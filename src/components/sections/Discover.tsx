@@ -5,10 +5,10 @@ import { Button } from "../ui/Button";
 export function Discover() {
   return (
     <section className="relative py-28 md:py-36 bg-white overflow-hidden mt-24 md:mt-36">
-      {/* Background Watermark (Tripian A Travel Agency) centered behind the content */}
-      <div className="absolute top-[12%] md:top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-[0.08] pointer-events-none select-none z-0 w-full">
-        <div className="relative font-bold text-gray-900 tracking-tight text-6xl sm:text-7xl md:text-[96px] font-sans">
-          Tripian
+      {/* Background Watermark (Kokalachi A Travel Agency) centered behind the content */}
+      <div className="absolute top-[12%] md:top-[15%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-[0.06] pointer-events-none select-none z-0 w-full">
+        <div className="relative font-bold text-gray-900 tracking-tight text-5xl sm:text-6xl md:text-[80px] font-sans">
+          Kokalachi
           {/* Plane icon flying above the 'ia' */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ export function Discover() {
           </p>
           <Button
             variant="primary"
-            className="rounded-lg px-8 py-3 bg-[#E6F2F1] hover:bg-[#d1eae8] text-[#3E7C7A] font-bold text-xs md:text-sm uppercase tracking-wider inline-flex items-center transition-all duration-300 shadow-sm"
+            className="rounded-lg px-8 py-3 bg-[#F5EBDD] hover:bg-[#e6d6c4] text-[#1F355E] font-bold text-xs md:text-sm uppercase tracking-wider inline-flex items-center transition-all duration-300 shadow-sm border border-[#e6d6c4]"
           >
             TAKE A TOUR <ArrowRight size={16} className="ml-2" />
           </Button>

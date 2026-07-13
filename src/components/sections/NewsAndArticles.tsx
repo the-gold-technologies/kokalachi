@@ -4,7 +4,6 @@ import { Calendar, Clock } from "lucide-react";
 export function NewsAndArticles() {
   return (
     <section className="relative py-24 bg-[#F9F9FB] overflow-hidden select-none">
-      
       {/* Background Graphic Watermarks - Left & Right World Map Silhouette (from User image) */}
       <div className="absolute top-[10%] left-[-4%] w-[25%] max-w-[300px] pointer-events-none opacity-40 z-0 select-none">
         <img
@@ -22,7 +21,6 @@ export function NewsAndArticles() {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center">
-        
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl">
           <span
@@ -35,14 +33,14 @@ export function NewsAndArticles() {
             Latest News & Articles
           </h2>
           <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
-            Are You Tired Of The Typical Tourist Destinations And Looking <br className="hidden md:inline" />
+            Are You Tired Of The Typical Tourist Destinations And Looking{" "}
+            <br className="hidden md:inline" />
             To Step Out Of Your Comfort Zonetravel
           </p>
         </div>
 
         {/* Article Section Layout (Using lg:items-stretch to match heights) */}
         <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 w-full max-w-5xl mb-12">
-          
           {/* Left Column - Large Featured Card */}
           <div className="w-full lg:w-1/2 flex">
             <div className="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer flex flex-col justify-between w-full h-full">
@@ -75,13 +73,11 @@ export function NewsAndArticles() {
                   <span>5 Mins Read</span>
                 </div>
               </div>
-
             </div>
           </div>
 
           {/* Right Column - Two Horizontal Stacked Cards (Using flex-1 to fill height) */}
           <div className="w-full lg:w-1/2 flex flex-col justify-between gap-6">
-            
             {/* Card 1 */}
             <div className="flex-1 bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer flex flex-col sm:flex-row gap-5 items-center">
               <div className="w-full sm:w-[190px] h-[135px] rounded-2xl overflow-hidden shrink-0">
@@ -149,22 +145,16 @@ export function NewsAndArticles() {
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
 
         {/* Footer Link */}
         <div className="text-center text-xs md:text-sm font-semibold text-gray-500 mt-4">
           Want To See Our Recent News & Updates.{" "}
-          <a
-            href="#"
-            className="text-[#3E7C7A] hover:underline"
-          >
+          <a href="#" className="text-[#3E7C7A] hover:underline">
             Click Here To View More
           </a>
         </div>
-
       </div>
     </section>
   );

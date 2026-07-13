@@ -95,8 +95,24 @@ export function Testimonials() {
   const dotsCount = maxIndex + 1;
 
   return (
-    <section className="py-24 bg-white overflow-hidden select-none">
-      <div className="container mx-auto px-4 md:px-8 flex flex-col items-center">
+    <section className="py-24 bg-white overflow-hidden relative select-none">
+      {/* Background Graphic Watermarks - Landmarks */}
+      <div className="absolute -bottom-6 left-[1%] w-[22%] max-w-[110px] h-[120px] sm:-bottom-10 sm:left-[2%] sm:w-[18%] sm:max-w-[180px] sm:h-[180px] md:-bottom-13 md:max-w-[280px] md:h-[250px] pointer-events-none opacity-25 sm:opacity-40 md:opacity-45 z-0 select-none">
+        <img
+          src="/taj-mahal-bg.png"
+          alt="Taj Mahal Watermark"
+          className="w-full h-full object-contain mix-blend-multiply"
+        />
+      </div>
+      <div className="absolute -top-6 right-[1%] w-[16%] max-w-[90px] h-[150px] sm:-top-10 sm:right-[2%] sm:w-[14%] sm:max-w-[150px] sm:h-[220px] md:-top-14 md:max-w-[240px] md:h-[280px] pointer-events-none opacity-25 sm:opacity-40 md:opacity-45 rotate-180 z-0 select-none">
+        <img
+          src="/burj-khalifa-bg.png"
+          alt="Burj Khalifa Watermark"
+          className="w-full h-full object-contain mix-blend-multiply"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center">
         {/* Header Section matching reference mockup */}
         <div className="text-center mb-16 max-w-2xl">
           <span

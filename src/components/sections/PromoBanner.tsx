@@ -10,7 +10,7 @@ export function PromoBanner() {
   return (
     <section 
       className="py-12 px-4 md:px-8 select-none"
-      style={{ background: "linear-gradient(to bottom, #ffffff 50%, #F8F5EE 50%)" }}
+      style={{ background: "linear-gradient(to bottom, #ffffff 50%, #F9F9FB 50%)" }}
     >
       <div className="container mx-auto max-w-5xl">
         <div className="relative rounded-[28px] overflow-hidden shadow-lg flex flex-col md:flex-row items-stretch">
