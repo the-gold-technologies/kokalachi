@@ -9,7 +9,8 @@ const testimonials = [
     name: "Jacob Jones",
     role: "CEO, Traveller",
     image: "https://randomuser.me/api/portraits/women/32.jpg",
-    content: "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
+    content:
+      "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
     rating: 4,
   },
   {
@@ -17,7 +18,8 @@ const testimonials = [
     name: "Floyd Miles",
     role: "CEO, Traveller",
     image: "https://randomuser.me/api/portraits/men/46.jpg",
-    content: "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
+    content:
+      "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
     rating: 4,
   },
   {
@@ -25,7 +27,8 @@ const testimonials = [
     name: "Esther Howard",
     role: "CEO, Traveller",
     image: "https://randomuser.me/api/portraits/women/68.jpg",
-    content: "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
+    content:
+      "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
     rating: 4,
   },
   {
@@ -33,7 +36,8 @@ const testimonials = [
     name: "Bessie Cooper",
     role: "CEO, Traveller",
     image: "https://randomuser.me/api/portraits/women/40.jpg",
-    content: "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
+    content:
+      "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
     rating: 4,
   },
   {
@@ -41,7 +45,8 @@ const testimonials = [
     name: "Ronald Richards",
     role: "CEO, Traveller",
     image: "https://randomuser.me/api/portraits/men/35.jpg",
-    content: "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
+    content:
+      "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
     rating: 4,
   },
   {
@@ -49,7 +54,8 @@ const testimonials = [
     name: "Albert Flores",
     role: "CEO, Traveller",
     image: "https://randomuser.me/api/portraits/men/29.jpg",
-    content: "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
+    content:
+      "Morem Ipsum Dolor Siterey Amet Mean Earty Areaeey Consec Taetur Adipisrvice Ollwing Ipsum Dolor Consectetur.",
     rating: 4,
   },
 ];
@@ -91,7 +97,6 @@ export function Testimonials() {
   return (
     <section className="py-24 bg-white overflow-hidden select-none">
       <div className="container mx-auto px-4 md:px-8 flex flex-col items-center">
-        
         {/* Header Section matching reference mockup */}
         <div className="text-center mb-16 max-w-2xl">
           <span
@@ -104,7 +109,8 @@ export function Testimonials() {
             See Those Lovely Words From Clients
           </h2>
           <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
-            Are You Tired Of The Typical Tourist Destinations And Looking <br className="hidden md:inline" />
+            Are You Tired Of The Typical Tourist Destinations And Looking{" "}
+            <br className="hidden md:inline" />
             To Step Out Of Your Comfort Zonetravel
           </p>
         </div>
@@ -124,7 +130,6 @@ export function Testimonials() {
               >
                 {/* Testimonial Card */}
                 <div className="bg-white rounded-3xl p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between h-full shadow-sm">
-                  
                   <div>
                     {/* Header: User Profile and Double Quote Icon */}
                     <div className="flex items-center justify-between mb-5">
@@ -169,7 +174,6 @@ export function Testimonials() {
                       );
                     })}
                   </div>
-
                 </div>
               </div>
             ))}
@@ -189,7 +193,6 @@ export function Testimonials() {
             />
           ))}
         </div>
-
       </div>
     </section>
   );

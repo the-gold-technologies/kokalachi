@@ -17,7 +17,7 @@ export function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBg((prev) => (prev + 1) % bgImages.length);
-    }, 5000); // Change image every 5 seconds
+    }, 8000); // Change image every 8 seconds
 
     return () => clearInterval(interval);
   }, []);
