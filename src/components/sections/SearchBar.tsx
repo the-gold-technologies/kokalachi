@@ -1,7 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, MapPin, Calendar, User, Send, Building2, Utensils, Home, TrendingUp, Car } from "lucide-react";
+import {
+  Search,
+  MapPin,
+  Calendar,
+  User,
+  Send,
+  Building2,
+  Utensils,
+  Home,
+  TrendingUp,
+  Car,
+} from "lucide-react";
 import { Button } from "../ui/Button";
 
 export function SearchBar() {
@@ -29,7 +40,9 @@ export function SearchBar() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`pb-4 px-3 md:px-6 flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-colors relative whitespace-nowrap flex-shrink-0 ${
-                  isActive ? "text-primary" : "text-gray-500 hover:text-gray-900"
+                  isActive
+                    ? "text-primary"
+                    : "text-gray-500 hover:text-gray-900"
                 }`}
               >
                 <Icon size={14} />
@@ -48,43 +61,57 @@ export function SearchBar() {
       {/* Form */}
       <div className="px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
-
           {/* Destinations */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Destinations:</label>
+            <label className="text-sm font-medium text-gray-700">
+              Destinations:
+            </label>
             <div className="relative">
               <input
                 type="text"
                 placeholder="Where are you going ..."
                 className="w-full pl-4 pr-10 py-3 bg-gray-50/50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm text-gray-700"
               />
-              <MapPin size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <MapPin
+                size={16}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
             </div>
           </div>
 
           {/* Check In */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Check In:</label>
+            <label className="text-sm font-medium text-gray-700">
+              Check In:
+            </label>
             <div className="relative">
               <input
                 type="text"
                 placeholder="10/07/2026"
                 className="w-full pl-4 pr-10 py-3 bg-gray-50/50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm text-gray-700"
               />
-              <Calendar size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Calendar
+                size={16}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
             </div>
           </div>
 
           {/* Check Out */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Check Out:</label>
+            <label className="text-sm font-medium text-gray-700">
+              Check Out:
+            </label>
             <div className="relative">
               <input
                 type="text"
                 placeholder="10/07/2026"
                 className="w-full pl-4 pr-10 py-3 bg-gray-50/50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm text-gray-700"
               />
-              <Calendar size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Calendar
+                size={16}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
             </div>
           </div>
 
@@ -98,17 +125,19 @@ export function SearchBar() {
                   placeholder="+ Add Guests"
                   className="w-full pl-4 pr-10 py-3 bg-gray-50/50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm text-gray-700"
                 />
-                <User size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <User
+                  size={16}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                />
               </div>
               <Button
                 variant="secondary"
-                className="w-full md:w-auto rounded-lg px-6 py-3 bg-[#FF5722] hover:bg-[#E64A19] text-white font-medium flex items-center justify-center gap-2 shrink-0"
+                className="w-full md:w-auto rounded-lg px-6 py-3 !hover:bg-[#326462] !bg-[#3e7c7a] text-white font-medium flex items-center justify-center gap-2 shrink-0"
               >
                 Search <Search size={16} />
               </Button>
             </div>
           </div>
-
         </div>
       </div>
     </div>

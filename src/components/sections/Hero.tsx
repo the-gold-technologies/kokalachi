@@ -7,24 +7,30 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 
 const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80",
     title: "Maldives island",
     tagline: "* This Offer Valid Till 22 August",
-    description: "When An Unknown Printer Took Ar Galley Offer Type Area Year Anddey Make Specimen Book",
+    description:
+      "When An Unknown Printer Took Ar Galley Offer Type Area Year Anddey Make Specimen Book",
     price: "$299",
   },
   {
-    image: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80",
     title: "Bora Bora Beach",
     tagline: "* Special Honeymoon Package Available",
-    description: "Discover romantic overwater bungalows and pristine turquoise lagoons in French Polynesia.",
+    description:
+      "Discover romantic overwater bungalows and pristine turquoise lagoons in French Polynesia.",
     price: "$349",
   },
   {
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80",
     title: "Santorini Coast",
     tagline: "* Explorer Summer Deals 2026",
-    description: "Experience iconic whitewashed cliffside villas overlooking the beautiful, azure Aegean Sea.",
+    description:
+      "Experience iconic whitewashed cliffside villas overlooking the beautiful, azure Aegean Sea.",
     price: "$259",
   },
 ];
@@ -126,15 +132,16 @@ export function Hero() {
       </div>
 
       {/* Hero Content (uses key={currentBg} to re-trigger smooth fadeIn animations when slide changes) */}
-      <div key={currentBg} className="container mx-auto px-4 z-10 flex flex-col items-center text-center mt-10">
+      <div
+        key={currentBg}
+        className="container mx-auto px-4 z-10 flex flex-col items-center text-center mt-10"
+      >
         <span className="text-white text-sm md:text-base font-medium tracking-widest mb-2 animate-fade-in-up">
           {activeSlide.tagline}
         </span>
-        <h1 className="text-6xl md:text-[80px] font-bold text-white mb-2 leading-none tracking-tight animate-fade-in-up animation-delay-75">
+        <h1 className="text-6xl md:text-[80px] font-bold text-white mb-2 leading-none tracking-tight animate-fade-in-up animation-delay-75 underline underline-offset-8 decoration-[2px]">
           {activeSlide.title}
         </h1>
-        {/* Subtle white underline decoration */}
-        <div className="w-48 h-0.5 bg-white/70 mb-5 animate-fade-in-up animation-delay-150"></div>
 
         <p className="text-white/90 text-sm md:text-lg max-w-2xl mb-5 animate-fade-in-up animation-delay-150">
           {activeSlide.description}
@@ -147,7 +154,7 @@ export function Hero() {
         <Button
           variant="primary"
           size="lg"
-          className="px-8 text-sm font-bold uppercase rounded-lg bg-[#3E7C7A] hover:bg-[#326462] animate-fade-in-up animation-delay-300"
+          className="px-8 text-sm font-bold uppercase rounded-lg !bg-[#D97745] !hover:bg-[#c06538] animate-fade-in-up animation-delay-300"
         >
           TAKE A TOUR <ArrowRight size={18} className="ml-2" />
         </Button>

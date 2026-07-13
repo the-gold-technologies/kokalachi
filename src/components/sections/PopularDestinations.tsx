@@ -184,7 +184,7 @@ export function PopularDestinations() {
         </div>
 
         {/* Tab Filters (Structured like SearchBar tabs) */}
-        <div className="flex border-b border-gray-100 overflow-x-auto w-full max-w-2xl justify-start md:justify-center mb-12 scrollbar-hide pt-2">
+        <div className="flex border-b border-gray-100 overflow-x-auto w-full justify-start md:justify-center mb-12 scrollbar-hide pt-2">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;

@@ -48,7 +48,10 @@ export function Footer() {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xl font-extrabold text-white tracking-widest flex items-center leading-none">
+                <span
+                  className="text-xl font-light text-white flex items-center leading-none font-montserrat"
+                  style={{ letterSpacing: "0.2em" }}
+                >
                   KOKAL
                   <span className="relative inline-block tracking-normal mr-1">
                     A

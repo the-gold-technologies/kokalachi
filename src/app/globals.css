@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: var(--font-poppins), sans-serif;
+  --font-montserrat: var(--font-montserrat), sans-serif;
   --color-primary: #3E7C7A;
   --color-primary-hover: #326462;
   --color-accent: #D97745;
