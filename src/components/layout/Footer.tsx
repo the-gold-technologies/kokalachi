@@ -48,12 +48,33 @@ export function Footer() {
                 </svg>
               </div>
               <div className="flex flex-col text-left">
-                <span className="text-xl font-extrabold text-white tracking-widest block leading-none">
-                  KOKALACHI
+                <span className="text-xl font-extrabold text-white tracking-widest flex items-center leading-none">
+                  KOKAL
+                  <span className="relative inline-block tracking-normal mr-1">
+                    A
+                    <svg
+                      className="absolute left-1/2 -translate-x-1/2 top-[35%] w-[130%] h-1.5 text-[#D97745]"
+                      viewBox="0 0 20 6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.5 5C5.5 2 14.5 2 18.5 5"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  CHI
                 </span>
-                <span className="text-[7.5px] uppercase tracking-[0.16em] text-gray-400 block mt-1 font-bold">
-                  Journeys Become Friendships
-                </span>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <span className="w-3.5 h-[1px] bg-[#D97745] shrink-0 opacity-80"></span>
+                  <span className="text-[7px] uppercase tracking-[0.18em] text-white/80 font-extrabold">
+                    Journeys Become Friendships
+                  </span>
+                  <span className="w-3.5 h-[1px] bg-[#D97745] shrink-0 opacity-80"></span>
+                </div>
               </div>
             </div>
 

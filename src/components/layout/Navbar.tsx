@@ -129,7 +129,7 @@ export function Navbar() {
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isScrolled
-            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-6 md:px-10"
+            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-5"
             : "top-0 w-full max-w-full bg-transparent py-6 px-4 md:px-8"
         }`}
       >
@@ -146,12 +146,33 @@ export function Navbar() {
                 />
               </div>
               <div className="hidden sm:flex flex-col text-left">
-                <span className={`text-xl font-extrabold tracking-widest leading-none transition-colors duration-500 ${isScrolled ? "text-[#1C2B38]" : "text-white"}`}>
-                  KOKALACHI
+                <span className={`text-xl font-extrabold tracking-widest leading-none flex items-center transition-colors duration-500 ${isScrolled ? "text-[#1C2B38]" : "text-white"}`}>
+                  KOKAL
+                  <span className="relative inline-block tracking-normal mr-1">
+                    A
+                    <svg
+                      className="absolute left-1/2 -translate-x-1/2 top-[35%] w-[130%] h-1.5 text-[#D97745]"
+                      viewBox="0 0 20 6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.5 5C5.5 2 14.5 2 18.5 5"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  CHI
                 </span>
-                <span className={`text-[7.5px] uppercase tracking-[0.16em] mt-1 font-bold hidden lg:block transition-colors duration-500 ${isScrolled ? "text-[#6B7C85]" : "text-[#b3d8d6]"}`}>
-                  Journeys Become Friendships
-                </span>
+                <div className="flex items-center gap-2 mt-1 hidden lg:flex">
+                  <span className="w-3.5 h-[1px] bg-[#D97745] shrink-0 opacity-80"></span>
+                  <span className={`text-[7px] uppercase tracking-[0.18em] font-extrabold transition-colors duration-500 ${isScrolled ? "text-[#6B7C85]" : "text-[#b3d8d6]"}`}>
+                    Journeys Become Friendships
+                  </span>
+                  <span className="w-3.5 h-[1px] bg-[#D97745] shrink-0 opacity-80"></span>
+                </div>
               </div>
             </div>
           </Link>
