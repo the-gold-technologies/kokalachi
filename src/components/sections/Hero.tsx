@@ -37,20 +37,24 @@ const heroSlides = [
 
 export function Hero() {
   const [currentBg, setCurrentBg] = useState(0);
+  const [prevBgIndex, setPrevBgIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setPrevBgIndex(currentBg);
       setCurrentBg((prev) => (prev + 1) % heroSlides.length);
     }, 8000); // Change image and content every 8 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentBg]);
 
   const nextBg = () => {
+    setPrevBgIndex(currentBg);
     setCurrentBg((prev) => (prev + 1) % heroSlides.length);
   };
 
   const prevBg = () => {
+    setPrevBgIndex(currentBg);
     setCurrentBg((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
@@ -60,15 +64,23 @@ export function Hero() {
     <section className="relative h-[85vh] min-h-[700px] w-full flex flex-col items-center justify-center pt-20 mb-28">
       {/* Background Image Slider (Smooth Fade) */}
       <div className="absolute inset-0 -z-10 overflow-hidden bg-black">
-        {heroSlides.map((slide, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
-              idx === currentBg ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ backgroundImage: `url('${slide.image}')` }}
-          />
-        ))}
+        {heroSlides.map((slide, idx) => {
+          const isActive = idx === currentBg;
+          const isPrev = idx === prevBgIndex;
+          const isAnimating = isActive || isPrev;
+
+          return (
+            <div
+              key={idx}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-[1200ms] ease-in-out ${
+                isActive ? "opacity-100" : "opacity-0"
+              } ${isAnimating ? "animate-hero-zoom" : ""}`}
+              style={{
+                backgroundImage: `url('${slide.image}')`,
+              }}
+            />
+          );
+        })}
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/60 z-10"></div>
 

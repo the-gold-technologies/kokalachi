@@ -62,3 +62,17 @@
 .animation-delay-375 {
   animation-delay: 375ms;
 }
+
+/* Smooth Ken Burns Slider Transition */
+@keyframes heroZoom {
+  0% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1.00);
+  }
+}
+
+.animate-hero-zoom {
+  animation: heroZoom 8.5s ease-out forwards;
+}

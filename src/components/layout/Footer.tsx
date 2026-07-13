@@ -49,8 +49,7 @@ export function Footer() {
               </div>
               <div className="flex flex-col text-left">
                 <span
-                  className="text-xl font-light text-white flex items-center leading-none font-montserrat"
-                  style={{ letterSpacing: "0.2em" }}
+                  className="text-xl font-semibold tracking-[0.2em] text-white flex items-center leading-none font-montserrat"
                 >
                   KOKAL
                   <span className="relative inline-block tracking-normal mr-1">
@@ -71,12 +70,10 @@ export function Footer() {
                   </span>
                   CHI
                 </span>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <span className="w-3.5 h-[1px] bg-[#D97745] shrink-0 opacity-80"></span>
-                  <span className="text-[7px] uppercase tracking-[0.18em] text-white/80 font-extrabold">
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-[8px] uppercase tracking-[0.1em] text-white/80 font-bold">
                     Journeys Become Friendships
                   </span>
-                  <span className="w-3.5 h-[1px] bg-[#D97745] shrink-0 opacity-80"></span>
                 </div>
               </div>
             </div>
