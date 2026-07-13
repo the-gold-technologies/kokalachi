@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Kokalachi - Journeys Become Friendships
 
-## Getting Started
+Kokalachi is a premium, high-fidelity travel and tourism landing page built using modern web development standards. Designed with a vibrant, clean, and balanced brand identity, it offers a seamless and interactive user experience.
 
-First, run the development server:
+---
 
+## 🎨 Design System & Visual DNA
+
+The website uses a curated color palette and layout structures aligned with Kokalachi's visual guidelines:
+
+- **Dominant Primary (Teal):** `#3E7C7A` — used for navigation links, hover states, primary CTAs, and active indicators.
+- **Brand Accent (Terra Cotta / Orange):** `#D97745` — used for key highlight details, stars, quotes, badges, and CTA highlights.
+- **Dark Neutral (Dark Blue):** `#1F355E` — used for heavy section contrast backdrops, cards, and title typography.
+- **Light Backdrop (Off-White):** `#F9F9FB` — standardized across section backdrops for clean contrast.
+- **Text Color (Charcoal / Slate):** `#1C2B38` — used for secondary typography and dark text settings.
+- **Pure White Backgrounds:** `#ffffff` — used in testimonials and other specific sections.
+
+---
+
+## ✨ Features Built
+
+### 1. 🛥️ Floating Capsule Navbar
+- Smoothly morphs from a full-width transparent header into a beautiful centered, floating white pill/capsule shape upon scrolling (`bg-white/95 backdrop-blur-md rounded-full shadow-lg border border-gray-100/80 w-[95%] max-w-[1220px]`).
+- Includes smooth hover-triggered 2-column mega dropdowns (with icons and descriptive headers).
+- Fully responsive logo element which hides the tagline on smaller screens and keeps only the circular badge icon visible on mobile.
+- Features accordion-style mobile sub-menu dropdowns inside the navigation drawer.
+
+### 2. 🎡 Responsive Landmarked Testimonials
+- Fully automated testimonial slider showing beautiful words from customers.
+- Employs custom generated, text-free watermark landmark outlines in the background: **Taj Mahal** sketch in the bottom-left and **Burj Khalifa** sketch in the bottom-right.
+- Watermarks scale down dynamically on tablet and mobile viewports, keeping the section completely clutter-free.
+
+### 3. 🏖️ Featured Destinations & Packages
+- Clean interactive sliders showing trending worldwide travel spots.
+- Integrated ratings, custom price flags, and booking buttons.
+
+### 4. 🏕️ Promo & Discover Banners
+- Embedded video preview links and outline sketches in the backgrounds.
+- Polished CTA buttons mapped to the brand color scheme.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js (App Router with Turbopack support)
+- **Library:** React
+- **Styling:** Tailwind CSS v4
+- **Icons:** Lucide React
+- **Hosting / Tooling:** TypeScript, Node.js
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run the Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the live page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build for Production
+```bash
+npm run build
+```
+This runs TypeScript validations and compiles the static site pages under the `.next` directory.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Start Production Server
+```bash
+npm run start
+```
