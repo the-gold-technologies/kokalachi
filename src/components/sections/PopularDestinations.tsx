@@ -173,7 +173,7 @@ export function PopularDestinations() {
         {/* Header */}
         <div className="text-center mb-10">
           <span
-            className="text-[#5A20C1] text-2xl md:text-3xl mb-3 block"
+            className="text-[#3E7C7A] text-2xl md:text-3xl mb-3 block"
             style={{ fontFamily: "var(--font-playball)" }}
           >
             Most Popular Tour Packages
@@ -194,14 +194,14 @@ export function PopularDestinations() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`pb-4 px-5 flex items-center gap-1.5 text-xs md:text-sm font-semibold transition-colors relative whitespace-nowrap flex-shrink-0 ${
                   isActive
-                    ? "text-[#5A20C1]"
+                    ? "text-[#3E7C7A]"
                     : "text-gray-500 hover:text-gray-900"
                 }`}
               >
                 <Icon size={14} />
                 <span>{tab.label}</span>
                 {isActive && (
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#5A20C1]" />
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#3E7C7A]" />
                 )}
               </button>
             );
@@ -256,7 +256,7 @@ export function PopularDestinations() {
               {/* Card Body */}
               <div className="p-5 pt-3.5 pb-0 flex-grow flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-base text-gray-900 leading-snug mb-3 group-hover:text-[#5A20C1] transition-colors line-clamp-2 min-h-[44px]">
+                  <h3 className="font-bold text-base text-gray-900 leading-snug mb-3 group-hover:text-[#3E7C7A] transition-colors line-clamp-2 min-h-[44px]">
                     {dest.title}
                   </h3>
 
@@ -276,7 +276,7 @@ export function PopularDestinations() {
               {/* Pricing & Reviews Bar (Flush to left & bottom borders of card) */}
               <div className="flex items-center justify-between mt-auto pl-5 pr-5 h-14 relative">
                 {/* Purple Price Tag (Flat-left, slanted/rounded-right shape, flush left/bottom matching reference) */}
-                <div className="absolute bottom-0 left-0 top-0 bg-[#5A20C1] text-white pl-5 pr-7 flex flex-col justify-center rounded-tr-[24px] z-10 leading-none">
+                <div className="absolute bottom-0 left-0 top-0 bg-[#3E7C7A] text-white pl-5 pr-7 flex flex-col justify-center rounded-tr-[24px] z-10 leading-none">
                   {dest.originalPrice && (
                     <span className="text-[9px] opacity-75 line-through mb-0.5">
                       ${dest.originalPrice}

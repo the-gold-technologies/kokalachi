@@ -129,7 +129,7 @@ export function Hero() {
         <Button
           variant="primary"
           size="lg"
-          className="px-8 text-sm font-bold uppercase rounded-lg bg-[#5A20C1] hover:bg-[#4a18a5]"
+          className="px-8 text-sm font-bold uppercase rounded-lg bg-[#3E7C7A] hover:bg-[#326462]"
         >
           TAKE A TOUR <ArrowRight size={18} className="ml-2" />
         </Button>

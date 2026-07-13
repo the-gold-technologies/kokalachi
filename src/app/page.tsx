@@ -9,7 +9,6 @@ import { AvailableDestinations } from "@/components/sections/AvailableDestinatio
 import { ExploreBanner } from "@/components/sections/ExploreBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { NewsAndArticles } from "@/components/sections/NewsAndArticles";
-import { AppDownload } from "@/components/sections/AppDownload";
 
 export default function Home() {
   return (
@@ -26,7 +25,6 @@ export default function Home() {
         <ExploreBanner />
         <Testimonials />
         <NewsAndArticles />
-        <AppDownload />
       </main>
       
       <Footer />

@@ -1,148 +1,170 @@
 import React from "react";
-import { Calendar, MessageCircle, ArrowRight, Tag } from "lucide-react";
-
-const articles = [
-  {
-    id: 1,
-    title: "Spain of Hispanic Stay Hamper To Be Lasting Tradition",
-    excerpt: "Explore the vibrant culture and stunning architecture of Spain. From the grand Sagrada Família to the lively streets of Barcelona.",
-    date: "12 Oct, 2023",
-    comments: 5,
-    image: "https://images.unsplash.com/photo-1544413660-299165566b1d?auto=format&fit=crop&q=80",
-    category: "Travel",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "New York Times Square From High Above Beautiful View",
-    excerpt: "Discover New York from a different perspective. The city that never sleeps is even more magical from above.",
-    date: "10 Oct, 2023",
-    comments: 2,
-    image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&q=80",
-    category: "Guide",
-    featured: false,
-  },
-  {
-    id: 3,
-    title: "Building National Park Tour & Beautiful Nature View",
-    excerpt: "Step into the wild and discover some of the most dramatic landscapes nature has to offer in stunning national parks.",
-    date: "08 Oct, 2023",
-    comments: 8,
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
-    category: "Nature",
-    featured: false,
-  },
-];
-
-const categoryColors: Record<string, string> = {
-  Travel: "bg-primary text-white",
-  Guide: "bg-orange-500 text-white",
-  Nature: "bg-green-500 text-white",
-};
+import { Calendar, Clock } from "lucide-react";
 
 export function NewsAndArticles() {
-  const featuredArticle = articles.find(a => a.featured);
-  const regularArticles = articles.filter(a => !a.featured);
-
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-8">
+    <section className="relative py-24 bg-[#F9F9FB] overflow-hidden select-none">
+      
+      {/* Background Graphic Watermarks - Left & Right World Map Silhouette (from User image) */}
+      <div className="absolute top-[10%] left-[-4%] w-[25%] max-w-[300px] pointer-events-none opacity-40 z-0 select-none">
+        <img
+          src="/map-bg.png"
+          alt="World Map Silhouette"
+          className="w-full h-auto object-contain mix-blend-multiply"
+        />
+      </div>
+      <div className="absolute bottom-[5%] right-[-4%] w-[25%] max-w-[300px] pointer-events-none opacity-40 z-0 select-none transform scale-x-[-1]">
+        <img
+          src="/map-bg.png"
+          alt="World Map Silhouette"
+          className="w-full h-auto object-contain mix-blend-multiply"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center">
+        
         {/* Header */}
-        <div className="flex flex-col md:flex-row items-end justify-between gap-6 mb-14">
-          <div>
-            <span className="text-primary font-semibold uppercase tracking-widest text-sm mb-3 block">
-              Our Articles
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-              Latest News & Articles
-            </h2>
+        <div className="text-center mb-16 max-w-2xl">
+          <span
+            className="text-[#3E7C7A] text-2xl md:text-3xl mb-3 block"
+            style={{ fontFamily: "var(--font-playball)" }}
+          >
+            Blog And Article
+          </span>
+          <h2 className="text-3xl md:text-[40px] font-extrabold text-gray-900 mb-6 leading-tight">
+            Latest News & Articles
+          </h2>
+          <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+            Are You Tired Of The Typical Tourist Destinations And Looking <br className="hidden md:inline" />
+            To Step Out Of Your Comfort Zonetravel
+          </p>
+        </div>
+
+        {/* Article Section Layout (Using lg:items-stretch to match heights) */}
+        <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 w-full max-w-5xl mb-12">
+          
+          {/* Left Column - Large Featured Card */}
+          <div className="w-full lg:w-1/2 flex">
+            <div className="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer flex flex-col justify-between w-full h-full">
+              <div>
+                <div className="relative w-full aspect-[4/2.4] rounded-2xl overflow-hidden mb-5">
+                  <img
+                    src="https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&q=80&w=600"
+                    alt="Spiritual Sojourn"
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 rounded-2xl"
+                  />
+                  {/* Category Tag Overlayed on Bottom Left of Image */}
+                  <div className="absolute bottom-4 left-4 bg-[#3E7C7A] text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-md shadow-md z-10">
+                    Travel River
+                  </div>
+                </div>
+
+                <h3 className="font-extrabold text-xl md:text-2xl text-gray-900 mb-4 text-left leading-snug group-hover:text-[#3E7C7A] transition-colors">
+                  Spiritual Sojourn: Pilgrimagee Tours For Soul Seekers
+                </h3>
+              </div>
+
+              {/* Metadata */}
+              <div className="flex items-center gap-6 text-xs text-gray-400 mt-4 border-t border-gray-50 pt-4">
+                <div className="flex items-center gap-1.5">
+                  <Calendar size={14} className="text-gray-400" />
+                  <span>26th Sep, 2024</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Clock size={14} className="text-gray-400" />
+                  <span>5 Mins Read</span>
+                </div>
+              </div>
+
+            </div>
           </div>
-          <a href="#" className="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all shrink-0">
-            View All Articles <ArrowRight size={18} />
+
+          {/* Right Column - Two Horizontal Stacked Cards (Using flex-1 to fill height) */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-between gap-6">
+            
+            {/* Card 1 */}
+            <div className="flex-1 bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer flex flex-col sm:flex-row gap-5 items-center">
+              <div className="w-full sm:w-[190px] h-[135px] rounded-2xl overflow-hidden shrink-0">
+                <img
+                  src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=400"
+                  alt="Wine Country Escapes"
+                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 rounded-2xl"
+                />
+              </div>
+              <div className="flex flex-col justify-between py-1 min-w-0 h-full w-full">
+                <div>
+                  <div className="flex justify-start mb-2">
+                    <span className="bg-[#3E7C7A] text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-md">
+                      Hiking
+                    </span>
+                  </div>
+                  <h3 className="font-extrabold text-[17px] text-gray-900 leading-snug text-left group-hover:text-[#3E7C7A] transition-colors">
+                    Wine Country Escapes: Vineyard Tours For Connoisseurs
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-4 text-[11px] text-gray-400 mt-3 sm:mt-0">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar size={13} className="text-gray-400" />
+                    <span>26th Sep, 2024</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Clock size={13} className="text-gray-400" />
+                    <span>5 Mins Read</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="flex-1 bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 group cursor-pointer flex flex-col sm:flex-row gap-5 items-center">
+              <div className="w-full sm:w-[190px] h-[135px] rounded-2xl overflow-hidden shrink-0">
+                <img
+                  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=400"
+                  alt="Thrills & Chills"
+                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 rounded-2xl"
+                />
+              </div>
+              <div className="flex flex-col justify-between py-1 min-w-0 h-full w-full">
+                <div>
+                  <div className="flex justify-start mb-2">
+                    <span className="bg-[#3E7C7A] text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-md">
+                      Adventure
+                    </span>
+                  </div>
+                  <h3 className="font-extrabold text-[17px] text-gray-900 leading-snug text-left group-hover:text-[#3E7C7A] transition-colors">
+                    Thrills & Chills: Extreme Sports Tours For Adrenaline
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-4 text-[11px] text-gray-400 mt-3 sm:mt-0">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar size={13} className="text-gray-400" />
+                    <span>26th Sep, 2024</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Clock size={13} className="text-gray-400" />
+                    <span>5 Mins Read</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Footer Link */}
+        <div className="text-center text-xs md:text-sm font-semibold text-gray-500 mt-4">
+          Want To See Our Recent News & Updates.{" "}
+          <a
+            href="#"
+            className="text-[#3E7C7A] hover:underline"
+          >
+            Click Here To View More
           </a>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Featured Article */}
-          {featuredArticle && (
-            <div className="lg:w-1/2 rounded-3xl overflow-hidden shadow-md group cursor-pointer bg-white border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="relative h-[320px] overflow-hidden">
-                <img 
-                  src={featuredArticle.image} 
-                  alt={featuredArticle.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className={`absolute top-5 left-5 ${categoryColors[featuredArticle.category] ?? "bg-primary text-white"} text-xs font-bold px-4 py-1.5 rounded-full flex items-center gap-1`}>
-                  <Tag size={11} />
-                  {featuredArticle.category}
-                </div>
-              </div>
-              <div className="p-8">
-                <div className="flex items-center gap-6 text-sm text-gray-400 mb-4">
-                  <div className="flex items-center gap-2">
-                    <Calendar size={15} className="text-primary" /> {featuredArticle.date}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MessageCircle size={15} className="text-primary" /> {featuredArticle.comments} Comments
-                  </div>
-                </div>
-                <h3 className="text-2xl font-extrabold text-gray-900 group-hover:text-primary transition-colors leading-snug mb-4">
-                  {featuredArticle.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">{featuredArticle.excerpt}</p>
-                <a href="#" className="flex items-center gap-2 text-primary font-bold text-sm hover:gap-3 transition-all">
-                  Read More <ArrowRight size={16} />
-                </a>
-              </div>
-            </div>
-          )}
-
-          {/* Regular Articles */}
-          <div className="lg:w-1/2 flex flex-col gap-6">
-            {regularArticles.map((article) => (
-              <div key={article.id} className="flex gap-5 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
-                <div className="w-28 h-28 shrink-0 rounded-xl overflow-hidden relative">
-                  <img 
-                    src={article.image} 
-                    alt={article.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className={`absolute top-2 left-2 ${categoryColors[article.category] ?? "bg-primary text-white"} text-[10px] font-bold px-2 py-0.5 rounded-full`}>
-                    {article.category}
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center min-w-0">
-                  <div className="flex items-center gap-4 text-xs text-gray-400 mb-2">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={12} className="text-primary" /> {article.date}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <MessageCircle size={12} className="text-primary" /> {article.comments}
-                    </div>
-                  </div>
-                  <h3 className="text-base font-extrabold text-gray-900 group-hover:text-primary transition-colors leading-snug mb-3">
-                    {article.title}
-                  </h3>
-                  <a href="#" className="flex items-center gap-1 text-primary font-bold text-xs hover:gap-2 transition-all">
-                    Read More <ArrowRight size={13} />
-                  </a>
-                </div>
-              </div>
-            ))}
-
-            {/* Newsletter Signup Card */}
-            <div className="bg-primary rounded-2xl p-6 text-white">
-              <h4 className="font-extrabold text-xl mb-2">Get Travel Tips & Deals</h4>
-              <p className="text-blue-200 text-sm mb-4">Subscribe to our newsletter for exclusive travel offers.</p>
-              <div className="flex bg-white/20 rounded-xl p-1">
-                <input type="email" placeholder="Your email address..." className="bg-transparent text-white placeholder-blue-200 flex-1 px-3 py-2 outline-none text-sm" />
-                <button className="bg-white text-primary font-bold text-sm px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

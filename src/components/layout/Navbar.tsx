@@ -45,15 +45,24 @@ export function Navbar() {
       >
         <div className="container mx-auto px-4 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-white">
-            <div className="flex flex-col">
-              <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-white mr-1">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                <span className="text-3xl font-bold tracking-tight">Tourex</span>
+          <Link href="/" className="flex items-center gap-3 text-white">
+            <div className="flex items-center gap-2.5">
+              {/* Circular Kokalachi Image Logo */}
+              <div className="w-11 h-11 shrink-0 rounded-full overflow-hidden border border-[#b3d8d6]/30 shadow-md">
+                <img
+                  src="/logo.png"
+                  alt="Kokalachi Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="text-[10px] uppercase tracking-[0.2em] ml-9 -mt-1 text-gray-300">A Travel Agency</span>
+              <div className="flex flex-col text-left">
+                <span className="text-xl font-extrabold tracking-widest text-white leading-none">
+                  KOKALACHI
+                </span>
+                <span className="text-[7.5px] uppercase tracking-[0.16em] text-[#b3d8d6] mt-1 font-bold">
+                  Journeys Become Friendships
+                </span>
+              </div>
             </div>
           </Link>
 
@@ -63,9 +72,7 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`flex items-center gap-1 font-medium transition-colors hover:text-primary ${
-                  link.name === "Home" ? "text-primary" : "text-white"
-                }`}
+                className={`flex items-center gap-1 font-medium transition-colors hover:text-primary text-white`}
               >
                 {link.name}
                 {link.hasDropdown && <ChevronDown size={14} />}
@@ -89,7 +96,9 @@ export function Navbar() {
             {/* Cart */}
             <div className="relative text-white cursor-pointer">
               <ShoppingCart size={24} />
-              <span className="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+              <span className="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                0
+              </span>
             </div>
 
             {/* Login */}
@@ -111,7 +120,9 @@ export function Navbar() {
             {/* Cart (mobile) */}
             <div className="relative text-white cursor-pointer">
               <ShoppingCart size={22} />
-              <span className="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+              <span className="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                0
+              </span>
             </div>
 
             {/* Hamburger toggle */}
@@ -130,7 +141,9 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-[60] transition-opacity duration-300 lg:hidden ${
-          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         {/* Backdrop */}
@@ -147,11 +160,21 @@ export function Navbar() {
         >
           {/* Drawer Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-            <Link href="/" className="flex items-center gap-1 text-white" onClick={() => setMobileMenuOpen(false)}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-1">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
-              <span className="text-xl font-bold">Tourex</span>
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-white"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <div className="w-8 h-8 shrink-0 rounded-full overflow-hidden border border-[#b3d8d6]/30">
+                <img
+                  src="/logo.png"
+                  alt="Kokalachi Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="text-lg font-bold tracking-wider">
+                Kokalachi
+              </span>
             </Link>
             <button
               id="mobile-menu-close"
@@ -178,7 +201,9 @@ export function Navbar() {
                 style={{ animationDelay: `${idx * 50}ms` }}
               >
                 {link.name}
-                {link.hasDropdown && <ChevronDown size={16} className="text-white/50" />}
+                {link.hasDropdown && (
+                  <ChevronDown size={16} className="text-white/50" />
+                )}
               </Link>
             ))}
           </nav>

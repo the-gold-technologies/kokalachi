@@ -29,7 +29,7 @@ export function Discover() {
         {/* Center Content */}
         <div className="text-center max-w-2xl mx-auto z-20">
           <span
-            className="text-[#5A20C1] text-2xl md:text-3xl mb-4 block"
+            className="text-[#3E7C7A] text-2xl md:text-3xl mb-4 block"
             style={{ fontFamily: "var(--font-playball)" }}
           >
             Most Popular Tour
@@ -45,7 +45,7 @@ export function Discover() {
           </p>
           <Button
             variant="primary"
-            className="rounded-lg px-8 py-3 bg-[#EAE2FF] hover:bg-[#d8cfff] text-[#5A20C1] font-bold text-xs md:text-sm uppercase tracking-wider inline-flex items-center transition-all duration-300 shadow-sm"
+            className="rounded-lg px-8 py-3 bg-[#E6F2F1] hover:bg-[#d1eae8] text-[#3E7C7A] font-bold text-xs md:text-sm uppercase tracking-wider inline-flex items-center transition-all duration-300 shadow-sm"
           >
             TAKE A TOUR <ArrowRight size={16} className="ml-2" />
           </Button>

@@ -19,7 +19,7 @@ export function Features() {
           {/* Left Column - Content & Features */}
           <div className="w-full lg:w-[46%] flex flex-col items-start text-left z-10">
             <span
-              className="text-[#5A20C1] text-2xl md:text-3xl mb-3 block"
+              className="text-[#3E7C7A] text-2xl md:text-3xl mb-3 block"
               style={{ fontFamily: "var(--font-playball)" }}
             >
               Dream Your Next Trip
@@ -35,10 +35,10 @@ export function Features() {
             </p>
 
             {/* Feature List */}
-            <div className="flex flex-col gap-6 w-full mb-8">
+            <div className="flex flex-col gap-8 w-full mb-10">
               {/* Feature 1 */}
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-blue-500/20 flex items-center justify-center text-blue-500 bg-blue-50/20">
+                <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-[#3E7C7A]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -47,18 +47,18 @@ export function Features() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="w-6 h-6"
+                    className="w-full h-full"
                   >
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
                     <path d="M2 12h20" />
                   </svg>
                 </div>
-                <div>
+                <div className="pt-1">
                   <h4 className="font-bold text-lg text-gray-900 mb-1">
                     Best Travel Agency
                   </h4>
-                  <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-md">
                     Are you tired of the typical tourist destinatio and looking
                     step out of your comfort.
                   </p>
@@ -67,7 +67,7 @@ export function Features() {
 
               {/* Feature 2 */}
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full border-2 border-blue-500/20 flex items-center justify-center text-blue-500 bg-blue-50/20">
+                <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-[#3E7C7A]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -76,7 +76,7 @@ export function Features() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="w-6 h-6"
+                    className="w-full h-full"
                   >
                     <path d="M6 20h12" />
                     <path d="M20 10V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4" />
@@ -85,11 +85,11 @@ export function Features() {
                     <path d="M12 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
                   </svg>
                 </div>
-                <div>
+                <div className="pt-1">
                   <h4 className="font-bold text-lg text-gray-900 mb-1">
                     Secure Journey With Us
                   </h4>
-                  <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-md">
                     Are you tired of the typical tourist destinatio and looking
                     step out of your comfort.
                   </p>
@@ -99,7 +99,7 @@ export function Features() {
 
             <Button
               variant="primary"
-              className="rounded-lg px-8 py-3.5 bg-[#5A20C1] hover:bg-[#4a18a5] text-white font-bold text-sm tracking-wider uppercase flex items-center shadow-md transition-all duration-300"
+              className="rounded-lg px-8 py-3.5 bg-[#3E7C7A] hover:bg-[#326462] text-white font-bold text-sm tracking-wider uppercase flex items-center shadow-md transition-all duration-300"
             >
               BOOK YOUR TRIP <ArrowRight size={16} className="ml-2" />
             </Button>
@@ -121,7 +121,7 @@ export function Features() {
               className="absolute -right-16 top-1/2 -translate-y-1/2 font-bold tracking-[0.08em] pointer-events-none opacity-35 z-0 select-none hidden sm:block font-sans"
               style={{
                 fontSize: "clamp(60px, 7.5vw, 100px)",
-                WebkitTextStroke: "1.5px #5A20C1",
+                WebkitTextStroke: "1.5px #3E7C7A",
                 color: "transparent",
                 writingMode: "vertical-lr",
                 transform: "rotate(180deg)",

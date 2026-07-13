@@ -8,77 +8,75 @@ export function PromoBanner() {
   const [showVideo, setShowVideo] = useState(false);
 
   return (
-    <section className="py-10 px-4 md:px-8">
-      <div className="container mx-auto">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row items-stretch">
+    <section 
+      className="py-12 px-4 md:px-8 select-none"
+      style={{ background: "linear-gradient(to bottom, #ffffff 50%, #F8F5EE 50%)" }}
+    >
+      <div className="container mx-auto max-w-5xl">
+        <div className="relative rounded-[28px] overflow-hidden shadow-lg flex flex-col md:flex-row items-stretch">
           
-          {/* Left Image Side */}
-          <div className="relative w-full md:w-1/2 h-[320px] md:h-[440px]">
+          {/* Left Image Side with Play Button */}
+          <div className="relative w-full md:w-[55%] h-[240px] md:h-[280px] bg-gray-100">
             <img 
-              src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80" 
-              alt="Beach house" 
+              src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800" 
+              alt="Tropical Beach Shoreline" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
               <button 
                 onClick={() => setShowVideo(true)}
-                className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-primary shadow-2xl hover:scale-110 transition-transform group"
+                className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 text-[#D97745]"
               >
-                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:bg-primary-hover transition-colors">
-                  <Play fill="white" size={24} className="ml-1 text-white" />
-                </div>
+                <Play fill="currentColor" size={18} className="ml-0.5 text-[#D97745]" />
               </button>
             </div>
-            {/* Overlay text */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
-              <p className="text-white font-bold text-xl">Watch Our Story</p>
-              <p className="text-white/70 text-sm">See how we create unforgettable journeys</p>
-            </div>
           </div>
 
-          {/* Right Content Side */}
-          <div className="w-full md:w-1/2 bg-[#0b1b3d] flex flex-col justify-center items-start text-left p-10 md:p-16 relative overflow-hidden">
-            {/* Decorative circles */}
-            <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/5"></div>
-            <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-white/5"></div>
+          {/* Right Content Side (Kokalachi Dark Navy Background) */}
+          <div className="w-full md:w-[45%] bg-[#1F355E] flex flex-col justify-center items-start text-left p-8 md:p-12 relative overflow-hidden">
+            
+            {/* Background Outline SVG - Sketched Palm Trees and Flying Bird Watermark (Bottom Right) */}
+            <div className="absolute bottom-[-10px] right-[-10px] w-40 h-40 opacity-15 text-gray-300 pointer-events-none z-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="w-full h-full"
+              >
+                {/* Island Mound */}
+                <path d="M 10,95 Q 50,88 90,95" />
+                {/* Left Palm Tree */}
+                <path d="M 60,90 Q 55,60 40,45" strokeWidth="1.2" />
+                <path d="M 40,45 Q 25,48 18,54 M 40,45 Q 30,35 25,32 M 40,45 Q 45,30 52,28 M 40,45 Q 52,38 58,42" />
+                {/* Right Palm Tree */}
+                <path d="M 75,90 Q 75,65 65,50" strokeWidth="1.2" />
+                <path d="M 65,50 Q 52,55 48,60 M 65,50 Q 55,40 50,38 M 65,50 Q 72,38 78,35 M 65,50 Q 75,45 80,50" />
+                {/* Flying Birds */}
+                <path d="M 20,20 Q 25,15 30,22 Q 35,15 40,20" strokeWidth="0.8" />
+                <path d="M 45,15 Q 48,11 52,16 Q 56,11 60,15" strokeWidth="0.6" />
+              </svg>
+            </div>
 
-            <span className="text-blue-400 font-semibold uppercase tracking-widest text-sm mb-4 z-10">
-              Summer Sale
-            </span>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight z-10">
-              Enjoy Summer Deals
-            </h3>
-            <div className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-6 z-10">
-              Up to 50%<br/>Discount!
-            </div>
-            <p className="text-blue-200 mb-8 max-w-md z-10 leading-relaxed">
-              Book your summer vacation now and get amazing discounts on selected destinations worldwide. Limited time offer!
-            </p>
-            <div className="flex gap-4 flex-wrap z-10">
-              <Button variant="primary" className="rounded-full px-8 py-3 bg-primary hover:bg-primary-hover">
-                Book Now
-              </Button>
-              <Button variant="outline" className="rounded-full px-8 py-3 border-white/30 text-white hover:bg-white/10">
-                Learn More
+            {/* Content */}
+            <div className="relative z-10">
+              <span className="text-white/90 text-sm font-medium tracking-wide mb-2 block">
+                Enjoy Summer Deals
+              </span>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-6 leading-tight">
+                Up to 40% Discount!
+              </h3>
+              <Button 
+                variant="primary" 
+                className="rounded-lg px-6 py-2.5 bg-[#D97745] hover:bg-[#c06538] text-white font-bold text-xs uppercase tracking-wider flex items-center shadow-md transition-all duration-300"
+              >
+                SEE DETAILS <span className="ml-2">→</span>
               </Button>
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-8 mt-10 z-10 border-t border-white/10 pt-8 w-full">
-              <div>
-                <div className="text-3xl font-black text-white">500+</div>
-                <div className="text-blue-300 text-sm">Destinations</div>
-              </div>
-              <div>
-                <div className="text-3xl font-black text-white">12K+</div>
-                <div className="text-blue-300 text-sm">Happy Travelers</div>
-              </div>
-              <div>
-                <div className="text-3xl font-black text-white">98%</div>
-                <div className="text-blue-300 text-sm">Satisfaction</div>
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
 
