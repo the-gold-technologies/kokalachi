@@ -34,21 +34,50 @@ export function FaqAndCtaSection() {
   };
 
   return (
-    <section id="faqs" className="py-24 bg-[#F7F3EC] relative overflow-hidden">
+    <section
+      id="faqs"
+      className="py-20 lg:py-28 bg-[#ffffff] relative overflow-hidden select-none"
+    >
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-4xl text-center">
-        {/* Header */}
-        <div className="mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E5A60]/10 text-[#0E5A60] text-xs font-bold uppercase tracking-wider mb-3">
-            <HelpCircle size={14} className="text-[#D96C2C]" />
-            <span>Got Questions?</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0B2A3D] leading-tight">
-            Frequently Asked <span className="text-[#0E5A60]">Questions</span>
-          </h2>
-          <p className="text-slate-600 text-sm md:text-base mt-2">
-            Everything you need to know before joining your first Kokalachi circle.
-          </p>
+        {/* SUB-HEADER TAGLINE */}
+        <div className="inline-flex items-center gap-2 mb-3">
+          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
+            GOT QUESTIONS?
+          </span>
+          <span className="text-[#D96C2C] font-sans text-sm inline-block">
+            ♡
+          </span>
         </div>
+
+        {/* MAIN HEADING */}
+        <div className="mb-4 max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
+            Frequently Asked{" "}
+            <span className="relative inline-block font-semibold text-[#0B2A3D]">
+              Questions
+              {/* Tapered Curved Underline Vector */}
+              <svg
+                className="absolute -bottom-2 left-0 w-full h-3 text-[#D96C2C]"
+                viewBox="0 0 100 20"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M5 15 Q 50 5 95 15"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </h2>
+        </div>
+
+        {/* SUBTITLE */}
+        <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-14 leading-relaxed font-sans">
+          Everything you need to know before joining your first Kokalachi
+          circle.
+        </p>
 
         {/* FAQ Accordion */}
         <div className="space-y-4 text-left mb-20">
@@ -80,31 +109,6 @@ export function FaqAndCtaSection() {
               </div>
             );
           })}
-        </div>
-
-        {/* Final High-Impact Booking CTA Box */}
-        <div className="bg-[#0B2A3D] p-10 sm:p-14 rounded-3xl text-white shadow-2xl relative overflow-hidden text-center flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-teal-300 text-xs font-bold uppercase tracking-widest mb-6">
-            <Sparkles size={14} className="text-[#D96C2C]" />
-            <span>Your Circle Is Forming Now</span>
-          </div>
-
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
-            Somewhere, someone else is looking <br className="hidden sm:inline" />
-            <span className="text-[#6F8F84]">for exactly the trip you are.</span>
-          </h3>
-
-          <p className="text-[#F7F3EC]/80 text-lg sm:text-xl font-light italic mb-8">
-            &quot;Maybe this is how you meet.&quot;
-          </p>
-
-          <a
-            href="#upcoming-circles"
-            className="px-10 py-5 bg-[#0E5A60] hover:bg-[#0a464b] text-white font-extrabold text-xs uppercase tracking-widest rounded-2xl shadow-xl transition-all hover:scale-105 flex items-center gap-3 border border-teal-400/30"
-          >
-            <span>Explore Upcoming Trips</span>
-            <ArrowRight size={18} />
-          </a>
         </div>
       </div>
     </section>

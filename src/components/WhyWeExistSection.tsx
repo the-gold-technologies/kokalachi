@@ -26,35 +26,24 @@ export function WhyWeExistSection() {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal leading-[1.14] font-serif max-w-4xl mx-auto mb-6">
-          <span className="text-[#0B2A3D] block font-normal">
-            The hardest part of travelling isn&apos;t choosing where to go.
-          </span>
-          <span className="text-[#C85A24] font-semibold block mt-1">
-            It&apos;s finding the right people to go with.
-          </span>
+        <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal leading-[1.14] font-serif max-w-4xl mx-auto mb-6 text-[#0B2A3D]">
+          Why do so many dream trips <span className="text-[#C85A24] font-semibold">never happen?</span>
         </h2>
 
+        {/* Subtitle statement */}
+        <p className="text-[#0B2A3D]/70 text-sm sm:text-base font-medium italic mb-6">
+          Finding travel companions shouldn&apos;t be this hard.
+        </p>
+
         {/* Paragraph copy text */}
-        <div className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-3xl mx-auto space-y-1 mb-5">
+        <div className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-3xl mx-auto space-y-3 mb-12">
           <p>
-            Most of us have a bucket list full of places we&apos;d love to
-            explore. But plans get postponed.
+            Most of us have a bucket list full of places we&apos;d love to explore. But plans get postponed. Leaves don&apos;t get approved. Schedules don&apos;t match. Life gets in the way.
           </p>
           <p>
-            Leaves don&apos;t get approved. Schedules don&apos;t match. Life
-            gets in the way.
-          </p>
-          <p>
-            Not because we don&apos;t want to travel. But because finding the
-            right people to travel with isn&apos;t always easy.
+            Not because we don&apos;t want to travel. But because finding the right people to travel with isn&apos;t always easy.
           </p>
         </div>
-
-        {/* Bold emphasis line */}
-        <h3 className="text-base sm:text-lg font-bold text-[#0B2A3D] mb-12 sm:mb-14">
-          So we decided to build a better way to travel.
-        </h3>
 
         {/* Side-by-Side Comparison Container */}
         <div className="relative max-w-7xl mx-auto">
@@ -350,6 +339,16 @@ export function WhyWeExistSection() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* BOTTOM EMPHASIS CONCLUSION */}
+        <div className="max-w-3xl mx-auto mt-14 sm:mt-16 text-center">
+          <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D]">
+            So, we decided to build a better way to do it.
+          </h3>
+          <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">
+            At Kokalachi, we bring together people who share a love for travel — so you can stop waiting and start exploring.
+          </p>
         </div>
       </div>
     </section>
