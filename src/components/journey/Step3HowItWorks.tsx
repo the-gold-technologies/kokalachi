@@ -48,29 +48,6 @@ export function Step3HowItWorks() {
           </p>
         </div>
 
-        {/* LEFT HANDWRITTEN TRAVEL DOODLE (Fills Left White Space) */}
-        <div className="hidden lg:flex flex-col items-center absolute top-28 left-2 xl:left-6 transform -rotate-6 z-20 pointer-events-none opacity-75 hover:opacity-100 transition-opacity">
-          <span
-            className="text-lg xl:text-xl text-[#D96C2C] font-bold leading-tight max-w-[160px] text-center"
-            style={{
-              fontFamily: "var(--font-playball), Georgia, cursive, serif",
-            }}
-          >
-            Choose your vibe &amp; destination! 🌴✨
-          </span>
-          {/* Curved Arrow pointing to Step 01 */}
-          <svg
-            className="w-14 h-10 text-[#D96C2C]/80 mt-1 transform rotate-12"
-            viewBox="0 0 60 40"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M 10 5 Q 35 10 45 30 M 36 24 L 45 30 L 48 20"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
         {/* 3 Steps Circle Layout Grid with Handwritten SVG Connecting Path */}
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-14 text-center items-start">
           {/* Handwritten Curved SVG Flight Path Connecting Circles (Desktop Only) */}
@@ -80,35 +57,34 @@ export function Step3HowItWorks() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Subtle double-ink shadow path for authentic hand-drawn feel */}
-            <path
-              d="M 175 35 C 260 -15, 310 95, 490 35 C 670 -25, 740 95, 825 35"
-              stroke="#D96C2C"
-              strokeWidth="2"
-              strokeDasharray="8 6"
-              strokeLinecap="round"
-              opacity="0.25"
-              transform="translate(2, 2)"
-            />
-
-            {/* Primary Terracotta Handwritten Dashed Flight Line */}
-            <path
-              d="M 175 35 C 260 -15, 310 95, 490 35 C 670 -25, 740 95, 825 35"
-              stroke="#D96C2C"
-              strokeWidth="3.5"
-              strokeDasharray="9 7"
-              strokeLinecap="round"
-              opacity="0.85"
-            />
-
             {/* Loop-de-Loop Accent Arc between Step 1 & Step 2 */}
             <path
-              d="M 290 20 C 310 -25, 335 -15, 320 20 C 305 50, 345 55, 360 25"
+              d="M 240 30 C 290 -15, 340 -15, 320 25 C 295 65, 370 60, 420 30"
               stroke="#D96C2C"
               strokeWidth="2.5"
-              strokeDasharray="5 5"
+              strokeDasharray="6 5"
               strokeLinecap="round"
-              opacity="0.75"
+              opacity="0.8"
+            />
+
+            {/* Loop-de-Loop Accent Arc between Step 2 & Step 3 */}
+            <path
+              d="M 580 30 C 630 -15, 680 -15, 660 25 C 635 65, 710 60, 760 30"
+              stroke="#D96C2C"
+              strokeWidth="2.5"
+              strokeDasharray="6 5"
+              strokeLinecap="round"
+              opacity="0.8"
+            />
+
+            {/* Handwritten Arrowhead near Step 3 */}
+            <path
+              d="M 748 22 L 762 31 L 748 39"
+              stroke="#D96C2C"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.85"
             />
 
             {/* Handwritten Heart doodle resting on the curve between Step 2 & 3 */}
@@ -135,22 +111,12 @@ export function Step3HowItWorks() {
                 opacity="0.95"
               />
             </g>
-
-            {/* Handwritten Arrowhead at the end near Step 3 */}
-            <path
-              d="M 815 25 L 828 36 L 814 42"
-              stroke="#D96C2C"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity="0.9"
-            />
           </svg>
 
           {/* STEP 01 */}
           <div className="flex flex-col items-center relative z-10 group">
             {/* BOTTOM LEFT HANDWRITTEN TRAVEL DOODLE (Attached to Step 01) */}
-            <div className="hidden lg:flex flex-col items-center absolute -bottom-8 -left-20 xl:-left-28 transform -rotate-12 pointer-events-none z-30 opacity-90 hover:opacity-100 transition-opacity">
+            <div className="hidden lg:flex flex-col items-center absolute bottom-[30%] -left-20 xl:-left-36 transform -rotate-12 pointer-events-none z-30 opacity-70 hover:opacity-100 transition-opacity">
               <span
                 className="text-base xl:text-lg text-[#D96C2C] font-bold leading-tight max-w-[150px] text-center"
                 style={{
@@ -311,7 +277,7 @@ export function Step3HowItWorks() {
           {/* STEP 03 */}
           <div className="flex flex-col items-center relative z-10 group">
             {/* UPPER RIGHT HANDWRITTEN TRAVEL DOODLE (Attached to Step 03) */}
-            <div className="hidden lg:flex flex-col items-center absolute -top-12 -right-20 xl:-right-28 transform rotate-12 pointer-events-none z-30 opacity-90 hover:opacity-100 transition-opacity">
+            <div className="hidden lg:flex flex-col items-center absolute -top-12 -right-20 xl:-right-28 transform rotate-12 pointer-events-none z-30 opacity-70 hover:opacity-100 transition-opacity">
               <span
                 className="text-base xl:text-lg text-[#0E5A60] font-bold leading-tight max-w-[160px] text-center"
                 style={{

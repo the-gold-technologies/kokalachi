@@ -2,245 +2,340 @@
 
 import React, { useState } from "react";
 import {
-  MapPin,
   Calendar,
-  Heart,
-  Compass,
-  Mountain,
-  Palmtree,
-  Sparkles,
-  Ticket,
+  Users,
+  Clock,
   ArrowRight,
+  MapPin,
+  Star,
+  User,
+  Heart,
+  Globe,
+  Coffee,
+  Waves,
+  Train,
 } from "lucide-react";
 import { TourModal, TourPackage } from "./TourModal";
 
-const packages: TourPackage[] = [
+interface TripCardData {
+  id: number;
+  destination: string;
+  locationTag: string;
+  duration: string;
+  groupSize: string;
+  dates: string;
+  price: string;
+  vibeTags: string[];
+  categories: string[];
+  image: string;
+  tourPackage: TourPackage;
+}
+
+const tripCards: TripCardData[] = [
   {
     id: 1,
-    title: "Manhattan Sunset Walking Circle",
-    location: "New York, USA",
-    duration: "4 Days",
-    rating: 5,
-    price: 320,
-    originalPrice: 380,
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=600",
-    category: "Mountain",
-    tag: "4 Spots Left",
-    tagColor: "bg-[#D96C2C]",
-    spotsLeft: 4,
-    nextDeparture: "Oct 12, 2026",
-    hook: "Walk the historic skyline trails and hidden speakeasies with 8 fellow culture lovers.",
+    destination: "Coastal Vietnam",
+    locationTag: "Hanoi & Ha Long Bay",
+    duration: "7 Days / 6 Nights",
+    groupSize: "10–12 Travellers",
+    dates: "14–20 Nov 2026",
+    price: "₹48,500",
+    vibeTags: ["Slow Travel", "Adventure", "Foodie"],
+    categories: ["Trending", "FirstTimers", "SlowTravel"],
+    image:
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=800",
+    tourPackage: {
+      id: 1,
+      title: "Coastal Vietnam Circle",
+      location: "Vietnam",
+      duration: "7 Days / 6 Nights",
+      rating: 5,
+      price: 48500,
+      originalPrice: 55000,
+      image:
+        "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=800",
+      category: "Foodie",
+      tag: "10–12 Travellers",
+      tagColor: "bg-[#EE5A2B]",
+      spotsLeft: 4,
+      nextDeparture: "14–20 Nov 2026",
+      hook: "Explore Hanoi's glowing night markets, taste secret family Pho recipes, and cruise Ha Long Bay with food lovers.",
+    },
   },
   {
     id: 2,
-    title: "Eternal Dubai Desert & Marina Escape",
-    location: "Dubai, UAE",
-    duration: "5 Days",
-    rating: 5,
-    price: 349,
-    originalPrice: 450,
-    image: "https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?auto=format&fit=crop&q=80&w=600",
-    category: "Coastal",
-    tag: "6 Spots Left",
-    tagColor: "bg-[#0E5A60]",
-    spotsLeft: 6,
-    nextDeparture: "Nov 02, 2026",
-    hook: "Dune bashing, private yacht sunsets, and starry desert dinners with an intimate circle.",
+    destination: "Tropical Sri Lanka",
+    locationTag: "Mirissa & Ella Valleys",
+    duration: "6 Days / 5 Nights",
+    groupSize: "8–10 Travellers",
+    dates: "02–07 Dec 2026",
+    price: "₹42,000",
+    vibeTags: ["Beach Escape", "Surfing", "Culture"],
+    categories: ["Trending", "BeachEscape", "SlowTravel"],
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800",
+    tourPackage: {
+      id: 2,
+      title: "Tropical Sri Lanka Circle",
+      location: "Sri Lanka",
+      duration: "6 Days / 5 Nights",
+      rating: 5,
+      price: 42000,
+      originalPrice: 49000,
+      image:
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800",
+      category: "Coastal",
+      tag: "8–10 Travellers",
+      tagColor: "bg-[#388E3C]",
+      spotsLeft: 5,
+      nextDeparture: "02–07 Dec 2026",
+      hook: "Slow down on tropical beaches, surf sunset waves, and share authentic Sri Lankan seafood feasts with fellow travellers.",
+    },
   },
   {
     id: 3,
-    title: "Pulau Seribu Island Hopping Circle",
-    location: "Jakarta, Indonesia",
-    duration: "6 Days",
-    rating: 5,
-    price: 299,
-    originalPrice: 350,
-    image: "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&q=80&w=600",
-    category: "Coastal",
-    tag: "3 Spots Left",
-    tagColor: "bg-[#D96C2C]",
-    spotsLeft: 3,
-    nextDeparture: "Sep 28, 2026",
-    hook: "Turquoise waters, pristine coral snorkeling, and beach campfire stories with solo explorers.",
+    destination: "Northern Lights Iceland",
+    locationTag: "Reykjavik & Golden Circle",
+    duration: "8 Days / 7 Nights",
+    groupSize: "10–12 Travellers",
+    dates: "12–19 Jan 2027",
+    price: "₹85,000",
+    vibeTags: ["Adventure", "Hot Springs", "Scenic"],
+    categories: ["Trending", "Adventure", "ScenicJourney"],
+    image:
+      "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=85&w=800",
+    tourPackage: {
+      id: 3,
+      title: "Northern Lights Iceland Circle",
+      location: "Iceland",
+      duration: "8 Days / 7 Nights",
+      rating: 5,
+      price: 85000,
+      originalPrice: 98000,
+      image:
+        "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=85&w=800",
+      category: "Adventure",
+      tag: "10–12 Travellers",
+      tagColor: "bg-[#7B1FA2]",
+      spotsLeft: 3,
+      nextDeparture: "12–19 Jan 2027",
+      hook: "Dip in geothermal hot springs, chase green auroras in snowy valleys, and lodge in remote Scandinavian cabins.",
+    },
   },
   {
     id: 4,
-    title: "Himalayan Ridge & Valley Trail",
-    location: "Manali, India",
-    duration: "7 Days",
-    rating: 5,
-    price: 275,
-    originalPrice: 320,
-    image: "https://images.unsplash.com/photo-1528072164453-f4e8ef0d475a?auto=format&fit=crop&q=80&w=600",
-    category: "Mountain",
-    tag: "Featured Circle",
-    tagColor: "bg-[#0E5A60]",
-    spotsLeft: 5,
-    nextDeparture: "Oct 20, 2026",
-    hook: "Summit panoramic peaks and unwind around wood-fire stoves in handpicked mountain stays.",
+    destination: "Kyoto & Mt. Fuji, Japan",
+    locationTag: "Kyoto & Tokyo Canopy",
+    duration: "7 Days / 6 Nights",
+    groupSize: "8–10 Travellers",
+    dates: "25 Mar – 31 Mar 2027",
+    price: "₹92,000",
+    vibeTags: ["Women Only", "Culture", "Mindful"],
+    categories: ["WomenOnly", "ScenicJourney"],
+    image:
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=85&w=800",
+    tourPackage: {
+      id: 4,
+      title: "The Sakura Edition — Japan",
+      location: "Japan",
+      duration: "7 Days / 6 Nights",
+      rating: 5,
+      price: 92000,
+      originalPrice: 105000,
+      image:
+        "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=85&w=800",
+      category: "Women Only",
+      tag: "8–10 Travellers",
+      tagColor: "bg-[#D81B60]",
+      spotsLeft: 4,
+      nextDeparture: "25 Mar – 31 Mar 2027",
+      hook: "Walk under Kyoto's blooming cherry blossom canopies, experience traditional tea ceremonies, and bond with an all-women group.",
+    },
   },
 ];
 
 export function Step5UpcomingJourneys() {
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Trending");
   const [selectedTour, setSelectedTour] = useState<TourPackage | null>(null);
-  const [wishlist, setWishlist] = useState<number[]>([]);
 
-  const tabs = [
-    { id: "All", label: "All Circles", icon: Sparkles },
-    { id: "Mountain", label: "Mountain Circles", icon: Mountain },
-    { id: "Coastal", label: "Coastal Escapes", icon: Palmtree },
-    { id: "Festival", label: "Festival Circles", icon: Ticket },
-    { id: "Offbeat", label: "Offbeat Circles", icon: Compass },
+  const categories = [
+    { id: "Trending", label: "Trending", icon: Star },
+    { id: "FirstTimers", label: "First Timers", icon: User },
+    { id: "WomenOnly", label: "Women Only", icon: Heart },
+    { id: "Adventure", label: "Adventure", icon: Globe },
+    { id: "SlowTravel", label: "Slow Travel", icon: Coffee },
+    { id: "BeachEscape", label: "Beach Escape", icon: Waves },
+    { id: "ScenicJourney", label: "Scenic Journey", icon: Train },
   ];
 
-  const toggleWishlist = (id: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setWishlist((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
-  };
-
-  const filteredPackages =
-    activeTab === "All"
-      ? packages
-      : packages.filter((pkg) => pkg.category === activeTab);
+  const filteredCards =
+    activeCategory === "Trending"
+      ? tripCards.slice(0, 3)
+      : tripCards
+          .filter((card) => card.categories.includes(activeCategory))
+          .slice(0, 3);
 
   return (
-    <section id="upcoming-circles" className="py-24 bg-white relative overflow-hidden select-none">
-      <div className="container mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center">
-        {/* Header */}
-        <div className="text-center mb-10 max-w-3xl">
-          <span
-            className="text-[#0E5A60] text-2xl md:text-3xl mb-2 block"
-            style={{ fontFamily: "var(--font-playball)" }}
-          >
-            Find Your Kind of Journey
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0B2A3D] leading-tight">
-            Upcoming <span className="text-[#0E5A60]">Curated Circles</span>
-          </h2>
-          <p className="text-slate-500 text-sm sm:text-base mt-3">
-            Small groups of 8-12 solo travellers leaving soon. Pick your circle and connect with fellow explorers before departure.
-          </p>
-        </div>
+    <section
+      id="upcoming-journeys"
+      className="py-20 lg:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
+    >
+      <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
+        {/* Sub-header tagline */}
+        <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+          UPCOMING JOURNEYS
+        </span>
 
-        {/* Tab Filters */}
-        <div className="flex border-b border-slate-200 overflow-x-auto w-full justify-start md:justify-center mb-12 scrollbar-hide pt-2 gap-2">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
+        {/* Main Title */}
+        <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal leading-[1.14] font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
+          Where will{" "}
+          <span
+            className="text-[#C85A24] italic font-normal inline-block"
+            style={{
+              fontFamily: "var(--font-playball), Georgia, cursive, serif",
+            }}
+          >
+            your
+          </span>{" "}
+          next journey begin?
+        </h2>
+
+        {/* Subtitle Description */}
+        <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
+          Every Kokalachi journey is curated end-to-end — the destination, the
+          pace, and the people. Pick the one that&apos;s calling you.
+        </p>
+
+        {/* Filter Pills Row */}
+        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 sm:gap-3 mb-12 pb-2 scrollbar-hide">
+          {categories.map((cat) => {
+            const Icon = cat.icon;
+            const isActive = activeCategory === cat.id;
             return (
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`pb-4 px-4 sm:px-6 flex items-center gap-2 text-xs sm:text-sm font-bold transition-all relative whitespace-nowrap flex-shrink-0 ${
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap cursor-pointer ${
                   isActive
-                    ? "text-[#0E5A60]"
-                    : "text-slate-500 hover:text-slate-900"
+                    ? "bg-[#0B2A3D] text-white shadow-md scale-105"
+                    : "bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50"
                 }`}
               >
-                <Icon size={16} />
-                <span>{tab.label}</span>
-                {isActive && (
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#0E5A60]" />
-                )}
+                <Icon
+                  size={14}
+                  className={isActive ? "text-white" : "text-slate-500"}
+                />
+                <span>{cat.label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Tour Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-          {filteredPackages.map((dest) => {
-            const isWishlisted = wishlist.includes(dest.id);
-            return (
-              <div
-                key={dest.id}
-                onClick={() => setSelectedTour(dest)}
-                className="bg-[#F7F3EC] rounded-3xl overflow-hidden border border-slate-200/80 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group flex flex-col cursor-pointer text-left relative"
-              >
-                {/* Card Image */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+        {/* Trip Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto text-left pt-2">
+          {filteredCards.map((card) => (
+            <div
+              key={card.id}
+              onClick={() => setSelectedTour(card.tourPackage)}
+              className="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_25px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between border border-slate-100/90 relative cursor-pointer"
+            >
+              <div>
+                {/* Inner Image Box */}
+                <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-2xl mb-3.5 bg-slate-100">
                   <img
-                    src={dest.image}
-                    alt={dest.title}
+                    src={card.image}
+                    alt={card.destination}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  
-                  {/* Spots Left / Tag */}
-                  {dest.tag && (
-                    <div
-                      className={`absolute top-4 left-0 px-3 py-1.5 text-[10px] font-extrabold text-white uppercase tracking-wider ${dest.tagColor}`}
-                      style={{
-                        clipPath: "polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%)",
-                      }}
-                    >
-                      {dest.tag}
-                    </div>
-                  )}
-
-                  {/* Heart Bookmark */}
-                  <button
-                    onClick={(e) => toggleWishlist(dest.id, e)}
-                    className="absolute top-4 right-4 w-9 h-9 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all"
-                  >
-                    <Heart
-                      size={16}
-                      className={
-                        isWishlisted
-                          ? "text-red-500 fill-red-500"
-                          : "text-slate-400 hover:text-red-500"
-                      }
-                    />
-                  </button>
+                  <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md text-white text-[11px] font-medium px-3 py-1 rounded-full flex items-center gap-1">
+                    <MapPin size={11} className="text-white" />
+                    <span>{card.locationTag}</span>
+                  </div>
                 </div>
 
-                {/* Card Body */}
-                <div className="p-5 flex-grow flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2">
-                      <div className="flex items-center gap-1">
-                        <MapPin size={13} className="text-[#0E5A60]" />
-                        <span>{dest.location}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar size={13} className="text-[#D96C2C]" />
-                        <span>{dest.nextDeparture}</span>
-                      </div>
+                {/* Destination Title (Matching Serif Font) */}
+                <h3 className="text-xl sm:text-[22px] font-bold text-[#C85A24] font-serif leading-snug mb-3 group-hover:opacity-90 transition-opacity">
+                  {card.destination}
+                </h3>
+
+                {/* Key Details Rows (Duration, Group Size, Dates) */}
+                <div className="bg-[#FAF4EC] p-3.5 sm:p-4 rounded-2xl space-y-2.5 mb-4 border border-[#F5ECE0]">
+                  <div className="flex items-center gap-2.5">
+                    <Clock size={16} className="text-[#C85A24] stroke-[1.8] flex-shrink-0" />
+                    <div className="flex items-baseline gap-1 text-xs">
+                      <span className="font-medium text-[#64748B]">Duration:</span>
+                      <span className="font-semibold text-[#0B2A3D] ml-0.5">
+                        {card.duration}
+                      </span>
                     </div>
-
-                    <h3 className="font-extrabold text-base text-[#0B2A3D] leading-snug mb-2 group-hover:text-[#0E5A60] transition-colors line-clamp-2 min-h-[44px]">
-                      {dest.title}
-                    </h3>
-
-                    <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed mb-4">
-                      {dest.hook}
-                    </p>
                   </div>
-
-                  {/* Card Footer Price & Action */}
-                  <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between mt-auto">
-                    <div>
-                      <span className="text-[10px] text-slate-400 block font-medium">Starts from</span>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-lg font-extrabold text-[#0B2A3D]">${dest.price}</span>
-                        <span className="text-[10px] text-slate-500">/ person</span>
-                      </div>
+                  <div className="flex items-center gap-2.5">
+                    <Users size={16} className="text-[#C85A24] stroke-[1.8] flex-shrink-0" />
+                    <div className="flex items-baseline gap-1 text-xs">
+                      <span className="font-medium text-[#64748B]">Group Size:</span>
+                      <span className="font-semibold text-[#0B2A3D] ml-0.5">
+                        {card.groupSize}
+                      </span>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <Calendar size={16} className="text-[#C85A24] stroke-[1.8] flex-shrink-0" />
+                    <div className="flex items-baseline gap-1 text-xs">
+                      <span className="font-medium text-[#64748B]">Dates:</span>
+                      <span className="font-semibold text-[#0B2A3D] ml-0.5">
+                        {card.dates}
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-                    <span className="px-3 py-1.5 rounded-xl bg-white text-[#0E5A60] font-bold text-xs group-hover:bg-[#0E5A60] group-hover:text-white transition-colors flex items-center gap-1 shadow-sm">
-                      View Circle <ArrowRight size={12} />
+                {/* Vibe Tags Pills */}
+                <div className="flex items-center flex-wrap gap-1.5 mb-4">
+                  {card.vibeTags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[11px] font-bold text-[#C85A24] bg-[#FAF0E6] px-3 py-1 rounded-full border border-[#F3DFD0]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Starting From Price Display */}
+                <div className="mb-4 border-t border-slate-100/80 pt-3 flex items-baseline justify-between">
+                  <span className="text-xs text-slate-400 font-medium">
+                    Starting From:
+                  </span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-black text-[#0B2A3D]">
+                      {card.price}
+                    </span>
+                    <span className="text-xs text-slate-500 font-medium">
+                      / person
                     </span>
                   </div>
                 </div>
               </div>
-            );
-          })}
+
+              {/* View Journey CTA Button */}
+              <button className="w-full bg-[#0B2A3D] hover:bg-[#123A53] text-white py-3.5 rounded-2xl font-bold text-sm shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2 group-hover:scale-[1.01]">
+                <span>View Journey</span>
+                <ArrowRight size={16} className="stroke-[2.5]" />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Section-end CTA Button */}
+        <div className="mt-14">
+          <button className="bg-[#C85A24] text-white px-9 py-4 rounded-full font-extrabold text-sm sm:text-base shadow-lg hover:bg-[#B34D1C] transition-all inline-flex items-center gap-2 cursor-pointer hover:scale-105">
+            <span>See All Upcoming Journeys</span>
+            <ArrowRight size={18} className="stroke-[2.5]" />
+          </button>
         </div>
       </div>
 
-      {/* Tour Quick View Modal */}
+      {/* Quick View Modal */}
       <TourModal
         tour={selectedTour}
         isOpen={!!selectedTour}
