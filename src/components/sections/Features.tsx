@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Globe, Luggage } from "lucide-react";
 import { Button } from "../ui/Button";
 
 export function Features() {
@@ -39,20 +39,7 @@ export function Features() {
               {/* Feature 1 */}
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-[#3E7C7A]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-full h-full"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                    <path d="M2 12h20" />
-                  </svg>
+                  <Globe className="w-full h-full" />
                 </div>
                 <div className="pt-1">
                   <h4 className="font-bold text-lg text-gray-900 mb-1">
@@ -68,22 +55,7 @@ export function Features() {
               {/* Feature 2 */}
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-[#3E7C7A]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-full h-full"
-                  >
-                    <path d="M6 20h12" />
-                    <path d="M20 10V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4" />
-                    <path d="M12 4v16" />
-                    <rect x="2" y="10" width="20" height="10" rx="2" />
-                    <path d="M12 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
-                  </svg>
+                  <Luggage className="w-full h-full" />
                 </div>
                 <div className="pt-1">
                   <h4 className="font-bold text-lg text-gray-900 mb-1">

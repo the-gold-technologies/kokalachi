@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plane } from "lucide-react";
 import { Button } from "../ui/Button";
 
 export function Discover() {
@@ -10,14 +10,7 @@ export function Discover() {
         <div className="relative font-bold text-gray-900 tracking-tight text-5xl sm:text-6xl md:text-[80px] font-sans">
           Kokalachi
           {/* Plane icon flying above the 'ia' */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="absolute -top-3 md:-top-5 right-[18%] w-8 h-8 md:w-12 md:h-12 transform rotate-[45deg]"
-          >
-            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
-          </svg>
+          <Plane className="absolute -top-3 md:-top-5 right-[18%] w-8 h-8 md:w-12 md:h-12 transform rotate-[45deg] fill-current text-gray-900" />
         </div>
         <div className="text-[10px] md:text-xs font-bold text-gray-900 tracking-[0.4em] uppercase mt-1 md:mt-2">
           A Travel Agency

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Play, X } from "lucide-react";
+import { Play, X, ArrowRight } from "lucide-react";
 import { Button } from "../ui/Button";
 
 export function PromoBanner() {
@@ -25,9 +25,9 @@ export function PromoBanner() {
             <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
               <button 
                 onClick={() => setShowVideo(true)}
-                className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 text-[#D97745]"
+                className="w-14 h-14 bg-[#3E7C7A] hover:bg-[#326462] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300 text-white"
               >
-                <Play fill="currentColor" size={18} className="ml-0.5 text-[#D97745]" />
+                <Play fill="currentColor" size={18} className="ml-0.5 text-white" />
               </button>
             </div>
           </div>
@@ -35,30 +35,6 @@ export function PromoBanner() {
           {/* Right Content Side (Kokalachi Dark Navy Background) */}
           <div className="w-full md:w-[45%] bg-[#1F355E] flex flex-col justify-center items-start text-left p-8 md:p-12 relative overflow-hidden">
             
-            {/* Background Outline SVG - Sketched Palm Trees and Flying Bird Watermark (Bottom Right) */}
-            <div className="absolute bottom-[-10px] right-[-10px] w-40 h-40 opacity-15 text-gray-300 pointer-events-none z-0">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 100 100"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                className="w-full h-full"
-              >
-                {/* Island Mound */}
-                <path d="M 10,95 Q 50,88 90,95" />
-                {/* Left Palm Tree */}
-                <path d="M 60,90 Q 55,60 40,45" strokeWidth="1.2" />
-                <path d="M 40,45 Q 25,48 18,54 M 40,45 Q 30,35 25,32 M 40,45 Q 45,30 52,28 M 40,45 Q 52,38 58,42" />
-                {/* Right Palm Tree */}
-                <path d="M 75,90 Q 75,65 65,50" strokeWidth="1.2" />
-                <path d="M 65,50 Q 52,55 48,60 M 65,50 Q 55,40 50,38 M 65,50 Q 72,38 78,35 M 65,50 Q 75,45 80,50" />
-                {/* Flying Birds */}
-                <path d="M 20,20 Q 25,15 30,22 Q 35,15 40,20" strokeWidth="0.8" />
-                <path d="M 45,15 Q 48,11 52,16 Q 56,11 60,15" strokeWidth="0.6" />
-              </svg>
-            </div>
-
             {/* Content */}
             <div className="relative z-10">
               <span className="text-white/90 text-sm font-medium tracking-wide mb-2 block">
@@ -71,7 +47,7 @@ export function PromoBanner() {
                 variant="primary" 
                 className="rounded-lg px-6 py-2.5 bg-[#D97745] hover:bg-[#c06538] text-white font-bold text-xs uppercase tracking-wider flex items-center shadow-md transition-all duration-300"
               >
-                SEE DETAILS <span className="ml-2">→</span>
+                SEE DETAILS <ArrowRight size={14} className="ml-2" />
               </Button>
             </div>
 

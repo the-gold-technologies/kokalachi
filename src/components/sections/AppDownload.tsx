@@ -1,5 +1,5 @@
 import React from "react";
-import { Play } from "lucide-react";
+import { FaGooglePlay, FaApple } from "react-icons/fa";
 
 export function AppDownload() {
   return (
@@ -54,7 +54,7 @@ export function AppDownload() {
             
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
               <a href="#" className="flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-500 fill-green-500"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <FaGooglePlay className="w-6 h-6 text-green-600" />
                 <div className="text-left">
                   <div className="text-[10px] uppercase font-bold text-gray-500 leading-none">Get it on</div>
                   <div className="font-bold text-sm leading-tight">Google Play</div>
@@ -62,7 +62,7 @@ export function AppDownload() {
               </a>
 
               <a href="#" className="flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-gray-900"><path d="M16.365 21.43c-1.144.66-2.296-.06-3.32-.06-1.025 0-2.228.736-3.32.06-2.613-1.616-5.263-7.31-2.92-11.458 1.135-2.016 3.195-3.238 5.437-3.238 1.488 0 2.825.86 3.864.86 1.05 0 2.584-.96 4.298-.82 2.373.19 4.205 1.456 5.253 3.32-4.52 2.148-3.766 8.528.878 10.37-1.156 2.83-2.93 5.46-5.172 6.777h-.002c-.896.53-2.046 1.07-3.414 1.07-1.332 0-2.47-.53-3.363-1.06l-.216-.134zm-2.003-14.773c-.15-2.583 1.954-5.01 4.542-5.462.364 2.822-2.126 5.37-4.542 5.462z"/></svg>
+                <FaApple className="w-6 h-6 text-gray-900" />
                 <div className="text-left">
                   <div className="text-[10px] uppercase font-bold text-gray-500 leading-none">Download on the</div>
                   <div className="font-bold text-sm leading-tight">App Store</div>
