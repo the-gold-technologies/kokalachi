@@ -1,0 +1,14 @@
+export { BrandLogo } from "./BrandLogo";
+export { NavbarV2 } from "./NavbarV2";
+export { Step1Hero } from "./Step1Hero";
+export { Step2WhyWeExist } from "./Step2WhyWeExist";
+export { Step3HowItWorks } from "./Step3HowItWorks";
+export { Step4Difference } from "./Step4Difference";
+export { Step5UpcomingJourneys } from "./Step5UpcomingJourneys";
+export { Step6GoodCompany } from "./Step6GoodCompany";
+export { Step7MomentsThatStayed } from "./Step7MomentsThatStayed";
+export { Step8WhoTravels } from "./Step8WhoTravels";
+export { Step9BehindKokalachi } from "./Step9BehindKokalachi";
+export { Step9MeetFounder } from "./Step9MeetFounder";
+export { Step10FaqAndCta } from "./Step10FaqAndCta";
+export { FooterV2 } from "./FooterV2";

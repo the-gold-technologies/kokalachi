@@ -3,14 +3,21 @@
 @theme {
   --font-sans: var(--font-poppins), sans-serif;
   --font-montserrat: var(--font-montserrat), sans-serif;
-  --color-primary: #3E7C7A;
-  --color-primary-hover: #326462;
-  --color-accent: #D97745;
-  --color-accent-hover: #c06538;
-  --color-dark-bg: #1F355E;
-  --color-gray-bg: #F8F5EE;
-  --color-text-main: #1C2B38;
-  --color-text-muted: #6B7C85;
+  --font-playball: var(--font-playball), cursive;
+
+  /* Official Kokalachi Brand Color Palette */
+  --color-brand-navy: #0B2A3D;
+  --color-brand-teal: #0E5A60;
+  --color-brand-sage: #6F8F84;
+  --color-brand-orange: #D96C2C;
+  --color-brand-cream: #F7F3EC;
+
+  --color-primary: #0E5A60;
+  --color-primary-hover: #0a464b;
+  --color-accent: #D96C2C;
+  --color-accent-hover: #b8571e;
+  --color-dark-bg: #0B2A3D;
+  --color-gray-bg: #F7F3EC;
 }
 
 @layer base {
