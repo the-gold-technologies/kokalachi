@@ -223,13 +223,8 @@ export function WhoTravelsSection() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Top Control Bar: Dot Page Indicator & Prev/Next Arrows */}
-          <div className="flex items-center justify-between mb-5 px-2">
-            <div className="text-xs sm:text-sm font-medium text-slate-500 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#D96C2C] animate-pulse" />
-              <span>Persona {currentRealIndex + 1} of {pillars.length} • {pillars[currentRealIndex].title}</span>
-            </div>
-
+          {/* Top Control Bar: Prev/Next Arrows */}
+          <div className="flex items-center justify-end mb-5 px-2">
             {/* Prev / Next Navigation Buttons */}
             <div className="flex items-center gap-2">
               <button
@@ -314,25 +309,6 @@ export function WhoTravelsSection() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* DOT PAGINATION INDICATORS */}
-          <div className="flex items-center justify-center gap-2 mt-6">
-            {pillars.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setIsTransitioning(true);
-                  setActiveOffset(startIndex + i);
-                }}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentRealIndex === i
-                    ? "w-8 bg-[#D96C2C]"
-                    : "w-2.5 bg-slate-300 hover:bg-slate-400"
-                }`}
-              />
-            ))}
           </div>
         </div> 
 
