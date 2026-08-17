@@ -48,7 +48,6 @@ export function MomentsThatStayedSection() {
       />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl text-center">
-        
         {/* SECTION HEADER */}
         <div className="inline-block mb-3">
           <span className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
@@ -58,7 +57,8 @@ export function MomentsThatStayedSection() {
 
         <div className="mb-4 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-5xl lg:text-[58px] font-normal text-[#0B2A3D] leading-[1.25] font-serif">
-            Every journey leaves with stories. <br className="hidden sm:inline" />
+            Every journey leaves with stories.{" "}
+            <br className="hidden sm:inline" />
             <span className="relative inline-block text-[#0B2A3D] font-script text-[1.25em] font-normal mr-2">
               Some leave with
               <svg
@@ -85,41 +85,50 @@ export function MomentsThatStayedSection() {
         </p>
 
         {/* ARTISTIC ASYMMETRIC SCRAPBOOK TRAVEL COLLAGE */}
-        <div className="relative mb-20 text-left max-w-6xl mx-auto">
-          
+        <div className="relative mb-20 text-left max-w-6xl mx-auto pt-8">
           {/* FLOATING DECORATIVE SCRAPBOOK HANDWRITTEN ANNOTATIONS */}
-          <div className="hidden lg:block absolute -top-8 left-4 z-30 transform -rotate-6 pointer-events-none">
-            <span className="font-script text-xl text-[#D96C2C] font-normal">
+          <div className="hidden md:flex flex-col items-start absolute -top-5 left-4 lg:left-8 z-30 transform -rotate-6 pointer-events-none">
+            <span className="font-script text-xl sm:text-2xl text-[#D96C2C] font-normal tracking-wide whitespace-nowrap">
               100% Unfiltered Memories ♡
             </span>
             <svg
-              className="w-12 h-6 text-[#D96C2C]/80 mt-1 transform rotate-12 ml-6"
+              className="w-10 h-5 text-[#D96C2C]/70 mt-0.5 transform rotate-12 ml-10"
               viewBox="0 0 50 30"
               fill="none"
             >
               <path
                 d="M 5 5 C 20 25 35 15 45 20 M 38 14 L 45 20 L 40 28"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="2.2"
                 strokeLinecap="round"
               />
             </svg>
           </div>
 
-          <div className="hidden lg:block absolute -top-6 right-8 z-30 transform rotate-6 pointer-events-none">
-            <span className="font-script text-xl text-[#0E5A60] font-normal">
+          <div className="hidden md:flex flex-col items-end absolute -top-5 right-4 lg:right-8 z-30 transform rotate-3 pointer-events-none">
+            <span className="font-script text-xl sm:text-2xl text-[#0E5A60] font-normal tracking-wide whitespace-nowrap">
               Collected from 12+ Countries ✨
             </span>
+            <svg
+              className="w-10 h-5 text-[#0E5A60]/70 mt-0.5 transform -rotate-12 mr-8"
+              viewBox="0 0 50 30"
+              fill="none"
+            >
+              <path
+                d="M 45 5 C 30 25 15 15 5 20 M 12 14 L 5 20 L 10 28"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+              />
+            </svg>
           </div>
 
           {/* MAIN COLLAGE GRID CONTAINER */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start relative">
-            
             {/* =========================================================
                 FEATURED LEFT HERO: WIDESCREEN CINEMATIC VIDEO (7 COLS)
                ========================================================= */}
             <div className="md:col-span-7 relative z-20">
-              
               {/* Main Cinematic Video Card */}
               <div className="rounded-[32px] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group h-[340px] sm:h-[400px] bg-slate-900 border-4 border-white">
                 <img
@@ -164,7 +173,8 @@ export function MomentsThatStayedSection() {
                 {/* Bottom Quote Banner */}
                 <div className="absolute bottom-5 left-6 right-6 text-white z-20 space-y-1">
                   <p className="text-base sm:text-lg font-serif italic leading-snug drop-shadow-md">
-                    &quot;I almost cancelled this trip. Now I&apos;m planning my next one.&quot;
+                    &quot;I almost cancelled this trip. Now I&apos;m planning my
+                    next one.&quot;
                   </p>
                   <div className="text-xs text-amber-200 font-sans flex items-center gap-2 pt-1 font-medium">
                     <span>— The Slow Island, Sri Lanka</span>
@@ -176,7 +186,6 @@ export function MomentsThatStayedSection() {
 
               {/* OVERLAPPING ROW BELOW HERO (WhatsApp Chat + Audio Player) */}
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 mt-6 items-start">
-                
                 {/* WhatsApp Chat Group Card (7 Cols inside left hero column) */}
                 <div className="sm:col-span-7 bg-white rounded-3xl border border-slate-200/90 shadow-lg hover:shadow-xl transition-all overflow-hidden flex flex-col transform sm:-rotate-1">
                   {/* WhatsApp Header */}
@@ -199,20 +208,29 @@ export function MomentsThatStayedSection() {
                         </div>
                       </div>
                     </div>
-                    <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">Chat</span>
+                    <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">
+                      Chat
+                    </span>
                   </div>
 
                   {/* Chat Message Bubbles */}
                   <div className="p-4 bg-[#E5DDD5] space-y-3 flex-1 flex flex-col justify-center">
                     <div className="bg-white p-3 rounded-2xl rounded-tl-xs shadow-xs text-xs text-slate-800 space-y-1 max-w-[90%]">
                       <p className="leading-relaxed">
-                        Can&apos;t believe it&apos;s been 3 months and this group is still so active! 💚
+                        Can&apos;t believe it&apos;s been 3 months and this
+                        group is still so active! 💚
                       </p>
-                      <div className="text-[9px] text-slate-400 text-right">10:42 AM</div>
+                      <div className="text-[9px] text-slate-400 text-right">
+                        10:42 AM
+                      </div>
                     </div>
                     <div className="bg-[#DCF8C6] p-3 rounded-2xl rounded-tr-xs shadow-xs text-xs text-slate-800 space-y-1 self-end max-w-[90%]">
-                      <p className="leading-relaxed">Already planning our next destination together 😍</p>
-                      <div className="text-[9px] text-slate-400 text-right">10:43 AM</div>
+                      <p className="leading-relaxed">
+                        Already planning our next destination together 😍
+                      </p>
+                      <div className="text-[9px] text-slate-400 text-right">
+                        10:43 AM
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -232,11 +250,21 @@ export function MomentsThatStayedSection() {
                         )}
                       </div>
                       <div className="flex items-center gap-0.5 text-[#0E5A60]">
-                        <span className={`w-1 h-3 bg-[#0E5A60] rounded-full ${isPlayingAudio ? 'animate-bounce' : ''}`} />
-                        <span className={`w-1 h-5 bg-[#0E5A60] rounded-full ${isPlayingAudio ? 'animate-bounce delay-75' : ''}`} />
-                        <span className={`w-1 h-2 bg-[#0E5A60] rounded-full ${isPlayingAudio ? 'animate-bounce' : ''}`} />
-                        <span className={`w-1 h-6 bg-[#0E5A60] rounded-full ${isPlayingAudio ? 'animate-bounce delay-150' : ''}`} />
-                        <span className={`w-1 h-3 bg-[#0E5A60] rounded-full ${isPlayingAudio ? 'animate-bounce' : ''}`} />
+                        <span
+                          className={`w-1 h-3 bg-[#0E5A60] rounded-full ${isPlayingAudio ? "animate-bounce" : ""}`}
+                        />
+                        <span
+                          className={`w-1 h-5 bg-[#0E5A60] rounded-full ${isPlayingAudio ? "animate-bounce delay-75" : ""}`}
+                        />
+                        <span
+                          className={`w-1 h-2 bg-[#0E5A60] rounded-full ${isPlayingAudio ? "animate-bounce" : ""}`}
+                        />
+                        <span
+                          className={`w-1 h-6 bg-[#0E5A60] rounded-full ${isPlayingAudio ? "animate-bounce delay-150" : ""}`}
+                        />
+                        <span
+                          className={`w-1 h-3 bg-[#0E5A60] rounded-full ${isPlayingAudio ? "animate-bounce" : ""}`}
+                        />
                       </div>
                     </button>
                     <span className="text-[10px] font-mono text-slate-500 font-medium">
@@ -245,7 +273,8 @@ export function MomentsThatStayedSection() {
                   </div>
 
                   <p className="text-[#0B2A3D] text-xs font-serif italic leading-relaxed mb-3">
-                    &quot;We still meet every month. Different cities, same people, same laughs!&quot;
+                    &quot;We still meet every month. Different cities, same
+                    people, same laughs!&quot;
                   </p>
 
                   <div className="flex items-center gap-2 pt-2 border-t border-amber-900/10">
@@ -259,42 +288,47 @@ export function MomentsThatStayedSection() {
                     </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
-
 
             {/* =========================================================
                 FEATURED RIGHT SIDE: SCRAPBOOK STACK & POLAROIDS (5 COLS)
                ========================================================= */}
             <div className="md:col-span-5 space-y-6 relative z-10">
-              
               {/* TOP RIGHT: JAPAN QUOTE PARCHMENT CARD */}
               <div className="bg-[#FFFDF9] p-6 sm:p-7 rounded-[30px] border border-amber-900/15 shadow-lg hover:shadow-xl transition-all relative transform md:-rotate-1">
                 {/* Decorative Top Stamp */}
                 <div className="absolute top-4 right-5 text-[#D96C2C]/30 text-2xl font-serif leading-none">
                   “
                 </div>
-                
+
                 <p className="text-[#0B2A3D] text-base sm:text-lg font-serif italic leading-relaxed mb-5">
-                  &quot;I came alone, not knowing anyone. By the end of the trip, I had a whole new family.&quot;
+                  &quot;I came alone, not knowing anyone. By the end of the
+                  trip, I had a whole new family.&quot;
                 </p>
 
                 <div className="flex items-end justify-between pt-4 border-t border-amber-900/10">
                   <div className="text-xs text-[#0B2A3D]/80 font-sans">
-                    <div className="font-semibold text-[#0B2A3D]">— The Sakura Edition</div>
-                    <div className="text-[#0E5A60] font-bold text-[11px]">Japan • April 2026</div>
+                    <div className="font-semibold text-[#0B2A3D]">
+                      — The Sakura Edition
+                    </div>
+                    <div className="text-[#0E5A60] font-bold text-[11px]">
+                      Japan • April 2026
+                    </div>
                   </div>
 
                   <button
-                    onClick={() => toggleLike('card2')}
+                    onClick={() => toggleLike("card2")}
                     className="p-2 rounded-full hover:bg-amber-100/50 transition-colors"
                     aria-label="Like story"
                   >
                     <Heart
                       size={18}
-                      className={likedCards.card2 ? "text-[#D96C2C] fill-[#D96C2C]" : "text-slate-400"}
+                      className={
+                        likedCards.card2
+                          ? "text-[#D96C2C] fill-[#D96C2C]"
+                          : "text-slate-400"
+                      }
                     />
                   </button>
                 </div>
@@ -302,7 +336,6 @@ export function MomentsThatStayedSection() {
 
               {/* MIDDLE RIGHT: 2-COLUMN PHOTO & REEL COLLAGE (Alleyway Photo + Northern Lights Reel) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-stretch">
-                
                 {/* Alleyway Photo Card with Washi Tape */}
                 <div className="rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all h-64 border-4 border-white relative group transform sm:rotate-2">
                   {/* Washi Tape Graphic */}
@@ -334,7 +367,6 @@ export function MomentsThatStayedSection() {
                     Iceland Aurora Magic 🌌
                   </div>
                 </div>
-
               </div>
 
               {/* BOTTOM RIGHT: AUTHENTIC TILTED POLAROID PHOTO NOTE CARD */}
@@ -351,19 +383,19 @@ export function MomentsThatStayedSection() {
                 </div>
 
                 <p className="text-sm text-slate-800 font-script font-normal leading-relaxed px-1 text-center">
-                  &quot;This was the midnight talk where we decided to visit Japan together next year!&quot;
+                  &quot;This was the midnight talk where we decided to visit
+                  Japan together next year!&quot;
                 </p>
 
                 <div className="text-[10px] font-sans text-slate-500 pt-2 border-t border-amber-900/10 mt-2 flex items-center justify-between">
                   <span>— Ladakh Road Trip • June 2025</span>
-                  <span className="text-[#D96C2C] font-script text-xs">memories ♡</span>
+                  <span className="text-[#D96C2C] font-script text-xs">
+                    memories ♡
+                  </span>
                 </div>
               </div>
-
             </div>
-
           </div>
-
         </div>
 
         {/* BOTTOM CONNECTED TIMELINE: "The Journey Continues..." (Clean without box or border line) */}
@@ -398,81 +430,81 @@ export function MomentsThatStayedSection() {
                 />
               </svg>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 relative z-10 items-start">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative z-10 items-start">
                 {/* STEP 1 */}
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
-                    <Plane size={22} className="stroke-[2]" />
+                <div className="flex flex-col items-center text-center group px-1">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <Plane size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Trip Ends
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
                     We part ways with full hearts.
                   </p>
                 </div>
 
                 {/* STEP 2 */}
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
-                    <MessageCircle size={22} className="stroke-[2]" />
+                <div className="flex flex-col items-center text-center group px-1">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <MessageCircle size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     WhatsApp Still Active
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
                     The conversations never stop.
                   </p>
                 </div>
 
                 {/* STEP 3 */}
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform mb-3">
-                    <Cake size={22} className="stroke-[2]" />
+                <div className="flex flex-col items-center text-center group px-1">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <Cake size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Birthdays &amp; Milestones
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[130px]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
                     We celebrate together, no matter the distance.
                   </p>
                 </div>
 
                 {/* STEP 4 */}
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
-                    <MapPin size={22} className="stroke-[2]" />
+                <div className="flex flex-col items-center text-center group px-1">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <MapPin size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Another Trip Booked
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[130px]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
                     Because some bonds deserve more adventures.
                   </p>
                 </div>
 
                 {/* STEP 5 */}
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
-                    <Camera size={22} className="stroke-[2]" />
+                <div className="flex flex-col items-center text-center group px-1">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <Camera size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Reunions &amp; Meetups
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
                     Different plans, same people.
                   </p>
                 </div>
 
                 {/* STEP 6 */}
-                <div className="flex flex-col items-center text-center group">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
-                    <Heart size={22} className="stroke-[2]" />
+                <div className="flex flex-col items-center text-center group px-1">
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <Heart size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Friendships for Life
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
                     From travel buddies to life buddies.
                   </p>
                 </div>

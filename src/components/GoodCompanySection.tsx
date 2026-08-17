@@ -75,11 +75,11 @@ export function GoodCompanySection() {
         </p>
 
         {/* 4 TORN-PAPER MOODBOARD CARDS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch mb-16 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-16 text-left">
           {/* ================= CARD 1: Small, Curated Groups ================= */}
-          <div className="bg-[#FAF6F0] rounded-[24px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:-rotate-1 hover:rotate-0">
+          <div className="bg-[#FAF6F0] rounded-[28px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:-rotate-1 hover:rotate-0">
             {/* Top Photo with Botanical Leaf Overlay */}
-            <div className="h-36 sm:h-40 overflow-hidden relative">
+            <div className="h-44 sm:h-48 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800"
                 alt="Friends laughing around campfire on beach"
@@ -88,9 +88,9 @@ export function GoodCompanySection() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
               {/* Top Left Botanical Leaf Line Doodle */}
-              <div className="absolute top-3 left-3 opacity-80 pointer-events-none">
+              <div className="absolute top-3.5 left-3.5 opacity-80 pointer-events-none">
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-9 h-9 text-white"
                   viewBox="0 0 50 50"
                   fill="none"
                 >
@@ -104,14 +104,14 @@ export function GoodCompanySection() {
               </div>
 
               {/* Top Right Hashtag Tag */}
-              <div className="absolute top-3 right-3 text-white/90 font-mono text-[9px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/20">
+              <div className="absolute top-3.5 right-3.5 text-white/90 font-mono text-[10px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20">
                 #curatedgroups
               </div>
 
               {/* ORGANIC TORN PAPER DECKLE EDGE MASK SVG */}
               <div className="absolute -bottom-1 left-0 right-0 w-full z-10 pointer-events-none">
                 <svg
-                  className="w-full h-8 text-[#FAF6F0] block"
+                  className="w-full h-9 text-[#FAF6F0] block"
                   viewBox="0 0 500 50"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -122,33 +122,34 @@ export function GoodCompanySection() {
             </div>
 
             {/* Bottom Textured Paper Content Block */}
-            <div className="p-4 pt-1 space-y-2 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
+            <div className="p-5 pt-1.5 space-y-3 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
               {/* Color Swatch Dots & Stipple Ink Dots */}
-              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2">
-                <div className="w-8 h-8 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-2xs">
-                  <Users size={16} className="stroke-[2]" />
+              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2.5">
+                <div className="w-9 h-9 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-2xs">
+                  <Users size={18} className="stroke-[2]" />
                 </div>
 
                 {/* 3 Color Palette Swatches */}
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#D96C2C]/80 inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0E5A60]/80 inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#D96C2C]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#0E5A60]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h3 className="text-base sm:text-lg font-serif text-[#0B2A3D] font-medium leading-snug">
+              <div className="space-y-1.5">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
                   Small, Curated Groups
                 </h3>
-                <p className="text-slate-600 text-xs leading-relaxed font-sans">
-                  We keep our groups intentionally small, making it easier to connect, feel included and truly enjoy the journey.
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
+                  We keep our groups intentionally small, making it easier to
+                  connect, feel included and truly enjoy the journey.
                 </p>
               </div>
 
               {/* Handwritten Typewriter Footer Hashtag */}
-              <div className="pt-2 border-t border-amber-900/10 text-right">
-                <span className="font-mono text-[10px] text-slate-500 tracking-wider">
+              <div className="pt-2.5 border-t border-amber-900/10 text-right">
+                <span className="font-mono text-[11px] text-slate-500 tracking-wider">
                   #intimatevibes
                 </span>
               </div>
@@ -156,9 +157,9 @@ export function GoodCompanySection() {
           </div>
 
           {/* ================= CARD 2: Meet Before You Travel ================= */}
-          <div className="bg-[#FAF6F0] rounded-[24px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:rotate-1 hover:rotate-0">
+          <div className="bg-[#FAF6F0] rounded-[28px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:rotate-1 hover:rotate-0">
             {/* Top Photo with Leaf Outline */}
-            <div className="h-36 sm:h-40 overflow-hidden relative">
+            <div className="h-44 sm:h-48 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=85&w=800"
                 alt="Travellers exploring historic streets together"
@@ -167,9 +168,9 @@ export function GoodCompanySection() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
               {/* Top Left Botanical Leaf Line Doodle */}
-              <div className="absolute top-3 left-3 opacity-80 pointer-events-none">
+              <div className="absolute top-3.5 left-3.5 opacity-80 pointer-events-none">
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-9 h-9 text-white"
                   viewBox="0 0 50 50"
                   fill="none"
                 >
@@ -183,14 +184,14 @@ export function GoodCompanySection() {
               </div>
 
               {/* Top Right Hashtag Tag */}
-              <div className="absolute top-3 right-3 text-white/90 font-mono text-[9px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/20">
+              <div className="absolute top-3.5 right-3.5 text-white/90 font-mono text-[10px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20">
                 #meetfirst
               </div>
 
               {/* ORGANIC TORN PAPER DECKLE EDGE MASK SVG */}
               <div className="absolute -bottom-1 left-0 right-0 w-full z-10 pointer-events-none">
                 <svg
-                  className="w-full h-8 text-[#FAF6F0] block"
+                  className="w-full h-9 text-[#FAF6F0] block"
                   viewBox="0 0 500 50"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -201,36 +202,38 @@ export function GoodCompanySection() {
             </div>
 
             {/* Bottom Textured Paper Content Block */}
-            <div className="p-4 pt-1 space-y-2 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
+            <div className="p-5 pt-1.5 space-y-3 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
               {/* Color Swatch Dots & Icon Badge */}
-              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2">
-                <div className="w-8 h-8 rounded-full bg-[#EBF3F0] text-[#0E5A60] flex items-center justify-center shadow-2xs">
-                  <MessageCircle size={16} className="stroke-[2]" />
+              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2.5">
+                <div className="w-9 h-9 rounded-full bg-[#EBF3F0] text-[#0E5A60] flex items-center justify-center shadow-2xs">
+                  <MessageCircle size={18} className="stroke-[2]" />
                 </div>
 
                 {/* 3 Color Palette Swatches */}
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0E5A60]/80 inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#A3C4BC] inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#0E5A60]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#A3C4BC] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h3 className="text-base sm:text-lg font-serif text-[#0B2A3D] font-medium leading-snug">
+              <div className="space-y-1.5">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
                   Meet Before You Travel
                 </h3>
-                <p className="text-slate-600 text-xs leading-relaxed font-sans">
-                  Get introduced to fellow travellers before departure through a dedicated pre-trip community.
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
+                  Get introduced to fellow travellers before departure through a
+                  dedicated pre-trip community.
                 </p>
                 <p className="font-script text-[#0E5A60] text-xs sm:text-sm pt-0.5">
-                  &quot;The first hello shouldn&apos;t happen at the airport.&quot;
+                  &quot;The first hello shouldn&apos;t happen at the
+                  airport.&quot;
                 </p>
               </div>
 
               {/* Handwritten Typewriter Footer Hashtag */}
-              <div className="pt-2 border-t border-amber-900/10 text-right">
-                <span className="font-mono text-[10px] text-slate-500 tracking-wider">
+              <div className="pt-2.5 border-t border-amber-900/10 text-right">
+                <span className="font-mono text-[11px] text-slate-500 tracking-wider">
                   #pretripcommunity
                 </span>
               </div>
@@ -238,9 +241,9 @@ export function GoodCompanySection() {
           </div>
 
           {/* ================= CARD 3: Safety Comes First ================= */}
-          <div className="bg-[#FAF6F0] rounded-[24px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:-rotate-1 hover:rotate-0">
+          <div className="bg-[#FAF6F0] rounded-[28px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:-rotate-1 hover:rotate-0">
             {/* Top Photo with Leaf Outline */}
-            <div className="h-36 sm:h-40 overflow-hidden relative">
+            <div className="h-44 sm:h-48 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&q=85&w=800"
                 alt="Serene mountain landscape view"
@@ -249,9 +252,9 @@ export function GoodCompanySection() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
               {/* Top Left Botanical Leaf Line Doodle */}
-              <div className="absolute top-3 left-3 opacity-80 pointer-events-none">
+              <div className="absolute top-3.5 left-3.5 opacity-80 pointer-events-none">
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-9 h-9 text-white"
                   viewBox="0 0 50 50"
                   fill="none"
                 >
@@ -265,14 +268,14 @@ export function GoodCompanySection() {
               </div>
 
               {/* Top Right Hashtag Tag */}
-              <div className="absolute top-3 right-3 text-white/90 font-mono text-[9px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/20">
+              <div className="absolute top-3.5 right-3.5 text-white/90 font-mono text-[10px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20">
                 #safetyfirst
               </div>
 
               {/* ORGANIC TORN PAPER DECKLE EDGE MASK SVG */}
               <div className="absolute -bottom-1 left-0 right-0 w-full z-10 pointer-events-none">
                 <svg
-                  className="w-full h-8 text-[#FAF6F0] block"
+                  className="w-full h-9 text-[#FAF6F0] block"
                   viewBox="0 0 500 50"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -283,33 +286,34 @@ export function GoodCompanySection() {
             </div>
 
             {/* Bottom Textured Paper Content Block */}
-            <div className="p-4 pt-1 space-y-2 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
+            <div className="p-5 pt-1.5 space-y-3 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
               {/* Color Swatch Dots & Icon Badge */}
-              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2">
-                <div className="w-8 h-8 rounded-full bg-[#EEF4F8] text-[#0B2A3D] flex items-center justify-center shadow-2xs">
-                  <ShieldCheck size={16} className="stroke-[2]" />
+              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2.5">
+                <div className="w-9 h-9 rounded-full bg-[#EEF4F8] text-[#0B2A3D] flex items-center justify-center shadow-2xs">
+                  <ShieldCheck size={18} className="stroke-[2]" />
                 </div>
 
                 {/* 3 Color Palette Swatches */}
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0B2A3D]/80 inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#8EAB9B] inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#0B2A3D]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#8EAB9B] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h3 className="text-base sm:text-lg font-serif text-[#0B2A3D] font-medium leading-snug">
+              <div className="space-y-1.5">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
                   Safety Comes First
                 </h3>
-                <p className="text-slate-600 text-xs leading-relaxed font-sans">
-                  From trusted travel partners to clear community guidelines and responsive support, your comfort is always our priority.
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
+                  From trusted travel partners to clear community guidelines and
+                  responsive support, your comfort is always our priority.
                 </p>
               </div>
 
               {/* Handwritten Typewriter Footer Hashtag */}
-              <div className="pt-2 border-t border-amber-900/10 text-right">
-                <span className="font-mono text-[10px] text-slate-500 tracking-wider">
+              <div className="pt-2.5 border-t border-amber-900/10 text-right">
+                <span className="font-mono text-[11px] text-slate-500 tracking-wider">
                   #247support
                 </span>
               </div>
@@ -317,9 +321,9 @@ export function GoodCompanySection() {
           </div>
 
           {/* ================= CARD 4: A Community Built on Respect ================= */}
-          <div className="bg-[#FAF6F0] rounded-[24px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:rotate-1 hover:rotate-0">
+          <div className="bg-[#FAF6F0] rounded-[28px] border border-amber-900/15 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between group relative transform lg:rotate-1 hover:rotate-0">
             {/* Top Photo with Leaf Outline */}
-            <div className="h-36 sm:h-40 overflow-hidden relative">
+            <div className="h-44 sm:h-48 overflow-hidden relative">
               <img
                 src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=85&w=800"
                 alt="Group of friends gathering with warm smiles"
@@ -328,9 +332,9 @@ export function GoodCompanySection() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
               {/* Top Left Botanical Leaf Line Doodle */}
-              <div className="absolute top-3 left-3 opacity-80 pointer-events-none">
+              <div className="absolute top-3.5 left-3.5 opacity-80 pointer-events-none">
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-9 h-9 text-white"
                   viewBox="0 0 50 50"
                   fill="none"
                 >
@@ -344,14 +348,14 @@ export function GoodCompanySection() {
               </div>
 
               {/* Top Right Hashtag Tag */}
-              <div className="absolute top-3 right-3 text-white/90 font-mono text-[9px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/20">
+              <div className="absolute top-3.5 right-3.5 text-white/90 font-mono text-[10px] tracking-wider uppercase bg-black/30 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20">
                 #respect
               </div>
 
               {/* ORGANIC TORN PAPER DECKLE EDGE MASK SVG */}
               <div className="absolute -bottom-1 left-0 right-0 w-full z-10 pointer-events-none">
                 <svg
-                  className="w-full h-8 text-[#FAF6F0] block"
+                  className="w-full h-9 text-[#FAF6F0] block"
                   viewBox="0 0 500 50"
                   preserveAspectRatio="none"
                   fill="currentColor"
@@ -362,33 +366,34 @@ export function GoodCompanySection() {
             </div>
 
             {/* Bottom Textured Paper Content Block */}
-            <div className="p-4 pt-1 space-y-2 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
+            <div className="p-5 pt-1.5 space-y-3 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
               {/* Color Swatch Dots & Icon Badge */}
-              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2">
-                <div className="w-8 h-8 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-2xs">
-                  <Heart size={16} className="stroke-[2]" />
+              <div className="flex items-center justify-between border-b border-amber-900/10 pb-2.5">
+                <div className="w-9 h-9 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-2xs">
+                  <Heart size={18} className="stroke-[2]" />
                 </div>
 
                 {/* 3 Color Palette Swatches */}
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#D96C2C]/80 inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#D68C45] inline-block shadow-2xs" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#D96C2C]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#D68C45] inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <h3 className="text-base sm:text-lg font-serif text-[#0B2A3D] font-medium leading-snug">
+              <div className="space-y-1.5">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
                   Built on Respect
                 </h3>
-                <p className="text-slate-600 text-xs leading-relaxed font-sans">
-                  Every traveller is expected to treat fellow travellers, local communities and shared experiences with kindness and respect.
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
+                  Every traveller is expected to treat fellow travellers, local
+                  communities and shared experiences with kindness and respect.
                 </p>
               </div>
 
               {/* Handwritten Typewriter Footer Hashtag */}
-              <div className="pt-2 border-t border-amber-900/10 text-right">
-                <span className="font-mono text-[10px] text-slate-500 tracking-wider">
+              <div className="pt-2.5 border-t border-amber-900/10 text-right">
+                <span className="font-mono text-[11px] text-slate-500 tracking-wider">
                   #kindnessfirst
                 </span>
               </div>

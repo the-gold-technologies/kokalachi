@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   User,
   Briefcase,
@@ -16,9 +16,15 @@ import {
   Leaf,
   Compass,
   Star,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export function WhoTravelsSection() {
+  const [cardsToShow, setCardsToShow] = useState(3);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
   const pillars = [
     {
       id: "women",
@@ -106,6 +112,60 @@ export function WhoTravelsSection() {
     },
   ];
 
+  // Duplicate array for seamless infinite looping
+  const extendedPillars = [...pillars, ...pillars, ...pillars];
+  const startIndex = pillars.length; // Start in middle set
+
+  const [activeOffset, setActiveOffset] = useState(startIndex);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setCardsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(3);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Auto-play timer (slides every 4s)
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      handleNext();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [isPaused, activeOffset]);
+
+  const handleNext = () => {
+    setIsTransitioning(true);
+    setActiveOffset((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    setIsTransitioning(true);
+    setActiveOffset((prev) => prev - 1);
+  };
+
+  // Reset offset position seamlessly when hitting boundary set
+  const handleTransitionEnd = () => {
+    if (activeOffset >= pillars.length * 2) {
+      setIsTransitioning(false);
+      setActiveOffset(activeOffset - pillars.length);
+    } else if (activeOffset < pillars.length) {
+      setIsTransitioning(false);
+      setActiveOffset(activeOffset + pillars.length);
+    }
+  };
+
+  // Real index 0..5 for indicator dots
+  const currentRealIndex = (activeOffset % pillars.length + pillars.length) % pillars.length;
+
   return (
     <section
       id="who-travels"
@@ -153,150 +213,237 @@ export function WhoTravelsSection() {
         </div>
 
         {/* SUBTITLE */}
-        <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto mb-14 leading-relaxed font-sans">
+        <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto mb-12 leading-relaxed font-sans">
           Different people. Different stories. One thing in common – the love of meaningful travel and incredible people.
         </p>
 
-        {/* 6 PILLARS CARDS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 items-stretch mb-12 text-left">
-          {pillars.map((item) => (
-            <div
-              key={item.id}
-              className={`${item.bgColor} rounded-3xl border border-amber-900/10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group relative`}
-            >
-              <div>
-                {/* Top Image Box */}
-                <div className="h-44 sm:h-48 overflow-hidden relative">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/10" />
+        {/* 3-CARD INFINITE LOOP CAROUSEL SLIDER */}
+        <div
+          className="relative mb-14 text-left max-w-6xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Top Control Bar: Dot Page Indicator & Prev/Next Arrows */}
+          <div className="flex items-center justify-between mb-5 px-2">
+            <div className="text-xs sm:text-sm font-medium text-slate-500 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#D96C2C] animate-pulse" />
+              <span>Persona {currentRealIndex + 1} of {pillars.length} • {pillars[currentRealIndex].title}</span>
+            </div>
 
-                  {/* Overlapping Floating Circle Icon Badge */}
-                  <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20">
-                    <div
-                      className={`w-11 h-11 rounded-full ${item.badgeBg} ${item.badgeColor} flex items-center justify-center shadow-md border-2 border-white`}
-                    >
-                      {item.icon}
+            {/* Prev / Next Navigation Buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handlePrev}
+                aria-label="Previous card"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 text-[#0B2A3D] flex items-center justify-center shadow-xs hover:bg-[#FAF4EB] hover:border-[#D96C2C]/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={handleNext}
+                aria-label="Next card"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 text-[#0B2A3D] flex items-center justify-center shadow-xs hover:bg-[#FAF4EB] hover:border-[#D96C2C]/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* SLIDER TRACK WRAPPER */}
+          <div className="overflow-hidden -mx-3 px-1 py-3">
+            <div
+              className={`flex ${
+                isTransitioning ? "transition-transform duration-500 ease-out" : ""
+              }`}
+              style={{
+                transform: `translateX(-${activeOffset * (100 / cardsToShow)}%)`,
+              }}
+              onTransitionEnd={handleTransitionEnd}
+            >
+              {extendedPillars.map((item, idx) => (
+                <div
+                  key={`${item.id}-${idx}`}
+                  className="w-full sm:w-1/2 lg:w-1/3 shrink-0 px-3 flex flex-col"
+                >
+                  <div
+                    className={`${item.bgColor} rounded-3xl border border-amber-900/10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group relative h-full`}
+                  >
+                    <div>
+                      {/* Top Image Box */}
+                      <div className="h-52 sm:h-56 overflow-hidden relative">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-black/10" />
+
+                        {/* Overlapping Floating Circle Icon Badge */}
+                        <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-20">
+                          <div
+                            className={`w-11 h-11 rounded-full ${item.badgeBg} ${item.badgeColor} flex items-center justify-center shadow-md border-2 border-white`}
+                          >
+                            {item.icon}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Content Box */}
+                      <div className="p-5 sm:p-6 pt-9 space-y-3 text-center">
+                        <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
+                          {item.title}
+                        </h3>
+                        <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed font-sans min-h-[64px]">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Bottom Tags Strip */}
+                    <div className="p-4 pt-0 flex items-center justify-between gap-1.5 border-t border-slate-200/50 mt-2">
+                      <div className="bg-white/90 backdrop-blur-xs px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 border border-slate-200/70 flex items-center gap-1.5 shadow-2xs">
+                        <Users size={12} className="text-slate-500 shrink-0" />
+                        <span>{item.age}</span>
+                      </div>
+                      <div className="bg-white/90 backdrop-blur-xs px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 border border-slate-200/70 flex items-center gap-1.5 shadow-2xs truncate">
+                        {item.attrIcon}
+                        <span className="truncate">{item.attrText}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Content Box */}
-                <div className="p-4 sm:p-5 pt-8 space-y-3 text-center">
-                  <h3 className="text-base sm:text-lg font-bold font-serif text-[#0B2A3D] leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed font-sans min-h-[72px]">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom Tags Strip */}
-              <div className="p-3 pt-0 flex items-center justify-between gap-1.5 border-t border-slate-200/50 mt-2">
-                <div className="bg-white/90 backdrop-blur-xs px-2 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold text-slate-700 border border-slate-200/70 flex items-center gap-1 shadow-2xs">
-                  <Users size={11} className="text-slate-500 shrink-0" />
-                  <span>{item.age}</span>
-                </div>
-                <div className="bg-white/90 backdrop-blur-xs px-2 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold text-slate-700 border border-slate-200/70 flex items-center gap-1 shadow-2xs truncate">
-                  {item.attrIcon}
-                  <span className="truncate">{item.attrText}</span>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+
+          {/* DOT PAGINATION INDICATORS */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {pillars.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setIsTransitioning(true);
+                  setActiveOffset(startIndex + i);
+                }}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  currentRealIndex === i
+                    ? "w-8 bg-[#D96C2C]"
+                    : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                }`}
+              />
+            ))}
+          </div>
+        </div> 
 
         {/* BOTTOM BANNER STRIP 1: CONNECTING SPIRIT BAR */}
-        <div className="bg-[#FAF4EB] rounded-3xl border border-amber-900/10 p-5 sm:p-6 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-6">
+        <div className="bg-[#FAF4EB] rounded-3xl border border-amber-900/10 p-6 sm:p-7 shadow-xs flex flex-col xl:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-6 relative overflow-hidden">
           {/* Left Side Signpost Graphic & Handwritten Text */}
-          <div className="flex items-center gap-4 shrink-0 border-b lg:border-b-0 lg:border-r border-dashed border-[#D96C2C]/30 pb-4 lg:pb-0 pr-0 lg:pr-8 w-full lg:w-auto justify-center lg:justify-start">
-            {/* Wooden Signpost Vector Icon */}
+          <div className="flex items-center gap-5 shrink-0 border-b xl:border-b-0 xl:border-r border-dashed border-[#D96C2C]/30 pb-4 xl:pb-0 pr-0 xl:pr-8 w-full xl:w-auto justify-center xl:justify-start relative z-10">
+            {/* Wooden Signpost Vector Icon with Grass Plant Base */}
             <svg
-              className="w-10 h-10 text-[#0B2A3D] shrink-0"
-              viewBox="0 0 48 48"
+              className="w-12 h-14 text-[#0B2A3D] shrink-0"
+              viewBox="0 0 50 60"
               fill="none"
             >
               {/* Post Pole */}
               <path
-                d="M24 6 V 42"
+                d="M25 6 V 52"
                 stroke="currentColor"
-                strokeWidth="3"
+                strokeWidth="2.8"
                 strokeLinecap="round"
               />
               {/* Top Signboard Pointing Left */}
               <path
-                d="M 12 11 L 34 11 L 38 16 L 34 21 L 12 21 Z"
+                d="M 12 12 L 36 12 L 40 17 L 36 22 L 12 22 Z"
                 fill="#FAF4EB"
                 stroke="currentColor"
-                strokeWidth="2.5"
+                strokeWidth="2.2"
                 strokeLinejoin="round"
               />
               {/* Bottom Signboard Pointing Right */}
               <path
-                d="M 14 26 L 36 26 L 40 31 L 36 36 L 14 36 Z"
+                d="M 14 27 L 38 27 L 42 32 L 38 37 L 14 37 Z"
                 fill="#FAF4EB"
                 stroke="currentColor"
-                strokeWidth="2.5"
+                strokeWidth="2.2"
                 strokeLinejoin="round"
+              />
+              {/* Grass Leaf Doodles at Base */}
+              <path
+                d="M 15 52 C 12 42, 10 40, 6 44 M 35 52 C 38 42, 40 40, 44 44 M 20 52 C 18 45, 12 46, 10 50"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
 
-            <div className="text-left leading-tight">
-              <div className="text-lg sm:text-xl font-serif font-bold text-[#0B2A3D]">
+            <div className="text-left leading-tight space-y-0.5">
+              <div className="font-script text-2xl sm:text-3xl font-normal text-[#0B2A3D] tracking-wide">
                 Different journeys.
               </div>
-              <div className="font-script text-[#D96C2C] text-2xl sm:text-3xl font-normal">
+              <div className="font-script text-[#D96C2C] text-2xl sm:text-3xl font-normal tracking-wide">
                 Same Kokalachi spirit.
               </div>
             </div>
           </div>
 
-          {/* Right Side Connected 4 Pillar Icons */}
-          <div className="flex-1 w-full overflow-x-auto scrollbar-hide py-1">
-            <div className="flex items-center justify-between min-w-[550px] px-4 relative">
-              {/* Connecting Curved Dotted Line */}
-              <div className="absolute top-1/2 left-10 right-10 -translate-y-1/2 border-t-2 border-dashed border-amber-900/20 z-0" />
+          {/* Right Side Connected 4 Pillar Icons with Looping Dotted SVG Line */}
+          <div className="flex-1 w-full overflow-x-auto scrollbar-hide py-2 relative">
+            <div className="flex items-center justify-between min-w-[580px] px-6 relative z-10">
+              
+              {/* Loop-de-Loop Dotted Wave Connecting SVG Line */}
+              <svg
+                className="absolute top-1/2 left-0 right-0 -translate-y-1/2 w-full h-12 text-[#D96C2C]/30 pointer-events-none z-0"
+                viewBox="0 0 600 40"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M 10 20 C 50 5, 80 35, 120 20 C 140 10, 150 0, 160 20 C 170 38, 185 20, 240 20 C 290 10, 310 30, 370 20 C 430 10, 470 30, 530 20 C 560 15, 580 25, 600 20"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeDasharray="4 4"
+                  strokeLinecap="round"
+                />
+              </svg>
 
               {/* Feature 1: Small Groups */}
-              <div className="flex flex-col items-center gap-1.5 relative z-10 bg-[#FAF4EB] px-2">
-                <div className="w-10 h-10 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-xs border border-amber-900/10">
-                  <Users size={18} className="stroke-[2]" />
+              <div className="flex flex-col items-center gap-2 relative z-10 bg-[#FAF4EB] px-3 py-1">
+                <div className="w-12 h-12 rounded-full bg-[#FFEFE6] text-[#D96C2C] flex items-center justify-center shadow-2xs border border-amber-900/10">
+                  <Users size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs font-bold text-[#0B2A3D]">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
                   Small Groups
                 </span>
               </div>
 
               {/* Feature 2: Real Connections */}
-              <div className="flex flex-col items-center gap-1.5 relative z-10 bg-[#FAF4EB] px-2">
-                <div className="w-10 h-10 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-xs border border-amber-900/10">
-                  <Heart size={18} className="stroke-[2]" />
+              <div className="flex flex-col items-center gap-2 relative z-10 bg-[#FAF4EB] px-3 py-1">
+                <div className="w-12 h-12 rounded-full bg-[#FFF0ED] text-[#E05353] flex items-center justify-center shadow-2xs border border-red-900/10">
+                  <Heart size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs font-bold text-[#0B2A3D]">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
                   Real Connections
                 </span>
               </div>
 
               {/* Feature 3: Travel with Confidence */}
-              <div className="flex flex-col items-center gap-1.5 relative z-10 bg-[#FAF4EB] px-2">
-                <div className="w-10 h-10 rounded-full bg-[#EBF3F0] text-[#0E5A60] flex items-center justify-center shadow-xs border border-teal-900/10">
-                  <ShieldCheck size={18} className="stroke-[2]" />
+              <div className="flex flex-col items-center gap-2 relative z-10 bg-[#FAF4EB] px-3 py-1">
+                <div className="w-12 h-12 rounded-full bg-[#EBF3F0] text-[#2F7D50] flex items-center justify-center shadow-2xs border border-teal-900/10">
+                  <ShieldCheck size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs font-bold text-[#0B2A3D]">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
                   Travel with Confidence
                 </span>
               </div>
 
               {/* Feature 4: Meaningful Experiences */}
-              <div className="flex flex-col items-center gap-1.5 relative z-10 bg-[#FAF4EB] px-2">
-                <div className="w-10 h-10 rounded-full bg-[#FAF5EE] text-[#D96C2C] flex items-center justify-center shadow-xs border border-amber-900/10">
-                  <Globe size={18} className="stroke-[2]" />
+              <div className="flex flex-col items-center gap-2 relative z-10 bg-[#FAF4EB] px-3 py-1">
+                <div className="w-12 h-12 rounded-full bg-[#FAF3E6] text-[#C88A2B] flex items-center justify-center shadow-2xs border border-amber-900/10">
+                  <Globe size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs font-bold text-[#0B2A3D]">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
                   Meaningful Experiences
                 </span>
               </div>
@@ -305,13 +452,23 @@ export function WhoTravelsSection() {
         </div>
 
         {/* BOTTOM BANNER STRIP 2: WARM TOAST PILL BADGE */}
-        <div className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#FFF5EE] border border-orange-200/80 text-slate-700 text-xs sm:text-sm font-medium shadow-2xs max-w-3xl mx-auto">
-          <span className="text-[#D96C2C] text-sm">✨</span>
+        <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-[#FAF4ED] border border-amber-900/10 text-slate-700 text-xs sm:text-sm font-medium shadow-2xs max-w-4xl mx-auto">
+          {/* Radiating Heart Icon Outline */}
+          <div className="relative flex items-center justify-center shrink-0">
+            <svg className="w-5 h-5 text-[#D96C2C]" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2V4 M4 6L6 8 M20 6L18 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="M12 8.5 C9.5 5, 5 5.5, 5 10 C5 14.5, 12 19, 12 19 C12 19, 19 14.5, 19 10 C19 5.5, 14.5 5, 12 8.5 Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+            </svg>
+          </div>
+
           <span>
             No matter which journey you choose, you&apos;ll always find one thing here –{" "}
             <strong className="text-[#0B2A3D] font-bold">good people and great memories.</strong>
           </span>
-          <span className="text-[#D96C2C] text-sm ml-1">♡</span>
+
+          <span className="text-[#D96C2C] font-script text-base font-bold ml-0.5 shrink-0">
+            ♡
+          </span>
         </div>
 
       </div>

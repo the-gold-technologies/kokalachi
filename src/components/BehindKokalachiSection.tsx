@@ -13,9 +13,11 @@ import {
 
 export function BehindKokalachiSection() {
   return (
-    <section id="behind-kokalachi" className="py-20 lg:py-28 bg-[#FDFBF7] relative overflow-hidden select-none">
+    <section
+      id="behind-kokalachi"
+      className="py-20 lg:py-28 bg-[#FDFBF7] relative overflow-hidden select-none"
+    >
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl">
-        
         {/* TOP OUTSIDE HEADER */}
         <div className="text-left space-y-2 mb-12">
           <h2 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-[#0B2A3D] font-montserrat">
@@ -25,13 +27,13 @@ export function BehindKokalachiSection() {
             How We Curate Every Journey
           </h3>
           <p className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-lg">
-            Finding the right people matters as much as choosing the right destination.
+            Finding the right people matters as much as choosing the right
+            destination.
           </p>
         </div>
 
         {/* FROM THE JOURNAL INNER WARM CONTAINER */}
         <div className="bg-[#FFFBF5] p-6 sm:p-12 rounded-[40px] border border-slate-200/80 shadow-sm relative text-center">
-          
           {/* Journal Tagline */}
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
@@ -47,12 +49,13 @@ export function BehindKokalachiSection() {
 
           {/* Journal Subtitle Paragraph */}
           <p className="text-[#0B2A3D]/75 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto mb-12 leading-relaxed">
-            Travel isn&apos;t just about destinations. It&apos;s about people, cultures, conversations and the memories we bring home. Explore stories, guides and reflections from the Kokalachi community.
+            Travel isn&apos;t just about destinations. It&apos;s about people,
+            cultures, conversations and the memories we bring home. Explore
+            stories, guides and reflections from the Kokalachi community.
           </p>
 
           {/* FEATURED STORY (Top Row) */}
           <div className="bg-white p-5 sm:p-6 rounded-[32px] border border-slate-200/80 shadow-sm hover:shadow-md transition-all text-left mb-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            
             {/* Featured Photo (7 cols) */}
             <div className="lg:col-span-7 rounded-2xl overflow-hidden h-64 sm:h-80 shadow-sm relative group bg-slate-100">
               <img
@@ -73,7 +76,8 @@ export function BehindKokalachiSection() {
               </h4>
 
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                Sometimes the people you&apos;ve never met become the people you never forget.
+                Sometimes the people you&apos;ve never met become the people you
+                never forget.
               </p>
 
               <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
@@ -91,12 +95,10 @@ export function BehindKokalachiSection() {
                 </a>
               </div>
             </div>
-
           </div>
 
           {/* 3 SMALLER ARTICLES (Bottom Row) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-12">
-            
             {/* ARTICLE 1 */}
             <div className="bg-white p-5 rounded-[28px] border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
               <div>
@@ -179,7 +181,8 @@ export function BehindKokalachiSection() {
                     The Hidden Cafés of Sri Lanka
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                    The best conversations rarely happen inside tourist attractions.
+                    The best conversations rarely happen inside tourist
+                    attractions.
                   </p>
                 </div>
               </div>
@@ -189,7 +192,6 @@ export function BehindKokalachiSection() {
                 <span>6 min read</span>
               </div>
             </div>
-
           </div>
 
           {/* BOTTOM JOURNAL CTA WITH PAPER AIRPLANE */}
@@ -217,9 +219,7 @@ export function BehindKokalachiSection() {
               <Send size={14} className="text-[#D96C2C] -rotate-45" />
             </a>
           </div>
-
         </div>
-
       </div>
     </section>
   );
