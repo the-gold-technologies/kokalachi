@@ -3,7 +3,7 @@
 import React from "react";
 import { Users, UserCheck, ShieldCheck, HeartHandshake, ArrowRight } from "lucide-react";
 
-export function Step6GoodCompany() {
+export function GoodCompanySection() {
   const pillars = [
     {
       emoji: "🧡",

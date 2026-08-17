@@ -26,7 +26,7 @@ const faqs = [
   },
 ];
 
-export function Step10FaqAndCta() {
+export function FaqAndCtaSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFaq = (idx: number) => {

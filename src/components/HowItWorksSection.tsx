@@ -3,7 +3,7 @@
 import React from "react";
 import { Compass, Users, Camera, Check } from "lucide-react";
 
-export function Step3HowItWorks() {
+export function HowItWorksSection() {
   return (
     <section
       id="how-it-works"

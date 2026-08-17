@@ -13,7 +13,7 @@ import {
   Users,
 } from "lucide-react";
 
-export function Step2WhyWeExist() {
+export function WhyWeExistSection() {
   return (
     <section
       id="why-we-exist"

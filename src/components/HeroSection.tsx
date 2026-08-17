@@ -3,7 +3,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
-export function Step1Hero() {
+export function HeroSection() {
   return (
     <section
       id="hero"

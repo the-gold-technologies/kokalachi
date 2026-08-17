@@ -12,7 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export function Step4Difference() {
+export function DifferenceSection() {
   return (
     <section
       id="difference"

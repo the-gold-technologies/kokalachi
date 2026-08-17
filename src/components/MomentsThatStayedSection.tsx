@@ -8,13 +8,14 @@ import {
   Plane,
   MessageCircle,
   Gift,
+  Cake,
   MapPin,
   Camera,
   ArrowRight,
   Sparkles,
 } from "lucide-react";
 
-export function Step7MomentsThatStayed() {
+export function MomentsThatStayedSection() {
   return (
     <section
       id="moments"
@@ -35,9 +36,15 @@ export function Step7MomentsThatStayed() {
         <div className="mb-4 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-[1.15] font-serif">
             Every journey leaves with stories. <br />
-            <span>Some leave with </span>
-            <span className="font-serif italic text-[#D96C2C]">
-              lifelong friendships.
+            Some leave with{" "}
+            <span
+              className="text-[#C85A24] italic font-normal inline-block"
+              style={{
+                fontFamily: "var(--font-playball), Georgia, cursive, serif",
+              }}
+            >
+              lifelong <br />
+              friendships.
             </span>
           </h2>
         </div>
@@ -249,98 +256,126 @@ export function Step7MomentsThatStayed() {
         </div>
 
         {/* BOTTOM CONNECTED TIMELINE: "The Journey Continues..." */}
-        <div className="bg-[#F7F3EC] rounded-3xl border border-slate-200/80 p-6 sm:p-10 shadow-sm relative text-center">
-          
-          {/* Cursive Header */}
-          <div className="mb-8">
-            <h3 className="text-2xl sm:text-3xl text-[#0B2A3D] font-serif italic flex items-center justify-center gap-2">
-              <span>The Journey Continues...</span>
-              <span className="text-[#D96C2C]">♡</span>
-            </h3>
-          </div>
-
-          {/* Dotted Connecting Line Steps */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-6 relative z-10 mb-8 items-start">
+        <div className="bg-[#FAF2E8] rounded-3xl border border-[#F2E5D5] p-6 sm:p-8 lg:p-10 shadow-[0_4px_25px_rgba(0,0,0,0.03)] relative text-left max-w-7xl mx-auto my-12 overflow-hidden">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 relative z-10">
             
-            {/* STEP 1 */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#6F8F84] text-white flex items-center justify-center shadow-md">
-                <Plane size={20} />
-              </div>
-              <h4 className="text-xs sm:text-sm font-bold text-[#0B2A3D]">Trip Ends</h4>
-              <p className="text-[11px] text-[#0B2A3D]/70 leading-snug">
-                We part ways with full hearts.
-              </p>
+            {/* Left Title */}
+            <div className="flex-shrink-0 text-center lg:text-left min-w-[210px] lg:pr-4">
+              <h3
+                className="text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#1E293B] leading-[1.12]"
+                style={{
+                  fontFamily: "var(--font-playball), Georgia, cursive, serif",
+                }}
+              >
+                The Journey <br />
+                Continues...{" "}
+                <span className="text-[#C85A24] font-sans text-2xl sm:text-3xl inline-block ml-1">
+                  ♡
+                </span>
+              </h3>
             </div>
 
-            {/* STEP 2 */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#D96C2C] text-white flex items-center justify-center shadow-md">
-                <MessageCircle size={20} />
-              </div>
-              <h4 className="text-xs sm:text-sm font-bold text-[#0B2A3D]">WhatsApp Still Active</h4>
-              <p className="text-[11px] text-[#0B2A3D]/70 leading-snug">
-                The conversations never stop.
-              </p>
-            </div>
+            {/* Right 6-Step Horizontal Timeline */}
+            <div className="flex-grow w-full relative">
+              {/* Connecting Wavy Dotted Path */}
+              <svg
+                className="hidden lg:block absolute top-[28px] left-[4%] right-[4%] w-[92%] h-10 pointer-events-none z-0"
+                viewBox="0 0 1000 50"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M0,25 C80,45 120,5 166,25 C233,45 270,5 333,25 C400,45 430,5 500,25 C570,45 600,5 666,25 C733,45 770,5 833,25 C900,45 940,5 1000,25"
+                  stroke="#7A8F68"
+                  strokeWidth="2"
+                  strokeDasharray="5 5"
+                  opacity="0.7"
+                />
+              </svg>
 
-            {/* STEP 3 */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#0E5A60] text-white flex items-center justify-center shadow-md">
-                <Gift size={20} />
-              </div>
-              <h4 className="text-xs sm:text-sm font-bold text-[#0B2A3D]">Birthdays & Milestones</h4>
-              <p className="text-[11px] text-[#0B2A3D]/70 leading-snug">
-                We celebrate together, no matter the distance.
-              </p>
-            </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 relative z-10 items-start">
+                {/* STEP 1 */}
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
+                    <Plane size={22} className="stroke-[2]" />
+                  </div>
+                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                    Trip Ends
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                    We part ways with full hearts.
+                  </p>
+                </div>
 
-            {/* STEP 4 */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#D96C2C] text-white flex items-center justify-center shadow-md">
-                <MapPin size={20} />
-              </div>
-              <h4 className="text-xs sm:text-sm font-bold text-[#0B2A3D]">Another Trip Booked</h4>
-              <p className="text-[11px] text-[#0B2A3D]/70 leading-snug">
-                Because some bonds deserve more adventures.
-              </p>
-            </div>
+                {/* STEP 2 */}
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
+                    <MessageCircle size={22} className="stroke-[2]" />
+                  </div>
+                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                    WhatsApp Still Active
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                    The conversations never stop.
+                  </p>
+                </div>
 
-            {/* STEP 5 */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#0E5A60] text-white flex items-center justify-center shadow-md">
-                <Camera size={20} />
-              </div>
-              <h4 className="text-xs sm:text-sm font-bold text-[#0B2A3D]">Reunions & Meetups</h4>
-              <p className="text-[11px] text-[#0B2A3D]/70 leading-snug">
-                Different plans, same people.
-              </p>
-            </div>
+                {/* STEP 3 */}
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform mb-3">
+                    <Cake size={22} className="stroke-[2]" />
+                  </div>
+                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                    Birthdays &amp; Milestones
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[130px]">
+                    We celebrate together, no matter the distance.
+                  </p>
+                </div>
 
-            {/* STEP 6 */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-[#D96C2C] text-white flex items-center justify-center shadow-md">
-                <Heart size={20} />
+                {/* STEP 4 */}
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
+                    <MapPin size={22} className="stroke-[2]" />
+                  </div>
+                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                    Another Trip Booked
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[130px]">
+                    Because some bonds deserve more adventures.
+                  </p>
+                </div>
+
+                {/* STEP 5 */}
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
+                    <Camera size={22} className="stroke-[2]" />
+                  </div>
+                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                    Reunions &amp; Meetups
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                    Different plans, same people.
+                  </p>
+                </div>
+
+                {/* STEP 6 */}
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform mb-3">
+                    <Heart size={22} className="stroke-[2]" />
+                  </div>
+                  <h4 className="font-extrabold text-[#0B2A3D] text-[13px] sm:text-sm mb-1 leading-tight">
+                    Friendships for Life
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-tight font-medium max-w-[125px]">
+                    From travel buddies to life buddies.
+                  </p>
+                </div>
+
               </div>
-              <h4 className="text-xs sm:text-sm font-bold text-[#0B2A3D]">Friendships for Life</h4>
-              <p className="text-[11px] text-[#0B2A3D]/70 leading-snug">
-                From travel buddies to life buddies.
-              </p>
             </div>
 
           </div>
-
-          {/* Read More Stories CTA Button */}
-          <div className="pt-2">
-            <a
-              href="#stories"
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#0B2A3D] hover:bg-[#0E5A60] text-white font-bold text-xs sm:text-sm rounded-full shadow-md hover:shadow-lg transition-all"
-            >
-              <span>Read More Stories</span>
-              <ArrowRight size={15} />
-            </a>
-          </div>
-
         </div>
 
       </div>

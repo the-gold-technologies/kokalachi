@@ -3,7 +3,7 @@
 import React from "react";
 import { UserCheck, Compass, Briefcase, Heart, Sparkles } from "lucide-react";
 
-export function Step8WhoTravels() {
+export function WhoTravelsSection() {
   const personas = [
     {
       icon: <Compass className="w-6 h-6 text-[#0E5A60]" />,

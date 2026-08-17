@@ -1,19 +1,16 @@
-import {
-  NavbarV2,
-  Step1Hero,
-  Step2WhyWeExist,
-  Step3HowItWorks,
-  Step4Difference,
-  Step5UpcomingJourneys,
-  Step6GoodCompany,
-  Step7MomentsThatStayed,
-  Step8WhoTravels,
-  Step9BehindKokalachi,
-  Step9MeetFounder,
-  Step10FaqAndCta,
-  FooterV2,
-} from "@/components/journey";
+import { HeroSection } from "@/components/HeroSection";
+import { WhyWeExistSection } from "@/components/WhyWeExistSection";
+import { HowItWorksSection } from "@/components/HowItWorksSection";
+import { DifferenceSection } from "@/components/DifferenceSection";
+import { UpcomingJourneysSection } from "@/components/UpcomingJourneysSection";
+import { GoodCompanySection } from "@/components/GoodCompanySection";
+import { MomentsThatStayedSection } from "@/components/MomentsThatStayedSection";
+import { WhoTravelsSection } from "@/components/WhoTravelsSection";
+import { BehindKokalachiSection } from "@/components/BehindKokalachiSection";
+import { MeetFounderSection } from "@/components/MeetFounderSection";
+import { FaqAndCtaSection } from "@/components/FaqAndCtaSection";
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -23,41 +20,41 @@ export default function Home() {
 
       <main className="flex-grow">
         {/* Step 1: Hero — Grab attention & inspire */}
-        <Step1Hero />
+        <HeroSection />
 
         {/* Step 2: Why We Exist — Build relevance & empathy */}
-        <Step2WhyWeExist />
+        <WhyWeExistSection />
 
         {/* Step 3: How It Works — Reduce friction (3 simple steps) */}
-        <Step3HowItWorks />
+        <HowItWorksSection />
 
         {/* Step 4: The Kokalachi Difference — Differentiate & position */}
-        <Step4Difference />
+        <DifferenceSection />
 
         {/* Step 5: Upcoming Journeys — Show real options & spark excitement */}
-        <Step5UpcomingJourneys />
+        <UpcomingJourneysSection />
 
         {/* Step 6: You're in Good Company — Build trust & safety */}
-        <Step6GoodCompany />
+        <GoodCompanySection />
 
         {/* Step 7: Moments That Stayed — Authentic social proof */}
-        <Step7MomentsThatStayed />
+        <MomentsThatStayedSection />
 
         {/* Step 8: Who Travels With Us? — Community belonging */}
-        <Step8WhoTravels />
+        <WhoTravelsSection />
 
-        {/* Behind Kokalachi — Journal stories & curation */}
-        <Step9BehindKokalachi />
+        {/* Step 9: Behind Kokalachi — Journal stories & curation */}
+        <BehindKokalachiSection />
 
         {/* Step 9: Meet the Founder — Humanize the brand */}
-        <Step9MeetFounder />
+        <MeetFounderSection />
 
         {/* Step 10: FAQs & Final Booking CTA — Remove last-mile doubts */}
-        <Step10FaqAndCta />
+        <FaqAndCtaSection />
       </main>
 
       {/* Official Brand Footer */}
-      <FooterV2 />
+      <Footer />
     </div>
   );
 }

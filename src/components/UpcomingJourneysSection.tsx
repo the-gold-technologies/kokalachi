@@ -154,7 +154,7 @@ const tripCards: TripCardData[] = [
   },
 ];
 
-export function Step5UpcomingJourneys() {
+export function UpcomingJourneysSection() {
   const [activeCategory, setActiveCategory] = useState("Trending");
   const [selectedTour, setSelectedTour] = useState<TourPackage | null>(null);
 
@@ -261,25 +261,38 @@ export function Step5UpcomingJourneys() {
                 {/* Key Details Rows (Duration, Group Size, Dates) */}
                 <div className="bg-[#FAF4EC] p-3.5 sm:p-4 rounded-2xl space-y-2.5 mb-4 border border-[#F5ECE0]">
                   <div className="flex items-center gap-2.5">
-                    <Clock size={16} className="text-[#C85A24] stroke-[1.8] flex-shrink-0" />
+                    <Clock
+                      size={16}
+                      className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
+                    />
                     <div className="flex items-baseline gap-1 text-xs">
-                      <span className="font-medium text-[#64748B]">Duration:</span>
+                      <span className="font-medium text-[#64748B]">
+                        Duration:
+                      </span>
                       <span className="font-semibold text-[#0B2A3D] ml-0.5">
                         {card.duration}
                       </span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <Users size={16} className="text-[#C85A24] stroke-[1.8] flex-shrink-0" />
+                    <Users
+                      size={16}
+                      className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
+                    />
                     <div className="flex items-baseline gap-1 text-xs">
-                      <span className="font-medium text-[#64748B]">Group Size:</span>
+                      <span className="font-medium text-[#64748B]">
+                        Group Size:
+                      </span>
                       <span className="font-semibold text-[#0B2A3D] ml-0.5">
                         {card.groupSize}
                       </span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <Calendar size={16} className="text-[#C85A24] stroke-[1.8] flex-shrink-0" />
+                    <Calendar
+                      size={16}
+                      className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
+                    />
                     <div className="flex items-baseline gap-1 text-xs">
                       <span className="font-medium text-[#64748B]">Dates:</span>
                       <span className="font-semibold text-[#0B2A3D] ml-0.5">

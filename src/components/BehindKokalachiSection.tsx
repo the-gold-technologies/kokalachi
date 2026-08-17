@@ -11,7 +11,7 @@ import {
   Send,
 } from "lucide-react";
 
-export function Step9BehindKokalachi() {
+export function BehindKokalachiSection() {
   return (
     <section id="behind-kokalachi" className="py-20 lg:py-28 bg-[#FDFBF7] relative overflow-hidden select-none">
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl">

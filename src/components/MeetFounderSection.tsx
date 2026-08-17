@@ -3,7 +3,7 @@
 import React from "react";
 import { Heart, Sparkles, ShieldCheck } from "lucide-react";
 
-export function Step9MeetFounder() {
+export function MeetFounderSection() {
   return (
     <section id="founder" className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-5xl">
