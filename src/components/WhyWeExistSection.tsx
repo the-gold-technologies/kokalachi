@@ -76,13 +76,7 @@ export function WhyWeExistSection() {
                   <div className="hidden sm:block pointer-events-none">
                     {/* Callout 1: Excitement */}
                     <div className="absolute -left-2 top-28 text-right">
-                      <span
-                        className="text-xs sm:text-sm text-[#4A3E3D] font-bold whitespace-nowrap block"
-                        style={{
-                          fontFamily:
-                            "var(--font-playball), Georgia, cursive, serif",
-                        }}
-                      >
+                      <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
                         Excitement
                       </span>
                       <svg
@@ -101,13 +95,7 @@ export function WhyWeExistSection() {
 
                     {/* Callout 2: Plans change */}
                     <div className="absolute -left-2 top-60 text-right">
-                      <span
-                        className="text-xs sm:text-sm text-[#4A3E3D] font-bold whitespace-nowrap block"
-                        style={{
-                          fontFamily:
-                            "var(--font-playball), Georgia, cursive, serif",
-                        }}
-                      >
+                      <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
                         Plans change
                       </span>
                       <svg
@@ -126,13 +114,7 @@ export function WhyWeExistSection() {
 
                     {/* Callout 3: The trip never happens */}
                     <div className="absolute -left-4 bottom-24 text-right">
-                      <span
-                        className="text-xs sm:text-sm text-[#4A3E3D] font-bold leading-tight block text-right max-w-[90px]"
-                        style={{
-                          fontFamily:
-                            "var(--font-playball), Georgia, cursive, serif",
-                        }}
-                      >
+                      <span className="text-sm sm:text-base text-[#4A3E3D] font-bold leading-tight block text-right max-w-[100px] font-script">
                         The trip <br /> never happens
                       </span>
                       <svg
@@ -276,13 +258,7 @@ export function WhyWeExistSection() {
                 <div className="flex justify-center mb-4">
                   <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#C85A24] text-white shadow-sm">
                     <Heart size={14} className="fill-white stroke-none" />
-                    <span
-                      className="text-xs sm:text-sm font-bold tracking-wide"
-                      style={{
-                        fontFamily:
-                          "var(--font-playball), Georgia, cursive, serif",
-                      }}
-                    >
+                    <span className="text-sm sm:text-base font-bold tracking-wide font-script">
                       The Kokalachi Way
                     </span>
                   </div>
@@ -299,13 +275,7 @@ export function WhyWeExistSection() {
 
                   {/* Cursive Handwritten Overlay Text */}
                   <div className="absolute top-4 right-5 text-white text-right font-medium drop-shadow-md leading-tight">
-                    <span
-                      className="text-lg sm:text-xl block font-bold"
-                      style={{
-                        fontFamily:
-                          "var(--font-playball), Georgia, cursive, serif",
-                      }}
-                    >
+                    <span className="text-xl sm:text-2xl block font-bold font-script">
                       Real people. <br />
                       Real connections.
                     </span>

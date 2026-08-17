@@ -43,12 +43,7 @@ export function DifferenceSection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 max-w-[1360px] text-center">
         {/* LEFT HANDWRITTEN TRAVEL DOODLE (Fills Left White Space) */}
         <div className="hidden lg:flex flex-col items-center absolute top-40 opacity-60 -left-4 xl:left-8 transform -rotate-6 z-20 pointer-events-none hover:opacity-100 transition-opacity">
-          <div
-            className="text-lg xl:text-xl text-[#D96C2C] font-bold leading-tight max-w-[180px] text-center"
-            style={{
-              fontFamily: "var(--font-playball), Georgia, cursive, serif",
-            }}
-          >
+          <div className="text-xl xl:text-2xl text-[#D96C2C] font-bold leading-tight max-w-[180px] text-center font-script">
             Pack your bags &amp; leave the details to us! ✈️♡
           </div>
           {/* Curved Arrow Pointing to Headline */}
@@ -71,12 +66,7 @@ export function DifferenceSection() {
 
         {/* RIGHT HANDWRITTEN TRAVEL DOODLE (Fills Right White Space) */}
         <div className="hidden lg:flex flex-col items-center absolute top-8 right-2 xl:right-8 transform rotate-6 z-20 pointer-events-none opacity-60 hover:opacity-100 transition-opacity">
-          <div
-            className="text-lg xl:text-xl text-[#0E5A60] font-bold leading-tight max-w-[190px] text-center"
-            style={{
-              fontFamily: "var(--font-playball), Georgia, cursive, serif",
-            }}
-          >
+          <div className="text-xl xl:text-2xl text-[#0E5A60] font-bold leading-tight max-w-[190px] text-center font-script">
             &ldquo;Memories &gt; Monuments&rdquo; 🌿✨
           </div>
           <div className="text-xs font-serif italic text-slate-500 mt-1 font-medium bg-[#FFFBF5] px-2 py-0.5 rounded border border-amber-900/10 shadow-2xs">
@@ -170,11 +160,11 @@ export function DifferenceSection() {
                     <span>01. Intimate Circles</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
                     Curated, Not Crowded
                   </h3>
 
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed">
                     Groups are built around compatibility, not just headcount —
                     so conversations happen naturally and no one&apos;s left on
                     the sidelines.
@@ -225,11 +215,11 @@ export function DifferenceSection() {
                     <span>02. Real Connection</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
                     Designed for Connection, Not Just Sightseeing
                   </h3>
 
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed">
                     Our itineraries build in the moments that actually bring a
                     group together — shared meals, downtime, activities that
                     spark conversation — not just a checklist of monuments.
@@ -280,11 +270,11 @@ export function DifferenceSection() {
                     <span>03. Seamless Hosting</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
                     Hosted, End to End
                   </h3>
 
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed">
                     A dedicated trip host travels with your group, handling
                     logistics and looking out for the group&apos;s experience,
                     so you can stay present instead of managing details.
@@ -335,11 +325,11 @@ export function DifferenceSection() {
                     <span>04. Intention &amp; Care</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
                     Every Detail, Thoughtfully Planned
                   </h3>
 
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed">
                     From the pace of the itinerary to the choice of stays, every
                     journey is built with intention — not stitched together from
                     a template.
@@ -365,35 +355,30 @@ export function DifferenceSection() {
         </div>
 
         {/* BOTTOM SLEEK VALUE STRIP BAR */}
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 lg:px-10 shadow-md shadow-amber-950/5 flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-8 lg:gap-10 text-sm sm:text-base font-extrabold text-[#0B2A3D]">
-            <div className="flex items-center gap-2.5 hover:text-[#D96C2C] hover:scale-[1.03] transition-all duration-300 cursor-default">
-              <Users size={22} className="text-[#D96C2C] shrink-0" />
-              <span className="tracking-tight">Real People</span>
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 lg:px-8 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 xl:gap-6 relative z-10 overflow-x-auto scrollbar-hide">
+          <div className="flex items-center justify-center xl:justify-start gap-4 sm:gap-6 lg:gap-7 text-xs sm:text-sm xl:text-base font-bold text-[#0B2A3D] whitespace-nowrap shrink-0">
+            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors cursor-default">
+              <Users size={18} className="text-[#D96C2C] shrink-0" />
+              <span>Real People</span>
             </div>
-            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors">
-              <Globe size={18} className="text-[#D96C2C]" />
+            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors cursor-default">
+              <Globe size={18} className="text-[#D96C2C] shrink-0" />
               <span>Meaningful Experiences</span>
             </div>
-            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors">
-              <Camera size={18} className="text-[#D96C2C]" />
+            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors cursor-default">
+              <Camera size={18} className="text-[#D96C2C] shrink-0" />
               <span>Lasting Memories</span>
             </div>
-            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors">
-              <Heart size={18} className="text-[#D96C2C]" />
+            <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors cursor-default">
+              <Heart size={18} className="text-[#D96C2C] shrink-0" />
               <span>Connections for Life</span>
             </div>
           </div>
 
           {/* Humanistic Handwritten Tagline */}
-          <div
-            className="text-lg sm:text-xl md:text-2xl font-serif italic text-[#D96C2C] flex items-center gap-2 font-bold whitespace-nowrap tracking-wide leading-none"
-            style={{
-              fontFamily: "var(--font-playball), Georgia, cursive, serif",
-            }}
-          >
+          <div className="text-lg sm:text-xl lg:text-2xl font-script text-[#D96C2C] flex items-center gap-1.5 font-normal whitespace-nowrap tracking-wide leading-none shrink-0">
             <span>That&apos;s the Kokalachi difference.</span>
-            <span className="text-xl sm:text-2xl font-normal text-[#D96C2C]">
+            <span className="text-lg sm:text-xl font-normal text-[#D96C2C]">
               ♡
             </span>
           </div>

@@ -117,12 +117,7 @@ export function HowItWorksSection() {
           <div className="flex flex-col items-center relative z-10 group">
             {/* BOTTOM LEFT HANDWRITTEN TRAVEL DOODLE (Attached to Step 01) */}
             <div className="hidden lg:flex flex-col items-center absolute bottom-[30%] -left-20 xl:-left-36 transform -rotate-12 pointer-events-none z-30 opacity-70 hover:opacity-100 transition-opacity">
-              <span
-                className="text-base xl:text-lg text-[#D96C2C] font-bold leading-tight max-w-[150px] text-center"
-                style={{
-                  fontFamily: "var(--font-playball), Georgia, cursive, serif",
-                }}
-              >
+              <span className="text-lg xl:text-xl text-[#D96C2C] font-bold leading-tight max-w-[160px] text-center font-script">
                 Choose your vibe &amp; destination! 🌴✨
               </span>
               <svg
@@ -278,12 +273,7 @@ export function HowItWorksSection() {
           <div className="flex flex-col items-center relative z-10 group">
             {/* UPPER RIGHT HANDWRITTEN TRAVEL DOODLE (Attached to Step 03) */}
             <div className="hidden lg:flex flex-col items-center absolute -top-12 -right-20 xl:-right-28 transform rotate-12 pointer-events-none z-30 opacity-70 hover:opacity-100 transition-opacity">
-              <span
-                className="text-base xl:text-lg text-[#0E5A60] font-bold leading-tight max-w-[160px] text-center"
-                style={{
-                  fontFamily: "var(--font-playball), Georgia, cursive, serif",
-                }}
-              >
+              <span className="text-lg xl:text-xl text-[#0E5A60] font-bold leading-tight max-w-[170px] text-center font-script">
                 &ldquo;Strangers into lifelong friends&rdquo; 📸♡
               </span>
               <svg

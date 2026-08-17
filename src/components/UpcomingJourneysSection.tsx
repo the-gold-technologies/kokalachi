@@ -178,7 +178,7 @@ export function UpcomingJourneysSection() {
   return (
     <section
       id="upcoming-journeys"
-      className="py-20 lg:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
+      className="py-20 lg:py-24 bg-white relative overflow-hidden select-none"
     >
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         {/* Sub-header tagline */}
@@ -189,12 +189,7 @@ export function UpcomingJourneysSection() {
         {/* Main Title */}
         <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal leading-[1.14] font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
           Where will{" "}
-          <span
-            className="text-[#C85A24] italic font-normal inline-block"
-            style={{
-              fontFamily: "var(--font-playball), Georgia, cursive, serif",
-            }}
-          >
+          <span className="text-[#C85A24] font-script text-[1.25em] font-normal inline-block">
             your
           </span>{" "}
           next journey begin?

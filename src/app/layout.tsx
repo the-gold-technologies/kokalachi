@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Playball, Montserrat } from "next/font/google";
+import { Poppins, Playball, Montserrat, Playfair_Display, Caveat, Satisfy } from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -15,8 +15,26 @@ const playball = Playball({
 });
 
 const montserrat = Montserrat({
-  weight: ["300"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-caveat",
+  subsets: ["latin"],
+});
+
+const satisfy = Satisfy({
+  weight: "400",
+  variable: "--font-satisfy",
   subsets: ["latin"],
 });
 
@@ -33,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${playball.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${poppins.variable} ${playball.variable} ${montserrat.variable} ${playfair.variable} ${caveat.variable} ${satisfy.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
