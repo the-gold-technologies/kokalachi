@@ -292,10 +292,10 @@ export function TourModal({ tour, isOpen, onClose }: TourModalProps) {
 
                   <button
                     type="submit"
-                    className="w-full py-3 bg-[#0E5A60] hover:bg-[#0a464b] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex items-center justify-center gap-2 mt-4"
+                    className="w-full py-3.5 bg-[#0B2A3D] hover:bg-[#061C29] text-white font-medium text-sm rounded-full shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4 cursor-pointer"
                   >
                     <span>Request To Join Circle</span>
-                    <ArrowRight size={14} />
+                    <ArrowRight size={16} />
                   </button>
                 </form>
               )}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import {
   Calendar,
   Users,
@@ -187,12 +188,13 @@ export function UpcomingJourneysSection() {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal leading-[1.14] font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
-          Where will{" "}
-          <span className="text-[#C85A24] font-script text-[1.25em] font-normal inline-block">
-            your
+        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
+          Where will your next{" "}
+          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            journey
+            <TitleUnderline />
           </span>{" "}
-          next journey begin?
+          begin?
         </h2>
 
         {/* Subtitle Description */}
@@ -326,9 +328,9 @@ export function UpcomingJourneysSection() {
               </div>
 
               {/* View Journey CTA Button */}
-              <button className="w-full bg-[#0B2A3D] hover:bg-[#123A53] text-white py-3.5 rounded-2xl font-bold text-sm shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2 group-hover:scale-[1.01]">
+              <button className="w-full bg-[#0B2A3D] hover:bg-[#061C29] text-white py-3.5 rounded-full font-medium text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
                 <span>View Journey</span>
-                <ArrowRight size={16} className="stroke-[2.5]" />
+                <ArrowRight size={16} className="stroke-[2]" />
               </button>
             </div>
           ))}
@@ -336,9 +338,9 @@ export function UpcomingJourneysSection() {
 
         {/* Section-end CTA Button */}
         <div className="mt-14">
-          <button className="bg-[#C85A24] text-white px-9 py-4 rounded-full font-extrabold text-sm sm:text-base shadow-lg hover:bg-[#B34D1C] transition-all inline-flex items-center gap-2 cursor-pointer hover:scale-105">
+          <button className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105">
             <span>See All Upcoming Journeys</span>
-            <ArrowRight size={18} className="stroke-[2.5]" />
+            <ArrowRight size={18} className="stroke-[2]" />
           </button>
         </div>
       </div>

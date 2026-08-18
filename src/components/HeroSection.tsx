@@ -51,19 +51,19 @@ export function HeroSection() {
           {/* Action Buttons — Rounded Pill Buttons */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
             <a
-              href="#upcoming-circles"
-              className="px-7 py-3.5 bg-[#0B2A3D] hover:bg-[#0E5A60] text-white font-bold text-xs sm:text-sm rounded-full shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2 border border-[#0B2A3D]"
+              href="#upcoming-journeys"
+              className="px-8 py-3.5 sm:py-4 bg-[#0B2A3D] hover:bg-[#061C29] text-white font-medium text-sm sm:text-base rounded-full shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2.5 cursor-pointer hover:scale-105"
             >
               <span>Explore Upcoming Trips</span>
-              <ArrowRight size={15} />
+              <ArrowRight size={16} />
             </a>
             <a
               href="#how-it-works"
-              className="px-7 py-3.5 bg-white/80 hover:bg-white text-[#0B2A3D] font-semibold text-xs sm:text-sm rounded-full border border-[#0B2A3D]/40 transition-all flex items-center justify-center gap-2 group shadow-sm text-center"
+              className="px-7 py-3.5 sm:py-4 bg-white/80 hover:bg-white text-[#0B2A3D] font-medium text-sm rounded-full border border-[#0B2A3D]/40 transition-all flex items-center justify-center gap-2 group shadow-sm text-center cursor-pointer hover:scale-105"
             >
               <span>How It Works</span>
               <ArrowRight
-                size={15}
+                size={16}
                 className="group-hover:translate-x-1 transition-transform"
               />
             </a>

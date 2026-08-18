@@ -5,7 +5,9 @@
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-playball: var(--font-playball), cursive;
   --font-serif: var(--font-playfair), Georgia, serif;
-  --font-script: var(--font-satisfy), var(--font-caveat), var(--font-playball), cursive;
+  --font-script: var(--font-caveat), var(--font-satisfy), var(--font-playball), cursive;
+  --font-caveat: var(--font-caveat), cursive;
+  --font-satisfy: var(--font-satisfy), cursive;
 
   /* Official Kokalachi Brand Color Palette */
   --color-brand-navy: #0B2A3D;

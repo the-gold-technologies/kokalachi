@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Compass, Users, Camera, Check } from "lucide-react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 
 export function HowItWorksSection() {
   return (
@@ -20,26 +21,15 @@ export function HowItWorksSection() {
             <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
               HOW IT WORKS
             </span>
-            <svg
-              className="w-16 h-2 text-[#D96C2C] mx-auto mt-0.5"
-              viewBox="0 0 100 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5 15Q50 5 95 15"
-                stroke="currentColor"
-                strokeWidth="4"
-                strokeLinecap="round"
-              />
-            </svg>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal text-[#0B2A3D] leading-[1.12] font-serif">
-            Three steps to your next <br className="hidden sm:inline" />
-            <span className="font-semibold text-[#0B2A3D]">
-              unforgettable journey.
-            </span>
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
+            Three steps to your next <br />
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+              unforgettable
+              <TitleUnderline />
+            </span>{" "}
+            journey.
           </h2>
 
           <p className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-xl mx-auto">

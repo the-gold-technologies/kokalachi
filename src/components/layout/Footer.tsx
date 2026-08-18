@@ -241,7 +241,7 @@ export function Footer() {
                   />
                   <button
                     type="submit"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-xl bg-[#C85A24] hover:bg-[#b34d1c] text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="absolute right-1.5 top-1.5 bottom-1.5 px-5 rounded-full bg-[#0B2A3D] hover:bg-[#061C29] text-white text-xs font-medium flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <span>Join</span>
                     <Send className="w-3 h-3 -rotate-45" />

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import {
   Users,
   MessageCircle,
@@ -52,15 +53,13 @@ export function GoodCompanySection() {
 
         {/* MAIN HEADING */}
         <div className="mb-4 max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-[1.2] font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             You&apos;re in{" "}
-            <span className="font-script text-[#D96C2C] text-[1.25em] font-normal inline-block mr-1">
-              Good
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+              good
+              <TitleUnderline />
             </span>{" "}
-            Company.{" "}
-            <span className="text-[#D96C2C] font-sans text-2xl sm:text-3xl inline-block ml-1">
-              ♡
-            </span>
+            company.
           </h2>
         </div>
 

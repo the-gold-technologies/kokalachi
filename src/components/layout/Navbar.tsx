@@ -232,17 +232,11 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop Right Actions (Morphed beautifully into the pill layout) */}
+          {/* Desktop Right Actions */}
           <div className="hidden lg:flex items-center gap-4">
-            <button
-              className={`flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider rounded-full px-6 py-2.5 transition-all duration-500 ${
-                isScrolled
-                  ? "hover:bg-[#326462] bg-[#3e7c7a] text-white shadow-md"
-                  : "border border-white/30 text-white hover:bg-white/10"
-              }`}
-            >
-              <User size={14} />
-              Login
+            <button className="flex items-center justify-center gap-2 font-medium text-xs sm:text-sm rounded-full px-6 py-2.5 bg-[#0B2A3D] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
+              <User size={15} />
+              <span>Login</span>
             </button>
           </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import {
   Users,
   MessageSquare,
@@ -101,23 +102,13 @@ export function DifferenceSection() {
         <div className="mb-4 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             More than a trip. <br />
-            <span className="font-semibold text-[#0B2A3D]">
-              Here&apos;s what makes us different.
-            </span>
+            Here&apos;s what{" "}
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+              makes
+              <TitleUnderline />
+            </span>{" "}
+            us different.
           </h2>
-          <svg
-            className="w-32 sm:w-44 h-3 text-[#D96C2C] mx-auto mt-2"
-            viewBox="0 0 100 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 15Q50 5 95 15"
-              stroke="currentColor"
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-          </svg>
         </div>
 
         {/* Subtitle Statement */}

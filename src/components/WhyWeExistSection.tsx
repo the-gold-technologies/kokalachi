@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import {
   X,
   Heart,
@@ -26,8 +27,12 @@ export function WhyWeExistSection() {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-normal leading-[1.14] font-serif max-w-4xl mx-auto mb-6 text-[#0B2A3D]">
-          Why do so many dream trips <span className="text-[#C85A24] font-semibold">never happen?</span>
+        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-6 text-[#0B2A3D]">
+          Why do so many dream trips never{" "}
+          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            happen?
+            <TitleUnderline />
+          </span>
         </h2>
 
         {/* Subtitle statement */}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import {
   User,
   Briefcase,
@@ -191,22 +192,9 @@ export function WhoTravelsSection() {
         <div className="mb-4 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             Find Your{" "}
-            <span className="relative inline-block font-semibold text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
               Kind
-              {/* Tapered Curved Underline Vector */}
-              <svg
-                className="absolute -bottom-2 left-0 w-full h-3 text-[#D96C2C]"
-                viewBox="0 0 100 20"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M5 15 Q 50 5 95 15"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <TitleUnderline />
             </span>{" "}
             of Journey
           </h2>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ChevronDown, ArrowRight, Sparkles, HelpCircle } from "lucide-react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 
 const faqs = [
   {
@@ -53,22 +54,9 @@ export function FaqAndCtaSection() {
         <div className="mb-4 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             Frequently Asked{" "}
-            <span className="relative inline-block font-semibold text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
               Questions
-              {/* Tapered Curved Underline Vector */}
-              <svg
-                className="absolute -bottom-2 left-0 w-full h-3 text-[#D96C2C]"
-                viewBox="0 0 100 20"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M5 15 Q 50 5 95 15"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                />
-              </svg>
+              <TitleUnderline />
             </span>
           </h2>
         </div>
