@@ -25,6 +25,11 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+  }
+
   :root {
     --background: #ffffff;
     --foreground: #171717;

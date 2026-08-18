@@ -23,6 +23,7 @@ interface DropdownItem {
   title: string;
   desc: string;
   icon: React.ReactNode;
+  href?: string;
 }
 
 const dropdownData: Record<string, DropdownItem[]> = {
@@ -31,16 +32,19 @@ const dropdownData: Record<string, DropdownItem[]> = {
       title: "Destinations",
       desc: "Browse our 8 trending worldwide travel spots.",
       icon: <MapPin className="w-4 h-4 text-[#3E7C7A]" />,
+      href: "/#upcoming-journeys",
     },
     {
       title: "Reviews",
       desc: "Read experiences from our global community.",
       icon: <Star className="w-4 h-4 text-[#D97745]" />,
+      href: "/#moments",
     },
     {
       title: "Articles",
       desc: "Weekly travel tips, hacks, and advisories.",
       icon: <FileText className="w-4 h-4 text-[#3E7C7A]" />,
+      href: "/about#why-we-started",
     },
   ],
   Pages: [
@@ -48,21 +52,25 @@ const dropdownData: Record<string, DropdownItem[]> = {
       title: "About Us",
       desc: "Learn about our mission and visual story.",
       icon: <Info className="w-4 h-4 text-[#D97745]" />,
+      href: "/about",
     },
     {
       title: "Services",
       desc: "Tailored tour planning and booking options.",
       icon: <Briefcase className="w-4 h-4 text-[#3E7C7A]" />,
+      href: "/#how-it-works",
     },
     {
       title: "Our Guides",
       desc: "Meet our certified adventure and safety experts.",
       icon: <Users className="w-4 h-4 text-[#3E7C7A]" />,
+      href: "/about#meet-the-founder",
     },
     {
       title: "FAQs",
       desc: "Find budget guides and answers to questions.",
       icon: <HelpCircle className="w-4 h-4 text-[#D97745]" />,
+      href: "/#good-company",
     },
   ],
   Blogs: [
@@ -70,16 +78,19 @@ const dropdownData: Record<string, DropdownItem[]> = {
       title: "Travel Advisories",
       desc: "Up-to-date entry rules and safety guides.",
       icon: <AlertTriangle className="w-4 h-4 text-[#3E7C7A]" />,
+      href: "/about#what-we-believe",
     },
     {
       title: "Scenic Photos",
       desc: "Visual gallery from our latest traveler tracks.",
       icon: <ImageIcon className="w-4 h-4 text-[#D97745]" />,
+      href: "/#moments",
     },
     {
       title: "Cultural Guides",
       desc: "Deep dive into local traditions and foods.",
       icon: <Compass className="w-4 h-4 text-[#3E7C7A]" />,
+      href: "/about#join-the-tribe",
     },
   ],
 };
@@ -114,7 +125,7 @@ export function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: "Home", href: "#", hasDropdown: false },
+    { name: "About Us", href: "/about", hasDropdown: false },
     { name: "Features", href: "#", hasDropdown: true },
     { name: "Pages", href: "#", hasDropdown: true },
     { name: "Blogs", href: "#", hasDropdown: true },
@@ -172,7 +183,7 @@ export function Navbar() {
                       {dropdownData[link.name]?.map((item) => (
                         <Link
                           key={item.title}
-                          href="#"
+                          href={item.href || "#"}
                           className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-[#FAF5EE] transition-all group/item"
                         >
                           <div className="w-9 h-9 shrink-0 rounded-lg bg-[#C85A24]/10 group-hover/item:bg-white flex items-center justify-center transition-colors">
@@ -288,7 +299,7 @@ export function Navbar() {
                     }
                   }}
                   className={`flex items-center justify-between py-3.5 px-4 rounded-xl font-bold text-base transition-all ${
-                    link.name === "Home"
+                    link.name === "About Us"
                       ? "text-white bg-[#3E7C7A] border border-[#3E7C7A]/30"
                       : "text-[#1C2B38] hover:text-[#3E7C7A] hover:bg-[#3E7C7A]/5"
                   }`}
@@ -313,7 +324,7 @@ export function Navbar() {
                     {dropdownData[link.name]?.map((item) => (
                       <Link
                         key={item.title}
-                        href="#"
+                        href={item.href || "#"}
                         onClick={() => setMobileMenuOpen(false)}
                         className="flex items-center gap-2 py-2.5 px-3 text-sm font-bold text-[#6B7C85] hover:text-[#3E7C7A] hover:bg-[#3E7C7A]/5 rounded-lg transition-colors"
                       >
