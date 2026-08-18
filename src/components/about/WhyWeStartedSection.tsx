@@ -42,6 +42,45 @@ export function WhyWeStartedSection() {
           {/* Right Column: Narrative Copy */}
           <div className="lg:col-span-7 text-left flex flex-col justify-between lg:pl-4">
             <div>
+              {/* OUR ETHOS Navigation Link Tab Bar */}
+              <div className="bg-[#FAF5EE] p-5 sm:p-6 rounded-2xl border border-amber-900/10 shadow-xs mb-6">
+                <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3.5">
+                  OUR ETHOS
+                </span>
+                <nav className="flex flex-wrap gap-x-6 gap-y-2.5 font-sans">
+                  <a
+                    href="#why-we-started"
+                    className="flex items-center gap-2 text-[#C85A24] font-bold text-base sm:text-lg hover:translate-x-0.5 transition-all"
+                  >
+                    <span className="text-[#C85A24]">→</span> Why We Exist
+                  </a>
+                  <a
+                    href="#what-we-believe"
+                    className="text-[#0B2A3D]/80 font-medium text-base sm:text-lg hover:text-[#C85A24] hover:translate-x-0.5 transition-all"
+                  >
+                    The Difference
+                  </a>
+                  <a
+                    href="#meet-the-founder"
+                    className="text-[#0B2A3D]/80 font-medium text-base sm:text-lg hover:text-[#C85A24] hover:translate-x-0.5 transition-all"
+                  >
+                    Trust &amp; Safety
+                  </a>
+                  <a
+                    href="#join-the-tribe"
+                    className="text-[#0B2A3D]/80 font-medium text-base sm:text-lg hover:text-[#C85A24] hover:translate-x-0.5 transition-all"
+                  >
+                    Traveler Stories
+                  </a>
+                  <a
+                    href="/#faq"
+                    className="text-[#0B2A3D]/80 font-medium text-base sm:text-lg hover:text-[#C85A24] hover:translate-x-0.5 transition-all"
+                  >
+                    FAQs &amp; Help
+                  </a>
+                </nav>
+              </div>
+
               {/* Reduced gap between Tagline and Main Title */}
               <div className="space-y-2 mb-6">
                 <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block">
@@ -53,8 +92,8 @@ export function WhyWeStartedSection() {
                 </h2>
               </div>
 
-              {/* Increased gap between Title and Paragraphs */}
-              <div className="space-y-4 text-[#0B2A3D]/85 text-sm sm:text-base leading-relaxed font-sans pt-1">
+              {/* Matched Paragraph Font Size Across Page */}
+              <div className="space-y-4 text-[#0B2A3D]/85 text-base sm:text-lg leading-relaxed font-sans pt-1">
                 <p>
                   Most of us have a list of places we&apos;ve always wanted to
                   see. And most of us have watched that list sit untouched — not
