@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import {
   User,
@@ -15,7 +15,6 @@ import {
   ShieldCheck,
   Globe,
   Leaf,
-  Compass,
   Star,
   ChevronLeft,
   ChevronRight,
@@ -119,6 +118,16 @@ export function WhoTravelsSection() {
 
   const [activeOffset, setActiveOffset] = useState(startIndex);
 
+  const handleNext = useCallback(() => {
+    setIsTransitioning(true);
+    setActiveOffset((prev) => prev + 1);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setIsTransitioning(true);
+    setActiveOffset((prev) => prev - 1);
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -141,17 +150,7 @@ export function WhoTravelsSection() {
       handleNext();
     }, 4000);
     return () => clearInterval(timer);
-  }, [isPaused, activeOffset]);
-
-  const handleNext = () => {
-    setIsTransitioning(true);
-    setActiveOffset((prev) => prev + 1);
-  };
-
-  const handlePrev = () => {
-    setIsTransitioning(true);
-    setActiveOffset((prev) => prev - 1);
-  };
+  }, [isPaused, activeOffset, handleNext]);
 
   // Reset offset position seamlessly when hitting boundary set
   const handleTransitionEnd = () => {
@@ -163,10 +162,6 @@ export function WhoTravelsSection() {
       setActiveOffset(activeOffset + pillars.length);
     }
   };
-
-  // Real index 0..5 for indicator dots
-  const currentRealIndex =
-    ((activeOffset % pillars.length) + pillars.length) % pillars.length;
 
   return (
     <section

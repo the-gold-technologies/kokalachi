@@ -15,7 +15,7 @@ import {
   Users,
   HelpCircle,
   AlertTriangle,
-  Image,
+  Image as ImageIcon,
   Compass,
 } from "lucide-react";
 
@@ -74,7 +74,7 @@ const dropdownData: Record<string, DropdownItem[]> = {
     {
       title: "Scenic Photos",
       desc: "Visual gallery from our latest traveler tracks.",
-      icon: <Image className="w-4 h-4 text-[#D97745]" />,
+      icon: <ImageIcon className="w-4 h-4 text-[#D97745]" />,
     },
     {
       title: "Cultural Guides",
@@ -127,16 +127,20 @@ export function Navbar() {
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isScrolled
             ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-6"
-            : "top-0 w-full max-w-full bg-transparent py-6 px-4 lg:px-[80px]"
+            : "top-0 w-full max-w-full bg-transparent py-6"
         }`}
       >
-        <div className="mx-auto flex items-center justify-between">
+        <div
+          className={`mx-auto flex items-center justify-between ${
+            isScrolled ? "w-full" : "container px-6 md:px-12 lg:px-16"
+          }`}
+        >
           {/* Main Logo Image */}
           <Link href="/" className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="Kokalachi Logo"
-              className={`h-10 ${isScrolled ? " sm:h-[60px] " : " sm:h-[65px] "}w-auto object-contain hover:scale-105 transition-transform`}
+              className={`h-10 ${isScrolled ? " sm:h-[60px] -ml-2.5" : " sm:h-[65px] -ml-5"}  w-auto object-contain hover:scale-105 transition-transform`}
             />
           </Link>
 

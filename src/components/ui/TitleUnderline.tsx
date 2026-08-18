@@ -9,7 +9,7 @@ interface TitleUnderlineProps {
 export function TitleUnderline({ className = "" }: TitleUnderlineProps) {
   return (
     <svg
-      className="absolute -bottom-2 left-0 w-full h-3 text-[#C85A24]"
+      className={`absolute -bottom-2 left-0 w-full h-3 text-[#C85A24] ${className}`}
       viewBox="0 0 100 20"
       fill="none"
       preserveAspectRatio="none"
