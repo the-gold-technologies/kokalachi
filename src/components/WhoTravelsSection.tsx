@@ -256,7 +256,7 @@ export function WhoTravelsSection() {
                   >
                     <div>
                       {/* Top Image Box */}
-                      <div className="h-52 sm:h-56 overflow-hidden relative">
+                      <div className="h-52 sm:h-56  relative">
                         <img
                           src={item.image}
                           alt={item.title}

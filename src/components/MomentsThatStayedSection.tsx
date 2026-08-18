@@ -128,16 +128,18 @@ export function MomentsThatStayedSection() {
                ========================================================= */}
             <div className="md:col-span-7 relative z-20">
               {/* Main Cinematic Video Card */}
-              <div className="rounded-[32px] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 relative group h-[340px] sm:h-[400px] bg-slate-900 border-4 border-white">
+              <div className="rounded-[35px] shadow-xl hover:shadow-2xl transition-all duration-500 relative group h-[340px] sm:h-[400px] bg-slate-900 border-4 border-white">
                 <img
                   src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=1200"
                   alt="Friends laughing around campfire on beach at sunset"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                  className="w-full h-full rounded-[32px] object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t rounded-[32px] from-black/90 via-black/20 to-black/30" />
 
                 {/* Top Left Washi Tape Overlay */}
-                <div className="absolute -top-3 left-10 w-20 h-6 bg-amber-100/80 backdrop-blur-xs transform -rotate-3 z-30 border-x border-amber-900/10 shadow-2xs" />
+                <div className="absolute -top-3 left-28 z-30 px-3.5 py-1 bg-[#FFF4E5]/95 backdrop-blur-md text-[#8C5E3C] font-script text-xs font-bold rounded-sm border-y border-amber-900/20 shadow-md transform -rotate-3 select-none flex items-center gap-1">
+                  <span>📌 Unfiltered Moments</span>
+                </div>
 
                 {/* Top Right Travel Passport Cancellation Stamp */}
                 <div className="absolute top-4 right-5 text-white/40 font-mono text-[9px] uppercase tracking-widest border border-white/30 px-2 py-1 rounded-sm rotate-6 z-20">
@@ -311,13 +313,15 @@ export function MomentsThatStayedSection() {
               {/* MIDDLE RIGHT: 2-COLUMN PHOTO & REEL COLLAGE (Alleyway Photo + Northern Lights Reel) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-stretch">
                 {/* Alleyway Photo Card with Washi Tape */}
-                <div className="rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all h-64 border-4 border-white relative group transform sm:rotate-2">
+                <div className="rounded-3xl shadow-md hover:shadow-xl transition-all h-64 border-4 border-white relative group transform sm:rotate-2">
                   {/* Washi Tape Graphic */}
-                  <div className="absolute -top-2 left-6 w-16 h-5 bg-teal-100/80 backdrop-blur-xs transform -rotate-6 z-20 shadow-2xs border-x border-teal-900/10" />
+                  <div className="absolute -top-2.5 left-5 z-40 px-2.5 py-0.5 bg-[#D4EBE6]/95 backdrop-blur-md text-[#1E5D53] font-script text-[11px] font-bold rounded-sm border-y border-teal-900/20 shadow-md transform -rotate-6 select-none flex items-center gap-1">
+                    <span>✨ Kyoto Walks</span>
+                  </div>
                   <img
                     src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=85&w=800"
                     alt="Traveller in Kyoto alleyway"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full rounded-3xl object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute bottom-3 left-3 text-white text-[11px] font-script opacity-0 group-hover:opacity-100 transition-opacity">
@@ -342,7 +346,9 @@ export function MomentsThatStayedSection() {
               {/* BOTTOM RIGHT: AUTHENTIC TILTED POLAROID PHOTO NOTE CARD */}
               <div className="p-4 pb-5 bg-[#FFFDF9] rounded-2xl border border-amber-900/15 shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-500 relative bg-paper-texture">
                 {/* Washi Tape Strip at Center Top */}
-                <div className="w-16 h-4 bg-amber-200/90 absolute -top-2 left-1/2 -translate-x-1/2 -rotate-1 z-30 shadow-2xs border-x border-amber-900/10" />
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 z-30 px-3 py-0.5 bg-[#FDE8BD]/95 text-[#7A5012] font-script text-[11px] font-bold rounded-sm border-y border-amber-900/20 shadow-md transform -rotate-1 select-none flex items-center gap-1">
+                  <span>♡ Memory Lane</span>
+                </div>
 
                 <div className="overflow-hidden rounded-xl h-44 mb-3 border border-amber-900/10">
                   <img
