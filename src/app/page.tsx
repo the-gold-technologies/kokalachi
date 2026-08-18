@@ -42,6 +42,9 @@ export default function Home() {
         {/* Step 8: Who Travels With Us? — Community belonging */}
         <WhoTravelsSection />
 
+        {/* Step 9: Behind Kokalachi — Journal stories & curation */}
+        <BehindKokalachiSection />
+
         {/* Step 10: Final CTA Banner */}
         <FinalCtaSection />
       </main>
