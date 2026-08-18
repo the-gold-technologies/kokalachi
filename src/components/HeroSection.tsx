@@ -12,13 +12,13 @@ export function HeroSection() {
       {/* Background Image & Soft Left Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&q=85&w=2000"
-          alt="Group of friends standing on mountain watching the golden sunset"
+          src="/hero_group_sunset_bg.jpg"
+          alt="Group of 4 friends hanging out and laughing on a mountain hill station peak at golden hour sunset"
           className="w-full h-full object-cover object-right sm:object-center"
         />
 
         {/* Soft Left Color Shading Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F7F3EC] via-[#F7F3EC]/95 sm:via-[#F7F3EC]/80 to-transparent w-full lg:w-[68%]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F7F3EC] via-[#F7F3EC]/90 sm:via-[#F7F3EC]/70 to-transparent w-full lg:w-[65%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#F7F3EC] via-transparent to-transparent sm:hidden" />
       </div>
 

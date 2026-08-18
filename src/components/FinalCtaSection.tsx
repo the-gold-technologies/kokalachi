@@ -74,7 +74,7 @@ export function FinalCtaSection() {
 
         <HandwrittenSticker
           type="pack-bags"
-          className=" absolute -left-28 bottom-0 text-[#4A3E3E] -rotate-6"
+          className=" absolute -left-36 bottom-0 text-[#4A3E3E] -rotate-8 text-base"
         />
       </div>
     </section>

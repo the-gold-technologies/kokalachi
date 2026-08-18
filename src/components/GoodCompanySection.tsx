@@ -34,7 +34,7 @@ export function GoodCompanySection() {
         {/* MAIN HEADING */}
         <div className="mb-4 max-w-4xl mx-auto relative">
           {/* Left Handwritten Margin Accent */}
-          <div className="hidden xl:flex items-center gap-1.5 absolute -left-20 top-3 text-[#C85A24] font-script text-base sm:text-lg -rotate-6 pointer-events-none select-none">
+          <div className="hidden xl:flex items-center gap-1.5 absolute -left-40 -bottom-32  text-[#C85A24] font-script text-base sm:text-lg -rotate-6 pointer-events-none select-none">
             <span>✨ 100% vetted circles</span>
           </div>
 
