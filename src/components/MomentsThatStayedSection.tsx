@@ -323,7 +323,7 @@ export function MomentsThatStayedSection() {
                     alt="Traveller in Kyoto alleyway"
                     className="w-full h-full rounded-3xl object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t rounded-3xl from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute bottom-3 left-3 text-white text-[11px] font-script opacity-0 group-hover:opacity-100 transition-opacity">
                     Kyoto slow walks 🌸
                   </div>
