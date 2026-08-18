@@ -12,7 +12,7 @@ export function FinalCtaSection() {
     <section className="py-20 sm:py-28 relative overflow-hidden select-none border-t border-amber-900/10">
       <div className="absolute inset-0 z-0">
         <img
-          src="/cta_friends_bg.jpg"
+          src="/hero_friends_sunset_1.jpg"
           alt="Group of friends sharing moments on a mountain peak at sunset"
           className="w-full h-full object-cover object-center"
         />
