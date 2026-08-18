@@ -12,7 +12,7 @@ export function HeroSection() {
       {/* Background Image & Soft Left Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero_group_sunset_bg.jpg"
+          src="/hero_friends_balloons_less_orangey.jpg"
           alt="Group of 4 friends hanging out and laughing on a mountain hill station peak at golden hour sunset"
           className="w-full h-full object-cover object-right sm:object-center"
         />
