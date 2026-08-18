@@ -9,7 +9,16 @@ import { HandwrittenSticker } from "@/components/ui/HandwrittenSticker";
 
 export function FinalCtaSection() {
   return (
-    <section className="py-20 sm:py-28 bg-[#FAF5EE] relative overflow-hidden select-none border-t border-amber-900/10">
+    <section className="py-20 sm:py-28 relative overflow-hidden select-none border-t border-amber-900/10">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/cta_friends_bg.jpg"
+          alt="Group of friends sharing moments on a mountain peak at sunset"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Soft Warm Gradient Overlay for High Editorial Aesthetics & Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EE]/95 via-[#FAF5EE]/88 to-[#FAF5EE]/95 opacity-50" />
+      </div>
       {/* Decorative Flying Birds Outline (Top Right Variation) */}
       <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0B2A3D]" />
 
@@ -65,7 +74,7 @@ export function FinalCtaSection() {
 
         <HandwrittenSticker
           type="pack-bags"
-          className=" absolute -left-28 bottom-0 opacity-70 -rotate-6"
+          className=" absolute -left-28 bottom-0 text-[#4A3E3E] -rotate-6"
         />
       </div>
     </section>

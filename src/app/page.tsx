@@ -7,7 +7,6 @@ import { GoodCompanySection } from "@/components/GoodCompanySection";
 import { MomentsThatStayedSection } from "@/components/MomentsThatStayedSection";
 import { WhoTravelsSection } from "@/components/WhoTravelsSection";
 import { BehindKokalachiSection } from "@/components/BehindKokalachiSection";
-import { FaqAndCtaSection } from "@/components/FaqAndCtaSection";
 import { FinalCtaSection } from "@/components/FinalCtaSection";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -45,9 +44,6 @@ export default function Home() {
 
         {/* Step 9: Behind Kokalachi — Journal stories & curation */}
         <BehindKokalachiSection />
-
-        {/* Step 10: FAQs & Final Booking CTA — Remove last-mile doubts */}
-        <FaqAndCtaSection />
 
         {/* Step 10: Final CTA Banner */}
         <FinalCtaSection />

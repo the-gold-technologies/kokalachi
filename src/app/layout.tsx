@@ -41,6 +41,11 @@ const satisfy = Satisfy({
 export const metadata: Metadata = {
   title: "Kokalachi - Journeys Become Friendships",
   description: "High-fidelity premium travel and tours landing page.",
+  icons: {
+    icon: "/fevicon.png",
+    shortcut: "/fevicon.png",
+    apple: "/fevicon.png",
+  },
 };
 
 export default function RootLayout({

@@ -126,54 +126,18 @@ export function Navbar() {
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isScrolled
-            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-5"
+            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-6"
             : "top-0 w-full max-w-full bg-transparent py-6 px-4 lg:px-[80px]"
         }`}
       >
         <div className="mx-auto flex items-center justify-between">
-          {/* Logo */}
+          {/* Main Logo Image */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="flex items-center gap-2.5">
-              {/* Circular Kokalachi Image Logo */}
-              <div className="w-11 h-11 shrink-0 rounded-full overflow-hidden border border-[#b3d8d6]/30 shadow-md">
-                <img
-                  src="/logo.png"
-                  alt="Kokalachi Logo"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="hidden sm:flex flex-col text-left">
-                <span
-                  className={`text-xl font-semibold tracking-[0.2em] leading-none flex items-center transition-colors duration-500 font-montserrat ${isScrolled ? "text-[#1C2B38]" : "text-white"}`}
-                >
-                  KOKAL
-                  <span className="relative inline-block tracking-normal mr-1">
-                    A
-                    <svg
-                      className="absolute left-1/2 -translate-x-1/2 top-[35%] w-[130%] h-1.5 text-[#D97745]"
-                      viewBox="0 0 20 6"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1.5 5C5.5 2 14.5 2 18.5 5"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  CHI
-                </span>
-                <div className="flex items-center gap-2 mt-1 hidden lg:flex">
-                  <span
-                    className={`text-[8px] uppercase tracking-[0.1em] font-bold transition-colors duration-500 ${isScrolled ? "text-[#6B7C85]" : "text-[#b3d8d6]"}`}
-                  >
-                    Journeys Become Friendships
-                  </span>
-                </div>
-              </div>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Kokalachi Logo"
+              className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform"
+            />
           </Link>
 
           {/* Desktop Nav with Hover Dropdowns */}
@@ -189,37 +153,32 @@ export function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-1 font-medium
-                     text-sm uppercase tracking-wider transition-colors duration-500 ${
-                       isScrolled
-                         ? "text-[#1C2B38] hover:text-[#3E7C7A]"
-                         : "text-white hover:text-[#b3d8d6]"
-                     }`}
+                  className="flex items-center gap-1 font-semibold text-xs uppercase tracking-widest text-[#0B2A3D] hover:text-[#C85A24] transition-colors duration-300 font-montserrat"
                 >
                   {link.name}
                   {link.hasDropdown && (
-                    <ChevronDown size={13} className="opacity-80" />
+                    <ChevronDown size={13} className="opacity-75" />
                   )}
                 </Link>
 
                 {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
                 {link.hasDropdown && activeDropdown === link.name && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    <div className="bg-white text-[#1C2B38] rounded-2xl shadow-[0_15px_50px_rgba(28,43,56,0.18)] p-5 border border-gray-100 w-[460px] grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-3 duration-200">
+                    <div className="bg-[#FFFDF9] text-[#0B2A3D] rounded-2xl shadow-[0_15px_50px_rgba(28,43,56,0.15)] p-5 border border-amber-900/10 w-[460px] grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-3 duration-200">
                       {dropdownData[link.name]?.map((item) => (
                         <Link
                           key={item.title}
                           href="#"
-                          className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-[#F8F5EE] transition-all group/item"
+                          className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-[#FAF5EE] transition-all group/item"
                         >
-                          <div className="w-9 h-9 shrink-0 rounded-lg bg-[#3E7C7A]/10 group-hover/item:bg-white flex items-center justify-center transition-colors">
+                          <div className="w-9 h-9 shrink-0 rounded-lg bg-[#C85A24]/10 group-hover/item:bg-white flex items-center justify-center transition-colors">
                             {item.icon}
                           </div>
                           <div className="flex flex-col text-left">
-                            <span className="font-bold text-[#1C2B38] text-xs leading-tight group-hover/item:text-[#3E7C7A] transition-colors mb-0.5">
+                            <span className="font-bold text-[#0B2A3D] text-xs leading-tight group-hover/item:text-[#C85A24] transition-colors mb-0.5">
                               {item.title}
                             </span>
-                            <span className="text-[10px] text-[#6B7C85] leading-normal font-semibold">
+                            <span className="text-[10px] text-[#0B2A3D]/70 leading-normal font-medium">
                               {item.desc}
                             </span>
                           </div>
@@ -245,10 +204,10 @@ export function Navbar() {
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(true)}
-              className={`p-1 transition-colors duration-500 ${isScrolled ? "text-[#1C2B38]" : "text-white"}`}
+              className="p-1 text-[#0B2A3D] hover:text-[#C85A24] transition-colors"
               aria-label="Open menu"
             >
-              <Menu size={28} />
+              <Menu size={26} />
             </button>
           </div>
         </div>

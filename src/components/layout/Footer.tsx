@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { BrandLogo } from "@/components/BrandLogo";
 import {
   Mail,
   MapPin,
@@ -41,7 +40,13 @@ export function Footer() {
           {/* Column 1: Brand & Bio (4 cols on lg) */}
           <div className="lg:col-span-4 space-y-5">
             <div className="flex items-start justify-start">
-              <BrandLogo variant="dark" size="md" />
+              <Link href="/" className="inline-block">
+                <img
+                  src="/logo.png"
+                  alt="Kokalachi Logo"
+                  className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform"
+                />
+              </Link>
             </div>
             <p className="text-[#0B2A3D]/80 text-xs sm:text-sm leading-relaxed max-w-sm font-sans">
               Kokalachi designs immersive, slow-paced journeys for conscious

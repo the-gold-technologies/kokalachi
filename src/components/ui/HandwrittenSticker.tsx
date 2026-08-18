@@ -13,10 +13,14 @@ export function HandwrittenSticker({
 }: HandwrittenStickerProps) {
   if (type === "connection") {
     return (
-      <div className={`flex flex-col items-center justify-center select-none ${className}`}>
+      <div
+        className={`flex flex-col items-center justify-center select-none ${className}`}
+      >
         {/* Handwritten Teal Quote with leaf & sparkles */}
         <span className="font-script text-xl sm:text-2xl text-[#4A7C7A] font-normal rotate-[-3deg] flex items-center gap-1.5 tracking-wide">
-          &ldquo;Memories &gt; Monuments&rdquo; <span className="text-base">🌿</span> <span className="text-amber-400">✨</span>
+          &ldquo;Memories &gt; Monuments&rdquo;{" "}
+          <span className="text-base">🌿</span>{" "}
+          <span className="text-amber-400">✨</span>
         </span>
 
         {/* Soft Pill Badge with Red Pin */}
@@ -54,10 +58,13 @@ export function HandwrittenSticker({
 
   // Type: pack-bags
   return (
-    <div className={`flex flex-col items-center justify-center select-none ${className}`}>
+    <div
+      className={`flex flex-col items-center justify-center select-none ${className}`}
+    >
       {/* Handwritten Terracotta Text with plane & heart */}
       <p className="font-script text-xl sm:text-2xl text-[#C85A24] font-normal rotate-[-2deg] text-center leading-snug tracking-wide max-w-xs">
-        Pack your bags &amp; leave the details to us! ✈️ <span className="text-[#C85A24]">♡</span>
+        Pack your bags &amp; leave the details to us! ✈️{" "}
+        <span className="text-[#C85A24]">♡</span>
       </p>
 
       {/* Hand-drawn Dashed Curved Arrow SVG pointing down */}
