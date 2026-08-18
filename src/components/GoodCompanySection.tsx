@@ -45,11 +45,9 @@ export function GoodCompanySection() {
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl text-center">
         {/* SECTION HEADER BADGE */}
-        <div className="inline-block mb-3">
-          <span className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
-            TRAVEL WITH CONFIDENCE
-          </span>
-        </div>
+        <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+          TRAVEL WITH CONFIDENCE
+        </span>
 
         {/* MAIN HEADING */}
         <div className="mb-4 max-w-4xl mx-auto">

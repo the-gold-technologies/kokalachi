@@ -165,7 +165,8 @@ export function WhoTravelsSection() {
   };
 
   // Real index 0..5 for indicator dots
-  const currentRealIndex = (activeOffset % pillars.length + pillars.length) % pillars.length;
+  const currentRealIndex =
+    ((activeOffset % pillars.length) + pillars.length) % pillars.length;
 
   return (
     <section
@@ -177,16 +178,10 @@ export function WhoTravelsSection() {
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 max-w-[1360px] text-center">
-        
         {/* SUB-HEADER TAGLINE */}
-        <div className="inline-flex items-center gap-2 mb-3">
-          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
-            WHO TRAVELS WITH KOKALACHI?
-          </span>
-          <span className="text-[#D96C2C] font-sans text-sm inline-block">
-            ♡
-          </span>
-        </div>
+        <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+          WHO TRAVELS WITH KOKALACHI?
+        </span>
 
         {/* MAIN HEADING */}
         <div className="mb-4 max-w-4xl mx-auto">
@@ -202,7 +197,8 @@ export function WhoTravelsSection() {
 
         {/* SUBTITLE */}
         <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto mb-12 leading-relaxed font-sans">
-          Different people. Different stories. One thing in common – the love of meaningful travel and incredible people.
+          Different people. Different stories. One thing in common – the love of
+          meaningful travel and incredible people.
         </p>
 
         {/* 3-CARD INFINITE LOOP CAROUSEL SLIDER */}
@@ -236,7 +232,9 @@ export function WhoTravelsSection() {
           <div className="overflow-hidden -mx-3 px-1 py-3">
             <div
               className={`flex ${
-                isTransitioning ? "transition-transform duration-500 ease-out" : ""
+                isTransitioning
+                  ? "transition-transform duration-500 ease-out"
+                  : ""
               }`}
               style={{
                 transform: `translateX(-${activeOffset * (100 / cardsToShow)}%)`,
@@ -298,7 +296,7 @@ export function WhoTravelsSection() {
               ))}
             </div>
           </div>
-        </div> 
+        </div>
 
         {/* BOTTOM BANNER STRIP 1: CONNECTING SPIRIT BAR */}
         <div className="bg-[#FAF4EB] rounded-3xl border border-amber-900/10 p-6 sm:p-7 shadow-xs flex flex-col xl:flex-row items-center justify-between gap-6 max-w-6xl mx-auto mb-6 relative overflow-hidden">
@@ -355,7 +353,6 @@ export function WhoTravelsSection() {
           {/* Right Side Connected 4 Pillar Icons with Looping Dotted SVG Line */}
           <div className="flex-1 w-full overflow-x-auto scrollbar-hide py-2 relative">
             <div className="flex items-center justify-between min-w-[580px] px-6 relative z-10">
-              
               {/* Loop-de-Loop Dotted Wave Connecting SVG Line */}
               <svg
                 className="absolute top-1/2 left-0 right-0 -translate-y-1/2 w-full h-12 text-[#D96C2C]/30 pointer-events-none z-0"
@@ -419,22 +416,38 @@ export function WhoTravelsSection() {
         <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-[#FAF4ED] border border-amber-900/10 text-slate-700 text-xs sm:text-sm font-medium shadow-2xs max-w-4xl mx-auto">
           {/* Radiating Heart Icon Outline */}
           <div className="relative flex items-center justify-center shrink-0">
-            <svg className="w-5 h-5 text-[#D96C2C]" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2V4 M4 6L6 8 M20 6L18 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <path d="M12 8.5 C9.5 5, 5 5.5, 5 10 C5 14.5, 12 19, 12 19 C12 19, 19 14.5, 19 10 C19 5.5, 14.5 5, 12 8.5 Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+            <svg
+              className="w-5 h-5 text-[#D96C2C]"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M12 2V4 M4 6L6 8 M20 6L18 8"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M12 8.5 C9.5 5, 5 5.5, 5 10 C5 14.5, 12 19, 12 19 C12 19, 19 14.5, 19 10 C19 5.5, 14.5 5, 12 8.5 Z"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
 
           <span>
-            No matter which journey you choose, you&apos;ll always find one thing here –{" "}
-            <strong className="text-[#0B2A3D] font-bold">good people and great memories.</strong>
+            No matter which journey you choose, you&apos;ll always find one
+            thing here –{" "}
+            <strong className="text-[#0B2A3D] font-bold">
+              good people and great memories.
+            </strong>
           </span>
 
           <span className="text-[#D96C2C] font-script text-base font-bold ml-0.5 shrink-0">
             ♡
           </span>
         </div>
-
       </div>
     </section>
   );

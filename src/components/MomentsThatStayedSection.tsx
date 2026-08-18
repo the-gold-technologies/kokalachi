@@ -49,11 +49,9 @@ export function MomentsThatStayedSection() {
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl text-center">
         {/* SECTION HEADER */}
-        <div className="inline-block mb-3">
-          <span className="text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
-            MOMENTS THAT STAYED
-          </span>
-        </div>
+        <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+          MOMENTS THAT STAYED
+        </span>
 
         <div className="mb-4 max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-5xl lg:text-[58px] font-normal text-[#0B2A3D] leading-[1.25] font-serif">
@@ -141,34 +139,10 @@ export function MomentsThatStayedSection() {
                 {/* Top Left Washi Tape Overlay */}
                 <div className="absolute -top-3 left-10 w-20 h-6 bg-amber-100/80 backdrop-blur-xs transform -rotate-3 z-30 border-x border-amber-900/10 shadow-2xs" />
 
-                {/* Top Left Video Badge */}
-                <div className="absolute top-5 left-5 bg-black/60 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 border border-white/20 z-20">
-                  <Play size={12} className="fill-white" />
-                  <span>Video Story • 0:45</span>
-                </div>
-
                 {/* Top Right Travel Passport Cancellation Stamp */}
                 <div className="absolute top-4 right-5 text-white/40 font-mono text-[9px] uppercase tracking-widest border border-white/30 px-2 py-1 rounded-sm rotate-6 z-20">
                   PASSPORT VERIFIED • SRI LANKA
                 </div>
-
-                {/* Center Play Pulse Button */}
-                <button
-                  onClick={() => setIsPlayingVideo1(!isPlayingVideo1)}
-                  className="absolute inset-0 flex items-center justify-center group/btn z-20"
-                  aria-label="Play Sri Lanka video story"
-                >
-                  <div className="relative">
-                    <span className="absolute -inset-3 rounded-full bg-white/20 animate-ping opacity-75" />
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/35 backdrop-blur-md border-2 border-white flex items-center justify-center text-white shadow-2xl group-hover/btn:scale-110 transition-transform">
-                      {isPlayingVideo1 ? (
-                        <Pause size={28} className="fill-white" />
-                      ) : (
-                        <Play size={28} className="fill-white ml-1.5" />
-                      )}
-                    </div>
-                  </div>
-                </button>
 
                 {/* Bottom Quote Banner */}
                 <div className="absolute bottom-5 left-6 right-6 text-white z-20 space-y-1">
@@ -359,10 +333,6 @@ export function MomentsThatStayedSection() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-md text-white px-2.5 py-0.5 rounded-full text-[10px] font-medium flex items-center gap-1 border border-white/20">
-                    <Play size={10} className="fill-white" />
-                    <span>Reel</span>
-                  </div>
                   <div className="absolute bottom-3 left-3 right-3 text-white text-[11px] font-medium truncate">
                     Iceland Aurora Magic 🌌
                   </div>

@@ -17,11 +17,9 @@ export function HowItWorksSection() {
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 max-w-6xl text-center">
         {/* Section Header */}
         <div className="space-y-3 mb-16 max-w-2xl mx-auto">
-          <div className="inline-block relative">
-            <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
-              HOW IT WORKS
-            </span>
-          </div>
+          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+            HOW IT WORKS
+          </span>
 
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             Three steps to your next <br />

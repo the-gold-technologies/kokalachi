@@ -41,14 +41,9 @@ export function FaqAndCtaSection() {
     >
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-4xl text-center">
         {/* SUB-HEADER TAGLINE */}
-        <div className="inline-flex items-center gap-2 mb-3">
-          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
-            GOT QUESTIONS?
-          </span>
-          <span className="text-[#D96C2C] font-sans text-sm inline-block">
-            ♡
-          </span>
-        </div>
+        <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+          GOT QUESTIONS?
+        </span>
 
         {/* MAIN HEADING */}
         <div className="mb-4 max-w-4xl mx-auto">

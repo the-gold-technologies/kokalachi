@@ -26,7 +26,7 @@ export function HeroSection() {
       <div className="container mx-auto px-6 md:px-12 lg:px-16 z-10 relative">
         <div className="max-w-4xl text-left space-y-6">
           {/* Category Tagline */}
-          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#0E5A60] block font-montserrat">
+          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] block font-montserrat mb-3">
             CURATED GROUP JOURNEYS
           </span>
 

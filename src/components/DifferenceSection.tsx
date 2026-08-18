@@ -92,11 +92,9 @@ export function DifferenceSection() {
         </div>
 
         {/* Section Tagline */}
-        <div className="inline-block mb-3">
-          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat">
-            WHY KOKALACHI
-          </span>
-        </div>
+        <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+          WHY KOKALACHI
+        </span>
 
         {/* Main Headline */}
         <div className="mb-4 max-w-4xl mx-auto">

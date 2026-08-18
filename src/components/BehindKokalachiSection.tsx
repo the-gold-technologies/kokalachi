@@ -22,12 +22,9 @@ export function BehindKokalachiSection() {
         {/* FROM THE JOURNAL INNER CONTAINER */}
         <div className="bg-[#FAF5EE] relative text-center">
           {/* Journal Tagline */}
-          <div className="inline-flex flex-col items-center justify-center mb-3">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D96C2C] font-montserrat block mb-1">
-              FROM THE JOURNAL
-            </span>
-            <span className="text-[#D96C2C] text-xs">❖</span>
-          </div>
+          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
+            FROM THE JOURNAL
+          </span>
 
           {/* Journal Main Title */}
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif mb-4 max-w-4xl mx-auto">
