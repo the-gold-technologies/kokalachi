@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown, ArrowRight, Sparkles, HelpCircle } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 
 const faqs = [
   {
@@ -39,6 +40,9 @@ export function FaqAndCtaSection() {
       id="faqs"
       className="py-20 lg:py-28 bg-[#ffffff] relative overflow-hidden select-none"
     >
+      {/* Decorative Flying Birds Outline (Top Left Variation) */}
+      <FlyingBirds className="hidden lg:block absolute top-14 left-16 opacity-30 text-[#0B2A3D]" />
+
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-4xl text-center">
         {/* SUB-HEADER TAGLINE */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
@@ -46,7 +50,17 @@ export function FaqAndCtaSection() {
         </span>
 
         {/* MAIN HEADING */}
-        <div className="mb-4 max-w-4xl mx-auto">
+        <div className="mb-4 max-w-4xl mx-auto relative">
+          {/* Left Handwritten Margin Accent */}
+          <div className="hidden xl:flex items-center gap-1.5 absolute -left-20 top-2 text-[#C85A24] font-script text-base sm:text-lg -rotate-4 pointer-events-none select-none">
+            <span>✨ no silly questions</span>
+          </div>
+
+          {/* Right Handwritten Margin Accent */}
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-20 top-2 text-[#C85A24] font-script text-base sm:text-lg rotate-3 pointer-events-none select-none">
+            <span>♡ we&apos;ve got you covered</span>
+          </div>
+
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             Frequently Asked{" "}
             <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">

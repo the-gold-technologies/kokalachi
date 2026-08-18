@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
   Clock,
   ArrowRight,
@@ -18,6 +19,8 @@ export function BehindKokalachiSection() {
       id="behind-kokalachi"
       className="py-16 sm:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
     >
+      {/* Decorative Flying Birds Outline (Top Right Variation) */}
+      <FlyingBirds className="hidden lg:block absolute top-10 right-14 opacity-35 text-[#0B2A3D]" />
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-6xl text-center">
         {/* FROM THE JOURNAL INNER CONTAINER */}
         <div className="bg-[#FAF5EE] relative text-center">
@@ -32,14 +35,16 @@ export function BehindKokalachiSection() {
             <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
               journey
               <TitleUnderline />
-            </span>.
+            </span>
           </h2>
 
           {/* Journal Subtitle Paragraph */}
           <p className="text-[#1E3327]/80 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto mb-12 leading-relaxed font-sans">
-            Travel isn&apos;t just about destinations. It&apos;s about people, cultures, conversations and the memories we bring home.
+            Travel isn&apos;t just about destinations. It&apos;s about people,
+            cultures, conversations and the memories we bring home.
             <br />
-            Explore stories, guides and reflections from the Kokalachi community.
+            Explore stories, guides and reflections from the Kokalachi
+            community.
           </p>
 
           {/* FEATURED STORY (Top Card Layout) */}
@@ -64,7 +69,8 @@ export function BehindKokalachiSection() {
               </h3>
 
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
-                Sometimes the people you&apos;ve never met become the people you never forget.
+                Sometimes the people you&apos;ve never met become the people you
+                never forget.
               </p>
 
               <div className="flex items-center gap-2 text-xs text-[#D96C2C] font-medium pt-1">
@@ -168,7 +174,8 @@ export function BehindKokalachiSection() {
                     The Hidden Cafés of Sri Lanka
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
-                    The best conversations rarely happen inside tourist attractions.
+                    The best conversations rarely happen inside tourist
+                    attractions.
                   </p>
                 </div>
               </div>

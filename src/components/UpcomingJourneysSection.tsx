@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
   Calendar,
   Users,
@@ -181,6 +182,9 @@ export function UpcomingJourneysSection() {
       id="upcoming-journeys"
       className="py-20 lg:py-24 bg-white relative overflow-hidden select-none"
     >
+      {/* Decorative Flying Birds Outline (Top Right) */}
+      <FlyingBirds className="hidden lg:block absolute top-14 right-12 opacity-35 text-[#0B2A3D]" />
+
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         {/* Sub-header tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">

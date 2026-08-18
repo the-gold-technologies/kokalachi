@@ -45,8 +45,8 @@ export function Footer() {
             </div>
             <p className="text-[#0B2A3D]/80 text-xs sm:text-sm leading-relaxed max-w-sm font-sans">
               Kokalachi designs immersive, slow-paced journeys for conscious
-              travelers, dreamers, and storytellers. We replace tourist traps with
-              authentic human connection.
+              travelers, dreamers, and storytellers. We replace tourist traps
+              with authentic human connection.
             </p>
 
             <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-[#0B2A3D]/80 font-sans">

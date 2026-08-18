@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
   X,
   Heart,
@@ -20,6 +21,9 @@ export function WhyWeExistSection() {
       id="why-we-exist"
       className="py-20 lg:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
     >
+      {/* Decorative Flying Birds Outline */}
+      <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0B2A3D]" />
+
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         {/* Sub-header category tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
@@ -43,10 +47,13 @@ export function WhyWeExistSection() {
         {/* Paragraph copy text */}
         <div className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-3xl mx-auto space-y-3 mb-12">
           <p>
-            Most of us have a bucket list full of places we&apos;d love to explore. But plans get postponed. Leaves don&apos;t get approved. Schedules don&apos;t match. Life gets in the way.
+            Most of us have a bucket list full of places we&apos;d love to
+            explore. But plans get postponed. Leaves don&apos;t get approved.
+            Schedules don&apos;t match. Life gets in the way.
           </p>
           <p>
-            Not because we don&apos;t want to travel. But because finding the right people to travel with isn&apos;t always easy.
+            Not because we don&apos;t want to travel. But because finding the
+            right people to travel with isn&apos;t always easy.
           </p>
         </div>
 
@@ -352,7 +359,8 @@ export function WhyWeExistSection() {
             So, we decided to build a better way to do it.
           </h3>
           <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">
-            At Kokalachi, we bring together people who share a love for travel — so you can stop waiting and start exploring.
+            At Kokalachi, we bring together people who share a love for travel —
+            so you can stop waiting and start exploring.
           </p>
         </div>
       </div>

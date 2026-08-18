@@ -184,7 +184,17 @@ export function WhoTravelsSection() {
         </span>
 
         {/* MAIN HEADING */}
-        <div className="mb-4 max-w-4xl mx-auto">
+        <div className="mb-4 max-w-4xl mx-auto relative">
+          {/* Left Handwritten Margin Accent */}
+          <div className="hidden xl:flex items-center gap-1.5 absolute -left-20 top-3 text-[#C85A24] font-script text-base sm:text-lg -rotate-6 pointer-events-none select-none">
+            <span>✨ 70% first-time solos</span>
+          </div>
+
+          {/* Right Handwritten Margin Accent */}
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-20 top-3 text-[#C85A24] font-script text-base sm:text-lg rotate-4 pointer-events-none select-none">
+            <span>♡ wanderers &amp; dreamers</span>
+          </div>
+
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             Find Your{" "}
             <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">

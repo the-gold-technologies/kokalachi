@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
   Users,
   MessageCircle,
@@ -21,27 +22,8 @@ export function GoodCompanySection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-10 w-96 h-96 bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Decorative Flying Birds SVG Outline */}
-      <div className="hidden lg:block absolute top-12 right-16 opacity-30 pointer-events-none">
-        <svg
-          className="w-24 h-12 text-[#0B2A3D]"
-          viewBox="0 0 100 50"
-          fill="none"
-        >
-          <path
-            d="M10 25 Q 20 15 30 25 Q 40 15 50 25"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-          <path
-            d="M60 15 Q 67 8 75 15 Q 82 8 90 15"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
+      {/* Decorative Flying Birds SVG Outline (Top Right Far Variation) */}
+      <FlyingBirds className="hidden lg:block absolute top-8 right-24 opacity-35 text-[#0B2A3D]" />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl text-center">
         {/* SECTION HEADER BADGE */}
@@ -50,7 +32,17 @@ export function GoodCompanySection() {
         </span>
 
         {/* MAIN HEADING */}
-        <div className="mb-4 max-w-4xl mx-auto">
+        <div className="mb-4 max-w-4xl mx-auto relative">
+          {/* Left Handwritten Margin Accent */}
+          <div className="hidden xl:flex items-center gap-1.5 absolute -left-20 top-3 text-[#C85A24] font-script text-base sm:text-lg -rotate-6 pointer-events-none select-none">
+            <span>✨ 100% vetted circles</span>
+          </div>
+
+          {/* Right Handwritten Margin Accent */}
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-20 top-3 text-[#C85A24] font-script text-base sm:text-lg rotate-3 pointer-events-none select-none">
+            <span>♡ verified solo safety</span>
+          </div>
+
           <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
             You&apos;re in{" "}
             <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">

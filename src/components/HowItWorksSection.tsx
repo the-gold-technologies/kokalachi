@@ -3,6 +3,7 @@
 import React from "react";
 import { Compass, Users, Camera, Check } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 
 export function HowItWorksSection() {
   return (
@@ -10,6 +11,9 @@ export function HowItWorksSection() {
       id="how-it-works"
       className="py-24 bg-[#FFFFFF] relative overflow-hidden select-none"
     >
+      {/* Decorative Flying Birds Outline (Top Left Variation) */}
+      <FlyingBirds className="hidden lg:block absolute top-12 left-14 opacity-30 text-[#0B2A3D]" />
+
       {/* Ambient Brand Color Glows */}
       <div className="absolute top-1/3 -left-20 w-80 h-80 bg-[#D96C2C]/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#0E5A60]/8 rounded-full blur-3xl pointer-events-none" />

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
   Users,
   MessageSquare,
@@ -19,6 +20,8 @@ export function DifferenceSection() {
       id="difference"
       className="py-20 lg:py-28 bg-[#FDFBF7] relative overflow-hidden select-none"
     >
+      {/* Decorative Flying Birds Outline (Top Left Variation) */}
+      <FlyingBirds className="hidden lg:block absolute top-16 left-10 opacity-30 text-[#0B2A3D]" />
       {/* Background Decorative Dashed Flight Line Connecting All Cards */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
