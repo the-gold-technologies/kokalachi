@@ -61,15 +61,15 @@ export function HandwrittenSticker({
     <div
       className={`flex flex-col items-center justify-center select-none ${className}`}
     >
-      {/* Handwritten Terracotta Text with plane & heart */}
-      <p className="font-script text-xl sm:text-2xl text-[#C85A24] font-normal rotate-[-2deg] text-center leading-snug tracking-wide max-w-xs">
+      {/* High-Contrast Handwritten Text with plane & heart */}
+      <p className="font-script text-2xl sm:text-3xl text-[#0B2A3D] font-bold rotate-[-2deg] text-center leading-snug tracking-wide max-w-sm drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
         Pack your bags &amp; leave the details to us! ✈️{" "}
         <span className="text-[#C85A24]">♡</span>
       </p>
 
       {/* Hand-drawn Dashed Curved Arrow SVG pointing down */}
       <svg
-        className="w-16 h-8 text-[#C85A24]/90 mt-1 opacity-85"
+        className="w-16 h-8 text-[#0B2A3D] mt-1 opacity-90 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]"
         viewBox="0 0 80 35"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -77,14 +77,14 @@ export function HandwrittenSticker({
         <path
           d="M 10 5 Q 40 30 70 20"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.5"
           strokeDasharray="4 3"
           strokeLinecap="round"
         />
         <path
           d="M 61 15 L 71 21 L 67 29"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"

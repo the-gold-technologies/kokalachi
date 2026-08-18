@@ -136,7 +136,7 @@ export function Navbar() {
             <img
               src="/logo.png"
               alt="Kokalachi Logo"
-              className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform"
+              className={`h-10 ${isScrolled ? " sm:h-[60px] " : " sm:h-[65px] "}w-auto object-contain hover:scale-105 transition-transform`}
             />
           </Link>
 

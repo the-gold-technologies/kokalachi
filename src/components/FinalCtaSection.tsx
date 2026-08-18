@@ -34,12 +34,12 @@ export function FinalCtaSection() {
         {/* Main Editorial Heading in Brand Serif Font */}
         <div className="relative max-w-3xl mx-auto mb-6">
           {/* Left Handwritten Margin Accent */}
-          <div className="hidden xl:flex items-center gap-1.5 absolute -right-40 -bottom-16 text-[#C85A24] font-script text-base sm:text-lg -rotate-6 pointer-events-none select-none opacity-70">
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-40 -bottom-16 text-[#0B2A3D] font-script text-base sm:text-lg font-bold -rotate-6 pointer-events-none select-none drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
             <span>✨ say yes to new adventures</span>
           </div>
 
           {/* Right Handwritten Margin Accent */}
-          <div className="hidden xl:flex items-center gap-1.5 absolute -right-54 top-2 text-[#C85A24] font-script text-base sm:text-lg rotate-4 pointer-events-none select-none opacity-70">
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-54 top-2 text-[#0B2A3D] font-script text-base sm:text-lg font-bold rotate-4 pointer-events-none select-none drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
             <span>♡ your story starts here</span>
           </div>
 
@@ -65,7 +65,7 @@ export function FinalCtaSection() {
         <div className="flex justify-center">
           <a
             href="#upcoming-journeys"
-            className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-9 py-4 rounded-full font-medium text-base sm:text-lg shadow-md hover:shadow-2xl transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
+            className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-9 py-4 rounded-full font-medium text-base shadow-md hover:shadow-2xl transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
           >
             <span>Explore Upcoming Trips</span>
             <ArrowRight size={18} className="stroke-[2.2]" />
