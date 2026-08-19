@@ -106,15 +106,15 @@ export function AboutHeroSection() {
               </div>
 
               {/* Tilted Floating Polaroid Card */}
-              <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-white p-3 pb-4 rounded-2xl shadow-xl border border-amber-900/10 -rotate-6 w-44 sm:w-52 z-20 select-none">
-                <div className="w-full h-28 sm:h-32 rounded-xl overflow-hidden mb-1.5">
+              <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-white p-2.5 pb-3 rounded-2xl shadow-2xl border border-amber-900/10 -rotate-6 w-48 sm:w-56 z-20 select-none">
+                <div className="w-full h-32 sm:h-36 rounded-xl overflow-hidden shadow-inner bg-slate-100">
                   <img
                     src="/about_hero_polaroid.jpg"
                     alt="Friends standing together on a peak"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="font-script text-xs sm:text-sm text-[#0B2A3D] font-bold text-center">
+                <p className="font-script text-xs sm:text-sm text-[#0B2A3D] font-bold text-center mt-2">
                   ✨ Travel together, belong anywhere ♡
                 </p>
               </div>

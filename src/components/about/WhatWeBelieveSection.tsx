@@ -90,7 +90,7 @@ export function WhatWeBelieveSection() {
               <div className="bg-[#FFFDF9] text-[#0B2A3D] p-7 sm:p-8 pt-9 pb-9 min-h-[310px] sm:min-h-[340px] rounded-2xl border border-amber-900/20 shadow-md relative overflow-hidden flex flex-col justify-between h-full">
                 {/* Background Travel Image */}
                 <img
-                  src={pillar.image}
+                  src={"/paper-bg.jpg"}
                   alt={pillar.title}
                   className="absolute inset-0 w-full h-full object-cover opacity-45 sm:opacity-50 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                 />
