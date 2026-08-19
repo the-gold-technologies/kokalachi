@@ -29,7 +29,7 @@ export function MeetFounderSection() {
             {/* Founder Image Container */}
             <div className="relative w-full max-w-sm sm:max-w-md h-[440px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl bg-slate-100 z-10 border border-amber-900/10 group">
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=85&w=800"
+                src="/about_meet_founder.jpg"
                 alt="Kokalachi Founder"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />

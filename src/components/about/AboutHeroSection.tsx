@@ -91,7 +91,7 @@ export function AboutHeroSection() {
               {/* Main Photo Card */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white h-[460px] sm:h-[500px] lg:h-[520px] group">
                 <img
-                  src="/hero_friends_balloons_less_orangey.jpg"
+                  src="/about_hero_main.jpg"
                   alt="Travellers celebrating together on a journey"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -109,7 +109,7 @@ export function AboutHeroSection() {
               <div className="absolute -bottom-4 -left-4 sm:-left-6 bg-white p-3 pb-4 rounded-2xl shadow-xl border border-amber-900/10 -rotate-6 w-44 sm:w-52 z-20 select-none">
                 <div className="w-full h-28 sm:h-32 rounded-xl overflow-hidden mb-1.5">
                   <img
-                    src="/hero_friends_mountain_peak.jpg"
+                    src="/about_hero_polaroid.jpg"
                     alt="Friends standing together on a peak"
                     className="w-full h-full object-cover"
                   />

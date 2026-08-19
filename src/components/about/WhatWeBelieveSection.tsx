@@ -8,7 +8,7 @@ export function WhatWeBelieveSection() {
     {
       title: "Curated Travel groups, real connection.",
       desc: "We keep our journeys in alignment with the interest of the Travellers. Random groups make it easy for people to disappear into the crowd; curated groups make it easy to actually know the people you're travelling with.",
-      image: "/belief_curated_groups.jpg",
+      image: "/about_belief_curated_groups.jpg",
       tapeLabel: "✨ real connections",
       rotation: "-rotate-1",
       colSpan: "col-span-1",
@@ -16,7 +16,7 @@ export function WhatWeBelieveSection() {
     {
       title: "The people matter as much as the place.",
       desc: "A great destination and the wrong group can still make for a forgettable trip. We curate for compatibility first, because that's what makes a journey unforgettable.",
-      image: "/belief_people_matter.jpg",
+      image: "/about_belief_people_matter.jpg",
       tapeLabel: "♡ shared energy",
       rotation: "rotate-1",
       colSpan: "col-span-1",
@@ -24,7 +24,7 @@ export function WhatWeBelieveSection() {
     {
       title: "Trust is earned before the trip starts.",
       desc: "From verified travellers to pre-trip introductions, we believe the first hello shouldn't happen at the airport — comfort and trust are built long before departure.",
-      image: "/belief_trust_earned.jpg",
+      image: "/about_belief_trust_earned.jpg",
       tapeLabel: "🔒 earned trust",
       rotation: "-rotate-2",
       colSpan: "col-span-1",
@@ -32,8 +32,7 @@ export function WhatWeBelieveSection() {
     {
       title: "Respect is non-negotiable.",
       desc: "For fellow travellers, for hosts, for local communities. Every Kokalachi journey is built on the expectation that everyone shows up with kindness.",
-      image:
-        "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=800",
+      image: "/about_belief_respect.jpg",
       tapeLabel: "📌 kindness first",
       rotation: "rotate-2",
       colSpan: "col-span-1",
@@ -41,7 +40,7 @@ export function WhatWeBelieveSection() {
     {
       title: "We won't compromise your experience to fill a seat.",
       desc: "We'll always choose the right group over a full one. Quality, intimate group dynamics and genuine human warmth will always come before numbers. That's a promise, not a slogan.",
-      image: "/hero_friends_sunset_1.jpg",
+      image: "/about_belief_quality.jpg",
       tapeLabel: "★ quality over quantity",
       rotation: "-rotate-1",
       colSpan: "md:col-span-2 lg:col-span-2",

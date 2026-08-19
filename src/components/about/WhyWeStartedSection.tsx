@@ -16,7 +16,7 @@ export function WhyWeStartedSection() {
           <div className="lg:col-span-5 relative flex flex-col">
             <div className="relative rounded-3xl overflow-hidden shadow-xl border border-amber-900/10 group h-[480px] sm:h-[540px] lg:h-[560px] lg:w-[105%]">
               <img
-                src="/why_we_started_vision.jpg"
+                src="/about_why_started.jpg"
                 alt="Group of diverse friends laughing and sharing travel stories on a mountain ridge at sunset"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
