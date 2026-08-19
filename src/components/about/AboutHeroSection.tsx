@@ -10,12 +10,12 @@ export function AboutHeroSection() {
   return (
     <section
       id="about-hero"
-      className="relative pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 bg-[#FAF5EE] overflow-hidden select-none border-b border-amber-900/10"
+      className="relative pt-36 sm:pt-40 lg:pt-48 pb-16 sm:pb-24 bg-[#FAF5EE] overflow-hidden select-none border-b border-amber-900/10"
     >
       {/* Ambient Soft Glows */}
-      <div className="absolute top-0 right-10 w-96 h-96 bg-[#C85A24]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#0E5A60]/10 rounded-full blur-3xl pointer-events-none" />
-      <FlyingBirds className="hidden lg:block absolute top-16 right-20 opacity-35 text-[#0B2A3D]" />
+      <div className="absolute -top-24 right-0 w-[500px] h-[500px] bg-[#C85A24]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
+      <FlyingBirds className="hidden lg:block absolute top-28 right-20 opacity-35 text-[#0B2A3D]" />
 
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -57,8 +57,8 @@ export function AboutHeroSection() {
                 We bring together people who love travelling but don&apos;t
                 always have the right people to travel with. Through curated
                 group journeys, we help you discover the world alongside
-                like-minded travellers — people who become as much a part of
-                the trip as the destination itself.
+                like-minded travellers — people who become as much a part of the
+                trip as the destination itself.
               </p>
 
               {/* Highlighted Quote Box */}

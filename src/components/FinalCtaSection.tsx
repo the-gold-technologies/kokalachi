@@ -12,12 +12,12 @@ export function FinalCtaSection() {
     <section className="py-20 sm:py-28 relative overflow-hidden select-none border-t border-amber-900/10">
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero_friends_sunset_1.jpg"
-          alt="Group of friends sharing moments on a mountain peak at sunset"
+          src="/home_final_cta_bg.jpg"
+          alt="Panoramic mountain sunset with travellers meeting"
           className="w-full h-full object-cover object-center"
         />
-        {/* Soft Warm Gradient Overlay for High Editorial Aesthetics & Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EE]/95 via-[#FAF5EE]/88 to-[#FAF5EE]/95 opacity-50" />
+        {/* Soft Warm Gradient Overlay for High Contrast & High Visibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EE]/75 via-[#FAF5EE]/45 to-[#FAF5EE]/75 pointer-events-none" />
       </div>
       {/* Decorative Flying Birds Outline (Top Right Variation) */}
       <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0B2A3D]" />

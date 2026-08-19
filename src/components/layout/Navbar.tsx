@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ChevronDown,
   User,
@@ -96,6 +97,8 @@ const dropdownData: Record<string, DropdownItem[]> = {
 };
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isAboutPage = pathname === "/about";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -137,7 +140,9 @@ export function Navbar() {
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isScrolled
-            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-6"
+            ? isAboutPage
+              ? "top-4 w-[95%] max-w-[1220px] bg-[#FAF5EE]/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-amber-900/15 rounded-full py-2.5 px-5 md:px-6"
+              : "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-6"
             : "top-0 w-full max-w-full bg-transparent py-6"
         }`}
       >
