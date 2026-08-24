@@ -42,24 +42,24 @@ export function HeroSection() {
           </h1>
 
           {/* Subtitle Paragraph */}
-          <p className="text-[#0B2A3D]/85 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-[560px]">
+          <p className="text-[#0B2A3D]/85 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-[560px] font-sans">
             Travel is better when shared. Join curated group journeys designed
             for people who love exploring the world — and making meaningful
             connections along the way.
           </p>
 
           {/* Action Buttons — Rounded Pill Buttons */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 font-sans">
             <a
               href="#upcoming-journeys"
-              className="px-8 py-3.5 sm:py-4 bg-[#0B2A3D] hover:bg-[#061C29] text-white font-medium text-sm sm:text-base rounded-full shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2.5 cursor-pointer hover:scale-105"
+              className="px-8 py-3.5 sm:py-4 bg-[#0B2A3D] hover:bg-[#061C29] text-white font-semibold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2.5 cursor-pointer hover:scale-105 font-sans"
             >
               <span>Explore Upcoming Trips</span>
               <ArrowRight size={16} />
             </a>
             <a
               href="#how-it-works"
-              className="px-7 py-3.5 sm:py-4 bg-white/80 hover:bg-white text-[#0B2A3D] font-medium text-sm rounded-full border border-[#0B2A3D]/40 transition-all flex items-center justify-center gap-2 group shadow-sm text-center cursor-pointer hover:scale-105"
+              className="px-7 py-3.5 sm:py-4 bg-white/80 hover:bg-white text-[#0B2A3D] font-semibold text-sm rounded-full border border-[#0B2A3D]/40 transition-all flex items-center justify-center gap-2 group shadow-sm text-center cursor-pointer hover:scale-105 font-sans"
             >
               <span>How It Works</span>
               <ArrowRight

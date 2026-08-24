@@ -1,13 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-poppins), sans-serif;
-  --font-montserrat: var(--font-montserrat), sans-serif;
-  --font-playball: var(--font-playball), cursive;
+  --font-sans: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-montserrat: var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
-  --font-script: var(--font-caveat), var(--font-satisfy), var(--font-playball), cursive;
+  --font-script: var(--font-caveat), cursive;
   --font-caveat: var(--font-caveat), cursive;
-  --font-satisfy: var(--font-satisfy), cursive;
 
   /* Official Kokalachi Brand Color Palette */
   --color-brand-navy: #0B2A3D;
@@ -28,6 +26,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 85px;
+    font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   :root {
@@ -38,7 +37,11 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: var(--font-poppins), sans-serif;
+    font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  button, input, select, textarea, optgroup {
+    font-family: inherit;
   }
 }
 

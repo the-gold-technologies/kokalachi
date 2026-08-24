@@ -141,13 +141,13 @@ export function DifferenceSection() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="text-center text-[11px] font-serif italic text-slate-500 pt-2 font-medium">
+                  <div className="text-center text-sm font-script font-bold text-slate-600 pt-2">
                     Sri Lanka Table Conversations ✨
                   </div>
                 </div>
 
-                <div className="space-y-2 px-1 pb-4">
-                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-serif italic font-bold text-xs">
+                <div className="space-y-2 px-1 pb-4 font-sans">
+                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-bold text-xs">
                     <Users size={14} />
                     <span>01. Intimate Circles</span>
                   </div>
@@ -156,7 +156,7 @@ export function DifferenceSection() {
                     Curated, Not Crowded
                   </h3>
 
-                  <p className="text-slate-600 text-[14px] leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed font-sans">
                     Groups are built around compatibility, not just headcount —
                     so conversations happen naturally and no one&apos;s left on
                     the sidelines.
@@ -196,13 +196,13 @@ export function DifferenceSection() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="text-center text-[11px] font-serif italic text-slate-500 pt-2 font-medium">
+                  <div className="text-center text-sm font-script font-bold text-slate-600 pt-2">
                     Unfiltered Shared Moments ♡
                   </div>
                 </div>
 
-                <div className="space-y-2 px-1 pb-4">
-                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-serif italic font-bold text-xs">
+                <div className="space-y-2 px-1 pb-4 font-sans">
+                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-bold text-xs">
                     <MessageSquare size={14} />
                     <span>02. Real Connection</span>
                   </div>
@@ -211,7 +211,7 @@ export function DifferenceSection() {
                     Designed for Connection, Not Just Sightseeing
                   </h3>
 
-                  <p className="text-slate-600 text-[14px] leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed font-sans">
                     Our itineraries build in the moments that actually bring a
                     group together — shared meals, downtime, activities that
                     spark conversation — not just a checklist of monuments.
@@ -251,13 +251,13 @@ export function DifferenceSection() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="text-center text-[11px] font-serif italic text-slate-500 pt-2 font-medium">
+                  <div className="text-center text-sm font-script font-bold text-slate-600 pt-2">
                     Host Accompanied ⛰️
                   </div>
                 </div>
 
-                <div className="space-y-2 px-1 pb-4">
-                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-serif italic font-bold text-xs">
+                <div className="space-y-2 px-1 pb-4 font-sans">
+                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-bold text-xs">
                     <UserCheck size={14} />
                     <span>03. Seamless Hosting</span>
                   </div>
@@ -266,7 +266,7 @@ export function DifferenceSection() {
                     Hosted, End to End
                   </h3>
 
-                  <p className="text-slate-600 text-[14px] leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed font-sans">
                     A dedicated trip host travels with your group, handling
                     logistics and looking out for the group&apos;s experience,
                     so you can stay present instead of managing details.
@@ -306,13 +306,13 @@ export function DifferenceSection() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
-                  <div className="text-center text-[11px] font-serif italic text-slate-500 pt-2 font-medium">
+                  <div className="text-center text-sm font-script font-bold text-slate-600 pt-2">
                     Built With Pure Intention 🌊
                   </div>
                 </div>
 
-                <div className="space-y-2 px-1 pb-4">
-                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-serif italic font-bold text-xs">
+                <div className="space-y-2 px-1 pb-4 font-sans">
+                  <div className="flex items-center gap-1.5 text-[#D96C2C] font-bold text-xs">
                     <Compass size={14} />
                     <span>04. Intention &amp; Care</span>
                   </div>
@@ -321,7 +321,7 @@ export function DifferenceSection() {
                     Every Detail, Thoughtfully Planned
                   </h3>
 
-                  <p className="text-slate-600 text-[14px] leading-relaxed">
+                  <p className="text-slate-600 text-[14px] leading-relaxed font-sans">
                     From the pace of the itinerary to the choice of stays, every
                     journey is built with intention — not stitched together from
                     a template.

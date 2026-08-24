@@ -202,13 +202,13 @@ export function UpcomingJourneysSection() {
         </h2>
 
         {/* Subtitle Description */}
-        <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
           Every Kokalachi journey is curated end-to-end — the destination, the
           pace, and the people. Pick the one that&apos;s calling you.
         </p>
 
         {/* Filter Pills Row */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 sm:gap-3 mb-12 pb-2 scrollbar-hide">
+        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 sm:gap-3 mb-12 pb-2 scrollbar-hide font-sans">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isActive = activeCategory === cat.id;
@@ -216,7 +216,7 @@ export function UpcomingJourneysSection() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap cursor-pointer font-sans ${
                   isActive
                     ? "bg-[#0B2A3D] text-white shadow-md scale-105"
                     : "bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50"
@@ -238,17 +238,17 @@ export function UpcomingJourneysSection() {
             <div
               key={card.id}
               onClick={() => setSelectedTour(card.tourPackage)}
-              className="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_25px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between border border-slate-100/90 relative cursor-pointer"
+              className="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_25px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between border border-slate-100/90 relative cursor-pointer font-sans"
             >
               <div>
                 {/* Inner Image Box */}
-                <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-2xl mb-3.5 bg-slate-100">
+                <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-2xl mb-3.5 bg-slate-100 font-sans">
                   <img
                     src={card.image}
                     alt={card.destination}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md text-white text-[11px] font-medium px-3 py-1 rounded-full flex items-center gap-1">
+                  <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md text-white text-[11px] font-medium px-3 py-1 rounded-full flex items-center gap-1 font-sans">
                     <MapPin size={11} className="text-white" />
                     <span>{card.locationTag}</span>
                   </div>
@@ -260,43 +260,43 @@ export function UpcomingJourneysSection() {
                 </h3>
 
                 {/* Key Details Rows (Duration, Group Size, Dates) */}
-                <div className="bg-[#FAF4EC] p-3.5 sm:p-4 rounded-2xl space-y-2.5 mb-4 border border-[#F5ECE0]">
-                  <div className="flex items-center gap-2.5">
+                <div className="bg-[#FAF4EC] p-3.5 sm:p-4 rounded-2xl space-y-2.5 mb-4 border border-[#F5ECE0] font-sans">
+                  <div className="flex items-center gap-2.5 font-sans">
                     <Clock
                       size={16}
                       className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
                     />
-                    <div className="flex items-baseline gap-1 text-xs">
+                    <div className="flex items-baseline gap-1 text-xs font-sans">
                       <span className="font-medium text-[#64748B]">
                         Duration:
                       </span>
-                      <span className="font-semibold text-[#0B2A3D] ml-0.5">
+                      <span className="font-semibold text-[#0B2A3D] ml-0.5 font-sans">
                         {card.duration}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2.5 font-sans">
                     <Users
                       size={16}
                       className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
                     />
-                    <div className="flex items-baseline gap-1 text-xs">
+                    <div className="flex items-baseline gap-1 text-xs font-sans">
                       <span className="font-medium text-[#64748B]">
                         Group Size:
                       </span>
-                      <span className="font-semibold text-[#0B2A3D] ml-0.5">
+                      <span className="font-semibold text-[#0B2A3D] ml-0.5 font-sans">
                         {card.groupSize}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2.5 font-sans">
                     <Calendar
                       size={16}
                       className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
                     />
-                    <div className="flex items-baseline gap-1 text-xs">
+                    <div className="flex items-baseline gap-1 text-xs font-sans">
                       <span className="font-medium text-[#64748B]">Dates:</span>
-                      <span className="font-semibold text-[#0B2A3D] ml-0.5">
+                      <span className="font-semibold text-[#0B2A3D] ml-0.5 font-sans">
                         {card.dates}
                       </span>
                     </div>
@@ -304,11 +304,11 @@ export function UpcomingJourneysSection() {
                 </div>
 
                 {/* Vibe Tags Pills */}
-                <div className="flex items-center flex-wrap gap-1.5 mb-4">
+                <div className="flex items-center flex-wrap gap-1.5 mb-4 font-sans">
                   {card.vibeTags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="text-[11px] font-bold text-[#C85A24] bg-[#FAF0E6] px-3 py-1 rounded-full border border-[#F3DFD0]"
+                      className="text-[11px] font-bold text-[#C85A24] bg-[#FAF0E6] px-3 py-1 rounded-full border border-[#F3DFD0] font-sans"
                     >
                       {tag}
                     </span>
@@ -316,15 +316,15 @@ export function UpcomingJourneysSection() {
                 </div>
 
                 {/* Starting From Price Display */}
-                <div className="mb-4 border-t border-slate-100/80 pt-3 flex items-baseline justify-between">
-                  <span className="text-xs text-slate-400 font-medium">
+                <div className="mb-4 border-t border-slate-100/80 pt-3 flex items-baseline justify-between font-sans">
+                  <span className="text-xs text-slate-400 font-medium font-sans">
                     Starting From:
                   </span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-black text-[#0B2A3D]">
+                  <div className="flex items-baseline gap-1 font-sans">
+                    <span className="text-2xl font-black text-[#0B2A3D] font-sans">
                       {card.price}
                     </span>
-                    <span className="text-xs text-slate-500 font-medium">
+                    <span className="text-xs text-slate-500 font-medium font-sans">
                       / person
                     </span>
                   </div>
@@ -332,7 +332,7 @@ export function UpcomingJourneysSection() {
               </div>
 
               {/* View Journey CTA Button */}
-              <button className="w-full bg-[#0B2A3D] hover:bg-[#061C29] text-white py-3.5 rounded-full font-medium text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <button className="w-full bg-[#0B2A3D] hover:bg-[#061C29] text-white py-3.5 rounded-full font-medium text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer font-sans">
                 <span>View Journey</span>
                 <ArrowRight size={16} className="stroke-[2]" />
               </button>
@@ -341,8 +341,8 @@ export function UpcomingJourneysSection() {
         </div>
 
         {/* Section-end CTA Button */}
-        <div className="mt-14">
-          <button className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105">
+        <div className="mt-14 font-sans">
+          <button className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105 font-sans">
             <span>See All Upcoming Journeys</span>
             <ArrowRight size={18} className="stroke-[2]" />
           </button>

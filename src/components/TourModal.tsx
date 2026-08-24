@@ -99,7 +99,7 @@ export function TourModal({ tour, isOpen, onClose }: TourModalProps) {
               <Calendar size={14} />
               <span>Next Departure: {tour.nextDeparture || "Sep 15, 2026"}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold font-serif text-white leading-tight">
               {tour.title}
             </h2>
           </div>

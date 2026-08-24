@@ -132,7 +132,6 @@ export function Navbar() {
     { name: "Features", href: "#", hasDropdown: true },
     { name: "Pages", href: "#", hasDropdown: true },
     { name: "Blogs", href: "#", hasDropdown: true },
-    { name: "Contact", href: "#", hasDropdown: false },
   ];
 
   return (
@@ -210,12 +209,14 @@ export function Navbar() {
           </nav>
 
           {/* Desktop Right Actions */}
-         <div className="hidden lg:flex items-center gap-4">
-            {/* <button className="flex items-center justify-center gap-2 font-medium text-xs sm:text-sm rounded-full px-6 py-2.5 bg-[#0B2A3D] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer">
-              <User size={15} />
-              <span>Login</span>
-            </button> */}
-          </div> 
+          <div className="hidden lg:flex items-center gap-4">
+            <a
+              href="#contact"
+              className="flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider rounded-full px-6 py-2.5 bg-[#0B2A3D] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans"
+            >
+              <span>Contact Us</span>
+            </a>
+          </div>
 
           {/* Mobile Right Actions */}
           <div className="flex lg:hidden items-center gap-4">

@@ -19,7 +19,7 @@ export function WhyWeExistSection() {
   return (
     <section
       id="why-we-exist"
-      className="py-20 lg:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
+      className="py-16 sm:py-20 lg:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline */}
       <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0B2A3D]" />
@@ -31,7 +31,7 @@ export function WhyWeExistSection() {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-6 text-[#0B2A3D]">
+        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
           Why do so many dream trips never{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
             happen?
@@ -39,33 +39,20 @@ export function WhyWeExistSection() {
           </span>
         </h2>
 
-        {/* Subtitle statement */}
-        <p className="text-[#0B2A3D]/70 text-sm sm:text-base font-medium italic mb-6">
-          Finding travel companions shouldn&apos;t be this hard.
+        {/* Short, reduced intro copy */}
+        <p className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-2xl mx-auto mb-12 font-sans">
+          Most bucket list trips get postponed when schedules clash and life gets in the way. Finding the right travel companions shouldn&apos;t be this hard.
         </p>
 
-        {/* Paragraph copy text */}
-        <div className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-3xl mx-auto space-y-3 mb-12">
-          <p>
-            Most of us have a bucket list full of places we&apos;d love to
-            explore. But plans get postponed. Leaves don&apos;t get approved.
-            Schedules don&apos;t match. Life gets in the way.
-          </p>
-          <p>
-            Not because we don&apos;t want to travel. But because finding the
-            right people to travel with isn&apos;t always easy.
-          </p>
-        </div>
-
-        {/* Side-by-Side Comparison Container */}
+        {/* Side-by-Side Comparison Container (Exact Original Layout) */}
         <div className="relative max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch text-left">
             {/* ==================== LEFT CARD: THE OLD WAY (col-span-5) ==================== */}
-            <div className="lg:col-span-5 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative shadow-none h-full">
+            <div className="lg:col-span-5 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative shadow-none h-full border border-[#E3DACB]/80">
               <div className="flex flex-col h-full justify-between">
                 {/* Header Badge Pill */}
                 <div className="flex justify-center mb-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DFD6C7] text-[#5C5248] text-[11px] font-extrabold uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DFD6C7] text-[#5C5248] text-[11px] font-extrabold uppercase tracking-wider font-sans">
                     <X size={13} className="text-[#5C5248] stroke-[3]" />
                     <span>THE OLD WAY</span>
                   </div>
@@ -134,7 +121,7 @@ export function WhyWeExistSection() {
                   </div>
 
                   {/* WhatsApp Style Chat Phone Frame */}
-                  <div className="bg-[#EEE7DC] rounded-3xl p-4 sm:p-6 border border-[#E3DACB] flex-1 flex flex-col justify-between space-y-4 shadow-none">
+                  <div className="bg-[#EEE7DC] rounded-3xl p-4 sm:p-6 border border-[#E3DACB] flex-1 flex flex-col justify-between space-y-4 shadow-none font-sans">
                     {/* Chat Header */}
                     <div className="flex items-center justify-between pb-3 border-b border-black/10">
                       <div className="flex items-center gap-3">
@@ -146,10 +133,10 @@ export function WhyWeExistSection() {
                           />
                         </div>
                         <div>
-                          <div className="font-extrabold text-[#0B2A3D] text-xs sm:text-sm flex items-center gap-1">
+                          <div className="font-extrabold text-[#0B2A3D] text-xs sm:text-sm flex items-center gap-1 font-sans">
                             Bali Trip? 🌴
                           </div>
-                          <div className="text-[10px] text-slate-500 font-medium">
+                          <div className="text-[10px] text-slate-500 font-medium font-sans">
                             8 members
                           </div>
                         </div>
@@ -162,21 +149,21 @@ export function WhyWeExistSection() {
                     </div>
 
                     {/* Messages Container spanning full inner height */}
-                    <div className="flex-1 flex flex-col justify-between space-y-4 pt-1 pb-1">
+                    <div className="flex-1 flex flex-col justify-between space-y-4 pt-1 pb-1 font-sans">
                       {/* Chat Message 1: Rohit */}
                       <div className="space-y-1">
-                        <div className="bg-white p-3 rounded-2xl rounded-tl-sm max-w-[92%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1">
-                          <span className="font-bold text-emerald-700 block text-[11px]">
+                        <div className="bg-white p-3 rounded-2xl rounded-tl-sm max-w-[92%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1 font-sans">
+                          <span className="font-bold text-emerald-700 block text-[11px] font-sans">
                             Rohit
                           </span>
-                          <p className="font-medium text-slate-800">
+                          <p className="font-medium text-slate-800 font-sans">
                             Guys, shall we do Bali in August? 😍
                           </p>
-                          <div className="flex items-center justify-between pt-1">
+                          <div className="flex items-center justify-between pt-1 font-sans">
                             <div className="inline-flex items-center gap-1 text-[10px] bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
                               <span>❤️ 🔥 🙌 4</span>
                             </div>
-                            <span className="text-[9px] text-slate-400">
+                            <span className="text-[9px] text-slate-400 font-sans">
                               10:30 AM
                             </span>
                           </div>
@@ -184,26 +171,26 @@ export function WhyWeExistSection() {
                       </div>
 
                       {/* Chat Message 2: Neha & Aman */}
-                      <div className="space-y-2.5">
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs">
-                          <span className="font-bold text-rose-600 block text-[10px]">
+                      <div className="space-y-2.5 font-sans">
+                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
+                          <span className="font-bold text-rose-600 block text-[10px] font-sans">
                             Neha
                           </span>
-                          <p className="text-slate-800 font-medium">
+                          <p className="text-slate-800 font-medium font-sans">
                             I&apos;m in! 🙌{" "}
-                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2">
+                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2 font-sans">
                               10:31 AM
                             </span>
                           </p>
                         </div>
 
-                        <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm">
-                          <span className="font-bold text-emerald-800 block text-[10px]">
+                        <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm font-sans">
+                          <span className="font-bold text-emerald-800 block text-[10px] font-sans">
                             Aman
                           </span>
-                          <p className="text-slate-800 font-medium">
+                          <p className="text-slate-800 font-medium font-sans">
                             Sorry guys, can&apos;t get leave 🙁{" "}
-                            <span className="text-[9px] text-slate-600 float-right mt-1 ml-2">
+                            <span className="text-[9px] text-slate-600 float-right mt-1 ml-2 font-sans">
                               10:32 AM ✓
                             </span>
                           </p>
@@ -211,30 +198,30 @@ export function WhyWeExistSection() {
                       </div>
 
                       {/* Chat Message 3: Priya & Silence */}
-                      <div className="space-y-2.5">
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs">
-                          <span className="font-bold text-purple-600 block text-[10px]">
+                      <div className="space-y-2.5 font-sans">
+                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
+                          <span className="font-bold text-purple-600 block text-[10px] font-sans">
                             Priya
                           </span>
-                          <p className="text-slate-800 font-medium">
+                          <p className="text-slate-800 font-medium font-sans">
                             Maybe next year?{" "}
-                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2">
+                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2 font-sans">
                               10:33 AM
                             </span>
                           </p>
                         </div>
 
                         {/* Dead Chat Fade out */}
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200">
+                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between font-sans">
+                          <div className="flex items-center gap-2 font-sans">
+                            <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200 font-sans">
                               ...
                             </span>
-                            <span className="italic text-slate-400">
+                            <span className="italic text-slate-400 font-sans">
                               No replies...
                             </span>
                           </div>
-                          <span className="text-[9px] text-slate-400">
+                          <span className="text-[9px] text-slate-400 font-sans">
                             10:45 AM
                           </span>
                         </div>
@@ -253,13 +240,13 @@ export function WhyWeExistSection() {
             </div>
 
             {/* ==================== RIGHT CARD: THE KOKALACHI WAY (col-span-7) ==================== */}
-            <div className="lg:col-span-7 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative shadow-none h-full">
+            <div className="lg:col-span-7 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative shadow-none h-full border border-[#E3DACB]/80">
               <div className="flex flex-col h-full justify-between">
-                {/* Header Badge Pill with Handwritten Cursive Text */}
+                {/* Header Badge Pill */}
                 <div className="flex justify-center mb-4">
-                  <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#C85A24] text-white shadow-sm">
+                  <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#C85A24] text-white shadow-sm font-sans font-bold text-xs sm:text-sm">
                     <Heart size={14} className="fill-white stroke-none" />
-                    <span className="text-sm sm:text-base font-bold tracking-wide font-script">
+                    <span className="tracking-wide font-sans">
                       The Kokalachi Way
                     </span>
                   </div>
@@ -280,7 +267,7 @@ export function WhyWeExistSection() {
                       Real people. <br />
                       Real connections.
                     </span>
-                    <span className="text-sm font-normal text-white/90">
+                    <span className="text-sm font-normal text-white/90 font-sans">
                       ♡ ✨
                     </span>
                   </div>
@@ -315,11 +302,11 @@ export function WhyWeExistSection() {
                 </div>
 
                 {/* 4 Pillars Bottom Bar */}
-                <div className="bg-[#EAE2D3] rounded-2xl p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 items-center text-[#2C221E]">
+                <div className="bg-[#EAE2D3] rounded-2xl p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 items-center text-[#2C221E] font-sans">
                   {/* Pillar 1 */}
                   <div className="flex items-center gap-2.5">
                     <Users className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E]">
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
                       Handpicked <br /> Travel Companions
                     </span>
                   </div>
@@ -327,7 +314,7 @@ export function WhyWeExistSection() {
                   {/* Pillar 2 */}
                   <div className="flex items-center gap-2.5">
                     <ShieldCheck className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E]">
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
                       Trusted <br /> &amp; Safe
                     </span>
                   </div>
@@ -335,7 +322,7 @@ export function WhyWeExistSection() {
                   {/* Pillar 3 */}
                   <div className="flex items-center gap-2.5">
                     <BookOpen className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E]">
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
                       Thoughtfully <br /> Planned
                     </span>
                   </div>
@@ -343,7 +330,7 @@ export function WhyWeExistSection() {
                   {/* Pillar 4 */}
                   <div className="flex items-center gap-2.5">
                     <Heart className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E]">
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
                       Connections <br /> That Last
                     </span>
                   </div>
@@ -355,7 +342,7 @@ export function WhyWeExistSection() {
 
         {/* BOTTOM EMPHASIS CONCLUSION */}
         <div className="max-w-3xl mx-auto mt-14 sm:mt-16 text-center">
-          <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D]">
+          <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] font-serif">
             So, we decided to build a better way to do it.
           </h3>
           <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">
