@@ -18,6 +18,7 @@ import {
   AlertTriangle,
   Image as ImageIcon,
   Compass,
+  Phone,
 } from "lucide-react";
 
 interface DropdownItem {
@@ -154,8 +155,8 @@ export function Navbar() {
               src="/logo.png"
               alt="Kokalachi Logo"
               className={`
-                ${isScrolled ? " sm:h-[60px] -ml-2.5" : " sm:h-[83px] -ml-7"}
-                w-auto object-contain hover:scale-105 transition-transform`}
+                ${isScrolled ? " sm:h-[60px] -ml-2.5" : " sm:h-[83px] sm:-ml-7"}
+                w-auto object-contain hover:scale-105 transition-transform h-10 -ml-5`}
             />
           </Link>
 
@@ -346,11 +347,15 @@ export function Navbar() {
 
           {/* Drawer Footer */}
           <div className="px-6 py-6 border-t border-gray-200 flex flex-col gap-4">
-            {/* Login Button */}
-            <button className="w-full flex items-center justify-center gap-2 border border-[#3E7C7A]/30 text-[#3E7C7A] hover:bg-[#3E7C7A]/5 rounded-full px-6 py-3 font-bold transition-colors">
-              <User size={16} />
-              Login
-            </button>
+            {/* Contact Us CTA Button */}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full flex items-center justify-center gap-2 bg-[#0B2A3D] text-white hover:bg-[#061C29] rounded-full px-6 py-3.5 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer font-sans"
+            >
+              <Phone size={15} />
+              <span>Contact Us</span>
+            </a>
           </div>
         </div>
       </div>
