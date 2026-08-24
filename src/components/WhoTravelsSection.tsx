@@ -32,12 +32,12 @@ export function WhoTravelsSection() {
       bgColor: "bg-[#FFF2EF]",
       badgeBg: "bg-[#F7D3CB]",
       badgeColor: "text-[#D95338]",
-      icon: <User size={20} className="stroke-[2.2]" />,
+      icon: <Heart size={20} className="fill-[#EF4444] text-[#EF4444] stroke-none" />,
       image:
         "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=600",
       desc: "Women-only journeys designed for connection, comfort and confidence. Travel, laugh, and create memories that last a lifetime.",
       age: "20s - 45s",
-      attrIcon: <Heart size={12} className="text-[#D95338]" />,
+      attrIcon: <Heart size={12} className="fill-[#EF4444] text-[#EF4444] stroke-none" />,
       attrText: "Supportive & Safe",
     },
     {

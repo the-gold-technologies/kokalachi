@@ -6,8 +6,6 @@ import { UpcomingJourneysSection } from "@/components/UpcomingJourneysSection";
 import { GoodCompanySection } from "@/components/GoodCompanySection";
 import { MomentsThatStayedSection } from "@/components/MomentsThatStayedSection";
 import { WhoTravelsSection } from "@/components/WhoTravelsSection";
-import { BehindKokalachiSection } from "@/components/BehindKokalachiSection";
-import { FinalCtaSection } from "@/components/FinalCtaSection";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -18,35 +16,29 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Step 1: Hero — Grab attention & inspire */}
+        {/* Section 1: Hero — Brand introduction, value proposition & primary CTA */}
         <HeroSection />
 
-        {/* Step 2: Why We Exist — Build relevance & empathy */}
+        {/* Section 2: Why We Exist — Pain points of planning & problem framing */}
         <WhyWeExistSection />
 
-        {/* Step 3: How It Works — Reduce friction (3 simple steps) */}
+        {/* Section 3: How It Works — 3-step frictionless travel process */}
         <HowItWorksSection />
 
-        {/* Step 4: The Kokalachi Difference — Differentiate & position */}
+        {/* Section 4: The Kokalachi Difference — Key differentiators & hosting style */}
         <DifferenceSection />
 
-        {/* Step 5: Upcoming Journeys — Show real options & spark excitement */}
-        <UpcomingJourneysSection />
-
-        {/* Step 6: You're in Good Company — Build trust & safety */}
+        {/* Section 5: Good Company — Trust, compatibility & traveller community */}
         <GoodCompanySection />
 
-        {/* Step 7: Moments That Stayed — Authentic social proof */}
+        {/* Section 6: Moments That Stayed — Authentic social proof, reviews & memories */}
         <MomentsThatStayedSection />
 
-        {/* Step 8: Who Travels With Us? — Community belonging */}
+        {/* Section 7: Who Travels With Us — Personas & community belonging */}
         <WhoTravelsSection />
 
-        {/* Step 9: Behind Kokalachi — Journal stories & curation */}
-        <BehindKokalachiSection />
-
-        {/* Step 10: Final CTA Banner */}
-        <FinalCtaSection />
+        {/* Section 8: Upcoming Journeys — Curated itineraries, dates & booking CTAs */}
+        <UpcomingJourneysSection />
       </main>
 
       {/* Official Brand Footer */}

@@ -9,12 +9,12 @@ import {
   Clock,
   ArrowRight,
   MapPin,
-  Star,
-  User,
+  Flame,
+  Compass,
   Heart,
-  Globe,
+  Mountain,
   Coffee,
-  Waves,
+  Palmtree,
   Train,
 } from "lucide-react";
 import { TourModal, TourPackage } from "./TourModal";
@@ -96,56 +96,25 @@ const tripCards: TripCardData[] = [
   },
   {
     id: 3,
-    destination: "Northern Lights Iceland",
-    locationTag: "Reykjavik & Golden Circle",
-    duration: "8 Days / 7 Nights",
-    groupSize: "10–12 Travellers",
-    dates: "12–19 Jan 2027",
-    price: "₹85,000",
-    vibeTags: ["Adventure", "Hot Springs", "Scenic"],
-    categories: ["Trending", "Adventure", "ScenicJourney"],
-    image:
-      "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=85&w=800",
-    tourPackage: {
-      id: 3,
-      title: "Northern Lights Iceland Circle",
-      location: "Iceland",
-      duration: "8 Days / 7 Nights",
-      rating: 5,
-      price: 85000,
-      originalPrice: 98000,
-      image:
-        "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=85&w=800",
-      category: "Adventure",
-      tag: "10–12 Travellers",
-      tagColor: "bg-[#7B1FA2]",
-      spotsLeft: 3,
-      nextDeparture: "12–19 Jan 2027",
-      hook: "Dip in geothermal hot springs, chase green auroras in snowy valleys, and lodge in remote Scandinavian cabins.",
-    },
-  },
-  {
-    id: 4,
-    destination: "Kyoto & Mt. Fuji, Japan",
-    locationTag: "Kyoto & Tokyo Canopy",
+    destination: "Kyoto & Mt. Fuji Sakura",
+    locationTag: "Japan",
     duration: "7 Days / 6 Nights",
     groupSize: "8–10 Travellers",
     dates: "25 Mar – 31 Mar 2027",
     price: "₹92,000",
-    vibeTags: ["Women Only", "Culture", "Mindful"],
-    categories: ["WomenOnly", "ScenicJourney"],
+    vibeTags: ["Cherry Blossoms", "Onsen Stays", "Hidden Alleys"],
     image:
-      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
+    categories: ["WomenOnly", "FirstTimers", "SlowTravel"],
     tourPackage: {
-      id: 4,
-      title: "The Sakura Edition — Japan",
+      id: 3,
+      title: "Japan Cherry Blossom & Heritage Journey",
       location: "Japan",
       duration: "7 Days / 6 Nights",
-      rating: 5,
+      rating: 5.0,
       price: 92000,
-      originalPrice: 105000,
       image:
-        "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
       category: "Women Only",
       tag: "8–10 Travellers",
       tagColor: "bg-[#D81B60]",
@@ -161,13 +130,13 @@ export function UpcomingJourneysSection() {
   const [selectedTour, setSelectedTour] = useState<TourPackage | null>(null);
 
   const categories = [
-    { id: "Trending", label: "Trending", icon: Star },
-    { id: "FirstTimers", label: "First Timers", icon: User },
-    { id: "WomenOnly", label: "Women Only", icon: Heart },
-    { id: "Adventure", label: "Adventure", icon: Globe },
-    { id: "SlowTravel", label: "Slow Travel", icon: Coffee },
-    { id: "BeachEscape", label: "Beach Escape", icon: Waves },
-    { id: "ScenicJourney", label: "Scenic Journey", icon: Train },
+    { id: "Trending", label: "Trending", icon: Flame, isHeart: false },
+    { id: "FirstTimers", label: "First Timers", icon: Compass, isHeart: false },
+    { id: "WomenOnly", label: "Women Only", icon: Heart, isHeart: true },
+    { id: "Adventure", label: "Adventure", icon: Mountain, isHeart: false },
+    { id: "SlowTravel", label: "Slow Travel", icon: Coffee, isHeart: false },
+    { id: "BeachEscape", label: "Beach Escape", icon: Palmtree, isHeart: false },
+    { id: "ScenicJourney", label: "Scenic Journey", icon: Train, isHeart: false },
   ];
 
   const filteredCards =
@@ -182,16 +151,13 @@ export function UpcomingJourneysSection() {
       id="upcoming-journeys"
       className="py-20 lg:py-24 bg-white relative overflow-hidden select-none"
     >
-      {/* Decorative Flying Birds Outline (Top Right) */}
       <FlyingBirds className="hidden lg:block absolute top-14 right-12 opacity-35 text-[#0B2A3D]" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
-        {/* Sub-header tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
           UPCOMING JOURNEYS
         </span>
 
-        {/* Main Title */}
         <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
           Where will your next{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
@@ -201,13 +167,12 @@ export function UpcomingJourneysSection() {
           begin?
         </h2>
 
-        {/* Subtitle Description */}
         <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
           Every Kokalachi journey is curated end-to-end — the destination, the
           pace, and the people. Pick the one that&apos;s calling you.
         </p>
 
-        {/* Filter Pills Row */}
+        {/* Filter Pills Row with Unified Icon Styling */}
         <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 sm:gap-3 mb-12 pb-2 scrollbar-hide font-sans">
           {categories.map((cat) => {
             const Icon = cat.icon;
@@ -219,20 +184,32 @@ export function UpcomingJourneysSection() {
                 className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap cursor-pointer font-sans ${
                   isActive
                     ? "bg-[#0B2A3D] text-white shadow-md scale-105"
-                    : "bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50"
+                    : "bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50 hover:border-slate-300"
                 }`}
               >
-                <Icon
-                  size={14}
-                  className={isActive ? "text-white" : "text-slate-500"}
-                />
+                {cat.isHeart ? (
+                  <Heart
+                    size={15}
+                    className={
+                      isActive
+                        ? "text-[#EF4444] fill-[#EF4444]"
+                        : "text-[#EF4444] fill-[#EF4444]"
+                    }
+                  />
+                ) : (
+                  <Icon
+                    size={15}
+                    className={`stroke-[2] ${
+                      isActive ? "text-white" : "text-[#0B2A3D]/70"
+                    }`}
+                  />
+                )}
                 <span>{cat.label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Trip Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto text-left pt-2">
           {filteredCards.map((card) => (
             <div
