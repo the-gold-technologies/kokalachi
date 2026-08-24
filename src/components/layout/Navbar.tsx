@@ -155,7 +155,7 @@ export function Navbar() {
               src="/logo.png"
               alt="Kokalachi Logo"
               className={`
-                ${isScrolled ? " sm:h-[60px] -ml-2.5" : " sm:h-[83px] sm:-ml-7"}
+                ${isScrolled ? " sm:h-[60px] -ml-2.5" : " sm:h-[75px] sm:-ml-7"}
                 w-auto object-contain hover:scale-105 transition-transform h-12 -ml-5`}
             />
           </Link>

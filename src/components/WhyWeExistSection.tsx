@@ -85,7 +85,9 @@ export function WhyWeExistSection() {
 
         {/* Short, reduced intro copy */}
         <p className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-2xl mx-auto mb-8 font-sans">
-          Most bucket list trips get postponed when schedules clash and life gets in the way. Finding the right travel companions shouldn&apos;t be this hard.
+          Most bucket list trips get postponed when schedules clash and life
+          gets in the way. Finding the right travel companions shouldn&apos;t be
+          this hard.
         </p>
 
         {/* Side-by-Side Comparison Container (Exact Original Layout) */}
@@ -289,7 +291,10 @@ export function WhyWeExistSection() {
                 {/* Header Badge Pill */}
                 <div className="flex justify-center mb-4">
                   <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#C85A24] text-white shadow-sm font-sans font-bold text-xs sm:text-sm">
-                    <Heart size={14} className="fill-[#EF4444] text-[#EF4444] stroke-none" />
+                    <Heart
+                      size={14}
+                      className="fill-[#EF4444] text-[#EF4444] stroke-none"
+                    />
                     <span className="tracking-wide font-sans">
                       The Kokalachi Way
                     </span>
@@ -297,14 +302,16 @@ export function WhyWeExistSection() {
                 </div>
 
                 {/* Main Large Group Photo with Smooth Transition Carousel */}
-                <div className="relative h-52 sm:h-64 lg:h-56 rounded-2xl overflow-hidden shadow-sm mb-3.5 group bg-slate-900">
+                <div className="relative h-full rounded-2xl overflow-hidden shadow-sm mb-3.5 group bg-slate-900">
                   {kokalachiPhotos.map((photo, idx) => {
                     const isActive = idx === activePhotoIdx;
                     return (
                       <div
                         key={idx}
                         className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                          isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                          isActive
+                            ? "opacity-100 z-10"
+                            : "opacity-0 z-0 pointer-events-none"
                         }`}
                       >
                         <img
@@ -351,7 +358,7 @@ export function WhyWeExistSection() {
                 </div>
 
                 {/* 3 Grid Photo Thumbnails Row (Interactive Transition Triggers) */}
-                <div className="grid grid-cols-3 gap-3 sm:gap-3.5 mb-4">
+                {/* <div className="grid grid-cols-3 gap-3 sm:gap-3.5 mb-4">
                   {kokalachiPhotos.slice(1, 4).map((thumb, idx) => {
                     const actualIdx = idx + 1;
                     const isSelected = activePhotoIdx === actualIdx;
@@ -377,7 +384,7 @@ export function WhyWeExistSection() {
                       </div>
                     );
                   })}
-                </div>
+                </div> */}
 
                 {/* 4 Pillars Bottom Bar */}
                 <div className="bg-[#EAE2D3] rounded-2xl p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 items-center text-[#2C221E] font-sans">
