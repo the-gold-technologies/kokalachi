@@ -302,7 +302,7 @@ export function WhyWeExistSection() {
                 </div>
 
                 {/* Main Large Group Photo with Smooth Transition Carousel */}
-                <div className="relative h-full rounded-2xl overflow-hidden shadow-sm mb-3.5 group bg-slate-900">
+                <div className="relative w-full h-[280px] sm:h-[340px] lg:h-full min-h-[280px] sm:min-h-[320px] rounded-2xl overflow-hidden shadow-sm mb-3.5 group bg-slate-900">
                   {kokalachiPhotos.map((photo, idx) => {
                     const isActive = idx === activePhotoIdx;
                     return (
