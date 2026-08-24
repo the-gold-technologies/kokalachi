@@ -16,7 +16,7 @@ export function GoodCompanySection() {
   return (
     <section
       id="good-company"
-      className="py-20 lg:py-28 bg-[#ffffff] relative overflow-hidden select-none"
+      className="py-12 sm:py-14 lg:py-16 bg-[#ffffff] relative overflow-hidden select-none"
     >
       {/* Background Soft Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />
@@ -358,13 +358,13 @@ export function GoodCompanySection() {
             <div className="p-5 pt-1.5 space-y-3 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
               {/* Color Swatch Dots & Icon Badge */}
               <div className="flex items-center justify-between border-b border-amber-900/10 pb-2.5">
-                <div className="w-9 h-9 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shadow-2xs">
-                  <Heart size={18} className="stroke-[2]" />
+                <div className="w-9 h-9 rounded-full bg-[#FDF0EC] text-[#EF4444] flex items-center justify-center shadow-2xs">
+                  <Heart size={18} className="fill-[#EF4444] text-[#EF4444] stroke-none" />
                 </div>
 
                 {/* 3 Color Palette Swatches */}
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-[#D96C2C]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#EF4444]/80 inline-block shadow-2xs" />
                   <span className="w-3 h-3 rounded-full bg-[#D68C45] inline-block shadow-2xs" />
                   <span className="w-3 h-3 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
                 </div>
@@ -392,10 +392,10 @@ export function GoodCompanySection() {
 
         {/* BOTTOM OUR PROMISE STRIP BANNER */}
         <div className="bg-[#FAF4EB] rounded-[32px] border border-amber-900/10 p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-start gap-6 sm:gap-8 text-left max-w-6xl mx-auto mb-10">
-          <div className="flex items-center gap-4 sm:gap-6 shrink-0 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-dashed border-[#D96C2C]/30 pb-4 md:pb-0 w-full md:w-auto">
-            {/* High-Precision Orange Radiating Heart with Tapered Supporting Swoosh Icon */}
+          <div className="flex items-center gap-4 sm:gap-6 shrink-0 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-dashed border-[#EF4444]/30 pb-4 md:pb-0 w-full md:w-auto">
+            {/* High-Precision Red Radiating Heart with Tapered Supporting Swoosh Icon */}
             <svg
-              className="w-14 h-14 text-[#D96C2C] shrink-0"
+              className="w-14 h-14 text-[#EF4444] shrink-0"
               viewBox="0 0 64 64"
               fill="none"
             >

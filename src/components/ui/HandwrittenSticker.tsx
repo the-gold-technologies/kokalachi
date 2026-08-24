@@ -64,7 +64,7 @@ export function HandwrittenSticker({
       {/* High-Contrast Handwritten Text with plane & heart */}
       <p className="font-script text-2xl sm:text-3xl text-[#0B2A3D] font-bold rotate-[-2deg] text-center leading-snug tracking-wide max-w-sm drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
         Pack your bags &amp; leave the details to us! ✈️{" "}
-        <span className="text-[#C85A24]">♡</span>
+        <span className="text-[#EF4444]">♡</span>
       </p>
 
       {/* Hand-drawn Dashed Curved Arrow SVG pointing down */}

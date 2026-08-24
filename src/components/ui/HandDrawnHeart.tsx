@@ -11,7 +11,7 @@ interface HandDrawnHeartProps {
 export function HandDrawnHeart({
   className = "",
   size = 36,
-  color = "#C85A24",
+  color = "#EF4444",
 }: HandDrawnHeartProps) {
   return (
     <svg

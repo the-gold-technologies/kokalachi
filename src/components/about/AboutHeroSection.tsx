@@ -75,7 +75,7 @@ export function AboutHeroSection() {
                 <span>Small-Group Trips</span>
               </div>
               <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0B2A3D] shadow-xs">
-                <Heart size={15} className="text-[#C85A24]" />
+                <Heart size={15} className="text-[#EF4444] fill-[#EF4444]" />
                 <span>Like-Minded Solos</span>
               </div>
               <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0B2A3D] shadow-xs">
@@ -115,15 +115,15 @@ export function AboutHeroSection() {
                   />
                 </div>
                 <p className="font-script text-xs sm:text-sm text-[#0B2A3D] font-bold text-center mt-2">
-                  ✨ Travel together, belong anywhere ♡
+                  ✨ Travel together, belong anywhere <span className="text-[#EF4444]">♡</span>
                 </p>
               </div>
 
               {/* Floating Decorative Heart Accent */}
-              <div className="absolute -top-4 -right-3 text-[#C85A24] pointer-events-none select-none z-20">
+              <div className="absolute -top-4 -right-3 text-[#EF4444] pointer-events-none select-none z-20">
                 <HandDrawnHeart
                   size={40}
-                  color="#C85A24"
+                  color="#EF4444"
                   className="rotate-12 drop-shadow-md"
                 />
               </div>

@@ -32,7 +32,7 @@ export function MomentsThatStayedSection() {
   return (
     <section
       id="moments"
-      className="py-20 lg:py-28 bg-white relative overflow-hidden select-none"
+      className="py-12 sm:py-14 lg:py-16 bg-white relative overflow-hidden select-none"
     >
       {/* Soft Decorative Ambient Background */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />
@@ -302,7 +302,7 @@ export function MomentsThatStayedSection() {
                       size={18}
                       className={
                         likedCards.card2
-                          ? "text-[#D96C2C] fill-[#D96C2C]"
+                          ? "text-[#EF4444] fill-[#EF4444]"
                           : "text-slate-400"
                       }
                     />
@@ -347,7 +347,7 @@ export function MomentsThatStayedSection() {
               <div className="p-4 pb-5 bg-[#FFFDF9] rounded-2xl border border-amber-900/15 shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-500 relative bg-paper-texture">
                 {/* Washi Tape Strip at Center Top */}
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 z-30 px-3 py-0.5 bg-[#FDE8BD]/95 text-[#7A5012] font-script text-[11px] font-bold rounded-sm border-y border-amber-900/20 shadow-md transform -rotate-1 select-none flex items-center gap-1">
-                  <span>♡ Memory Lane</span>
+                  <span><span className="text-[#EF4444]">♡</span> Memory Lane</span>
                 </div>
 
                 <div className="overflow-hidden rounded-xl h-44 mb-3 border border-amber-900/10">
@@ -365,7 +365,7 @@ export function MomentsThatStayedSection() {
 
                 <div className="text-[10px] font-sans text-slate-500 pt-2 border-t border-amber-900/10 mt-2 flex items-center justify-between">
                   <span>— Ladakh Road Trip • June 2025</span>
-                  <span className="text-[#D96C2C] font-script text-xs">
+                  <span className="text-[#EF4444] font-script text-xs">
                     memories ♡
                   </span>
                 </div>
@@ -382,7 +382,7 @@ export function MomentsThatStayedSection() {
               <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-normal text-[#1E293B] leading-[1.12] font-script">
                 The Journey <br />
                 Continues...{" "}
-                <span className="text-[#C85A24] font-sans text-2xl sm:text-3xl inline-block ml-1">
+                <span className="text-[#EF4444] font-sans text-2xl sm:text-3xl inline-block ml-1">
                   ♡
                 </span>
               </h3>
@@ -474,8 +474,8 @@ export function MomentsThatStayedSection() {
 
                 {/* STEP 6 */}
                 <div className="flex flex-col items-center text-center group px-1">
-                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
-                    <Heart size={20} className="stroke-[2]" />
+                  <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#EF4444] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
+                    <Heart size={20} className="fill-white stroke-none" />
                   </div>
                   <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Friendships for Life

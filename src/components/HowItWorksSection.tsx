@@ -9,7 +9,7 @@ export function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="py-24 bg-[#FFFFFF] relative overflow-hidden select-none"
+      className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline (Top Left Variation) */}
       <FlyingBirds className="hidden lg:block absolute top-12 left-14 opacity-30 text-[#0B2A3D]" />
@@ -20,7 +20,7 @@ export function HowItWorksSection() {
 
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 max-w-6xl text-center">
         {/* Section Header */}
-        <div className="space-y-3 mb-16 max-w-2xl mx-auto">
+        <div className="space-y-3 mb-10 max-w-2xl mx-auto">
           <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
             HOW IT WORKS
           </span>

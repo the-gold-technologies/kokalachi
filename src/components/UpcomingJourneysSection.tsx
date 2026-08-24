@@ -149,7 +149,7 @@ export function UpcomingJourneysSection() {
   return (
     <section
       id="upcoming-journeys"
-      className="py-20 lg:py-24 bg-white relative overflow-hidden select-none"
+      className="py-12 sm:py-14 lg:py-16 bg-white relative overflow-hidden select-none"
     >
       <FlyingBirds className="hidden lg:block absolute top-14 right-12 opacity-35 text-[#0B2A3D]" />
 

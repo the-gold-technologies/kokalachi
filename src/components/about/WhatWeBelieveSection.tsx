@@ -105,7 +105,7 @@ export function WhatWeBelieveSection() {
                     <div className="inline-block border-b-2 border-[#0B2A3D] pb-1">
                       <h3 className="font-script text-2xl sm:text-3xl  text-[#0B2A3D] font-bold flex items-center justify-center gap-2 leading-[1.3]">
                         <span>{pillar.title}</span>
-                        <span className="text-2xl text-[#C85A24]">♡</span>
+                        <span className="text-2xl text-[#EF4444]">♡</span>
                       </h3>
                     </div>
                   </div>

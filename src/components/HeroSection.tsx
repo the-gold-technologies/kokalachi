@@ -7,7 +7,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] w-full flex items-center justify-start pt-24 pb-16 overflow-hidden bg-[#F7F3EC] select-none"
+      className="relative min-h-[90vh] w-full flex items-center justify-start pt-20 pb-10 lg:pt-28 lg:pb-14 overflow-hidden bg-[#F7F3EC] select-none"
     >
       {/* Background Image & Soft Left Gradient Overlay */}
       <div className="absolute inset-0 z-0">

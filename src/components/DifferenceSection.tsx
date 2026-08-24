@@ -18,7 +18,7 @@ export function DifferenceSection() {
   return (
     <section
       id="difference"
-      className="py-20 lg:py-28 bg-[#FDFBF7] relative overflow-hidden select-none"
+      className="py-12 sm:py-14 lg:py-16 bg-[#FDFBF7] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline (Top Left Variation) */}
       <FlyingBirds className="hidden lg:block absolute top-16 left-10 opacity-30 text-[#0B2A3D]" />
@@ -197,7 +197,7 @@ export function DifferenceSection() {
                     />
                   </div>
                   <div className="text-center text-sm font-script font-bold text-slate-600 pt-2">
-                    Unfiltered Shared Moments ♡
+                    Unfiltered Shared Moments <span className="text-[#EF4444]">♡</span>
                   </div>
                 </div>
 

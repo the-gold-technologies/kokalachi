@@ -82,10 +82,10 @@ export function WhyWeStartedSection() {
                 <Star size={14} className="text-[#C85A24] fill-[#C85A24]/30" />
               </div>
 
-              <div className="absolute -bottom-3 -right-2 text-[#C85A24] pointer-events-none select-none">
+              <div className="absolute -bottom-3 -right-2 text-[#EF4444] pointer-events-none select-none">
                 <HandDrawnHeart
                   size={26}
-                  color="#C85A24"
+                  color="#EF4444"
                   className="rotate-12"
                 />
               </div>

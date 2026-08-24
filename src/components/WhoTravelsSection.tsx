@@ -166,7 +166,7 @@ export function WhoTravelsSection() {
   return (
     <section
       id="who-travels"
-      className="py-20 lg:py-28 bg-white relative overflow-hidden select-none"
+      className="py-12 sm:py-14 lg:py-16 bg-[#FAF6F0] relative overflow-hidden select-none"
     >
       {/* Background Soft Glow Ambient Effects */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />

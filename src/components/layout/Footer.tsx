@@ -269,7 +269,7 @@ export function Footer() {
             <span>
               © {new Date().getFullYear()} Kokalachi Travel Co. Built with
             </span>
-            <Heart className="w-3.5 h-3.5 text-[#C85A24] fill-[#C85A24] inline-block mx-0.5" />
+            <Heart className="w-3.5 h-3.5 text-[#EF4444] fill-[#EF4444] inline-block mx-0.5" />
             <span>for wandering souls.</span>
           </p>
 
