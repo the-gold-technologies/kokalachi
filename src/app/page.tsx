@@ -35,7 +35,7 @@ export default function Home() {
         <MomentsThatStayedSection />
 
         {/* Section 7: Who Travels With Us — Personas & community belonging */}
-        <WhoTravelsSection />
+        {/* <WhoTravelsSection /> */}
 
         {/* Section 8: Upcoming Journeys — Curated itineraries, dates & booking CTAs */}
         <UpcomingJourneysSection />
