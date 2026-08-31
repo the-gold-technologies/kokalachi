@@ -42,9 +42,9 @@ export function Footer() {
             <div className="flex items-start justify-start">
               <Link href="/" className="inline-block">
                 <img
-                  src="/logo.png"
+                  src="/logo-footer.png"
                   alt="Kokalachi Logo"
-                  className="h-10 sm:h-[65px] -ml-5 w-auto object-contain hover:scale-105 transition-transform"
+                  className="h-16 sm:h-20 w-auto object-contain hover:scale-105 transition-transform"
                 />
               </Link>
             </div>

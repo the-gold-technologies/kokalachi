@@ -140,8 +140,8 @@ export function Navbar() {
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isScrolled
-            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-2.5 px-5 md:px-6"
-            : "top-0 w-full max-w-full bg-transparent py-4"
+            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3.5 px-5 md:px-6"
+            : "top-0 w-full max-w-full bg-transparent py-6"
         }`}
       >
         <div
@@ -152,11 +152,10 @@ export function Navbar() {
           {/* Main Logo Image */}
           <Link href="/" className="flex items-center gap-3">
             <img
-              src="/logo.png"
+              src="/logo-clean.png"
               alt="Kokalachi Logo"
               className={`
-                ${isScrolled ? " sm:h-[60px] -ml-2.5" : " sm:h-[75px] sm:-ml-7"}
-                w-auto object-contain hover:scale-105 transition-transform h-12 -ml-5`}
+                w-auto object-contain hover:scale-105 transition-transform h-6`}
             />
           </Link>
 
