@@ -216,12 +216,12 @@ export function Navbar() {
 
           {/* Desktop Right Actions */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider rounded-full px-6 py-2.5 bg-[#0E5A60] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans"
             >
               <span>Contact Us</span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Right Actions */}
@@ -351,14 +351,14 @@ export function Navbar() {
           {/* Drawer Footer */}
           <div className="px-6 py-6 border-t border-gray-200 flex flex-col gap-4">
             {/* Contact Us CTA Button */}
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center justify-center gap-2 bg-[#0E5A60] text-white hover:bg-[#061C29] rounded-full px-6 py-3.5 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer font-sans"
             >
               <Phone size={15} />
               <span>Contact Us</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
