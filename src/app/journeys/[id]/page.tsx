@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   MapPin,
@@ -155,9 +155,9 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
             <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
           </div>
 
-          <button className="w-full py-3 bg-[#0E5A60] hover:bg-[#0E5A60] text-white font-bold text-[13px] rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group">
+          <button className="w-full py-3.5 cursor-pointer bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group">
             <span>Book Now</span>
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
           </button>
         </div>
       </div>
@@ -174,12 +174,28 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
   const [activeDetailTab, setActiveDetailTab] = useState<"inclusions" | "essentials" | "faq">("inclusions");
   const [scrolled, setScrolled] = useState(false);
   const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
-  const [expandedDays, setExpandedDays] = useState<number[]>([0]);
+  const [expandedDay, setExpandedDay] = useState<number | null>(0);
+  const dayRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleDay = (idx: number) => {
-    setExpandedDays(prev =>
-      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
-    );
+    const isOpening = expandedDay !== idx;
+    setExpandedDay(prev => (prev === idx ? null : idx));
+
+    if (isOpening) {
+      setTimeout(() => {
+        const targetElement = dayRefs.current[idx];
+        if (targetElement) {
+          const headerOffset = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }, 60);
+    }
   };
 
   useEffect(() => {
@@ -428,10 +444,14 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
               <div className="space-y-6 ml-2 sm:ml-4">
                 {tour.itinerary ? (
                   tour.itinerary.map((day, idx) => {
-                    const isExpanded = expandedDays.includes(idx);
+                    const isExpanded = expandedDay === idx;
 
                     return (
-                      <div key={idx} className="relative group">
+                      <div 
+                        key={idx} 
+                        ref={(el) => { dayRefs.current[idx] = el; }}
+                        className="relative group scroll-mt-28"
+                      >
                         {/* Timeline Node - "DAY 01" Badge */}
                         <div className={`absolute left-0 top-3 w-10 h-10 rounded-full bg-white border-[2px] flex flex-col items-center justify-center z-10 shadow-sm transition-colors duration-300 ${isExpanded ? 'border-[#0E5A60]' : 'border-[#D96C2C]'}`}>
                           <span className={`text-[7px] font-bold uppercase tracking-widest leading-none mt-0.5 ${isExpanded ? 'text-[#0E5A60]' : 'text-[#D96C2C]'}`}>Day</span>
@@ -443,35 +463,57 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                           <div className="absolute left-[19px] top-[52px] -bottom-[36px] w-[2px] bg-[#0E5A60]/20 z-0" />
                         )}
 
-                        {/* Accordion Header Card */}
-                        <div className="pl-14 sm:pl-16">
-                          <div
-                            onClick={() => toggleDay(idx)}
-                            className={`bg-white rounded-2xl border ${isExpanded ? 'border-[#0E5A60]/30 shadow-md' : 'border-slate-100 shadow-sm'} p-2 sm:p-2.5 flex items-center justify-between cursor-pointer hover:border-[#0E5A60]/50 hover:shadow-md transition-all duration-300`}
-                          >
-                            <div className="flex items-center gap-3 sm:gap-4">
-                              {/* Small Thumbnail Image */}
-                              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-slate-100 relative">
-                                <img src={tour.image} alt={day.title} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: `center ${idx * 25}%` }} />
-                              </div>
-
-                              <div>
-                                <div className="flex items-center gap-1.5 mb-0.5">
-                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{day.day}</span>
-                                  <span className="w-1 h-1 rounded-full bg-slate-300" />
-                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{trip.destination}</span>
+                          {/* Accordion Header Card */}
+                          <div className="pl-14 sm:pl-16">
+                            <div
+                              onClick={() => toggleDay(idx)}
+                              className={`bg-white rounded-2xl border ${isExpanded ? 'border-[#0E5A60]/30 shadow-md h-56 sm:h-64 relative overflow-hidden' : 'border-slate-100 shadow-sm p-2 sm:p-2.5 flex items-center justify-between'} cursor-pointer hover:border-[#0E5A60]/50 hover:shadow-md transition-all duration-300 group/header`}
+                            >
+                              {/* CLOSED STATE */}
+                              <div className={`flex items-center gap-3 sm:gap-4 w-full ${isExpanded ? 'opacity-0 hidden' : 'opacity-100'}`}>
+                                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-slate-100 relative">
+                                  <img src={day.image || tour.image} alt={day.title} className="absolute inset-0 w-full h-full object-cover" />
                                 </div>
-                                <h4 className="font-semibold text-[13px] sm:text-[15px] text-[#0E5A60] leading-tight group-hover:text-[#0E5A60] transition-colors">
-                                  {day.title}
-                                </h4>
+                                <div className="flex-grow">
+                                  <div className="flex items-center gap-1.5 mb-0.5">
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{day.day}</span>
+                                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{trip.destination}</span>
+                                  </div>
+                                  <h4 className="font-semibold text-[13px] sm:text-[15px] text-[#0E5A60] leading-tight group-hover/header:text-[#0E5A60] transition-colors">
+                                    {day.title}
+                                  </h4>
+                                </div>
+                                <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mr-2 bg-slate-50 text-slate-400 group-hover/header:bg-[#0E5A60]/10 group-hover/header:text-[#0E5A60] transition-colors duration-300">
+                                  <ChevronDown size={16} className="transition-transform duration-300" />
+                                </div>
                               </div>
-                            </div>
 
-                            {/* Chevron Down Button */}
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mr-2 transition-colors duration-300 ${isExpanded ? 'bg-[#0E5A60]/10 text-[#0E5A60]' : 'bg-slate-50 text-slate-400 group-hover:bg-[#0E5A60]/10 group-hover:text-[#0E5A60]'}`}>
-                              <ChevronDown size={16} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                              {/* EXPANDED STATE (Large Header) */}
+                              {isExpanded && (
+                                <div className="absolute inset-0 w-full h-full flex flex-col justify-between p-4 sm:p-5 z-10 animate-in fade-in duration-500">
+                                  <img src={day.image || tour.image} alt={day.title} className="absolute inset-0 w-full h-full object-cover z-0" />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/10 z-0" />
+                                  
+                                  <div className="relative z-10 flex justify-end">
+                                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors duration-300">
+                                      <ChevronDown size={16} className="rotate-180 transition-transform duration-300" />
+                                    </div>
+                                  </div>
+
+                                  <div className="relative z-10">
+                                    <div className="flex items-center gap-1.5 mb-1.5">
+                                      <span className="text-[10px] font-bold text-white/90 uppercase tracking-wider">{day.day}</span>
+                                      <span className="w-1 h-1 rounded-full bg-white/50" />
+                                      <span className="text-[10px] font-bold text-white/90 uppercase tracking-wider">{trip.destination}</span>
+                                    </div>
+                                    <h4 className="font-bold text-lg sm:text-xl text-white leading-tight shadow-sm">
+                                      {day.title}
+                                    </h4>
+                                  </div>
+                                </div>
+                              )}
                             </div>
-                          </div>
 
                           {/* Accordion Content */}
                           <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'}`}>

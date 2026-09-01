@@ -15,7 +15,7 @@ export interface TourPackage {
   nextDeparture?: string;
   hook?: string;
   overview?: string[];
-  itinerary?: { day: string; title: string; journey: string; community: string }[];
+  itinerary?: { day: string; title: string; journey: string; community: string; image?: string }[];
   inclusions?: string[];
   exclusions?: string[];
   meals?: string[];
@@ -101,25 +101,29 @@ export const tripCards: TripCardData[] = [
           day: "Day 01",
           title: "Saffron Trails & Woodland Bonfires",
           journey: "Early Srinagar Airport arrival → Scenic drive to Pahalgam (100 km / 3–4 hrs) → Enroute saffron fields pause → Awantipora Cricket Bat Factory stop → Check-in at Hotel Lidder Resort, along the Lidder River.",
-          community: "\"Two Truths & A Travel Lie\" and Acoustic Bonfire Night: An icebreaker session on the coach drive to Pahalgam, followed by a riverside bonfire in the evening with fresh Kashmiri snacks, local folk music, and an open-mic storytelling session."
+          community: "\"Two Truths & A Travel Lie\" and Acoustic Bonfire Night: An icebreaker session on the coach drive to Pahalgam, followed by a riverside bonfire in the evening with fresh Kashmiri snacks, local folk music, and an open-mic storytelling session.",
+          image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 02",
           title: "Canyon Trails & The Tribe Picnic",
           journey: "Breakfast → Union cab excursion to Aru Valley → Scenic hike toward Kolahai Glacier base → Betaab Valley exploration → Chandanwari snow bridge visit → Overnight at Pahalgam.",
-          community: "The Step Buddy System and Betaab Valley Picnic: Travellers pair up as \"Step Buddies\" during the Aru Valley trail walk, concluding with a group picnic at the idyllic Hajin spot and an evening pass-the-aux music session by the Lidder River."
+          community: "The Step Buddy System and Betaab Valley Picnic: Travellers pair up as \"Step Buddies\" during the Aru Valley trail walk, concluding with a group picnic at the idyllic Hajin spot and an evening pass-the-aux music session by the Lidder River.",
+          image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 03",
           title: "Heritage Gardens & Floating Sunsets",
           journey: "Early breakfast → Drive to Srinagar → Half-day Mughal Gardens exploration (Chasma Shahi, Nishat Bagh & Shalimar Bagh) → Sunset shikara ride to Nehru Park → Deluxe houseboat check-in.",
-          community: "The Wazwan Feast and Floating Postcard Ritual: A traditional multi-course Kashmiri Wazwan feast at a local restaurant, followed by writing physical postcards to fellow travellers on the open deck of the shikara during sunset."
+          community: "The Wazwan Feast and Floating Postcard Ritual: A traditional multi-course Kashmiri Wazwan feast at a local restaurant, followed by writing physical postcards to fellow travellers on the open deck of the shikara during sunset.",
+          image: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 04",
           title: "The Unbroken Circle",
           journey: "Morning breakfast on the water → Srinagar Airport transfer by coach.",
-          community: "The Circle Alumni Onboarding and Frame Photo Exchange: A final group photo on the houseboat deck, followed by official onboarding into the Kokalachi alumni network to share the master photo vault before departure."
+          community: "The Circle Alumni Onboarding and Frame Photo Exchange: A final group photo on the houseboat deck, followed by official onboarding into the Kokalachi alumni network to share the master photo vault before departure.",
+          image: "https://images.unsplash.com/photo-1593417376544-4c4201061e22?auto=format&fit=crop&q=85&w=800"
         }
       ],
       inclusions: [
@@ -250,37 +254,43 @@ export const tripCards: TripCardData[] = [
           day: "Day 01",
           title: "The Unfiltered Welcome",
           journey: "Guwahati Airport arrival → Scenic drive to Shillong → Umiam Lake pause → Police Bazaar evening walk.",
-          community: "\"Two Truths & A Travel Lie\" and Street-Food Quest: An icebreaker session on the drive to Shillong, followed by pairing up at Police Bazaar to find and review local street snacks over evening tea."
+          community: "\"Two Truths & A Travel Lie\" and Street-Food Quest: An icebreaker session on the drive to Shillong, followed by pairing up at Police Bazaar to find and review local street snacks over evening tea.",
+          image: "https://images.unsplash.com/photo-1593813738953-fb3c93e0769d?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 02",
           title: "Canyon Trails & Waterfall Dips",
           journey: "Laitlum Canyons viewpoint → Krang Suri Waterfall swim → Return to Shillong.",
-          community: "The Pass-the-Aux Horizon Session and Water Curtain Plunge: A 15-minute group quiet moment at Laitlum adding tracks to the shared Spotify playlist, followed by a synchronized team plunge under the Krang Suri waterfall curtain."
+          community: "The Pass-the-Aux Horizon Session and Water Curtain Plunge: A 15-minute group quiet moment at Laitlum adding tracks to the shared Spotify playlist, followed by a synchronized team plunge under the Krang Suri waterfall curtain.",
+          image: "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 03",
           title: "Ancient Forests & Mountain Myths",
           journey: "Mawsynram Caves → Mawphlang Sacred Grove walk → Khasi Model Village → Elephant Falls → Cherrapunjee arrival.",
-          community: "The Silent Forest Walk and \"Waiting Problem\" Fireside Chat: A 10-minute silent walk through the ancient grove, ending with an evening bonfire chat sharing the trips everyone put off before joining this circle."
+          community: "The Silent Forest Walk and \"Waiting Problem\" Fireside Chat: A 10-minute silent walk through the ancient grove, ending with an evening bonfire chat sharing the trips everyone put off before joining this circle.",
+          image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 04",
           title: "The Tribe Challenge",
           journey: "Full-day Nongriat trek → 3,200 steps descent → Double Decker Living Root Bridge → Rainbow Falls hike → Cherrapunjee return.",
-          community: "The Step Buddy System and Victory Dip: Travellers are paired as \"Step Buddies\" to support each other during the 3,200-step trek, celebrating the finish with a group splash at Rainbow Falls."
+          community: "The Step Buddy System and Victory Dip: Travellers are paired as \"Step Buddies\" to support each other during the 3,200-step trek, celebrating the finish with a group splash at Rainbow Falls.",
+          image: "https://images.unsplash.com/photo-1689089526066-c7e6e95ee265?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 05",
           title: "Sunset Reflections",
           journey: "Cherrapunjee to Guwahati drive → Brahmaputra River sunset cruise.",
-          community: "The Postcard Ritual and Circle Awards: Writing physical postcards to fellow travellers on the deck of the riverboat, followed by handing out non-competitive \"Circle Badges\" during dinner."
+          community: "The Postcard Ritual and Circle Awards: Writing physical postcards to fellow travellers on the deck of the riverboat, followed by handing out non-competitive \"Circle Badges\" during dinner.",
+          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 06",
           title: "The Unbroken Circle",
           journey: "Morning Kamakhya Temple visit → Guwahati Airport drop.",
-          community: "The Circle Alumni Onboarding: A final group photo exchange and onboarding into the official post-trip alumni chat before departure."
+          community: "The Circle Alumni Onboarding: A final group photo exchange and onboarding into the official post-trip alumni chat before departure.",
+          image: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&q=85&w=800"
         }
       ],
       inclusions: [
@@ -408,37 +418,43 @@ export const tripCards: TripCardData[] = [
           day: "Day 01",
           title: "Heritage & Coastal Icebreakers",
           journey: "Kochi Airport arrival → Fort Kochi heritage lanes → Chinese fishing nets → Princess Street walk → Sunset at Fort Kochi Beach.",
-          community: "Tuk-Tuk Photo Quest and Beach Icebreakers: Pairing up to capture candid portraits against colonial backdrops, followed by a beachside \"Two Truths & A Travel Lie\" session at sunset."
+          community: "Tuk-Tuk Photo Quest and Beach Icebreakers: Pairing up to capture candid portraits against colonial backdrops, followed by a beachside \"Two Truths & A Travel Lie\" session at sunset.",
+          image: "https://images.unsplash.com/photo-1583513645242-25a32d451084?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 02",
           title: "Pine Forests & Fireside Vibes",
           journey: "Drive to Vagamon (Western Ghats) → Vagamon Meadows → Pine forest walk → Tea gardens.",
-          community: "The Silent Canopy Pause and Fireside Chat: A 10-minute digital-detox walk through the pine trees with instrumental ambient music, followed by an evening bonfire chat."
+          community: "The Silent Canopy Pause and Fireside Chat: A 10-minute digital-detox walk through the pine trees with instrumental ambient music, followed by an evening bonfire chat.",
+          image: "https://images.unsplash.com/photo-1597735881932-d9664c9bbcea?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 03",
           title: "Winding Roads & Horizon Sounds",
           journey: "Scenic drive to Ponmudi → Golden Valley streams → Mountain viewpoint walk.",
-          community: "The Riverstone Ritual and Acoustic Sunset: Dropping symbolic \"stress stones\" into the Golden Valley stream, followed by an acoustic sunset singalong overlooking the valley."
+          community: "The Riverstone Ritual and Acoustic Sunset: Dropping symbolic \"stress stones\" into the Golden Valley stream, followed by an acoustic sunset singalong overlooking the valley.",
+          image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 04",
           title: "Clifftop Sunsets & Coastal Energy",
           journey: "Drive to Varkala → Papanasam Beach → Varkala Cliff cafés.",
-          community: "Sunset Beach Games and Cliff Café Swap: Casual beach frisbee on Papanasam Beach, followed by rotating seats between courses at dinner along the Varkala Cliff."
+          community: "Sunset Beach Games and Cliff Café Swap: Casual beach frisbee on Papanasam Beach, followed by rotating seats between courses at dinner along the Varkala Cliff.",
+          image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 05",
           title: "Slow Waterways & Fellowship",
           journey: "Day trip to Munroe Island → Canoe ride through narrow canals → Village walk → Varkala return.",
-          community: "The Silent Canoe Stream and Farewell Dinner: 15 minutes of complete silence on the backwater canoes to absorb the natural setting, followed by a postcard exchange and badge ceremony in Varkala."
+          community: "The Silent Canoe Stream and Farewell Dinner: 15 minutes of complete silence on the backwater canoes to absorb the natural setting, followed by a postcard exchange and badge ceremony in Varkala.",
+          image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 06",
           title: "The Unbroken Circle",
           journey: "Leisurely breakfast → Trivandrum Airport transfer.",
-          community: "The Co-Branded Vault Exchange: Sharing a master media folder of all trip photos and connecting the group to the Kokalachi alumni network."
+          community: "The Co-Branded Vault Exchange: Sharing a master media folder of all trip photos and connecting the group to the Kokalachi alumni network.",
+          image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=85&w=800"
         }
       ],
       inclusions: [
@@ -564,37 +580,43 @@ export const tripCards: TripCardData[] = [
           day: "Day 01",
           title: "Arrival & The Happiness Meter",
           journey: "Paro Airport arrival → Tamchhog Lhakhang (Iron Bridge) → Chuzom Confluence → Thimphu check-in.",
-          community: "The GNH Baseline and Salted Butter Tea Trial: Recording initial \"Happiness Meter\" goals in pocket journals, followed by a group tasting of traditional Suja (butter tea)."
+          community: "The GNH Baseline and Salted Butter Tea Trial: Recording initial \"Happiness Meter\" goals in pocket journals, followed by a group tasting of traditional Suja (butter tea).",
+          image: "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 02",
           title: "Art, Archery & Mountain Skylines",
           journey: "Buddha Point → Sangaygang Viewpoint → Zorig Chusum Art School → Simply Bhutan Museum.",
-          community: "Traditional Archery Challenge and The 3-Word Pause: Competing in friendly traditional dart and archery games, paired with a 3-word reflection session overlooking Thimphu valley."
+          community: "Traditional Archery Challenge and The 3-Word Pause: Competing in friendly traditional dart and archery games, paired with a 3-word reflection session overlooking Thimphu valley.",
+          image: "https://images.unsplash.com/photo-1580649851649-992b28f56e98?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 03",
           title: "Pass of 108 Stupas",
           journey: "Drive to Punakha via Dochula Pass (3,080m) → Punakha Dzong → Suspension bridge.",
-          community: "Prayer Flags on the Wind and Suspension Bridge Hype: Writing personal wishes on traditional prayer flags at Dochula Pass, followed by paired photo walks across Bhutan's longest suspension bridge."
+          community: "Prayer Flags on the Wind and Suspension Bridge Hype: Writing personal wishes on traditional prayer flags at Dochula Pass, followed by paired photo walks across Bhutan's longest suspension bridge.",
+          image: "https://images.unsplash.com/photo-1555821108-3fb2763b226a?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 04",
           title: "Botanical Walks & Mountain Legends",
           journey: "Royal Botanical Garden (Lampelri) → Ta Dzong → Rinpung Dzong → Paro arrival.",
-          community: "The Riverstone Gratitude Circle and Hike Prep: Creating a group rock cairn by the Paro Chhu river, followed by a supportive carbo-load dinner before the big hike."
+          community: "The Riverstone Gratitude Circle and Hike Prep: Creating a group rock cairn by the Paro Chhu river, followed by a supportive carbo-load dinner before the big hike.",
+          image: "https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 05",
           title: "The Tiger's Nest Tribe Hike",
           journey: "Full-day hike to Taktsang Lhakhang (Tiger's Nest) → Pine forest trail → Mountain cafeteria → Paro return.",
-          community: "The Hike Relay and Future-Self Letters: Pacing each other up the 3-hour climb using a shared hike playlist, writing letters to your future self at the mountain cafeteria, and ending with a signed frame farewell night."
+          community: "The Hike Relay and Future-Self Letters: Pacing each other up the 3-hour climb using a shared hike playlist, writing letters to your future self at the mountain cafeteria, and ending with a signed frame farewell night.",
+          image: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 06",
           title: "Blessings & Onward Journeys",
           journey: "Paro hotel checkout → Paro Airport transfer.",
-          community: "The Bhutan Circle Onboarding: Official onboarding into the Kokalachi alumni community with shared digital photo albums before airport drop-off."
+          community: "The Circle Alumni Onboarding: A final prayer wheel spin together and onboarding into the official post-trip alumni network.",
+          image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=85&w=800"
         }
       ],
       inclusions: [
