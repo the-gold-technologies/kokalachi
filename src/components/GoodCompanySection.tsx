@@ -23,7 +23,7 @@ export function GoodCompanySection() {
       <div className="absolute bottom-0 right-10 w-96 h-96 bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Decorative Flying Birds SVG Outline (Top Right Far Variation) */}
-      <FlyingBirds className="hidden lg:block absolute top-8 right-24 opacity-35 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-8 right-24 opacity-35 text-[#0E5A60]" />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl text-center">
         {/* SECTION HEADER BADGE */}
@@ -43,9 +43,9 @@ export function GoodCompanySection() {
             <span>♡ verified solo safety</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif">
             You&apos;re in{" "}
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
               good
               <TitleUnderline />
             </span>{" "}
@@ -54,7 +54,7 @@ export function GoodCompanySection() {
         </div>
 
         {/* SUBTITLE DESCRIPTION */}
-        <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-16 leading-relaxed font-sans">
+        <p className="text-[#0E5A60]/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-16 leading-relaxed font-sans">
           Every Kokalachi journey is thoughtfully curated so you can focus on
           the experience, not the uncertainty.{" "}
           <br className="hidden sm:inline" />
@@ -127,7 +127,7 @@ export function GoodCompanySection() {
               </div>
 
               <div className="space-y-1.5">
-                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0E5A60] leading-snug">
                   Small, Curated Groups
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
@@ -207,7 +207,7 @@ export function GoodCompanySection() {
               </div>
 
               <div className="space-y-1.5">
-                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0E5A60] leading-snug">
                   Meet Before You Travel
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
@@ -278,20 +278,20 @@ export function GoodCompanySection() {
             <div className="p-5 pt-1.5 space-y-3 flex-1 flex flex-col justify-between relative bg-[#FAF6F0]">
               {/* Color Swatch Dots & Icon Badge */}
               <div className="flex items-center justify-between border-b border-amber-900/10 pb-2.5">
-                <div className="w-9 h-9 rounded-full bg-[#EEF4F8] text-[#0B2A3D] flex items-center justify-center shadow-2xs">
+                <div className="w-9 h-9 rounded-full bg-[#EEF4F8] text-[#0E5A60] flex items-center justify-center shadow-2xs">
                   <ShieldCheck size={18} className="stroke-[2]" />
                 </div>
 
                 {/* 3 Color Palette Swatches */}
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-[#0B2A3D]/80 inline-block shadow-2xs" />
+                  <span className="w-3 h-3 rounded-full bg-[#0E5A60]/80 inline-block shadow-2xs" />
                   <span className="w-3 h-3 rounded-full bg-[#8EAB9B] inline-block shadow-2xs" />
                   <span className="w-3 h-3 rounded-full bg-[#E5B588] inline-block shadow-2xs" />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0E5A60] leading-snug">
                   Safety Comes First
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
@@ -371,7 +371,7 @@ export function GoodCompanySection() {
               </div>
 
               <div className="space-y-1.5">
-                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
+                <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0E5A60] leading-snug">
                   Built on Respect
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-sans">
@@ -446,13 +446,13 @@ export function GoodCompanySection() {
                 fill="currentColor"
               />
             </svg>
-            <h4 className="text-xl sm:text-2xl font-serif text-[#0B2A3D] font-bold leading-tight">
+            <h4 className="text-xl sm:text-2xl font-serif text-[#0E5A60] font-bold leading-tight">
               Our <br /> Promise
             </h4>
           </div>
 
           <div className="flex-1 space-y-1.5">
-            <p className="text-lg sm:text-xl lg:text-[22px] font-serif font-bold text-[#0B2A3D] leading-snug">
+            <p className="text-lg sm:text-xl lg:text-[22px] font-serif font-bold text-[#0E5A60] leading-snug">
               We&apos;ll never compromise your safety, comfort or experience
               just to fill a trip.
             </p>
@@ -463,7 +463,7 @@ export function GoodCompanySection() {
 
               {/* Hand-drawn Ink Line & Tilted Heart Doodle SVG */}
               <svg
-                className="h-6 w-32 text-[#0B2A3D] inline-block shrink-0 ml-1"
+                className="h-6 w-32 text-[#0E5A60] inline-block shrink-0 ml-1"
                 viewBox="0 0 120 24"
                 fill="none"
               >
@@ -489,7 +489,7 @@ export function GoodCompanySection() {
         <div>
           <a
             href="#faqs"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0B2A3D] text-white hover:bg-[#0E5A60] font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg active:scale-95"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0E5A60] text-white hover:bg-[#0E5A60] font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg active:scale-95"
           >
             <span>Learn More About Trust &amp; Safety</span>
             <ArrowRight size={16} />

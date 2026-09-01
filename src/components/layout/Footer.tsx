@@ -28,7 +28,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#FAF5EE] text-[#0B2A3D] overflow-hidden pt-16 pb-8 border-t border-amber-900/10 select-none">
+    <footer className="relative bg-[#FAF5EE] text-[#0E5A60] overflow-hidden pt-16 pb-8 border-t border-amber-900/10 select-none">
       {/* Decorative Ambient Glows */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#C85A24]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
       <div className="absolute bottom-0 left-10 w-80 h-80 bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
@@ -48,13 +48,13 @@ export function Footer() {
                 />
               </Link>
             </div>
-            <p className="text-[#0B2A3D]/80 text-xs sm:text-sm leading-relaxed max-w-sm font-sans">
+            <p className="text-[#0E5A60]/80 text-xs sm:text-sm leading-relaxed max-w-sm font-sans">
               Kokalachi designs immersive, slow-paced journeys for conscious
               travelers, dreamers, and storytellers. We replace tourist traps
               with authentic human connection.
             </p>
 
-            <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-[#0B2A3D]/80 font-sans">
+            <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-[#0E5A60]/80 font-sans">
               <div className="flex items-center gap-3 hover:text-[#C85A24] transition-colors">
                 <MapPin className="w-4 h-4 text-[#C85A24] shrink-0" />
                 <span>Basecamp in Kochi, India &amp; Global Field Guides</span>
@@ -76,7 +76,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0B2A3D] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
               >
                 <FaInstagram className="w-4 h-4" />
               </a>
@@ -85,7 +85,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0B2A3D] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
               >
                 <FaYoutube className="w-4 h-4" />
               </a>
@@ -94,14 +94,14 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp Community"
-                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#25D366] text-[#0B2A3D] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#25D366] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
               >
                 <FaWhatsapp className="w-4 h-4" />
               </a>
               <a
                 href="#"
                 aria-label="Global Community"
-                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0B2A3D] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
               >
                 <Globe className="w-4 h-4" />
               </a>
@@ -113,7 +113,7 @@ export function Footer() {
             <h3 className="text-[#C85A24] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
               Explore Journeys
             </h3>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#0B2A3D]/80 font-sans">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#0E5A60]/80 font-sans">
               <li>
                 <Link
                   href="#upcoming-journeys"
@@ -167,7 +167,7 @@ export function Footer() {
             <h3 className="text-[#C85A24] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
               Our Ethos
             </h3>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#0B2A3D]/80 font-sans">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-[#0E5A60]/80 font-sans">
               <li>
                 <Link
                   href="#why-we-exist"
@@ -221,7 +221,7 @@ export function Footer() {
             <h3 className="text-[#C85A24] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
               The Secret Dispatch
             </h3>
-            <p className="text-[#0B2A3D]/80 text-xs sm:text-sm leading-relaxed font-sans">
+            <p className="text-[#0E5A60]/80 text-xs sm:text-sm leading-relaxed font-sans">
               Get early access to secret trip launches, rare visual travelogues,
               and slow travel advice. Zero spam, ever.
             </p>
@@ -242,11 +242,11 @@ export function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address..."
-                    className="w-full px-4 py-3 rounded-2xl bg-white border border-amber-900/15 text-[#0B2A3D] placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#C85A24] focus:ring-1 focus:ring-[#C85A24] transition-all font-sans shadow-2xs"
+                    className="w-full px-4 py-3 rounded-2xl bg-white border border-amber-900/15 text-[#0E5A60] placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#C85A24] focus:ring-1 focus:ring-[#C85A24] transition-all font-sans shadow-2xs"
                   />
                   <button
                     type="submit"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 px-5 rounded-full bg-[#0B2A3D] hover:bg-[#061C29] text-white text-xs font-medium flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="absolute right-1.5 top-1.5 bottom-1.5 px-5 rounded-full bg-[#0E5A60] hover:bg-[#061C29] text-white text-xs font-medium flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <span>Join</span>
                     <Send className="w-3 h-3 -rotate-45" />

@@ -21,7 +21,7 @@ export function DifferenceSection() {
       className="py-12 sm:py-14 lg:py-16 bg-[#FDFBF7] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline (Top Left Variation) */}
-      <FlyingBirds className="hidden lg:block absolute top-16 left-10 opacity-30 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-16 left-10 opacity-30 text-[#0E5A60]" />
       {/* Background Decorative Dashed Flight Line Connecting All Cards */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
@@ -101,10 +101,10 @@ export function DifferenceSection() {
 
         {/* Main Headline */}
         <div className="mb-4 max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif">
             More than a trip. <br />
             Here&apos;s what{" "}
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
               makes
               <TitleUnderline />
             </span>{" "}
@@ -113,8 +113,8 @@ export function DifferenceSection() {
         </div>
 
         {/* Subtitle Statement */}
-        <div className="text-[#0B2A3D]/80 text-base sm:text-xl font-normal max-w-3xl mx-auto mb-16 leading-relaxed">
-          <p className="font-medium text-[#0B2A3D] text-lg sm:text-xl">
+        <div className="text-[#0E5A60]/80 text-base sm:text-xl font-normal max-w-3xl mx-auto mb-16 leading-relaxed">
+          <p className="font-medium text-[#0E5A60] text-lg sm:text-xl">
             Every journey is designed around one simple belief:{" "}
             <span className="text-[#D96C2C] underline decoration-[#D96C2C]/40 underline-offset-4 font-semibold font-serif italic">
               great destinations become unforgettable when shared with the right
@@ -130,7 +130,7 @@ export function DifferenceSection() {
             {/* Masking Tape at Top Corner */}
             <div className="w-16 h-4 bg-amber-200/90 backdrop-blur-sm absolute -top-2.5 left-6 rotate-[-10deg] z-30 shadow-sm border-t border-white/60" />
 
-            <div className="bg-[#FFFBF5] text-[#0B2A3D] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
+            <div className="bg-[#FFFBF5] text-[#0E5A60] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
               {/* Photo Inset Box */}
               <div>
                 <div className="bg-[#F7F3EC] p-2.5 rounded-xl shadow-inner mb-4 relative border border-slate-200/60">
@@ -152,7 +152,7 @@ export function DifferenceSection() {
                     <span>01. Intimate Circles</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0E5A60] font-serif leading-snug">
                     Curated, Not Crowded
                   </h3>
 
@@ -185,7 +185,7 @@ export function DifferenceSection() {
             {/* Masking Tape at Top Right Corner */}
             <div className="w-16 h-4 bg-amber-200/90 backdrop-blur-sm absolute -top-2.5 right-6 rotate-[12deg] z-30 shadow-sm border-t border-white/60" />
 
-            <div className="bg-[#FFFBF5] text-[#0B2A3D] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
+            <div className="bg-[#FFFBF5] text-[#0E5A60] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
               {/* Photo Inset Box */}
               <div>
                 <div className="bg-[#F7F3EC] p-2.5 rounded-xl shadow-inner mb-4 relative border border-slate-200/60">
@@ -207,7 +207,7 @@ export function DifferenceSection() {
                     <span>02. Real Connection</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0E5A60] font-serif leading-snug">
                     Designed for Connection, Not Just Sightseeing
                   </h3>
 
@@ -240,7 +240,7 @@ export function DifferenceSection() {
             {/* Masking Tape at Top Corner */}
             <div className="w-16 h-4 bg-amber-200/90 backdrop-blur-sm absolute -top-2.5 left-6 rotate-[-10deg] z-30 shadow-sm border-t border-white/60" />
 
-            <div className="bg-[#FFFBF5] text-[#0B2A3D] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
+            <div className="bg-[#FFFBF5] text-[#0E5A60] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
               {/* Photo Inset Box */}
               <div>
                 <div className="bg-[#F7F3EC] p-2.5 rounded-xl shadow-inner mb-4 relative border border-slate-200/60">
@@ -262,7 +262,7 @@ export function DifferenceSection() {
                     <span>03. Seamless Hosting</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0E5A60] font-serif leading-snug">
                     Hosted, End to End
                   </h3>
 
@@ -295,7 +295,7 @@ export function DifferenceSection() {
             {/* Masking Tape at Top Right Corner */}
             <div className="w-16 h-4 bg-amber-200/90 backdrop-blur-sm absolute -top-2.5 right-6 rotate-[10deg] z-30 shadow-sm border-t border-white/60" />
 
-            <div className="bg-[#FFFBF5] text-[#0B2A3D] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
+            <div className="bg-[#FFFBF5] text-[#0E5A60] p-4 sm:p-5 rounded-t-2xl shadow-xl hover:shadow-2xl transition-all relative overflow-hidden flex flex-col justify-between h-full border border-slate-200/90">
               {/* Photo Inset Box */}
               <div>
                 <div className="bg-[#F7F3EC] p-2.5 rounded-xl shadow-inner mb-4 relative border border-slate-200/60">
@@ -317,7 +317,7 @@ export function DifferenceSection() {
                     <span>04. Intention &amp; Care</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#0B2A3D] font-serif leading-snug">
+                  <h3 className="text-xl font-bold text-[#0E5A60] font-serif leading-snug">
                     Every Detail, Thoughtfully Planned
                   </h3>
 
@@ -348,7 +348,7 @@ export function DifferenceSection() {
 
         {/* BOTTOM SLEEK VALUE STRIP BAR */}
         <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 lg:px-8 shadow-sm flex flex-col xl:flex-row items-center justify-between gap-4 xl:gap-6 relative z-10 overflow-x-auto scrollbar-hide">
-          <div className="flex items-center justify-center xl:justify-start gap-4 sm:gap-6 lg:gap-7 text-xs sm:text-sm xl:text-base font-bold text-[#0B2A3D] whitespace-nowrap shrink-0">
+          <div className="flex items-center justify-center xl:justify-start gap-4 sm:gap-6 lg:gap-7 text-xs sm:text-sm xl:text-base font-bold text-[#0E5A60] whitespace-nowrap shrink-0">
             <div className="flex items-center gap-2 hover:text-[#D96C2C] transition-colors cursor-default">
               <Users size={18} className="text-[#D96C2C] shrink-0" />
               <span>Real People</span>

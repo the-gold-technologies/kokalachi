@@ -20,7 +20,7 @@ export function FinalCtaSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF5EE]/75 via-[#FAF5EE]/45 to-[#FAF5EE]/75 pointer-events-none" />
       </div>
       {/* Decorative Flying Birds Outline (Top Right Variation) */}
-      <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0E5A60]" />
 
       {/* Decorative Ambient Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-80 bg-[#C85A24]/5 rounded-full blur-3xl pointer-events-none" />
@@ -34,27 +34,27 @@ export function FinalCtaSection() {
         {/* Main Editorial Heading in Brand Serif Font */}
         <div className="relative max-w-3xl mx-auto mb-6">
           {/* Left Handwritten Margin Accent */}
-          <div className="hidden xl:flex items-center gap-1.5 absolute -right-40 -bottom-16 text-[#0B2A3D] font-script text-base sm:text-lg font-bold -rotate-6 pointer-events-none select-none drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-40 -bottom-16 text-[#0E5A60] font-script text-base sm:text-lg font-bold -rotate-6 pointer-events-none select-none drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
             <span>✨ say yes to new adventures</span>
           </div>
 
           {/* Right Handwritten Margin Accent */}
-          <div className="hidden xl:flex items-center gap-1.5 absolute -right-54 top-2 text-[#0B2A3D] font-script text-base sm:text-lg font-bold rotate-4 pointer-events-none select-none drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+          <div className="hidden xl:flex items-center gap-1.5 absolute -right-54 top-2 text-[#0E5A60] font-script text-base sm:text-lg font-bold rotate-4 pointer-events-none select-none drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
             <span>♡ your story starts here</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-[1.2] font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-[1.2] font-serif">
             Somewhere, someone else is looking for{" "}
-            <span className="font-semibold text-[#0B2A3D]">
+            <span className="font-semibold text-[#0E5A60]">
               exactly the trip you are.
             </span>
           </h2>
         </div>
 
         {/* Subtitle with Handwritten Highlight */}
-        <p className="text-[#0B2A3D]/80 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl mx-auto mb-8 font-sans italic">
+        <p className="text-[#0E5A60]/80 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl mx-auto mb-8 font-sans italic">
           &quot;Maybe this is how you{" "}
-          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D] not-italic">
+          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60] not-italic">
             meet
             <TitleUnderline />
           </span>
@@ -65,7 +65,7 @@ export function FinalCtaSection() {
         <div className="flex justify-center">
           <a
             href="#upcoming-journeys"
-            className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-9 py-4 rounded-full font-medium text-base shadow-md hover:shadow-2xl transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
+            className="bg-[#0E5A60] hover:bg-[#061C29] text-white px-9 py-4 rounded-full font-medium text-base shadow-md hover:shadow-2xl transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
           >
             <span>Explore Upcoming Trips</span>
             <ArrowRight size={18} className="stroke-[2.2]" />

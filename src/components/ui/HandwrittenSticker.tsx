@@ -24,7 +24,7 @@ export function HandwrittenSticker({
         </span>
 
         {/* Soft Pill Badge with Red Pin */}
-        <div className="mt-1.5 bg-white/90 border border-amber-900/10 shadow-sm rounded-full px-3.5 py-1 text-xs italic font-serif text-[#0B2A3D]/80 -rotate-1 inline-flex items-center gap-1.5 backdrop-blur-sm">
+        <div className="mt-1.5 bg-white/90 border border-amber-900/10 shadow-sm rounded-full px-3.5 py-1 text-xs italic font-serif text-[#0E5A60]/80 -rotate-1 inline-flex items-center gap-1.5 backdrop-blur-sm">
           <span className="text-sm">📍</span>
           <span>Built for Connection</span>
         </div>
@@ -62,14 +62,14 @@ export function HandwrittenSticker({
       className={`flex flex-col items-center justify-center select-none ${className}`}
     >
       {/* High-Contrast Handwritten Text with plane & heart */}
-      <p className="font-script text-2xl sm:text-3xl text-[#0B2A3D] font-bold rotate-[-2deg] text-center leading-snug tracking-wide max-w-sm drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+      <p className="font-script text-2xl sm:text-3xl text-[#0E5A60] font-bold rotate-[-2deg] text-center leading-snug tracking-wide max-w-sm drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
         Pack your bags &amp; leave the details to us! ✈️{" "}
         <span className="text-[#EF4444]">♡</span>
       </p>
 
       {/* Hand-drawn Dashed Curved Arrow SVG pointing down */}
       <svg
-        className="w-16 h-8 text-[#0B2A3D] mt-1 opacity-90 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]"
+        className="w-16 h-8 text-[#0E5A60] mt-1 opacity-90 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]"
         viewBox="0 0 80 35"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -20,7 +20,7 @@ export function WhyWeStartedSection() {
                 alt="Group of diverse friends laughing and sharing travel stories on a mountain ridge at sunset"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D]/90 via-black/20 to-transparent flex flex-col justify-end p-7 sm:p-8 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0E5A60]/90 via-black/20 to-transparent flex flex-col justify-end p-7 sm:p-8 text-white">
                 <span className="text-xs uppercase tracking-widest text-[#F7D3CB] font-extrabold mb-2 font-montserrat">
                   THE SPARK &amp; VISION
                 </span>
@@ -33,7 +33,7 @@ export function WhyWeStartedSection() {
             {/* Floating Handwritten Callout */}
             <div className="hidden sm:flex items-center gap-2 absolute -bottom-4 -right-2 lg:-right-2 bg-[#FAF5EE] border border-amber-900/10 p-3.5 sm:p-4 rounded-2xl shadow-lg rotate-3 z-20">
               <Sparkles size={20} className="text-[#C85A24] shrink-0" />
-              <span className="text-xs sm:text-sm font-bold text-[#0B2A3D] font-script">
+              <span className="text-xs sm:text-sm font-bold text-[#0E5A60] font-script">
                 ✨ Turn &quot;someday&quot; into NOW!
               </span>
             </div>
@@ -48,13 +48,13 @@ export function WhyWeStartedSection() {
                   WHY WE STARTED (VISION)
                 </span>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-normal text-[#0B2A3D] leading-tight font-serif">
+                <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-normal text-[#0E5A60] leading-tight font-serif">
                   The problem we couldn&apos;t ignore.
                 </h2>
               </div>
 
               {/* Matched Paragraph Font Size Across Page */}
-              <div className="space-y-4 text-[#0B2A3D]/85 text-base sm:text-lg leading-relaxed font-sans pt-1">
+              <div className="space-y-4 text-[#0E5A60]/85 text-base sm:text-lg leading-relaxed font-sans pt-1">
                 <p>
                   Most of us have a list of places we&apos;ve always wanted to
                   see. And most of us have watched that list sit untouched — not
@@ -90,7 +90,7 @@ export function WhyWeStartedSection() {
                 />
               </div>
 
-              <p className="font-script text-base sm:text-lg lg:text-xl font-bold text-[#0B2A3D] leading-relaxed tracking-normal">
+              <p className="font-script text-base sm:text-lg lg:text-xl font-bold text-[#0E5A60] leading-relaxed tracking-normal">
                 &quot;So we built{" "}
                 <span className="text-[#C85A24] font-extrabold underline decoration-[#C85A24]/40 decoration-wavy decoration-2 underline-offset-4">
                   Kokalachi

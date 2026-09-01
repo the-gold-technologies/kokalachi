@@ -99,7 +99,7 @@ const dropdownData: Record<string, DropdownItem[]> = {
 
 export function Navbar() {
   const pathname = usePathname();
-  const isAboutPage = pathname === "/about";
+  const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -130,23 +130,27 @@ export function Navbar() {
 
   const navLinks = [
     { name: "About Us", href: "/about", hasDropdown: false },
-    { name: "Features", href: "#", hasDropdown: true },
-    { name: "Pages", href: "#", hasDropdown: true },
-    { name: "Blogs", href: "#", hasDropdown: true },
+    { name: "Features", href: "/#upcoming-journeys", hasDropdown: true },
+    { name: "Pages", href: "/about", hasDropdown: true },
+    { name: "Blogs", href: "/#moments", hasDropdown: true },
   ];
+
+  // We want the Navbar to always have the solid white pill background 
+  // on non-home pages so it doesn't get lost on dark hero images.
+  const isSolid = isScrolled || !isHomePage;
 
   return (
     <>
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
-          isScrolled
+          isSolid
             ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3.5 px-5 md:px-6"
             : "top-0 w-full max-w-full bg-transparent py-6"
         }`}
       >
         <div
           className={`mx-auto flex items-center justify-between ${
-            isScrolled ? "w-full" : "container px-6 md:px-12 lg:px-16"
+            isSolid ? "w-full" : "container px-6 md:px-12 lg:px-16"
           }`}
         >
           {/* Main Logo Image */}
@@ -172,7 +176,7 @@ export function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="flex items-center gap-1 font-semibold text-xs uppercase tracking-widest text-[#0B2A3D] hover:text-[#C85A24] transition-colors duration-300 font-montserrat"
+                  className="flex items-center gap-1 font-semibold text-xs uppercase tracking-widest text-[#0E5A60] hover:text-[#C85A24] transition-colors duration-300 font-montserrat"
                 >
                   {link.name}
                   {link.hasDropdown && (
@@ -183,7 +187,7 @@ export function Navbar() {
                 {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
                 {link.hasDropdown && activeDropdown === link.name && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    <div className="bg-[#FFFDF9] text-[#0B2A3D] rounded-2xl shadow-[0_15px_50px_rgba(28,43,56,0.15)] p-5 border border-amber-900/10 w-[460px] grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-3 duration-200">
+                    <div className="bg-[#FFFDF9] text-[#0E5A60] rounded-2xl shadow-[0_15px_50px_rgba(28,43,56,0.15)] p-5 border border-amber-900/10 w-[460px] grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-3 duration-200">
                       {dropdownData[link.name]?.map((item) => (
                         <Link
                           key={item.title}
@@ -194,10 +198,10 @@ export function Navbar() {
                             {item.icon}
                           </div>
                           <div className="flex flex-col text-left">
-                            <span className="font-bold text-[#0B2A3D] text-xs leading-tight group-hover/item:text-[#C85A24] transition-colors mb-0.5">
+                            <span className="font-bold text-[#0E5A60] text-xs leading-tight group-hover/item:text-[#C85A24] transition-colors mb-0.5">
                               {item.title}
                             </span>
-                            <span className="text-[10px] text-[#0B2A3D]/70 leading-normal font-medium">
+                            <span className="text-[10px] text-[#0E5A60]/70 leading-normal font-medium">
                               {item.desc}
                             </span>
                           </div>
@@ -214,7 +218,7 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="#contact"
-              className="flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider rounded-full px-6 py-2.5 bg-[#0B2A3D] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans"
+              className="flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider rounded-full px-6 py-2.5 bg-[#0E5A60] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans"
             >
               <span>Contact Us</span>
             </a>
@@ -225,7 +229,7 @@ export function Navbar() {
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(true)}
-              className="p-1 text-[#0B2A3D] hover:text-[#C85A24] transition-colors"
+              className="p-1 text-[#0E5A60] hover:text-[#C85A24] transition-colors"
               aria-label="Open menu"
             >
               <Menu size={26} />
@@ -350,7 +354,7 @@ export function Navbar() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 bg-[#0B2A3D] text-white hover:bg-[#061C29] rounded-full px-6 py-3.5 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer font-sans"
+              className="w-full flex items-center justify-center gap-2 bg-[#0E5A60] text-white hover:bg-[#061C29] rounded-full px-6 py-3.5 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer font-sans"
             >
               <Phone size={15} />
               <span>Contact Us</span>

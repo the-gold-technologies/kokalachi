@@ -12,9 +12,6 @@ import { Footer } from "@/components/layout/Footer";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 antialiased selection:bg-[#0E5A60] selection:text-white">
-      {/* Official Navigation Header */}
-      <Navbar />
-
       <main className="flex-grow">
         {/* Section 1: Hero — Brand introduction, value proposition & primary CTA */}
         <HeroSection />
@@ -40,9 +37,6 @@ export default function Home() {
         {/* Section 8: Upcoming Journeys — Curated itineraries, dates & booking CTAs */}
         <UpcomingJourneysSection />
       </main>
-
-      {/* Official Brand Footer */}
-      <Footer />
     </div>
   );
 }

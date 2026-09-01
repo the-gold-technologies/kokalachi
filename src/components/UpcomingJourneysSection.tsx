@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
@@ -16,118 +17,126 @@ import {
   Coffee,
   Palmtree,
   Train,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { TourModal, TourPackage } from "./TourModal";
+import { tripCards, TripCardData } from "@/data/trips";
 
-interface TripCardData {
-  id: number;
-  destination: string;
-  locationTag: string;
-  duration: string;
-  groupSize: string;
-  dates: string;
-  price: string;
-  vibeTags: string[];
-  categories: string[];
-  image: string;
-  tourPackage: TourPackage;
+function TripCardItem({ card }: { card: TripCardData }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (!card.images || card.images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % card.images.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [card.images]);
+
+  return (
+    <Link
+      href={`/journeys/${card.slug}`}
+      className="bg-white rounded-[2rem] px-2 pt-2 pb-4 shadow-sm hover:shadow-2xl transition-all duration-500 group flex flex-col border border-slate-100 relative cursor-pointer font-sans transform hover:-translate-y-2 h-full"
+    >
+      {/* Image Section */}
+      <div className="relative h-56 w-full overflow-hidden rounded-3xl mb-3 bg-slate-100">
+        {card.images && card.images.map((img, idx) => (
+          <img
+            key={idx}
+            src={img}
+            alt={`${card.tourPackage.title} - Image ${idx + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out group-hover:scale-110 ${
+              idx === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          />
+        ))}
+        {/* Pagination Dots */}
+        {card.images && card.images.length > 1 && (
+          <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-1.5 pointer-events-none">
+            {card.images.map((_, idx) => (
+              <span
+                key={idx}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentImageIndex
+                    ? "bg-white w-4 opacity-100"
+                    : "bg-white/60 w-1.5 opacity-60"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-black/10 opacity-60 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-[#0E5A60] flex items-center gap-1.5 shadow-sm">
+          <MapPin size={14} className="text-[#C85A24]" /> {card.destination}
+        </div>
+        {card.tourPackage.spotsLeft && (
+          <div className="absolute top-4 right-4 z-20 bg-[#D96C2C] px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-sm flex items-center gap-1">
+            <Flame size={12} className="fill-white" /> {card.tourPackage.spotsLeft} Spots
+          </div>
+        )}
+      </div>
+
+      {/* Content Section */}
+      <div className="flex flex-col flex-grow px-3">
+        <h3 className="text-base sm:text-lg font-bold text-[#0E5A60] font-serif leading-tight mb-2 group-hover:text-[#0E5A60] transition-colors line-clamp-2">
+          {card.tourPackage.title}
+        </h3>
+
+        {/* Key Stats Grid */}
+        <div className="grid grid-cols-2 gap-y-1.5 gap-x-2 mb-3">
+          <div className="flex items-center gap-2 text-xs text-slate-600">
+            <Clock size={15} className="text-[#0E5A60] opacity-80" />
+            <span className="font-medium text-[#0E5A60]">{card.duration}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-600">
+            <Calendar size={16} className="text-[#0E5A60] opacity-80" />
+            <span className="font-medium text-[#0E5A60] text-[13px]">{card.dates}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-600 col-span-2">
+            <Users size={16} className="text-[#0E5A60] opacity-80" />
+            <span className="font-medium text-[#0E5A60] text-[13px]">{card.groupSize}</span>
+          </div>
+        </div>
+
+        {/* Footer: Price & CTA */}
+        <div className="mt-auto pt-3 border-t border-slate-100 flex items-end justify-between">
+          <div>
+            <p className="text-xs text-slate-400 font-bold tracking-wider uppercase mb-1">
+              Starting From
+            </p>
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-black text-[#0E5A60]">
+                {card.price}
+              </span>
+            </div>
+          </div>
+          <div className="w-10 h-10 rounded-full bg-[#0E5A60] text-white flex items-center justify-center group-hover:bg-[#C85A24] transition-colors shadow-md">
+            <ArrowRight
+              size={18}
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
 }
-
-const tripCards: TripCardData[] = [
-  {
-    id: 1,
-    destination: "Coastal Vietnam",
-    locationTag: "Hanoi & Ha Long Bay",
-    duration: "7 Days / 6 Nights",
-    groupSize: "10–12 Travellers",
-    dates: "14–20 Nov 2026",
-    price: "₹48,500",
-    vibeTags: ["Slow Travel", "Adventure", "Foodie"],
-    categories: ["Trending", "FirstTimers", "SlowTravel"],
-    image:
-      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=800",
-    tourPackage: {
-      id: 1,
-      title: "Coastal Vietnam Circle",
-      location: "Vietnam",
-      duration: "7 Days / 6 Nights",
-      rating: 5,
-      price: 48500,
-      originalPrice: 55000,
-      image:
-        "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=800",
-      category: "Foodie",
-      tag: "10–12 Travellers",
-      tagColor: "bg-[#EE5A2B]",
-      spotsLeft: 4,
-      nextDeparture: "14–20 Nov 2026",
-      hook: "Explore Hanoi's glowing night markets, taste secret family Pho recipes, and cruise Ha Long Bay with food lovers.",
-    },
-  },
-  {
-    id: 2,
-    destination: "Tropical Sri Lanka",
-    locationTag: "Mirissa & Ella Valleys",
-    duration: "6 Days / 5 Nights",
-    groupSize: "8–10 Travellers",
-    dates: "02–07 Dec 2026",
-    price: "₹42,000",
-    vibeTags: ["Beach Escape", "Surfing", "Culture"],
-    categories: ["Trending", "BeachEscape", "SlowTravel"],
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800",
-    tourPackage: {
-      id: 2,
-      title: "Tropical Sri Lanka Circle",
-      location: "Sri Lanka",
-      duration: "6 Days / 5 Nights",
-      rating: 5,
-      price: 42000,
-      originalPrice: 49000,
-      image:
-        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800",
-      category: "Coastal",
-      tag: "8–10 Travellers",
-      tagColor: "bg-[#388E3C]",
-      spotsLeft: 5,
-      nextDeparture: "02–07 Dec 2026",
-      hook: "Slow down on tropical beaches, surf sunset waves, and share authentic Sri Lankan seafood feasts with fellow travellers.",
-    },
-  },
-  {
-    id: 3,
-    destination: "Kyoto & Mt. Fuji Sakura",
-    locationTag: "Japan",
-    duration: "7 Days / 6 Nights",
-    groupSize: "8–10 Travellers",
-    dates: "25 Mar – 31 Mar 2027",
-    price: "₹92,000",
-    vibeTags: ["Cherry Blossoms", "Onsen Stays", "Hidden Alleys"],
-    image:
-      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
-    categories: ["WomenOnly", "FirstTimers", "SlowTravel"],
-    tourPackage: {
-      id: 3,
-      title: "Japan Cherry Blossom & Heritage Journey",
-      location: "Japan",
-      duration: "7 Days / 6 Nights",
-      rating: 5.0,
-      price: 92000,
-      image:
-        "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
-      category: "Women Only",
-      tag: "8–10 Travellers",
-      tagColor: "bg-[#D81B60]",
-      spotsLeft: 4,
-      nextDeparture: "25 Mar – 31 Mar 2027",
-      hook: "Walk under Kyoto's blooming cherry blossom canopies, experience traditional tea ceremonies, and bond with an all-women group.",
-    },
-  },
-];
 
 export function UpcomingJourneysSection() {
   const [activeCategory, setActiveCategory] = useState("Trending");
-  const [selectedTour, setSelectedTour] = useState<TourPackage | null>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    }
+  };
 
   const categories = [
     { id: "Trending", label: "Trending", icon: Flame, isHeart: false },
@@ -136,31 +145,30 @@ export function UpcomingJourneysSection() {
     { id: "Adventure", label: "Adventure", icon: Mountain, isHeart: false },
     { id: "SlowTravel", label: "Slow Travel", icon: Coffee, isHeart: false },
     { id: "BeachEscape", label: "Beach Escape", icon: Palmtree, isHeart: false },
-    { id: "ScenicJourney", label: "Scenic Journey", icon: Train, isHeart: false },
   ];
 
   const filteredCards =
     activeCategory === "Trending"
-      ? tripCards.slice(0, 3)
+      ? tripCards.slice(0, 6)
       : tripCards
           .filter((card) => card.categories.includes(activeCategory))
-          .slice(0, 3);
+          .slice(0, 6);
 
   return (
     <section
       id="upcoming-journeys"
       className="py-12 sm:py-14 lg:py-16 bg-white relative overflow-hidden select-none"
     >
-      <FlyingBirds className="hidden lg:block absolute top-14 right-12 opacity-35 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-14 right-12 opacity-35 text-[#0E5A60]" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
           UPCOMING JOURNEYS
         </span>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-4 text-[#0B2A3D]">
+        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-4 text-[#0E5A60]">
           Where will your next{" "}
-          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
             journey
             <TitleUnderline />
           </span>{" "}
@@ -172,166 +180,87 @@ export function UpcomingJourneysSection() {
           pace, and the people. Pick the one that&apos;s calling you.
         </p>
 
-        {/* Filter Pills Row with Unified Icon Styling */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 sm:gap-3 mb-12 pb-2 scrollbar-hide font-sans">
-          {categories.map((cat) => {
-            const Icon = cat.icon;
-            const isActive = activeCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap cursor-pointer font-sans ${
-                  isActive
-                    ? "bg-[#0B2A3D] text-white shadow-md scale-105"
-                    : "bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50 hover:border-slate-300"
-                }`}
-              >
-                {cat.isHeart ? (
-                  <Heart
-                    size={15}
-                    className={
-                      isActive
-                        ? "text-[#EF4444] fill-[#EF4444]"
-                        : "text-[#EF4444] fill-[#EF4444]"
-                    }
-                  />
-                ) : (
-                  <Icon
-                    size={15}
-                    className={`stroke-[2] ${
-                      isActive ? "text-white" : "text-[#0B2A3D]/70"
-                    }`}
-                  />
-                )}
-                <span>{cat.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Filter Pills Row with Unified Icon Styling & Navigation */}
+        <div className="flex items-center justify-between mb-12 gap-4">
+          <div className="flex items-center justify-start overflow-x-auto gap-2.5 sm:gap-3 pb-2 scrollbar-hide font-sans w-full px-4">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              const isActive = activeCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 whitespace-nowrap cursor-pointer font-sans shrink-0 ${
+                    isActive
+                      ? "bg-[#0E5A60] text-white shadow-md scale-105"
+                      : "bg-white border border-slate-200/80 text-slate-700 hover:bg-slate-50 hover:border-slate-300"
+                  }`}
+                >
+                  {cat.isHeart ? (
+                    <Heart
+                      size={15}
+                      className={
+                        isActive
+                          ? "text-[#EF4444] fill-[#EF4444]"
+                          : "text-[#EF4444] fill-[#EF4444]"
+                      }
+                    />
+                  ) : (
+                    <Icon
+                      size={15}
+                      className={`stroke-[2] ${
+                        isActive ? "text-white" : "text-[#0E5A60]/70"
+                      }`}
+                    />
+                  )}
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto text-left pt-2">
-          {filteredCards.map((card) => (
-            <div
-              key={card.id}
-              onClick={() => setSelectedTour(card.tourPackage)}
-              className="bg-white rounded-3xl p-4 sm:p-5 shadow-[0_8px_25px_rgba(0,0,0,0.05)] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between border border-slate-100/90 relative cursor-pointer font-sans"
+          {/* Navigation Arrows */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0 pb-2">
+            <button 
+              onClick={scrollLeft} 
+              className="w-10 h-10 rounded-full bg-[#0E5A60] shadow-md flex items-center justify-center text-white hover:bg-[#C85A24] hover:-translate-x-0.5 transition-all"
+              aria-label="Scroll left"
             >
-              <div>
-                {/* Inner Image Box */}
-                <div className="relative h-44 sm:h-48 w-full overflow-hidden rounded-2xl mb-3.5 bg-slate-100 font-sans">
-                  <img
-                    src={card.image}
-                    alt={card.destination}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md text-white text-[11px] font-medium px-3 py-1 rounded-full flex items-center gap-1 font-sans">
-                    <MapPin size={11} className="text-white" />
-                    <span>{card.locationTag}</span>
-                  </div>
-                </div>
+              <ChevronLeft size={20} className="stroke-[2.5]" />
+            </button>
+            <button 
+              onClick={scrollRight} 
+              className="w-10 h-10 rounded-full bg-[#0E5A60] shadow-md flex items-center justify-center text-white hover:bg-[#C85A24] hover:translate-x-0.5 transition-all"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} className="stroke-[2.5]" />
+            </button>
+          </div>
+        </div>
+      </div> {/* Close container here for full width slider */}
 
-                {/* Destination Title (Matching Serif Font) */}
-                <h3 className="text-xl sm:text-[22px] font-bold text-[#C85A24] font-serif leading-snug mb-3 group-hover:opacity-90 transition-opacity">
-                  {card.destination}
-                </h3>
-
-                {/* Key Details Rows (Duration, Group Size, Dates) */}
-                <div className="bg-[#FAF4EC] p-3.5 sm:p-4 rounded-2xl space-y-2.5 mb-4 border border-[#F5ECE0] font-sans">
-                  <div className="flex items-center gap-2.5 font-sans">
-                    <Clock
-                      size={16}
-                      className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
-                    />
-                    <div className="flex items-baseline gap-1 text-xs font-sans">
-                      <span className="font-medium text-[#64748B]">
-                        Duration:
-                      </span>
-                      <span className="font-semibold text-[#0B2A3D] ml-0.5 font-sans">
-                        {card.duration}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 font-sans">
-                    <Users
-                      size={16}
-                      className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
-                    />
-                    <div className="flex items-baseline gap-1 text-xs font-sans">
-                      <span className="font-medium text-[#64748B]">
-                        Group Size:
-                      </span>
-                      <span className="font-semibold text-[#0B2A3D] ml-0.5 font-sans">
-                        {card.groupSize}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2.5 font-sans">
-                    <Calendar
-                      size={16}
-                      className="text-[#C85A24] stroke-[1.8] flex-shrink-0"
-                    />
-                    <div className="flex items-baseline gap-1 text-xs font-sans">
-                      <span className="font-medium text-[#64748B]">Dates:</span>
-                      <span className="font-semibold text-[#0B2A3D] ml-0.5 font-sans">
-                        {card.dates}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Vibe Tags Pills */}
-                <div className="flex items-center flex-wrap gap-1.5 mb-4 font-sans">
-                  {card.vibeTags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="text-[11px] font-bold text-[#C85A24] bg-[#FAF0E6] px-3 py-1 rounded-full border border-[#F3DFD0] font-sans"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Starting From Price Display */}
-                <div className="mb-4 border-t border-slate-100/80 pt-3 flex items-baseline justify-between font-sans">
-                  <span className="text-xs text-slate-400 font-medium font-sans">
-                    Starting From:
-                  </span>
-                  <div className="flex items-baseline gap-1 font-sans">
-                    <span className="text-2xl font-black text-[#0B2A3D] font-sans">
-                      {card.price}
-                    </span>
-                    <span className="text-xs text-slate-500 font-medium font-sans">
-                      / person
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* View Journey CTA Button */}
-              <button className="w-full bg-[#0B2A3D] hover:bg-[#061C29] text-white py-3.5 rounded-full font-medium text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer font-sans">
-                <span>View Journey</span>
-                <ArrowRight size={16} className="stroke-[2]" />
-              </button>
+      {/* Horizontal Slider Layout */}
+      <div 
+        ref={sliderRef}
+        className="w-full overflow-x-auto snap-x snap-mandatory pt-2 pb-12 pl-4 md:pl-8 xl:pl-[calc((100vw-1280px)/2+32px)] scroll-pl-4 md:scroll-pl-8 xl:scroll-pl-[calc((100vw-1280px)/2+32px)] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] text-left"
+      >        <div className="flex gap-4 lg:gap-6 w-max pr-4 md:pr-8 xl:pr-[calc((100vw-1280px)/2+32px)] h-full">
+          {filteredCards.map((card) => (
+            <div key={card.id} className="w-[80vw] sm:w-[300px] md:w-[340px] shrink-0 snap-start h-auto">
+              <TripCardItem card={card} />
             </div>
           ))}
         </div>
+      </div>
 
+      <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         {/* Section-end CTA Button */}
-        <div className="mt-14 font-sans">
-          <button className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105 font-sans">
+        <div className="mt-6 font-sans">
+          <button className="bg-[#0E5A60] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105 font-sans">
             <span>See All Upcoming Journeys</span>
             <ArrowRight size={18} className="stroke-[2]" />
           </button>
         </div>
       </div>
-
-      {/* Quick View Modal */}
-      <TourModal
-        tour={selectedTour}
-        isOpen={!!selectedTour}
-        onClose={() => setSelectedTour(null)}
-      />
     </section>
   );
 }

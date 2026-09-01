@@ -23,7 +23,7 @@ export function MeetFounderSection() {
           <div className="lg:col-span-5 relative flex justify-center">
             {/* Background Abstract Geometric Accent Blobs in Kokalachi Theme Colors */}
             <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-[#C85A24]/20 pointer-events-none" />
-            <div className="absolute top-10 -left-10 w-16 h-16 rounded-full bg-[#0B2A3D]/15 pointer-events-none" />
+            <div className="absolute top-10 -left-10 w-16 h-16 rounded-full bg-[#0E5A60]/15 pointer-events-none" />
             <div className="absolute -bottom-6 -left-4 w-28 h-28 rounded-full bg-[#E3D4BF]/60 pointer-events-none" />
 
             {/* Founder Image Container */}
@@ -40,7 +40,7 @@ export function MeetFounderSection() {
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#C85A24] font-montserrat block">
                     FOUNDER &amp; CHIEF CURATOR
                   </span>
-                  <h4 className="text-base font-bold text-[#0B2A3D] font-serif">
+                  <h4 className="text-base font-bold text-[#0E5A60] font-serif">
                     Kokalachi Travel Tribe
                   </h4>
                 </div>
@@ -59,12 +59,12 @@ export function MeetFounderSection() {
             </span>
 
             {/* Bold Headline matching website typography */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#0B2A3D] leading-tight font-serif">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#0E5A60] leading-tight font-serif">
               The People Behind Every Journey
             </h2>
 
             {/* Subtitle matching website typography */}
-            <p className="text-[#0B2A3D]/85 text-base sm:text-lg font-sans leading-relaxed">
+            <p className="text-[#0E5A60]/85 text-base sm:text-lg font-sans leading-relaxed">
               &quot;I created Kokalachi after watching so many amazing people
               put off their travel dreams simply because they didn&apos;t have
               a group to go with. We build journeys where no one travels as a
@@ -76,7 +76,7 @@ export function MeetFounderSection() {
               {values.map((v, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-3 text-[#0B2A3D]/85 font-sans font-medium text-base sm:text-lg hover:text-[#0B2A3D] transition-colors"
+                  className="flex items-center gap-3 text-[#0E5A60]/85 font-sans font-medium text-base sm:text-lg hover:text-[#0E5A60] transition-colors"
                 >
                   <span className="text-[#C85A24] font-bold font-mono text-base sm:text-lg w-8 shrink-0">
                     {v.num}.
@@ -88,7 +88,7 @@ export function MeetFounderSection() {
 
             {/* Handwritten Footer Line (Single Line) */}
             <div className="pt-6 border-t border-amber-900/10">
-              <p className="font-script text-xl sm:text-2xl lg:text-[26px] text-[#0B2A3D] font-bold flex flex-wrap items-center gap-2 whitespace-nowrap">
+              <p className="font-script text-xl sm:text-2xl lg:text-[26px] text-[#0E5A60] font-bold flex flex-wrap items-center gap-2 whitespace-nowrap">
                 <span>Kokalachi Curation Team</span>
                 <span className="text-[#C85A24] font-normal mx-1">—</span>
                 <span className="text-[#C85A24]">

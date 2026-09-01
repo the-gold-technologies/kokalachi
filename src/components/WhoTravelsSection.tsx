@@ -190,9 +190,9 @@ export function WhoTravelsSection() {
             <span>♡ wanderers &amp; dreamers</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif">
             Find Your{" "}
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
               Kind
               <TitleUnderline />
             </span>{" "}
@@ -201,7 +201,7 @@ export function WhoTravelsSection() {
         </div>
 
         {/* SUBTITLE */}
-        <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto mb-12 leading-relaxed font-sans">
+        <p className="text-[#0E5A60]/80 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto mb-12 leading-relaxed font-sans">
           Different people. Different stories. One thing in common – the love of
           meaningful travel and incredible people.
         </p>
@@ -219,14 +219,14 @@ export function WhoTravelsSection() {
               <button
                 onClick={handlePrev}
                 aria-label="Previous card"
-                className="w-10 h-10 rounded-full bg-white border border-slate-200 text-[#0B2A3D] flex items-center justify-center shadow-xs hover:bg-[#FAF4EB] hover:border-[#D96C2C]/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 text-[#0E5A60] flex items-center justify-center shadow-xs hover:bg-[#FAF4EB] hover:border-[#D96C2C]/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={handleNext}
                 aria-label="Next card"
-                className="w-10 h-10 rounded-full bg-white border border-slate-200 text-[#0B2A3D] flex items-center justify-center shadow-xs hover:bg-[#FAF4EB] hover:border-[#D96C2C]/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 text-[#0E5A60] flex items-center justify-center shadow-xs hover:bg-[#FAF4EB] hover:border-[#D96C2C]/50 hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 <ChevronRight size={20} />
               </button>
@@ -276,7 +276,7 @@ export function WhoTravelsSection() {
 
                       {/* Content Box */}
                       <div className="p-5 sm:p-6 pt-9 space-y-3 text-center">
-                        <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2A3D] leading-snug">
+                        <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0E5A60] leading-snug">
                           {item.title}
                         </h3>
                         <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed font-sans min-h-[64px]">
@@ -309,7 +309,7 @@ export function WhoTravelsSection() {
           <div className="flex items-center gap-5 shrink-0 border-b xl:border-b-0 xl:border-r border-dashed border-[#D96C2C]/30 pb-4 xl:pb-0 pr-0 xl:pr-8 w-full xl:w-auto justify-center xl:justify-start relative z-10">
             {/* Wooden Signpost Vector Icon with Grass Plant Base */}
             <svg
-              className="w-12 h-14 text-[#0B2A3D] shrink-0"
+              className="w-12 h-14 text-[#0E5A60] shrink-0"
               viewBox="0 0 50 60"
               fill="none"
             >
@@ -346,7 +346,7 @@ export function WhoTravelsSection() {
             </svg>
 
             <div className="text-left leading-tight space-y-0.5">
-              <div className="font-script text-2xl sm:text-3xl font-normal text-[#0B2A3D] tracking-wide">
+              <div className="font-script text-2xl sm:text-3xl font-normal text-[#0E5A60] tracking-wide">
                 Different journeys.
               </div>
               <div className="font-script text-[#D96C2C] text-2xl sm:text-3xl font-normal tracking-wide">
@@ -379,7 +379,7 @@ export function WhoTravelsSection() {
                 <div className="w-12 h-12 rounded-full bg-[#FFEFE6] text-[#D96C2C] flex items-center justify-center shadow-2xs border border-amber-900/10">
                   <Users size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0E5A60] whitespace-nowrap">
                   Small Groups
                 </span>
               </div>
@@ -389,7 +389,7 @@ export function WhoTravelsSection() {
                 <div className="w-12 h-12 rounded-full bg-[#FFF0ED] text-[#E05353] flex items-center justify-center shadow-2xs border border-red-900/10">
                   <Heart size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0E5A60] whitespace-nowrap">
                   Real Connections
                 </span>
               </div>
@@ -399,7 +399,7 @@ export function WhoTravelsSection() {
                 <div className="w-12 h-12 rounded-full bg-[#EBF3F0] text-[#2F7D50] flex items-center justify-center shadow-2xs border border-teal-900/10">
                   <ShieldCheck size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0E5A60] whitespace-nowrap">
                   Travel with Confidence
                 </span>
               </div>
@@ -409,7 +409,7 @@ export function WhoTravelsSection() {
                 <div className="w-12 h-12 rounded-full bg-[#FAF3E6] text-[#C88A2B] flex items-center justify-center shadow-2xs border border-amber-900/10">
                   <Globe size={22} className="stroke-[2]" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold text-[#0B2A3D] whitespace-nowrap">
+                <span className="text-xs sm:text-[13px] font-bold text-[#0E5A60] whitespace-nowrap">
                   Meaningful Experiences
                 </span>
               </div>
@@ -444,7 +444,7 @@ export function WhoTravelsSection() {
           <span>
             No matter which journey you choose, you&apos;ll always find one
             thing here –{" "}
-            <strong className="text-[#0B2A3D] font-bold">
+            <strong className="text-[#0E5A60] font-bold">
               good people and great memories.
             </strong>
           </span>

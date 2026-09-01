@@ -15,7 +15,7 @@ export function AboutHeroSection() {
       {/* Ambient Soft Glows */}
       <div className="absolute -top-24 right-0 w-[500px] h-[500px] bg-[#C85A24]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
-      <FlyingBirds className="hidden lg:block absolute top-28 right-20 opacity-35 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-28 right-20 opacity-35 text-[#0E5A60]" />
 
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -30,9 +30,9 @@ export function AboutHeroSection() {
             </div>
 
             {/* Main Editorial Title */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-normal text-[#0B2A3D] leading-[1.18] font-serif">
+            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-normal text-[#0E5A60] leading-[1.18] font-serif">
               We bring together the travellers who were always{" "}
-              <span className="relative inline-block font-semibold text-[#0B2A3D]">
+              <span className="relative inline-block font-semibold text-[#0E5A60]">
                 meant to meet.
                 <TitleUnderline />
               </span>
@@ -45,9 +45,9 @@ export function AboutHeroSection() {
             </p>
 
             {/* Narrative Hero Paragraphs (Directly on page without card container) */}
-            <div className="space-y-4 text-[#0B2A3D]/85 text-base sm:text-lg leading-relaxed font-sans pt-1">
+            <div className="space-y-4 text-[#0E5A60]/85 text-base sm:text-lg leading-relaxed font-sans pt-1">
               <p>
-                <strong className="text-[#0B2A3D] font-semibold">
+                <strong className="text-[#0E5A60] font-semibold">
                   Kokalachi exists for a simple reason:
                 </strong>{" "}
                 travelling is one of the best things you can do — but only when
@@ -70,15 +70,15 @@ export function AboutHeroSection() {
 
             {/* Micro Feature Badges */}
             <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0B2A3D] shadow-xs">
+              <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0E5A60] shadow-xs">
                 <Users size={15} className="text-[#C85A24]" />
                 <span>Small-Group Trips</span>
               </div>
-              <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0B2A3D] shadow-xs">
+              <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0E5A60] shadow-xs">
                 <Heart size={15} className="text-[#EF4444] fill-[#EF4444]" />
                 <span>Like-Minded Solos</span>
               </div>
-              <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0B2A3D] shadow-xs">
+              <div className="inline-flex items-center gap-2 bg-white/80 border border-amber-900/10 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-[#0E5A60] shadow-xs">
                 <MapPin size={15} className="text-[#0E5A60]" />
                 <span>Curated Destinations</span>
               </div>
@@ -95,7 +95,7 @@ export function AboutHeroSection() {
                   alt="Travellers celebrating together on a journey"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D]/85 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0E5A60]/85 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
                   <span className="text-xs uppercase tracking-widest text-[#F7D3CB] font-extrabold mb-1 font-montserrat">
                     KOKALACHI TRIBE
                   </span>
@@ -114,7 +114,7 @@ export function AboutHeroSection() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="font-script text-xs sm:text-sm text-[#0B2A3D] font-bold text-center mt-2">
+                <p className="font-script text-xs sm:text-sm text-[#0E5A60] font-bold text-center mt-2">
                   ✨ Travel together, belong anywhere <span className="text-[#EF4444]">♡</span>
                 </p>
               </div>

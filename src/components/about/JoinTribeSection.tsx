@@ -28,15 +28,15 @@ export function JoinTribeSection() {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-normal text-[#0B2A3D] leading-tight font-serif mb-6 drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
+        <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-normal text-[#0E5A60] leading-tight font-serif mb-6 drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
           Your next journey is waiting.{" "}
-          <span className="font-semibold text-[#0B2A3D]">
+          <span className="font-semibold text-[#0E5A60]">
             So are your people.
           </span>
         </h2>
 
         {/* Paragraph Copy */}
-        <p className="text-[#0B2A3D]/90 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8 font-sans drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+        <p className="text-[#0E5A60]/90 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8 font-sans drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
           Somewhere out there is a group of travellers who are just as ready to
           explore, connect, and make memories as you are. All that&apos;s
           missing is you.
@@ -52,14 +52,14 @@ export function JoinTribeSection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/#upcoming-journeys"
-            className="bg-[#0B2A3D] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
+            className="bg-[#0E5A60] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
           >
             <span>Explore Upcoming Trips</span>
             <ArrowRight size={18} />
           </Link>
           <Link
             href="/#upcoming-journeys"
-            className="bg-white/90 hover:bg-white text-[#0B2A3D] px-8 py-4 rounded-full font-medium text-base border border-[#0B2A3D]/30 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
+            className="bg-white/90 hover:bg-white text-[#0E5A60] px-8 py-4 rounded-full font-medium text-base border border-[#0E5A60]/30 shadow-xs hover:shadow-md transition-all inline-flex items-center gap-3 cursor-pointer hover:scale-105"
           >
             <Compass size={18} className="text-[#C85A24]" />
             <span>Find your Next Journey</span>

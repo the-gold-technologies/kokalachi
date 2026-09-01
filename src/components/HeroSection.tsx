@@ -31,18 +31,18 @@ export function HeroSection() {
           </span>
 
           {/* Main Headline — Guaranteed 2 Lines */}
-          <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-normal text-[#0B2A3D] leading-[1.12] tracking-tight font-serif max-w-4xl">
+          <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-normal text-[#0E5A60] leading-[1.12] tracking-tight font-serif max-w-4xl">
             <span className="inline-block sm:whitespace-nowrap">
               Don&apos;t just discover new places.
             </span>{" "}
             <br />
-            <span className="font-semibold text-[#0B2A3D] inline-block sm:whitespace-nowrap pt-1">
+            <span className="font-semibold text-[#0E5A60] inline-block sm:whitespace-nowrap pt-1">
               Discover your people.
             </span>
           </h1>
 
           {/* Subtitle Paragraph */}
-          <p className="text-[#0B2A3D]/85 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-[560px] font-sans">
+          <p className="text-[#0E5A60]/85 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-[560px] font-sans">
             Travel is better when shared. Join curated group journeys designed
             for people who love exploring the world — and making meaningful
             connections along the way.
@@ -52,14 +52,14 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 font-sans">
             <a
               href="#upcoming-journeys"
-              className="px-8 py-3.5 sm:py-4 bg-[#0B2A3D] hover:bg-[#061C29] text-white font-semibold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2.5 cursor-pointer hover:scale-105 font-sans"
+              className="px-8 py-3.5 sm:py-4 bg-[#0E5A60] hover:bg-[#061C29] text-white font-semibold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2.5 cursor-pointer hover:scale-105 font-sans"
             >
               <span>Explore Upcoming Trips</span>
               <ArrowRight size={16} />
             </a>
             <a
               href="#how-it-works"
-              className="px-7 py-3.5 sm:py-4 bg-white/80 hover:bg-white text-[#0B2A3D] font-semibold text-sm rounded-full border border-[#0B2A3D]/40 transition-all flex items-center justify-center gap-2 group shadow-sm text-center cursor-pointer hover:scale-105 font-sans"
+              className="px-7 py-3.5 sm:py-4 bg-white/80 hover:bg-white text-[#0E5A60] font-semibold text-sm rounded-full border border-[#0E5A60]/40 transition-all flex items-center justify-center gap-2 group shadow-sm text-center cursor-pointer hover:scale-105 font-sans"
             >
               <span>How It Works</span>
               <ArrowRight

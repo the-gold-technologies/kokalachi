@@ -61,11 +61,11 @@ export function WhatWeBelieveSection() {
             WHAT WE BELIEVE (MISSION)
           </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#0B2A3D] leading-tight font-serif">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#0E5A60] leading-tight font-serif">
             The Kokalachi Way
           </h2>
 
-          <p className="text-[#0B2A3D]/80 text-base sm:text-lg font-sans">
+          <p className="text-[#0E5A60]/80 text-base sm:text-lg font-sans">
             Everything we design — every itinerary, every group, every detail —
             comes back to a handful of things we simply won&apos;t compromise
             on.
@@ -87,7 +87,7 @@ export function WhatWeBelieveSection() {
               </div>
 
               {/* Taped Paper Note Card Container */}
-              <div className="bg-[#FFFDF9] text-[#0B2A3D] p-7 sm:p-8 pt-9 pb-9 min-h-[310px] sm:min-h-[340px] rounded-2xl border border-amber-900/20 shadow-md relative overflow-hidden flex flex-col justify-between h-full">
+              <div className="bg-[#FFFDF9] text-[#0E5A60] p-7 sm:p-8 pt-9 pb-9 min-h-[310px] sm:min-h-[340px] rounded-2xl border border-amber-900/20 shadow-md relative overflow-hidden flex flex-col justify-between h-full">
                 {/* Background Travel Image */}
                 <img
                   src={"/paper-bg.jpg"}
@@ -102,8 +102,8 @@ export function WhatWeBelieveSection() {
                 <div className="relative z-10 space-y-4">
                   {/* Handwritten Title with Underline & Heart */}
                   <div className="text-center pb-1">
-                    <div className="inline-block border-b-2 border-[#0B2A3D] pb-1">
-                      <h3 className="font-script text-2xl sm:text-3xl  text-[#0B2A3D] font-bold flex items-center justify-center gap-2 leading-[1.3]">
+                    <div className="inline-block border-b-2 border-[#0E5A60] pb-1">
+                      <h3 className="font-script text-2xl sm:text-3xl  text-[#0E5A60] font-bold flex items-center justify-center gap-2 leading-[1.3]">
                         <span>{pillar.title}</span>
                         <span className="text-2xl text-[#EF4444]">♡</span>
                       </h3>
@@ -111,7 +111,7 @@ export function WhatWeBelieveSection() {
                   </div>
 
                   {/* Handwritten Paragraph Copy - Increased Font Size by ~4px */}
-                  <p className="font-script text-xl sm:text-2xl lg:text-[23px] text-[#0B2A3D] leading-[1.3] font-bold text-center sm:text-left drop-shadow-2xs">
+                  <p className="font-script text-xl sm:text-2xl lg:text-[23px] text-[#0E5A60] leading-[1.3] font-bold text-center sm:text-left drop-shadow-2xs">
                     {pillar.desc}
                   </p>
                 </div>

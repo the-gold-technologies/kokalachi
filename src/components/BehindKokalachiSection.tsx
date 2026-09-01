@@ -20,7 +20,7 @@ export function BehindKokalachiSection() {
       className="py-16 sm:py-24 bg-[#FAF5EE] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline (Top Right Variation) */}
-      <FlyingBirds className="hidden lg:block absolute top-10 right-14 opacity-35 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-10 right-14 opacity-35 text-[#0E5A60]" />
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10 max-w-6xl text-center">
         {/* FROM THE JOURNAL INNER CONTAINER */}
         <div className="bg-[#FAF5EE] relative text-center">
@@ -30,9 +30,9 @@ export function BehindKokalachiSection() {
           </span>
 
           {/* Journal Main Title */}
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif mb-4 max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif mb-4 max-w-4xl mx-auto">
             Stories that inspire your next{" "}
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
               journey
               <TitleUnderline />
             </span>
@@ -207,7 +207,7 @@ export function BehindKokalachiSection() {
 
               <a
                 href="#journal"
-                className="relative z-10 inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#0B2A3D] hover:bg-[#061C29] text-white font-medium text-xs sm:text-sm rounded-full shadow-md hover:shadow-lg transition-all cursor-pointer hover:scale-105"
+                className="relative z-10 inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#0E5A60] hover:bg-[#061C29] text-white font-medium text-xs sm:text-sm rounded-full shadow-md hover:shadow-lg transition-all cursor-pointer hover:scale-105"
               >
                 <span>Explore the Journal</span>
                 <ArrowRight size={16} />

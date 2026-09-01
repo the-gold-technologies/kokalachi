@@ -66,7 +66,7 @@ export function WhyWeExistSection() {
       className="py-12 sm:py-14 lg:py-16 bg-[#FAF5EE] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline */}
-      <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0E5A60]" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         {/* Sub-header category tagline */}
@@ -75,16 +75,16 @@ export function WhyWeExistSection() {
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-3 text-[#0B2A3D]">
+        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-3 text-[#0E5A60]">
           Why do so many dream trips never{" "}
-          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+          <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
             happen?
             <TitleUnderline />
           </span>
         </h2>
 
         {/* Short, reduced intro copy */}
-        <p className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-2xl mx-auto mb-8 font-sans">
+        <p className="text-[#0E5A60]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-2xl mx-auto mb-8 font-sans">
           Most bucket list trips get postponed when schedules clash and life
           gets in the way. Finding the right travel companions shouldn&apos;t be
           this hard.
@@ -179,7 +179,7 @@ export function WhyWeExistSection() {
                           />
                         </div>
                         <div>
-                          <div className="font-extrabold text-[#0B2A3D] text-xs sm:text-sm flex items-center gap-1 font-sans">
+                          <div className="font-extrabold text-[#0E5A60] text-xs sm:text-sm flex items-center gap-1 font-sans">
                             Bali Trip? 🌴
                           </div>
                           <div className="text-[10px] text-slate-500 font-medium font-sans">
@@ -280,7 +280,7 @@ export function WhyWeExistSection() {
 
             {/* Center Arrow Pill (Floating Desktop Only) */}
             <div className="hidden lg:flex absolute left-[41.6%] top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
-              <div className="w-10 h-10 rounded-full bg-white shadow-md border border-slate-200/80 flex items-center justify-center text-[#0B2A3D]">
+              <div className="w-10 h-10 rounded-full bg-white shadow-md border border-slate-200/80 flex items-center justify-center text-[#0E5A60]">
                 <ArrowRight size={18} className="stroke-[2.5]" />
               </div>
             </div>
@@ -427,7 +427,7 @@ export function WhyWeExistSection() {
 
         {/* BOTTOM EMPHASIS CONCLUSION */}
         <div className="max-w-3xl mx-auto mt-14 sm:mt-16 text-center">
-          <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] font-serif">
+          <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] font-serif">
             So, we decided to build a better way to do it.
           </h3>
           <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">

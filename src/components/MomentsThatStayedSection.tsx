@@ -42,7 +42,7 @@ export function MomentsThatStayedSection() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#0B2A3D 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#0E5A60 1px, transparent 1px)`,
           backgroundSize: `24px 24px`,
         }}
       />
@@ -54,10 +54,10 @@ export function MomentsThatStayedSection() {
         </span>
 
         <div className="mb-4 max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-5xl lg:text-[58px] font-normal text-[#0B2A3D] leading-[1.25] font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[58px] font-normal text-[#0E5A60] leading-[1.25] font-serif">
             Every journey leaves with stories.{" "}
             <br className="hidden sm:inline" />
-            <span className="relative inline-block text-[#0B2A3D] font-script text-[1.25em] font-normal mr-2">
+            <span className="relative inline-block text-[#0E5A60] font-script text-[1.25em] font-normal mr-2">
               Some leave with
               <svg
                 className="absolute -bottom-1.5 left-0 w-full h-3 text-[#D96C2C]"
@@ -78,7 +78,7 @@ export function MomentsThatStayedSection() {
           </h2>
         </div>
 
-        <p className="text-[#0B2A3D]/80 text-sm sm:text-base lg:text-lg font-normal max-w-2xl mx-auto mb-16 font-sans">
+        <p className="text-[#0E5A60]/80 text-sm sm:text-base lg:text-lg font-normal max-w-2xl mx-auto mb-16 font-sans">
           Real stories from real people. Real moments from real journeys.
         </p>
 
@@ -248,7 +248,7 @@ export function MomentsThatStayedSection() {
                     </span>
                   </div>
 
-                  <p className="text-[#0B2A3D] text-xs font-serif italic leading-relaxed mb-3">
+                  <p className="text-[#0E5A60] text-xs font-serif italic leading-relaxed mb-3">
                     &quot;We still meet every month. Different cities, same
                     people, same laughs!&quot;
                   </p>
@@ -278,14 +278,14 @@ export function MomentsThatStayedSection() {
                   “
                 </div>
 
-                <p className="text-[#0B2A3D] text-base sm:text-lg font-serif italic leading-relaxed mb-5">
+                <p className="text-[#0E5A60] text-base sm:text-lg font-serif italic leading-relaxed mb-5">
                   &quot;I came alone, not knowing anyone. By the end of the
                   trip, I had a whole new family.&quot;
                 </p>
 
                 <div className="flex items-end justify-between pt-4 border-t border-amber-900/10">
-                  <div className="text-xs text-[#0B2A3D]/80 font-sans">
-                    <div className="font-semibold text-[#0B2A3D]">
+                  <div className="text-xs text-[#0E5A60]/80 font-sans">
+                    <div className="font-semibold text-[#0E5A60]">
                       — The Sakura Edition
                     </div>
                     <div className="text-[#0E5A60] font-bold text-[11px]">
@@ -412,7 +412,7 @@ export function MomentsThatStayedSection() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
                     <Plane size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                  <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Trip Ends
                   </h4>
                   <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
@@ -425,7 +425,7 @@ export function MomentsThatStayedSection() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
                     <MessageCircle size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                  <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     WhatsApp Still Active
                   </h4>
                   <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
@@ -438,7 +438,7 @@ export function MomentsThatStayedSection() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
                     <Cake size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                  <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Birthdays &amp; Milestones
                   </h4>
                   <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
@@ -451,7 +451,7 @@ export function MomentsThatStayedSection() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
                     <MapPin size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                  <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Another Trip Booked
                   </h4>
                   <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
@@ -464,7 +464,7 @@ export function MomentsThatStayedSection() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#6B7D56] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
                     <Camera size={20} className="stroke-[2]" />
                   </div>
-                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                  <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Reunions &amp; Meetups
                   </h4>
                   <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
@@ -477,7 +477,7 @@ export function MomentsThatStayedSection() {
                   <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#EF4444] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5">
                     <Heart size={20} className="fill-white stroke-none" />
                   </div>
-                  <h4 className="font-semibold text-[#0B2A3D] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                  <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
                     Friendships for Life
                   </h4>
                   <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">

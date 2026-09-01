@@ -12,7 +12,7 @@ export function HowItWorksSection() {
       className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] relative overflow-hidden select-none"
     >
       {/* Decorative Flying Birds Outline (Top Left Variation) */}
-      <FlyingBirds className="hidden lg:block absolute top-12 left-14 opacity-30 text-[#0B2A3D]" />
+      <FlyingBirds className="hidden lg:block absolute top-12 left-14 opacity-30 text-[#0E5A60]" />
 
       {/* Ambient Brand Color Glows */}
       <div className="absolute top-1/3 -left-20 w-80 h-80 bg-[#D96C2C]/8 rounded-full blur-3xl pointer-events-none" />
@@ -25,16 +25,16 @@ export function HowItWorksSection() {
             HOW IT WORKS
           </span>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0B2A3D] leading-tight font-serif">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif">
             Three steps to your next <br />
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0B2A3D]">
+            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
               unforgettable
               <TitleUnderline />
             </span>{" "}
             journey.
           </h2>
 
-          <p className="text-[#0B2A3D]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-xl mx-auto">
+          <p className="text-[#0E5A60]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-xl mx-auto">
             Joining Kokalachi is simple. We take care of the planning, so you
             can focus on the experience.
           </p>
@@ -145,7 +145,7 @@ export function HowItWorksSection() {
               {/* Phone App UI Overlay Representation */}
               <div className="absolute inset-0 bg-black/10 flex items-center justify-center p-6">
                 <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-white/40 w-44 text-left space-y-2 transform -rotate-3 scale-95">
-                  <div className="text-[10px] font-extrabold text-[#0B2A3D] uppercase tracking-wider">
+                  <div className="text-[10px] font-extrabold text-[#0E5A60] uppercase tracking-wider">
                     Upcoming Journeys
                   </div>
                   <div className="space-y-1.5">
@@ -153,7 +153,7 @@ export function HowItWorksSection() {
                       <div className="w-6 h-6 rounded-md bg-[#0E5A60] text-white text-[9px] font-bold flex items-center justify-center">
                         BALI
                       </div>
-                      <div className="text-[9px] font-bold text-[#0B2A3D]">
+                      <div className="text-[9px] font-bold text-[#0E5A60]">
                         Island Escape
                       </div>
                     </div>
@@ -161,7 +161,7 @@ export function HowItWorksSection() {
                       <div className="w-6 h-6 rounded-md bg-[#D96C2C] text-white text-[9px] font-bold flex items-center justify-center">
                         JAPAN
                       </div>
-                      <div className="text-[9px] font-bold text-[#0B2A3D]">
+                      <div className="text-[9px] font-bold text-[#0E5A60]">
                         Autumn Trail
                       </div>
                     </div>
@@ -171,15 +171,15 @@ export function HowItWorksSection() {
             </div>
 
             {/* Bottom Overlapping Icon Badge */}
-            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0B2A3D] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
+            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0E5A60] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
               <Compass size={24} />
             </div>
 
             {/* Title & Description */}
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] mb-2 font-serif">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] mb-2 font-serif">
               Discover a Journey
             </h3>
-            <p className="text-[#0B2A3D]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
+            <p className="text-[#0E5A60]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
               Browse upcoming journeys and choose the one that excites you the
               most.
             </p>
@@ -247,15 +247,15 @@ export function HowItWorksSection() {
             </div>
 
             {/* Bottom Overlapping Icon Badge */}
-            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0B2A3D] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
+            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0E5A60] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
               <Users size={24} />
             </div>
 
             {/* Title & Description */}
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] mb-2 font-serif">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] mb-2 font-serif">
               Meet Your Circle
             </h3>
-            <p className="text-[#0B2A3D]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
+            <p className="text-[#0E5A60]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
               Join a thoughtfully curated group of travellers who are just as
               excited about the journey as you are.
             </p>
@@ -300,15 +300,15 @@ export function HowItWorksSection() {
             </div>
 
             {/* Bottom Overlapping Icon Badge */}
-            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0B2A3D] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
+            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0E5A60] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
               <Camera size={24} />
             </div>
 
             {/* Title & Description */}
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0B2A3D] mb-2 font-serif">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] mb-2 font-serif">
               Travel Together
             </h3>
-            <p className="text-[#0B2A3D]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
+            <p className="text-[#0E5A60]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
               Explore incredible destinations, share unforgettable moments, and
               return home with memories and friendships that last.
             </p>
