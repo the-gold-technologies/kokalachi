@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { tripCards } from "@/data/trips";
-import { TripCardItem } from "@/components/TripCardItem";
+import { CompactTripCardItem } from "@/components/CompactTripCardItem";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { Flame, Compass, Heart, Mountain, Coffee, Palmtree } from "lucide-react";
 
@@ -64,8 +64,8 @@ export default function AllJourneysPage() {
 
       {/* Main Content Area with Sticky Sidebar */}
       <div className="container mx-auto px-4 md:px-8 max-w-7xl py-12 lg:py-16">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-          
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+
           {/* Left Sidebar (Sticky Filters) */}
           <div className="w-full lg:w-[280px] shrink-0 lg:sticky lg:top-24">
             <div className="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm">
@@ -113,10 +113,10 @@ export default function AllJourneysPage() {
 
           {/* Right Area (3-Column Grid) */}
           <div className="w-full flex-grow">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCards.map((card) => (
                 <div key={card.id} className="h-full">
-                  <TripCardItem card={card} />
+                  <CompactTripCardItem card={card} />
                 </div>
               ))}
             </div>

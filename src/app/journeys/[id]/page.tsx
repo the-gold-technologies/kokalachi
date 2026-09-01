@@ -24,6 +24,7 @@ import {
   Tag
 } from "lucide-react";
 import { tripCards, TourPackage } from "@/data/trips";
+import { TripCardItem } from "@/components/TripCardItem";
 
 function BookingWidget({ tour }: { tour: TourPackage }) {
   const [guests, setGuests] = useState(1);
@@ -32,7 +33,7 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
   // Determine base prices
   const basePrice = typeof tour.price === "number" ? tour.price : 49999;
   const originalPrice = tour.originalPrice || basePrice + 4000;
-  
+
   const doublePrice = basePrice;
   const privatePrice = basePrice + 13000; // E.g., 62,999
 
@@ -55,13 +56,11 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
         </h4>
         <div className="space-y-2">
           {/* Double Room Option */}
-          <label className={`flex items-center justify-between p-3 rounded-xl cursor-pointer border-[2px] transition-all ${
-            roomType === "double" ? "border-[#D96C2C] bg-[#D96C2C]/10" : "border-slate-100 bg-white hover:border-slate-200"
-          }`}>
+          <label className={`flex items-center justify-between p-3 rounded-xl cursor-pointer border-[2px] transition-all ${roomType === "double" ? "border-[#D96C2C] bg-[#D96C2C]/10" : "border-slate-100 bg-white hover:border-slate-200"
+            }`}>
             <div className="flex items-center gap-2.5">
-              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                roomType === "double" ? "border-[#D96C2C]" : "border-slate-300"
-              }`}>
+              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${roomType === "double" ? "border-[#D96C2C]" : "border-slate-300"
+                }`}>
                 {roomType === "double" && <div className="w-2 h-2 rounded-full bg-[#D96C2C]" />}
               </div>
               <span className="font-bold text-sm text-[#0E5A60]">Double Sharing</span>
@@ -74,13 +73,11 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
           </label>
 
           {/* Private Room Option */}
-          <label className={`flex items-center justify-between p-3 rounded-xl cursor-pointer border-[2px] transition-all ${
-            roomType === "private" ? "border-[#D96C2C] bg-[#D96C2C]/10" : "border-slate-100 bg-white hover:border-slate-200"
-          }`}>
+          <label className={`flex items-center justify-between p-3 rounded-xl cursor-pointer border-[2px] transition-all ${roomType === "private" ? "border-[#D96C2C] bg-[#D96C2C]/10" : "border-slate-100 bg-white hover:border-slate-200"
+            }`}>
             <div className="flex items-center gap-2.5">
-              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                roomType === "private" ? "border-[#D96C2C]" : "border-slate-300"
-              }`}>
+              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${roomType === "private" ? "border-[#D96C2C]" : "border-slate-300"
+                }`}>
                 {roomType === "private" && <div className="w-2 h-2 rounded-full bg-[#D96C2C]" />}
               </div>
               <span className="font-bold text-sm text-[#0E5A60]">Private Room</span>
@@ -99,7 +96,7 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
           <Users size={15} className="text-[#0E5A60]" /> Guests
         </h4>
         <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-full px-2 py-1">
-          <button 
+          <button
             type="button"
             onClick={() => setGuests(Math.max(1, guests - 1))}
             className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
@@ -107,7 +104,7 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
             <Minus size={12} />
           </button>
           <span className="font-bold text-sm text-[#0E5A60] w-3 text-center">{guests}</span>
-          <button 
+          <button
             type="button"
             onClick={() => setGuests(Math.min(10, guests + 1))}
             className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
@@ -180,7 +177,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
   const [expandedDays, setExpandedDays] = useState<number[]>([0]);
 
   const toggleDay = (idx: number) => {
-    setExpandedDays(prev => 
+    setExpandedDays(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
     );
   };
@@ -222,6 +219,8 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
     }, 3500);
   };
 
+  const otherTrips = tripCards.filter(t => t.id !== trip.id).slice(0, 3);
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-[#0E5A60]/20">
 
@@ -255,7 +254,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                   {tour.subtitle}
                 </h2>
               )}
-              
+
               <div className="flex flex-wrap items-center gap-6 text-sm sm:text-base font-medium text-slate-200">
                 <div className="flex items-center gap-2">
                   <MapPin size={18} className="text-teal-400" />
@@ -287,7 +286,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
               <h3 className="text-2xl sm:text-3xl font-serif text-[#0E5A60] leading-tight">
                 Tour Snapshot
               </h3>
-              
+
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-sm">
                 <div className="flex gap-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
@@ -298,7 +297,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                     <span className="text-[13px] font-bold text-[#0E5A60]">{tour.nextDeparture || "Upcoming"}</span>
                   </div>
                 </div>
-                
+
                 <div className="flex gap-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
                     <Clock size={18} className="text-[#0E5A60]" />
@@ -354,7 +353,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                       {tour.overview.map((para, idx) => {
                         const isBullet = para.trim().startsWith("•") || para.trim().startsWith("-");
                         const content = para.replace(/^[•-]\s*/, "");
-                        
+
                         if (isBullet) {
                           return (
                             <div key={idx} className="flex items-start gap-3 text-[14px] pl-1">
@@ -375,7 +374,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                       {tour.hook}
                     </p>
                   )}
-                  
+
                   {/* Highlights Grid */}
                   {tour.highlights && tour.highlights.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6 pb-2 mt-4 border-t border-slate-100">
@@ -406,8 +405,8 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                     <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
                   )}
                 </div>
-                
-                <button 
+
+                <button
                   onClick={() => setIsOverviewExpanded(!isOverviewExpanded)}
                   className="text-[#D96C2C] font-bold text-[14px] mt-4 flex items-center gap-1 hover:text-[#C85A24] transition-colors"
                 >
@@ -430,70 +429,71 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                 {tour.itinerary ? (
                   tour.itinerary.map((day, idx) => {
                     const isExpanded = expandedDays.includes(idx);
-                    
+
                     return (
-                    <div key={idx} className="relative group">
-                      {/* Timeline Node - "DAY 01" Badge */}
-                      <div className={`absolute left-0 top-3 w-10 h-10 rounded-full bg-white border-[2px] flex flex-col items-center justify-center z-10 shadow-sm transition-colors duration-300 ${isExpanded ? 'border-[#0E5A60]' : 'border-[#D96C2C]'}`}>
-                         <span className={`text-[7px] font-bold uppercase tracking-widest leading-none mt-0.5 ${isExpanded ? 'text-[#0E5A60]' : 'text-[#D96C2C]'}`}>Day</span>
-                         <span className={`text-[12px] font-black leading-none mb-0.5 ${isExpanded ? 'text-[#0E5A60]' : 'text-[#D96C2C]'}`}>{String(idx + 1).padStart(2, '0')}</span>
-                      </div>
-
-                      {/* Segment line (only for non-last items) */}
-                      {idx !== tour.itinerary!.length - 1 && (
-                         <div className="absolute left-[19px] top-[52px] -bottom-[36px] w-[2px] bg-[#0E5A60]/20 z-0" />
-                      )}
-
-                      {/* Accordion Header Card */}
-                      <div className="pl-14 sm:pl-16">
-                        <div 
-                          onClick={() => toggleDay(idx)}
-                          className={`bg-white rounded-2xl border ${isExpanded ? 'border-[#0E5A60]/30 shadow-md' : 'border-slate-100 shadow-sm'} p-2 sm:p-2.5 flex items-center justify-between cursor-pointer hover:border-[#0E5A60]/50 hover:shadow-md transition-all duration-300`}
-                        >
-                          <div className="flex items-center gap-3 sm:gap-4">
-                             {/* Small Thumbnail Image */}
-                             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-slate-100 relative">
-                               <img src={tour.image} alt={day.title} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: `center ${idx * 25}%` }} />
-                             </div>
-                             
-                             <div>
-                               <div className="flex items-center gap-1.5 mb-0.5">
-                                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{day.day}</span>
-                                 <span className="w-1 h-1 rounded-full bg-slate-300" />
-                                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{trip.destination}</span>
-                               </div>
-                               <h4 className="font-semibold text-[13px] sm:text-[15px] text-[#0E5A60] leading-tight group-hover:text-[#0E5A60] transition-colors">
-                                 {day.title}
-                               </h4>
-                             </div>
-                          </div>
-                          
-                          {/* Chevron Down Button */}
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mr-2 transition-colors duration-300 ${isExpanded ? 'bg-[#0E5A60]/10 text-[#0E5A60]' : 'bg-slate-50 text-slate-400 group-hover:bg-[#0E5A60]/10 group-hover:text-[#0E5A60]'}`}>
-                            <ChevronDown size={16} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-                          </div>
+                      <div key={idx} className="relative group">
+                        {/* Timeline Node - "DAY 01" Badge */}
+                        <div className={`absolute left-0 top-3 w-10 h-10 rounded-full bg-white border-[2px] flex flex-col items-center justify-center z-10 shadow-sm transition-colors duration-300 ${isExpanded ? 'border-[#0E5A60]' : 'border-[#D96C2C]'}`}>
+                          <span className={`text-[7px] font-bold uppercase tracking-widest leading-none mt-0.5 ${isExpanded ? 'text-[#0E5A60]' : 'text-[#D96C2C]'}`}>Day</span>
+                          <span className={`text-[12px] font-black leading-none mb-0.5 ${isExpanded ? 'text-[#0E5A60]' : 'text-[#D96C2C]'}`}>{String(idx + 1).padStart(2, '0')}</span>
                         </div>
 
-                      {/* Accordion Content */}
-                      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'}`}>
-                        <div className="bg-[#FAF4EC] p-4 sm:p-5 rounded-2xl border border-[#F0E8D9] space-y-3 shadow-inner">
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1.5">The Journey</p>
-                            <p className="text-slate-700 leading-relaxed text-[13px]">
-                              {day.journey}
-                            </p>
+                        {/* Segment line (only for non-last items) */}
+                        {idx !== tour.itinerary!.length - 1 && (
+                          <div className="absolute left-[19px] top-[52px] -bottom-[36px] w-[2px] bg-[#0E5A60]/20 z-0" />
+                        )}
+
+                        {/* Accordion Header Card */}
+                        <div className="pl-14 sm:pl-16">
+                          <div
+                            onClick={() => toggleDay(idx)}
+                            className={`bg-white rounded-2xl border ${isExpanded ? 'border-[#0E5A60]/30 shadow-md' : 'border-slate-100 shadow-sm'} p-2 sm:p-2.5 flex items-center justify-between cursor-pointer hover:border-[#0E5A60]/50 hover:shadow-md transition-all duration-300`}
+                          >
+                            <div className="flex items-center gap-3 sm:gap-4">
+                              {/* Small Thumbnail Image */}
+                              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-slate-100 relative">
+                                <img src={tour.image} alt={day.title} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: `center ${idx * 25}%` }} />
+                              </div>
+
+                              <div>
+                                <div className="flex items-center gap-1.5 mb-0.5">
+                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{day.day}</span>
+                                  <span className="w-1 h-1 rounded-full bg-slate-300" />
+                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{trip.destination}</span>
+                                </div>
+                                <h4 className="font-semibold text-[13px] sm:text-[15px] text-[#0E5A60] leading-tight group-hover:text-[#0E5A60] transition-colors">
+                                  {day.title}
+                                </h4>
+                              </div>
+                            </div>
+
+                            {/* Chevron Down Button */}
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mr-2 transition-colors duration-300 ${isExpanded ? 'bg-[#0E5A60]/10 text-[#0E5A60]' : 'bg-slate-50 text-slate-400 group-hover:bg-[#0E5A60]/10 group-hover:text-[#0E5A60]'}`}>
+                              <ChevronDown size={16} className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                            </div>
                           </div>
-                          <div className="pt-3 border-t border-[#E8DCC8]">
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-[#D96C2C] mb-1.5">Community Moment</p>
-                            <p className="text-slate-600 leading-relaxed italic text-[12px]">
-                              {day.community}
-                            </p>
+
+                          {/* Accordion Content */}
+                          <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'}`}>
+                            <div className="bg-[#FAF4EC] p-4 sm:p-5 rounded-2xl border border-[#F0E8D9] space-y-3 shadow-inner">
+                              <div>
+                                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1.5">The Journey</p>
+                                <p className="text-slate-700 leading-relaxed text-[13px]">
+                                  {day.journey}
+                                </p>
+                              </div>
+                              <div className="pt-3 border-t border-[#E8DCC8]">
+                                <p className="text-[10px] font-bold uppercase tracking-widest text-[#D96C2C] mb-1.5">Community Moment</p>
+                                <p className="text-slate-600 leading-relaxed italic text-[12px]">
+                                  {day.community}
+                                </p>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      </div>
-                    </div>
-                  )})
+                    )
+                  })
                 ) : (
                   <p className="text-slate-500 italic">Detailed itinerary coming soon.</p>
                 )}
@@ -520,8 +520,8 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                       key={tab.id}
                       onClick={() => setActiveDetailTab(tab.id as any)}
                       className={`flex-1 py-4 px-5 font-bold text-[13px] whitespace-nowrap transition-colors border-b-[3px] ${activeDetailTab === tab.id
-                          ? "border-[#0E5A60] text-[#0E5A60] bg-white"
-                          : "border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+                        ? "border-[#0E5A60] text-[#0E5A60] bg-white"
+                        : "border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                         }`}
                     >
                       {tab.label}
@@ -624,7 +624,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
           {/* Right Column: Sticky Booking Widget */}
           <div className="lg:col-span-4">
             <div className="sticky top-24 bg-white p-4 rounded-[32px] border border-slate-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex flex-col max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              
+
               {/* Top Summary Info */}
               <div className="bg-slate-50 px-3 py-3 rounded-2xl mb-4 flex items-center justify-between border border-slate-100">
                 <div className="flex items-center gap-3">
@@ -636,7 +636,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                     <p className="text-sm font-bold text-[#0E5A60]">{tour.nextDeparture || "Upcoming"}</p>
                   </div>
                 </div>
-                
+
                 <div className="h-8 w-[1px] bg-slate-200"></div>
 
                 <div className="flex items-center gap-3">
@@ -658,6 +658,29 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
 
         </div>
       </div>
+
+      {/* Explore More Journeys Section */}
+      <div className="py-16 lg:py-24 mt-12 border-t border-[#0E5A60]/10">
+        <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+          <div className="mb-10 lg:mb-14">
+            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#0E5A60]">
+              Explore Other Journeys
+            </h2>
+            <p className="text-slate-600 mt-3 text-lg font-sans">
+              Find your next adventure with these handcrafted experiences.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {otherTrips.map(card => (
+              <div key={card.id} className="h-full">
+                <TripCardItem card={card} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
