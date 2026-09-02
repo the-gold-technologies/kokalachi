@@ -439,6 +439,7 @@ export function HeroSection() {
                   </div>
                 </div>
               )}
+              
             </div>
 
             {/* Search CTA Button */}
