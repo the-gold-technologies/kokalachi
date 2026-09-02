@@ -19,80 +19,119 @@ import {
   Image as ImageIcon,
   Compass,
   Phone,
+  Mountain,
+  ShieldCheck,
+  Heart,
+  ArrowRight,
 } from "lucide-react";
 
 interface DropdownItem {
   title: string;
+  tag?: string;
   desc: string;
-  icon: React.ReactNode;
+  image: string;
   href?: string;
 }
 
 const dropdownData: Record<string, DropdownItem[]> = {
-  Features: [
+  Destinations: [
     {
-      title: "Destinations",
-      desc: "Browse our 8 trending worldwide travel spots.",
-      icon: <MapPin className="w-4 h-4 text-[#3E7C7A]" />,
+      title: "All Journeys",
+      tag: "Explore All",
+      desc: "Browse our complete slow-travel collection.",
+      image:
+        "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300",
+      href: "/journeys",
+    },
+    {
+      title: "Kashmir & Ladakh",
+      tag: "Mountains",
+      desc: "Glacial valleys, houseboats & serene passes.",
+      image:
+        "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=80&w=300",
+      href: "/journeys",
+    },
+    {
+      title: "Meghalaya & Spiti",
+      tag: "Wilderness",
+      desc: "Misty waterfalls, rugged peaks & raw nature.",
+      image:
+        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&q=80&w=300",
+      href: "/journeys",
+    },
+    {
+      title: "Kerala & South",
+      tag: "Tropical",
+      desc: "Lush tea hills, serene lagoons & coastlines.",
+      image:
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=300",
+      href: "/journeys",
+    },
+  ],
+  Tours: [
+    {
+      title: "Upcoming Departures",
+      tag: "2026 Trips",
+      desc: "Handcrafted dates & itineraries for travellers.",
+      image:
+        "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300",
       href: "/#upcoming-journeys",
     },
     {
-      title: "Reviews",
-      desc: "Read experiences from our global community.",
-      icon: <Star className="w-4 h-4 text-[#D97745]" />,
-      href: "/#moments",
-    },
-    {
-      title: "Articles",
-      desc: "Weekly travel tips, hacks, and advisories.",
-      icon: <FileText className="w-4 h-4 text-[#3E7C7A]" />,
-      href: "/about#why-we-started",
-    },
-  ],
-  Pages: [
-    {
-      title: "About Us",
-      desc: "Learn about our mission and visual story.",
-      icon: <Info className="w-4 h-4 text-[#D97745]" />,
-      href: "/about",
-    },
-    {
-      title: "Services",
-      desc: "Tailored tour planning and booking options.",
-      icon: <Briefcase className="w-4 h-4 text-[#3E7C7A]" />,
+      title: "How Kokalachi Works",
+      tag: "Zero Stress",
+      desc: "Simple 3-step frictionless travel flow.",
+      image:
+        "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=300",
       href: "/#how-it-works",
     },
     {
-      title: "Our Guides",
-      desc: "Meet our certified adventure and safety experts.",
-      icon: <Users className="w-4 h-4 text-[#3E7C7A]" />,
-      href: "/about#meet-the-founder",
+      title: "Zero-Awkwardness",
+      tag: "Solo Friendly",
+      desc: "Vetted, curated groups of like-minded travellers.",
+      image:
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300",
+      href: "/about#what-we-believe",
     },
     {
-      title: "FAQs",
-      desc: "Find budget guides and answers to questions.",
-      icon: <HelpCircle className="w-4 h-4 text-[#D97745]" />,
-      href: "/#good-company",
+      title: "Custom Group Trips",
+      tag: "Private",
+      desc: "Private handcrafted travel for your circle.",
+      image:
+        "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300",
+      href: "/contact",
     },
   ],
   Blogs: [
     {
-      title: "Travel Advisories",
-      desc: "Up-to-date entry rules and safety guides.",
-      icon: <AlertTriangle className="w-4 h-4 text-[#3E7C7A]" />,
-      href: "/about#what-we-believe",
-    },
-    {
-      title: "Scenic Photos",
-      desc: "Visual gallery from our latest traveler tracks.",
-      icon: <ImageIcon className="w-4 h-4 text-[#D97745]" />,
+      title: "Traveler Memoirs",
+      tag: "Real Stories",
+      desc: "Unfiltered reflections from past travellers.",
+      image:
+        "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=300",
       href: "/#moments",
     },
     {
-      title: "Cultural Guides",
-      desc: "Deep dive into local traditions and foods.",
-      icon: <Compass className="w-4 h-4 text-[#3E7C7A]" />,
-      href: "/about#join-the-tribe",
+      title: "Moments Captured",
+      tag: "Photo Diary",
+      desc: "Visual memories, polaroids & photo tracks.",
+      image: "/about_hero_polaroid.jpg",
+      href: "/#moments",
+    },
+    {
+      title: "Why We Started",
+      tag: "Our Vision",
+      desc: "The story, values & beliefs behind our tribe.",
+      image: "/about_why_started.jpg",
+      href: "/about#why-we-started",
+    },
+    {
+      title: "Packing & Route Guides",
+      tag: "Travel Tips",
+      desc: "Essential advice for mountain & slow trails.",
+      image:
+        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=300",
+      href: "/about#what-we-believe",
     },
   ],
 };
@@ -109,10 +148,15 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (window.scrollY > 40) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
+
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -130,9 +174,10 @@ export function Navbar() {
 
   const navLinks = [
     { name: "About Us", href: "/about", hasDropdown: false },
-    { name: "Features", href: "/#upcoming-journeys", hasDropdown: true },
-    { name: "Pages", href: "/about", hasDropdown: true },
+    { name: "Destinations", href: "/journeys", hasDropdown: true },
+    { name: "Tours", href: "/#upcoming-journeys", hasDropdown: true },
     { name: "Blogs", href: "/#moments", hasDropdown: true },
+    { name: "Community", href: "/#good-company", hasDropdown: false },
   ];
 
   // We want the Navbar to always have the solid white pill background 
@@ -144,22 +189,23 @@ export function Navbar() {
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isSolid
-            ? "top-4 w-[95%] max-w-[1220px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3.5 px-5 md:px-6"
+            ? "top-4 w-[95%] max-w-[1300px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3.5 px-6 md:px-8"
             : "top-0 w-full max-w-full bg-transparent py-6"
         }`}
       >
         <div
           className={`mx-auto flex items-center justify-between ${
-            isSolid ? "w-full" : "container px-6 md:px-12 lg:px-16"
+            isSolid ? "w-full" : "container mx-auto px-6 md:px-12 lg:px-30"
           }`}
         >
           {/* Main Logo Image */}
           <Link href="/" className="flex items-center gap-3">
             <img
-              src="/logo-clean.png"
+              src={isSolid ? "/logo-clean.png" : "/clean_logo_lighter.png"}
               alt="Kokalachi Logo"
-              className={`
-                w-auto object-contain hover:scale-105 transition-transform h-6`}
+              className={`w-auto object-contain hover:scale-105 transition-transform ${
+                isSolid ? "h-6" : "h-7"
+              }`}
             />
           </Link>
 
@@ -176,37 +222,74 @@ export function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="flex items-center gap-1 font-semibold text-xs uppercase tracking-widest text-[#0E5A60] hover:text-[#C85A24] transition-colors duration-300 font-montserrat"
+                  className={`flex items-center gap-1 font-medium text-xs uppercase tracking-widest transition-colors duration-300 font-montserrat ${
+                    isSolid
+                      ? "text-[#0E5A60] hover:text-[#C85A24]"
+                      : "text-white/90 hover:text-white"
+                  }`}
                 >
                   {link.name}
                   {link.hasDropdown && (
-                    <ChevronDown size={13} className="opacity-75" />
+                    <ChevronDown size={16} className="opacity-90" strokeWidth={2} />
                   )}
                 </Link>
 
                 {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
                 {link.hasDropdown && activeDropdown === link.name && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    <div className="bg-[#FFFDF9] text-[#0E5A60] rounded-2xl shadow-[0_15px_50px_rgba(28,43,56,0.15)] p-5 border border-amber-900/10 w-[460px] grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-3 duration-200">
+                    <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-4 sm:p-5 w-[620px] grid grid-cols-2 gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
                       {dropdownData[link.name]?.map((item) => (
                         <Link
                           key={item.title}
                           href={item.href || "#"}
-                          className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-[#FAF5EE] transition-all group/item"
+                          onClick={() => setActiveDropdown(null)}
+                          className="flex items-center gap-3.5 p-2.5 rounded-2xl hover:bg-[#FAF6F0] border border-transparent hover:border-amber-900/10 transition-all duration-300 group/item text-left"
                         >
-                          <div className="w-9 h-9 shrink-0 rounded-lg bg-[#C85A24]/10 group-hover/item:bg-white flex items-center justify-center transition-colors">
-                            {item.icon}
+                          {/* Rich Visual Image Thumbnail */}
+                          <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shrink-0 shadow-sm relative bg-slate-100">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity" />
                           </div>
-                          <div className="flex flex-col text-left">
-                            <span className="font-bold text-[#0E5A60] text-xs leading-tight group-hover/item:text-[#C85A24] transition-colors mb-0.5">
+
+                          {/* Content */}
+                          <div className="flex flex-col min-w-0 flex-1">
+                            {item.tag && (
+                              <span className="text-[9.5px] font-bold uppercase tracking-wider text-[#D96C2C] bg-[#D96C2C]/10 px-2 py-0.5 rounded-full inline-block mb-1 w-fit">
+                                {item.tag}
+                              </span>
+                            )}
+                            <span className="font-bold text-xs sm:text-[13px] text-[#0E5A60] group-hover/item:text-[#D96C2C] leading-snug transition-colors line-clamp-1">
                               {item.title}
                             </span>
-                            <span className="text-[10px] text-[#0E5A60]/70 leading-normal font-medium">
+                            <span className="text-[11px] text-slate-500 leading-snug line-clamp-2 mt-0.5">
                               {item.desc}
                             </span>
                           </div>
                         </Link>
                       ))}
+
+                      {/* Dropdown Footer CTA Strip */}
+                      <div className="col-span-2 pt-3 mt-1 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
+                        <span>
+                          {link.name === "Destinations"
+                            ? "Handcrafted slow-travel destinations across India"
+                            : link.name === "Tours"
+                            ? "Curated solo-friendly group adventures & retreats"
+                            : "Real memories & stories from the Kokalachi tribe"}
+                        </span>
+                        <Link
+                          href={link.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="font-bold text-[#0E5A60] hover:text-[#D96C2C] flex items-center gap-1.5 transition-colors shrink-0"
+                        >
+                          <span>Explore all</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -218,7 +301,11 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               href="/contact"
-              className="flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider rounded-full px-6 py-2.5 bg-[#0E5A60] hover:bg-[#061C29] text-white shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans"
+              className={`flex items-center justify-center gap-2 font-medium text-xs uppercase tracking-widest rounded-full px-6 py-3 shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans ${
+                isSolid
+                  ? "bg-[#0E5A60] hover:bg-[#061C29] text-white border border-transparent"
+                  : "bg-[#153448] hover:bg-[#0B2A3D] text-white border border-white/20"
+              }`}
             >
               <span>Contact Us</span>
             </Link>
@@ -229,7 +316,11 @@ export function Navbar() {
             <button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(true)}
-              className="p-1 text-[#0E5A60] hover:text-[#C85A24] transition-colors"
+              className={`p-1 transition-colors ${
+                isSolid
+                  ? "text-[#0E5A60] hover:text-[#C85A24]"
+                  : "text-white hover:text-white/80"
+              }`}
               aria-label="Open menu"
             >
               <Menu size={26} />
@@ -330,16 +421,25 @@ export function Navbar() {
 
                 {/* Mobile Dropdown Accordion List */}
                 {link.hasDropdown && expandedMobileDropdown === link.name && (
-                  <div className="flex flex-col pl-6 pr-4 py-1.5 gap-1.5 border-l-2 border-[#3E7C7A]/20 ml-4 mt-1 transition-all duration-300">
+                  <div className="flex flex-col pl-3 pr-2 py-2 gap-2 border-l-2 border-[#3E7C7A]/20 ml-4 mt-1 transition-all duration-300">
                     {dropdownData[link.name]?.map((item) => (
                       <Link
                         key={item.title}
                         href={item.href || "#"}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 py-2.5 px-3 text-sm font-bold text-[#6B7C85] hover:text-[#3E7C7A] hover:bg-[#3E7C7A]/5 rounded-lg transition-colors"
+                        className="flex items-center gap-3 p-2 text-sm font-semibold text-slate-700 hover:text-[#0E5A60] hover:bg-white/70 rounded-xl transition-colors"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3E7C7A]"></span>
-                        <span>{item.title}</span>
+                        <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-xs bg-slate-100">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-xs font-bold text-[#0E5A60] truncate">{item.title}</span>
+                          <span className="text-[10.5px] text-slate-500 truncate">{item.desc}</span>
+                        </div>
                       </Link>
                     ))}
                   </div>
