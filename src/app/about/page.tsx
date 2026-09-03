@@ -35,9 +35,6 @@ export default function AboutPage() {
         {/* Step 5: Join the Tribe (Final CTA) */}
         <JoinTribeSection />
       </main>
-
-      {/* Brand Footer */}
-      <Footer />
     </div>
   );
 }

@@ -4,20 +4,12 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 
 export function MeetFounderSection() {
-  const values = [
-    { num: "01", text: "Curated Compatibility First" },
-    { num: "02", text: "Intimate & Cozy Group Dynamics" },
-    { num: "03", text: "Verified & Safe Solo Travellers" },
-    { num: "04", text: "Slow, Immersive Local Experiences" },
-    { num: "05", text: "Genuine Human Connection & Warmth" },
-  ];
-
   return (
     <section
       id="meet-the-founder"
       className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden select-none"
     >
-      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 max-w-6xl">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Founder Photo Card with Abstract Geometric Accent Shapes */}
           <div className="lg:col-span-5 relative flex justify-center">
@@ -30,7 +22,7 @@ export function MeetFounderSection() {
             <div className="relative w-full max-w-sm sm:max-w-md h-[440px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl bg-slate-100 z-10 border border-amber-900/10 group">
               <img
                 src="/about_meet_founder.jpg"
-                alt="Kokalachi Founder"
+                alt="Kokalachi Founders"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
 
@@ -38,10 +30,10 @@ export function MeetFounderSection() {
               <div className="absolute bottom-5 left-5 right-5 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-lg flex items-center justify-between">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#C85A24] font-montserrat block">
-                    FOUNDER &amp; CHIEF CURATOR
+                    CO-FOUNDERS
                   </span>
                   <h4 className="text-base font-bold text-[#0E5A60] font-serif">
-                    Kokalachi Travel Tribe
+                    Rachit &amp; Hitesh
                   </h4>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
@@ -51,48 +43,46 @@ export function MeetFounderSection() {
             </div>
           </div>
 
-          {/* Right Column: Narrative & Numbered Values List */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          {/* Right Column: Narrative */}
+          <div className="lg:col-span-7 space-y-5 text-left">
             {/* Category Tag */}
             <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block">
-              MEET THE FOUNDER &amp; TEAM
+              MEET THE FOUNDERS
             </span>
 
             {/* Bold Headline matching website typography */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#0E5A60] leading-tight font-serif">
-              The People Behind Every Journey
+              Some ideas take decades to find their moment.
             </h2>
 
-            {/* Subtitle matching website typography */}
-            <p className="text-[#0E5A60]/85 text-base sm:text-lg font-sans leading-relaxed">
-              &quot;I created Kokalachi after watching so many amazing people
-              put off their travel dreams simply because they didn&apos;t have
-              a group to go with. We build journeys where no one travels as a
-              stranger.&quot;
-            </p>
-
-            {/* Numbered Values List */}
-            <div className="space-y-3 pt-1">
-              {values.map((v, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 text-[#0E5A60]/85 font-sans font-medium text-base sm:text-lg hover:text-[#0E5A60] transition-colors"
-                >
-                  <span className="text-[#C85A24] font-bold font-mono text-base sm:text-lg w-8 shrink-0">
-                    {v.num}.
-                  </span>
-                  <span>{v.text}</span>
-                </div>
-              ))}
+            <div className="space-y-3 text-[#0E5A60]/85 text-base sm:text-md font-sans leading-relaxed">
+              <p className="text-xl font-medium">
+                Kokalachi is one of them.
+              </p>
+              <p>
+                We&apos;ve been friends for over 35 years through countless conversations, road trips, family holidays, and adventures along the way. And somewhere in all of it, we noticed the same thing, again and again: the destination was rarely what stayed with us. It was always the people we shared it with.
+              </p>
+              <p>
+                Hitesh has spent 28 years in the travel industry, designing holidays and helping thousands of travellers explore the world. Rachit has spent his own years chasing curiosity hiking mountains, riding scenic highways, chasing adventure sports, and finding the hidden stays most travellers never discover.
+              </p>
+              <p>
+                Between the two of us, one thing became clear travel isn&apos;t just about seeing new places. It&apos;s about finding the people who make those places unforgettable.
+              </p>
+              <p>
+                That&apos;s why we built Kokalachi. Not as another travel company but as a community where meaningful journeys begin with meaningful people.
+              </p>
+              <p className="font-medium text-[#C85A24]">
+                We hope you&apos;ll join us on one.
+              </p>
             </div>
 
-            {/* Handwritten Footer Line (Single Line) */}
-            <div className="pt-6 border-t border-amber-900/10">
+            {/* Handwritten Footer Line */}
+            <div className="">
               <p className="font-script text-xl sm:text-2xl lg:text-[26px] text-[#0E5A60] font-bold flex flex-wrap items-center gap-2 whitespace-nowrap">
-                <span>Kokalachi Curation Team</span>
+                <span>Rachit Ahuja &amp; Hitesh Kalra</span>
                 <span className="text-[#C85A24] font-normal mx-1">—</span>
                 <span className="text-[#C85A24]">
-                  Delhi &amp; Worldwide Operations ♡
+                  Co-Founders, Kokalachi ♡
                 </span>
               </p>
             </div>
