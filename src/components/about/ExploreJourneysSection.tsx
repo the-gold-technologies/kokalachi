@@ -3,6 +3,7 @@
 import React from "react";
 import { tripCards } from "@/data/trips";
 import { TripCardItem } from "@/components/TripCardItem";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 
 export function ExploreJourneysSection() {
   const featuredTrips = tripCards.slice(0, 3);
@@ -14,8 +15,14 @@ export function ExploreJourneysSection() {
           <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-3">
             UPCOMING TRIPS
           </span>
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#0E5A60]">
-            Explore Our Journeys
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px]  font-serif font-semibold text-[#0E5A60]">
+            Explore Our {" "}
+            <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
+              Journeys.
+              <div className="absolute bottom-1 left-0 w-full">
+                 <TitleUnderline />
+              </div>
+            </span>
           </h2>
           <p className="text-slate-600 mt-3 text-lg font-sans max-w-2xl ">
             Find your next adventure with these handcrafted experiences.

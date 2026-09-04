@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+import { TitleUnderline } from "../ui/TitleUnderline";
 
 export function MeetFounderSection() {
   return (
@@ -44,15 +45,21 @@ export function MeetFounderSection() {
           </div>
 
           {/* Right Column: Narrative */}
-          <div className="lg:col-span-7 space-y-5 text-left">
+          <div className="lg:col-span-7 space-y-5 text-left pr-6">
             {/* Category Tag */}
             <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block">
               MEET THE FOUNDERS
             </span>
 
             {/* Bold Headline matching website typography */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#0E5A60] leading-tight font-serif">
-              Some ideas take decades to find their moment.
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px]  font-medium text-[#0E5A60] leading-tight font-serif">
+              Some ideas take decades to find their {" "}
+              <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
+                moment.
+                <div className="absolute bottom-1 left-0 w-full">
+                   <TitleUnderline />
+                </div>
+              </span>
             </h2>
 
             <div className="space-y-3 text-[#0E5A60]/85 text-base sm:text-md font-sans leading-relaxed">

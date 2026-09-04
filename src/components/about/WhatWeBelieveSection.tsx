@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Users, Mountain, ShieldCheck, Heart, UserPlus } from "lucide-react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 
 export function WhatWeBelieveSection() {
   const pillars = [
@@ -59,8 +60,14 @@ export function WhatWeBelieveSection() {
                 </span>
               </div>
               
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
-                The Kokalachi Way
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px]  font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
+                The Kokalachi {" "}
+                <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
+                 Way
+                  <div className="absolute bottom-1 left-0 w-full">
+                     <TitleUnderline />
+                  </div>
+                </span>
               </h2>
               
               <p className="text-[#4A5568] text-[15px] sm:text-[16px] leading-relaxed max-w-2xl">

@@ -12,6 +12,7 @@ import {
   ChevronRight,
   Check,
 } from "lucide-react";
+import { TitleUnderline } from "@/components/ui/TitleUnderline";
 
 export function HeroSection() {
   const router = useRouter();
@@ -169,11 +170,14 @@ export function HeroSection() {
           </span>
 
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[64px] font-normal text-white leading-[1.12] tracking-tight font-serif">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[64px] font-normal text-white leading-[1] tracking-tight font-serif">
             Find your circle. <br />
             Find your next{" "}
-            <span className="italic font-serif text-[#F3B748]">
+            <span className="relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]">
               journey.
+              <div className="absolute bottom-1 left-0 w-full">
+                 <TitleUnderline />
+              </div>
             </span>
           </h1>
 

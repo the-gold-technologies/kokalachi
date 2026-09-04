@@ -33,14 +33,8 @@ export function JoinTribeSection() {
             </div>
 
             {/* Main Title */}
-            <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium text-[#0E5A60] leading-[1.12] font-serif mb-6 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-medium text-[#0E5A60] leading-[1.12] font-serif mb-6 tracking-tight">
               Your next journey is <br/>waiting. So are your people.
-              <span className="relative inline-block text-[#0E5A60]">
-               
-                <div className="absolute -bottom-1.5 left-0 w-full">
-                   <TitleUnderline />
-                </div>
-              </span>
             </h2>
 
             {/* Paragraph Copy */}

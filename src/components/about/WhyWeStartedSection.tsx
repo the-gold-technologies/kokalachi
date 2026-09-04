@@ -51,12 +51,12 @@ export function WhyWeStartedSection() {
                 </span>
               </div>
               
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
-                The problem{" "}<br/> we  {" "}
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
+                The problem{" "}we couldn't {" "}
                 
-                <span className="relative inline-block text-[#0E5A60]">
-                 couldn't ignore.
-                  <div className="absolute -bottom-1.5 left-0 w-full">
+                <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
+                 ignore.
+                  <div className="absolute bottom-1 left-0 w-full">
                      <TitleUnderline />
                   </div>
                 </span>
