@@ -10,7 +10,7 @@ export function ExploreJourneysSection() {
 
   return (
     <section className="py-16 bg-white relative">
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+      <div className="container mx-auto px-4 md:px-0 max-w-7xl">
         <div className="mb-10 lg:mb-14 text-left">
           <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-3">
             UPCOMING TRIPS
