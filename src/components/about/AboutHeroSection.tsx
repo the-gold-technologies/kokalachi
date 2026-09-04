@@ -47,10 +47,10 @@ export function AboutHeroSection() {
               </div>
 
               {/* Main Editorial Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-medium text-[#0A2640] leading-[1.15] font-serif tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
                 Built on Friendships.<br />
                 Made for{" "}
-                <span className="relative inline-block font-script font-medium text-[1.22em] text-[#0A2640]">
+                <span className="relative inline-block font-script font-medium text-[1.22em] text-[#0E5A60]">
                   Meaningful
                   <div className="absolute -bottom-1 left-0 w-full">
                      <TitleUnderline />
@@ -71,8 +71,8 @@ export function AboutHeroSection() {
                 Our Story <ArrowRight size={18} />
               </button>
               
-              <button className="flex items-center gap-3 text-[#0A2640] font-medium hover:text-[#D35400] transition-colors group">
-                <div className="w-10 h-10 rounded-full border border-[#0A2640] group-hover:border-[#D35400] flex items-center justify-center transition-colors">
+              <button className="flex items-center gap-3 text-[#0E5A60] font-medium hover:text-[#D35400] transition-colors group">
+                <div className="w-10 h-10 rounded-full border border-[#0E5A60] group-hover:border-[#D35400] flex items-center justify-center transition-colors">
                   <Play size={18} />
                 </div>
                 <span className="text-sm">Watch Our Journey</span>

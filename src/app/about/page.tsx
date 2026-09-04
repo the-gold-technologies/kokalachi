@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { AboutHeroSection } from "@/components/about/AboutHeroSection";
 import { WhyWeStartedSection } from "@/components/about/WhyWeStartedSection";
 import { WhatWeBelieveSection } from "@/components/about/WhatWeBelieveSection";
 import { MeetFounderSection } from "@/components/about/MeetFounderSection";
+import { ExploreJourneysSection } from "@/components/about/ExploreJourneysSection";
 import { JoinTribeSection } from "@/components/about/JoinTribeSection";
 
 export const metadata: Metadata = {
@@ -32,7 +32,10 @@ export default function AboutPage() {
         {/* Step 4: Meet the Founder */}
         <MeetFounderSection />
 
-        {/* Step 5: Join the Tribe (Final CTA) */}
+        {/* Step 5: Explore Our Journeys */}
+        <ExploreJourneysSection />
+
+        {/* Step 6: Join the Tribe (Final CTA) */}
         <JoinTribeSection />
       </main>
     </div>

@@ -30,7 +30,6 @@ export function JoinTribeSection() {
               <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block">
                 JOIN THE TRIBE
               </span>
-              <div className="h-[1px] w-12 bg-[#D35400]/30"></div>
             </div>
 
             {/* Main Title */}

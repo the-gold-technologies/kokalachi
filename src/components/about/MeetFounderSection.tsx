@@ -7,7 +7,7 @@ export function MeetFounderSection() {
   return (
     <section
       id="meet-the-founder"
-      className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden select-none"
+      className="py-16 bg-white relative overflow-hidden select-none"
     >
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -46,7 +46,7 @@ export function MeetFounderSection() {
           {/* Right Column: Narrative */}
           <div className="lg:col-span-7 space-y-5 text-left">
             {/* Category Tag */}
-            <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block">
+            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block">
               MEET THE FOUNDERS
             </span>
 
