@@ -446,7 +446,7 @@ export function HeroSection() {
             <button
               type="button"
               onClick={handleSearch}
-              className="bg-[#153448] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl md:rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0"
+              className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl md:rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0"
             >
               <Search className="w-4 h-4 text-white" />
               <span>SEARCH TRIPS</span>

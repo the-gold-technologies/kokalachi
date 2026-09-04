@@ -189,7 +189,7 @@ export function Navbar() {
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
           isSolid
-            ? "top-4 w-[95%] max-w-[1300px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3.5 px-6 md:px-8"
+            ? "top-4 w-[90%] max-w-[1300px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3 pl-6 pr-3 "
             : "top-0 w-full max-w-full bg-transparent py-6"
         }`}
       >
@@ -303,8 +303,8 @@ export function Navbar() {
               href="/contact"
               className={`flex items-center justify-center gap-2 font-medium text-xs uppercase tracking-widest rounded-full px-6 py-3 shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans ${
                 isSolid
-                  ? "bg-[#0E5A60] hover:bg-[#061C29] text-white border border-transparent"
-                  : "bg-[#153448] hover:bg-[#0B2A3D] text-white border border-white/20"
+                  ? "bg-[#0E5A60] hover:bg-[#0B2A3D] text-white border border-transparent"
+                  : "bg-[#0E5A60] hover:bg-[#0B2A3D] text-white border border-white/20"
               }`}
             >
               <span>Contact Us</span>

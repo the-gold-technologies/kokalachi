@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF5EE] text-slate-900 antialiased selection:bg-[#0E5A60] selection:text-white">
+    <div className="min-h-screen flex flex-col  text-slate-900 antialiased  selection:text-white">
       {/* Navigation Header */}
       <Navbar />
 

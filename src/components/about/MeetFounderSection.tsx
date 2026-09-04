@@ -9,7 +9,7 @@ export function MeetFounderSection() {
       id="meet-the-founder"
       className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden select-none"
     >
-      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 max-w-7xl">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Founder Photo Card with Abstract Geometric Accent Shapes */}
           <div className="lg:col-span-5 relative flex justify-center">
