@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
+import { createBooking } from "@/actions/booking";
 import {
   MapPin,
   Calendar,
@@ -28,6 +30,14 @@ import { TripCardItem } from "@/components/TripCardItem";
 
 function BookingWidget({ tour }: { tour: TourPackage }) {
   const [guests, setGuests] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Determine base prices
   const basePrice = typeof tour.price === "number" ? tour.price : 49999;
@@ -38,71 +48,174 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
   const tcs = tour.tcsPercent ? (roomTotal * (tour.tcsPercent / 100)) : 0;
   const finalTotal = roomTotal + gst + tcs;
 
+  const handleBookingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      specialRequests: formData.get("specialRequests") as string,
+      guests,
+      tripId: tour.id.toString(),
+      tripName: tour.title,
+      totalAmount: finalTotal,
+    };
+    
+    const result = await createBooking(data);
+    if (result.success) {
+      setSubmitSuccess(true);
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setSubmitSuccess(false);
+      }, 3000);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+    setIsSubmitting(false);
+  };
+
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-full justify-between gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-      {/* Group Size Counter */}
-      <div className="flex items-center justify-between py-2 flex-shrink-0">
-        <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5">
-          <Users size={15} className="text-[#0E5A60]" /> Group Size
-        </h4>
-        <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-full px-2 py-1">
-          <button
-            type="button"
-            onClick={() => setGuests(Math.max(1, guests - 1))}
-            className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
-          >
-            <Minus size={12} />
-          </button>
-          <span className="font-bold text-sm text-[#0E5A60] w-3 text-center">{guests}</span>
-          <button
-            type="button"
-            onClick={() => setGuests(Math.min(10, guests + 1))}
-            className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
-          >
-            <Plus size={12} />
-          </button>
-        </div>
-      </div>
-
-      {/* Calculation Breakdown Box */}
-      <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col flex-1 justify-between min-h-[220px]">
-        <div>
-          <div className="mb-4 pb-4 border-b border-slate-200">
-            <div className="flex items-center justify-between">
-              <span className="text-[13px] font-medium text-slate-600">Costing</span>
-              <span className="font-bold text-[13px] text-[#0E5A60]">₹{roomTotal.toLocaleString()}</span>
-            </div>
+    <>
+      <div className="flex flex-col flex-1 min-h-0 h-full justify-between gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {/* Group Size Counter */}
+        <div className="flex items-center justify-between py-2 flex-shrink-0">
+          <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5">
+            <Users size={15} className="text-[#0E5A60]" /> Group Size
+          </h4>
+          <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-full px-2 py-1">
+            <button
+              type="button"
+              onClick={() => setGuests(Math.max(1, guests - 1))}
+              className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
+            >
+              <Minus size={12} />
+            </button>
+            <span className="font-bold text-sm text-[#0E5A60] w-3 text-center">{guests}</span>
+            <button
+              type="button"
+              onClick={() => setGuests(Math.min(10, guests + 1))}
+              className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
+            >
+              <Plus size={12} />
+            </button>
           </div>
+        </div>
 
-          {/* Taxes & Fees */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-slate-500 font-medium">GST</span>
-              <span className="font-medium text-slate-700">₹{gst.toLocaleString()}</span>
-            </div>
-            {tour.tcsPercent ? (
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-500 font-medium">TCS {tour.tcsPercent}%</span>
-                <span className="font-medium text-slate-700">₹{tcs.toLocaleString()}</span>
+        {/* Calculation Breakdown Box */}
+        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col flex-1 justify-between min-h-[220px]">
+          <div>
+            <div className="mb-4 pb-4 border-b border-slate-200">
+              <div className="flex items-center justify-between">
+                <span className="text-[13px] font-medium text-slate-600">Costing</span>
+                <span className="font-bold text-[13px] text-[#0E5A60]">₹{roomTotal.toLocaleString()}</span>
               </div>
-            ) : null}
-          </div>
-        </div>
+            </div>
 
-        {/* Total Price & CTA */}
-        <div className="pt-4 border-t border-slate-200 mt-4 flex-shrink-0">
-          <div className="flex items-center justify-between mb-4">
-            <span className="font-bold text-base text-[#0E5A60]">Total</span>
-            <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
+            {/* Taxes & Fees */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-slate-500 font-medium">GST</span>
+                <span className="font-medium text-slate-700">₹{gst.toLocaleString()}</span>
+              </div>
+              {tour.tcsPercent ? (
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-500 font-medium">TCS {tour.tcsPercent}%</span>
+                  <span className="font-medium text-slate-700">₹{tcs.toLocaleString()}</span>
+                </div>
+              ) : null}
+            </div>
           </div>
 
-          <button className="w-full py-3.5 cursor-pointer bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group">
-            <span>Book Now</span>
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-          </button>
+          {/* Total Price & CTA */}
+          <div className="pt-4 border-t border-slate-200 mt-4 flex-shrink-0">
+            <div className="flex items-center justify-between mb-4">
+              <span className="font-bold text-base text-[#0E5A60]">Total</span>
+              <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
+            </div>
+
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="w-full py-3.5 cursor-pointer bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
+            >
+              <span>Book Now</span>
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Booking Form Modal */}
+      {isModalOpen && mounted && createPortal(
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" style={{ zIndex: 99999 }}>
+          <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-300">
+            <div className="flex items-center justify-between p-6 border-b border-slate-100">
+              <div>
+                <h3 className="text-xl font-bold text-[#0E5A60]">Book Your Journey</h3>
+                <p className="text-sm text-slate-500 mt-1">{tour.title}</p>
+              </div>
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-colors"
+              >
+                <X size={16} />
+              </button>
+            </div>
+            
+            {submitSuccess ? (
+              <div className="p-10 text-center flex flex-col items-center justify-center min-h-[300px]">
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                  <CheckCircle2 size={32} />
+                </div>
+                <h4 className="text-xl font-bold text-slate-800 mb-2">Booking Request Sent!</h4>
+                <p className="text-slate-600">Our team will reach out to you shortly to confirm your booking and process the payment.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleBookingSubmit} className="p-6 space-y-4">
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6 flex justify-between items-center">
+                  <span className="text-sm text-slate-600">Total for {guests} Guest{guests > 1 ? 's' : ''}</span>
+                  <span className="text-lg font-bold text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
+                </div>
+
+                <div>
+                  <label htmlFor="name" className="block text-sm font-bold text-slate-700 mb-1.5">Full Name</label>
+                  <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="John Doe" />
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-1.5">Email Address</label>
+                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="john@example.com" />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-1.5">WhatsApp Number</label>
+                    <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="+91 98765 43210" />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="specialRequests" className="block text-sm font-bold text-slate-700 mb-1.5">Special Requests (Optional)</label>
+                  <textarea id="specialRequests" name="specialRequests" rows={3} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="Any dietary requirements, medical conditions, or other requests..."></textarea>
+                </div>
+
+                <div className="pt-4">
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 bg-[#0E5A60] hover:bg-[#0A4348] disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold text-[15px] rounded-full shadow-md transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? "Submitting..." : "Confirm Booking Request"}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }
 

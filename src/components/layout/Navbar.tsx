@@ -138,6 +138,11 @@ const dropdownData: Record<string, DropdownItem[]> = {
 
 export function Navbar() {
   const pathname = usePathname();
+  
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+  
   const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
