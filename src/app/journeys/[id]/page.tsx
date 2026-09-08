@@ -28,72 +28,22 @@ import { TripCardItem } from "@/components/TripCardItem";
 
 function BookingWidget({ tour }: { tour: TourPackage }) {
   const [guests, setGuests] = useState(1);
-  const [roomType, setRoomType] = useState<"double" | "private">("double");
 
   // Determine base prices
   const basePrice = typeof tour.price === "number" ? tour.price : 49999;
-  const originalPrice = tour.originalPrice || basePrice + 4000;
-
-  const doublePrice = basePrice;
-  const privatePrice = basePrice + 13000; // E.g., 62,999
-
-  const selectedPrice = roomType === "double" ? doublePrice : privatePrice;
-  const roomName = roomType === "double" ? "Double Sharing Room" : "Private Room";
-
+  
   // Calculations
-  const roomTotal = selectedPrice * guests;
-  const gst = roomTotal * 0.05;
-  const tcs = roomTotal * 0.02;
-  const gatewayFee = roomTotal * 0.03;
-  const finalTotal = roomTotal + gst + tcs + gatewayFee;
+  const roomTotal = basePrice * guests;
+  const gst = (tour.gstAmount || 0) * guests;
+  const tcs = tour.tcsPercent ? (roomTotal * (tour.tcsPercent / 100)) : 0;
+  const finalTotal = roomTotal + gst + tcs;
 
   return (
     <div className="flex flex-col flex-1 min-h-0 h-full justify-between gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-      {/* Room Type Selection */}
-      <div className="flex flex-col gap-1.5 flex-shrink-0">
-        <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5 mb-1">
-          <Bed size={15} className="text-[#0E5A60]" /> Room Type
-        </h4>
-        <div className="space-y-2">
-          {/* Double Room Option */}
-          <label className={`flex items-center justify-between p-3 rounded-xl cursor-pointer border-[2px] transition-all ${roomType === "double" ? "border-[#D96C2C] bg-[#D96C2C]/10" : "border-slate-100 bg-white hover:border-slate-200"
-            }`}>
-            <div className="flex items-center gap-2.5">
-              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${roomType === "double" ? "border-[#D96C2C]" : "border-slate-300"
-                }`}>
-                {roomType === "double" && <div className="w-2 h-2 rounded-full bg-[#D96C2C]" />}
-              </div>
-              <span className="font-bold text-sm text-[#0E5A60]">Double Sharing</span>
-            </div>
-            <div className="text-right flex items-center gap-2">
-              <span className="text-[11px] text-slate-400 line-through">₹{originalPrice.toLocaleString()}</span>
-              <span className="font-bold text-sm text-[#0E5A60]">₹{doublePrice.toLocaleString()}</span>
-            </div>
-            <input type="radio" className="hidden" checked={roomType === "double"} onChange={() => setRoomType("double")} />
-          </label>
-
-          {/* Private Room Option */}
-          <label className={`flex items-center justify-between p-3 rounded-xl cursor-pointer border-[2px] transition-all ${roomType === "private" ? "border-[#D96C2C] bg-[#D96C2C]/10" : "border-slate-100 bg-white hover:border-slate-200"
-            }`}>
-            <div className="flex items-center gap-2.5">
-              <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${roomType === "private" ? "border-[#D96C2C]" : "border-slate-300"
-                }`}>
-                {roomType === "private" && <div className="w-2 h-2 rounded-full bg-[#D96C2C]" />}
-              </div>
-              <span className="font-bold text-sm text-[#0E5A60]">Private Room</span>
-            </div>
-            <div className="text-right">
-              <span className="font-bold text-sm text-[#0E5A60]">₹{privatePrice.toLocaleString()}</span>
-            </div>
-            <input type="radio" className="hidden" checked={roomType === "private"} onChange={() => setRoomType("private")} />
-          </label>
-        </div>
-      </div>
-
-      {/* Guests Counter */}
+      {/* Group Size Counter */}
       <div className="flex items-center justify-between py-2 flex-shrink-0">
         <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5">
-          <Users size={15} className="text-[#0E5A60]" /> Guests
+          <Users size={15} className="text-[#0E5A60]" /> Group Size
         </h4>
         <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-full px-2 py-1">
           <button
@@ -117,42 +67,33 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
       {/* Calculation Breakdown Box */}
       <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col flex-1 justify-between min-h-[220px]">
         <div>
-          <div className="mb-3">
+          <div className="mb-4 pb-4 border-b border-slate-200">
             <div className="flex items-center justify-between">
-              <span className="text-[13px] font-medium text-slate-600">{roomName} {guests} x ₹{selectedPrice.toLocaleString()}</span>
+              <span className="text-[13px] font-medium text-slate-600">Costing</span>
               <span className="font-bold text-[13px] text-[#0E5A60]">₹{roomTotal.toLocaleString()}</span>
             </div>
-            {roomType === "double" && (
-              <p className="text-[10px] text-[#D96C2C] font-medium flex items-center gap-1 mt-0.5">
-                <Tag size={10} />
-                Save ₹{((originalPrice - basePrice) * guests).toLocaleString()} total (Regular ₹{originalPrice.toLocaleString()}/person)
-              </p>
-            )}
           </div>
 
           {/* Taxes & Fees */}
-          <div className="space-y-1.5">
-            <h5 className="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-1.5">Taxes & Fees</h5>
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500 font-medium">GST 5%</span>
-              <span className="font-medium text-slate-700">₹{gst.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-slate-500 font-medium">GST</span>
+              <span className="font-medium text-slate-700">₹{gst.toLocaleString()}</span>
             </div>
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500 font-medium">TCS 2%</span>
-              <span className="font-medium text-slate-700">₹{tcs.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
-            </div>
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-500 font-medium">Gateway 3%</span>
-              <span className="font-medium text-slate-700">₹{gatewayFee.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
-            </div>
+            {tour.tcsPercent ? (
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-slate-500 font-medium">TCS {tour.tcsPercent}%</span>
+                <span className="font-medium text-slate-700">₹{tcs.toLocaleString()}</span>
+              </div>
+            ) : null}
           </div>
         </div>
 
         {/* Total Price & CTA */}
-        <div className="pt-4 border-t border-slate-200 mt-3 flex-shrink-0">
+        <div className="pt-4 border-t border-slate-200 mt-4 flex-shrink-0">
           <div className="flex items-center justify-between mb-4">
             <span className="font-bold text-base text-[#0E5A60]">Total</span>
-            <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+            <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
           </div>
 
           <button className="w-full py-3.5 cursor-pointer bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group">
@@ -605,18 +546,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
 
                   {activeDetailTab === "essentials" && (
                     <div className="space-y-8">
-                      {tour.meals && (
-                        <div>
-                          <h4 className="text-base font-bold text-[#0E5A60] mb-3">Meals</h4>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {tour.meals.map((meal, idx) => (
-                              <li key={idx} className="p-3 bg-slate-50 rounded-xl text-slate-600 text-[13px] leading-relaxed border border-slate-100">
-                                {meal}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+
                       {tour.whatToPack && (
                         <div>
                           <h4 className="text-base font-bold text-[#0E5A60] mb-3">What To Pack</h4>

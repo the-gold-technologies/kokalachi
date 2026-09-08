@@ -23,6 +23,8 @@ export interface TourPackage {
   weather?: string[];
   faqs?: { question: string; answer: string }[];
   highlights?: { icon: string; title: string; description: string }[];
+  gstAmount?: number;
+  tcsPercent?: number;
   gallery?: string[];
 }
 
@@ -65,7 +67,8 @@ export const tripCards: TripCardData[] = [
       location: "Kashmir",
       duration: "3 Nights / 4 Days",
       rating: 5,
-      price: "TBA",
+      price: 25999,
+      gstAmount: 360,
       originalPrice: null,
       image:
         "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800",
@@ -219,7 +222,8 @@ export const tripCards: TripCardData[] = [
       location: "Meghalaya",
       duration: "5 Nights / 6 Days",
       rating: 5,
-      price: "TBA",
+      price: 42999,
+      gstAmount: 540,
       originalPrice: null,
       image:
         "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?auto=format&fit=crop&q=85&w=800",
@@ -384,7 +388,8 @@ export const tripCards: TripCardData[] = [
       location: "Kerala",
       duration: "5 Nights / 6 Days",
       rating: 5,
-      price: "TBA",
+      price: 29999,
+      gstAmount: 360,
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1583513645242-25a32d451084?auto=format&fit=crop&q=85&w=800",
       category: "Coastal & Heritage",
@@ -546,7 +551,9 @@ export const tripCards: TripCardData[] = [
       location: "Bhutan",
       duration: "5 Nights / 6 Days",
       rating: 5,
-      price: "TBA",
+      price: 41000,
+      gstAmount: 900,
+      tcsPercent: 2,
       originalPrice: null,
       image: "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?auto=format&fit=crop&q=85&w=800",
       category: "Culture & Discovery",
