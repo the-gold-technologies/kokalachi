@@ -104,7 +104,7 @@ function TripCardItem({ card }: { card: TripCardData }) {
             </p>
             <div className="flex items-baseline gap-1">
               <span className="text-2xl font-black text-[#0E5A60]">
-                {card.price}
+                ₹{((card.tourPackage.price as number) || 49999).toLocaleString()}
               </span>
             </div>
           </div>

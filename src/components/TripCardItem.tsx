@@ -112,10 +112,7 @@ export function TripCardItem({ card }: { card: TripCardData }) {
             </p>
             <div className="flex items-baseline gap-2">
               <span className="text-xl font-black text-[#D96C2C] leading-none">
-                {card.price === "TBA" ? "₹49,999" : card.price}
-              </span>
-              <span className="text-xs text-slate-400 line-through font-semibold">
-                {card.price === "TBA" ? "₹55,000" : `₹${card.tourPackage.originalPrice?.toLocaleString() || "55,000"}`}
+                ₹{((card.tourPackage.price as number) || 49999).toLocaleString()}
               </span>
             </div>
           </div>

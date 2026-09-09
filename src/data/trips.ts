@@ -693,4 +693,135 @@ export const tripCards: TripCardData[] = [
       ]
     },
   },
+  {
+    id: 5,
+    slug: "udaipur",
+    destination: "Udaipur",
+    locationTag: "📍 Udaipur",
+    duration: "4 Days / 3 Nights",
+    groupSize: "20 Travellers",
+    dates: "1 – 4 Oct 2026",
+    price: "15,999",
+    vibeTags: ["Heritage", "Culture", "Scenic", "Road Trip", "Community"],
+    categories: ["Trending", "FirstTimers"],
+    images: [
+      "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1695956353120-54ce5e91632b?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1589901164570-f9de6556e1c1?auto=format&fit=crop&q=85&w=800"
+    ],
+    tourPackage: {
+      id: 5,
+      title: "The Majestic Sunsets | Udaipur · Royalty, Lakes & Connections",
+      subtitle: "Royal Havelis, Lakeside Sunsets, an Overnight Trip that helps you meet new people sharing the love for travel, thereby turning strangers into friends",
+      location: "Udaipur",
+      duration: "4 Days / 3 Nights",
+      rating: 4.9,
+      price: 15999,
+      originalPrice: 18999,
+      gstAmount: 360,
+      image: "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?auto=format&fit=crop&q=85&w=800",
+      category: "Heritage",
+      tag: "Community",
+      tagColor: "bg-amber-100 text-amber-800",
+      spotsLeft: 20,
+      nextDeparture: "1 Oct 2026",
+      hook: "1st Oct, 2026 - (Thursday) Night Departure via Tempo Traveller to Udaipur",
+      overview: [
+        "The Majestics Sunsets is a 3-night, 4-day road trip to the City of Lakes — built around the ideation that the journey towards this royal destination matters equally as much as the destination",
+        "Here's what the journey holds:",
+        "Depart Delhi by Tempo Traveller on Thursday night, with ice-breakers, music, and dinner en route as the group gets to know each other before Udaipur even comes into view",
+        "Check into Sarovar on Lake Pichola, then spend the evening watching the sunset over Lake Pichola followed by a heritage dinner at Shaam-e-Viraasat — The Haveli",
+        "Explore the City Palace, Jagdish Temple, and the lanes of Old Udaipur, followed by an afternoon at Fateh Sagar Lake and Saheliyon Ki Bari",
+        "Close the second night with a rooftop dinner and one last evening of music, games, and conversation as a full group",
+        "Share a final \"one thing I'll take back from this trip\" moment by the lake before the road trip back to Delhi, with a group lunch en route"
+      ],
+      itinerary: [
+        {
+          day: "01",
+          title: "1 Oct 2026, Thursday — The Journey Begins",
+          journey: "Common departure from Delhi by Tempo Traveller → Dinner en route → Overnight journey towards Udaipur.",
+          community: "The Kokalachi Moment: Ice-breaker activities and introductions on the road, with music, games, and travel conversations as the trip begins before Udaipur is even in sight. \"You came as strangers. Let the journey change that.\"",
+          image: "https://images.unsplash.com/photo-1695956353120-54ce5e91632b?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "02",
+          title: "2 Oct 2026, Friday — Welcome to the City of Lakes",
+          journey: "Arrive in Udaipur → Check in at Sarovar on Lake Pichola → Lunch at the hotel → Leisure afternoon → Evening at Lake Pichola for sunset and group photographs.",
+          community: "The Evening Heritage Dinner: A heritage-style dinner at Shaam-e-Viraasat — The Haveli, bringing together Rajasthani ambience, local flavours, music, and community — the signature cultural evening of the trip.",
+          image: "https://images.unsplash.com/photo-1589901164570-f9de6556e1c1?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "03",
+          title: "3 Oct 2026, Saturday — Royal Udaipur, Explored Together",
+          journey: "City Palace → Jagdish Temple → Old Udaipur lanes and local markets → Lunch at Rajwadi → Afternoon at Saheliyon Ki Bari and Fateh Sagar Lake.",
+          community: "The Kokalachi Old City Experience and Sunset Moment: Photography stops, local handicraft discoveries, a chai break, and group interaction challenges through Old Udaipur's lanes, followed by an evening of music, conversations, games, and drinks back at the hotel, closing with a rooftop dinner overlooking Udaipur.",
+          image: "https://images.unsplash.com/photo-1622462281019-f6118fc42e46?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "04",
+          title: "4 Oct 2026, Sunday — Goodbyes, But Not Really",
+          journey: "Breakfast and check-out → Final photographs by Lake Pichola → Free time for shopping → Return road trip to Delhi → Lunch en route.",
+          community: "The Kokalachi Circle: Before leaving Udaipur, everyone shares \"one thing I'll take back from this trip\" — because the idea was never just to visit Udaipur, but to find the people you met along the way.",
+          image: "https://images.unsplash.com/photo-1633702738734-443da2c18f3c?auto=format&fit=crop&q=85&w=800"
+        }
+      ],
+      inclusions: [
+        "Delhi–Udaipur–Delhi travel by Tempo Traveller",
+        "Accommodation at Sarovar on Lake Pichola, Udaipur",
+        "Hotel breakfast (2 mornings)",
+        "Lunch at hotel on 2 Oct",
+        "Dinner en route on 1 Oct",
+        "Dinner at Shaam-e-Viraasat — The Haveli",
+        "Lunch at Rajwadi on 3 Oct",
+        "Rooftop dinner at hotel",
+        "Lunch en route on 4 Oct",
+        "Udaipur local sightseeing",
+        "Kokalachi community experiences",
+        "Trip coordination"
+      ],
+      exclusions: [
+        "Travel to and from the Delhi departure point",
+        "Meals not explicitly listed above",
+        "Personal expenses, shopping, and tips",
+        "Travel insurance",
+        "Entry fees for monuments/attractions not included in the group itinerary",
+        "Any costs arising from unforeseen circumstances, such as road delays or weather disruptions",
+        "Taxes, if not already included in the ₹15,999 package price"
+      ],
+      whatToPack: [
+        "Light, breathable clothing for warm October days, with a light layer for cooler evenings by the lake",
+        "Comfortable walking shoes for the City Palace, Old Udaipur's lanes, and general sightseeing",
+        "A neck pillow or light blanket for the overnight Tempo Traveller journey",
+        "Sunscreen, sunglasses, and a cap for daytime sightseeing",
+        "A power bank — useful for the long road journey both ways",
+        "A camera or phone ready for the Lake Pichola sunset — this is the trip's most photographed moment",
+        "A valid photo ID for hotel check-in",
+        "Cash in small denominations for Old Udaipur's local markets and handicraft stalls"
+      ],
+      weather: [
+        "Udaipur in October sits at the tail end of the monsoon, with warm, mostly dry days and pleasantly cool evenings — one of the more comfortable times of year to visit.",
+        "Daytime highs typically reach around 32–33°C (90–91°F)",
+        "Evenings and nights cool down to around 18–20°C (65–68°F), comfortable for the Lake Pichola sunset and rooftop dinner",
+        "Rain is unlikely but not impossible — a light layer for evenings is more useful than rain gear"
+      ],
+      faqs: [
+        {
+          question: "Group Size",
+          answer: "20 people"
+        },
+        {
+          question: "Need Assistance in Air Fare, Visa, Permit?",
+          answer: "Not applicable for this trip — it's a road journey by Tempo Traveller with a common departure point in Delhi, so no flights or permits are required."
+        },
+        {
+          question: "Where does this trip start from?",
+          answer: "The trip begins with a common departure from Delhi by Tempo Traveller on the night of 1 Oct, and returns to Delhi on 4 Oct."
+        },
+        {
+          question: "What is the cancellation policy?",
+          answer: "Contact us for more details"
+        }
+      ]
+    }
+  }
 ];

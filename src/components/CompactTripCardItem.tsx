@@ -112,10 +112,7 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
             </p>
             <div className="flex items-baseline gap-1.5">
               <span className="text-lg font-bold text-[#D96C2C] leading-none">
-                {card.price === "TBA" ? "₹49,999" : card.price}
-              </span>
-              <span className="text-[10px] text-slate-400 line-through font-semibold">
-                {card.price === "TBA" ? "₹55,000" : `₹${card.tourPackage.originalPrice?.toLocaleString() || "55,000"}`}
+                ₹{((card.tourPackage.price as number) || 49999).toLocaleString()}
               </span>
             </div>
           </div>
