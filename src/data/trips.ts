@@ -698,7 +698,7 @@ export const tripCards: TripCardData[] = [
     slug: "udaipur",
     destination: "Udaipur",
     locationTag: "📍 Udaipur",
-    duration: "4 Days / 3 Nights",
+    duration: "3 Days / 2 Nights",
     groupSize: "20 Travellers",
     dates: "1 – 4 Oct 2026",
     price: "15,999",
