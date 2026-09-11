@@ -8,9 +8,22 @@ import { ExploreJourneysSection } from "@/components/about/ExploreJourneysSectio
 import { JoinTribeSection } from "@/components/about/JoinTribeSection";
 
 export const metadata: Metadata = {
-  title: "About Kokalachi - Journeys Become Friendships",
+  title: "About Us",
   description:
     "Discover why Kokalachi exists, our vision, mission, and the people behind our curated group travel journeys.",
+  openGraph: {
+    title: "About Kokalachi — Journeys Become Friendships",
+    description:
+      "Discover why Kokalachi exists, our vision, mission, and the people behind our curated group travel journeys.",
+    url: "https://kokalachi.com/about",
+    images: [{ url: "/fevicon.png", width: 512, height: 512, alt: "Kokalachi Logo" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "About Kokalachi — Journeys Become Friendships",
+    description: "Discover the vision, mission, and people behind Kokalachi's curated group journeys.",
+    images: ["/fevicon.png"],
+  },
 };
 
 export default function AboutPage() {

@@ -39,12 +39,66 @@ const satisfy = Satisfy({
 });
 
 export const metadata: Metadata = {
-  title: "Kokalachi - Journeys Become Friendships",
-  description: "High-fidelity premium travel and tours landing page.",
+  metadataBase: new URL("https://kokalachi.com"),
+  title: {
+    default: "Kokalachi — Journeys Become Friendships",
+    template: "%s | Kokalachi",
+  },
+  description:
+    "Kokalachi designs immersive, slow-paced group journeys for conscious travelers. Replace tourist traps with authentic human connection and lifelong friendships.",
+  keywords: [
+    "group travel",
+    "slow travel",
+    "conscious travel",
+    "curated journeys",
+    "travel community",
+    "Kokalachi",
+    "India travel",
+    "international travel",
+    "travel experiences",
+  ],
+  authors: [{ name: "Kokalachi", url: "https://kokalachi.com" }],
+  creator: "Kokalachi",
+  publisher: "Kokalachi",
   icons: {
     icon: "/fevicon.png",
     shortcut: "/fevicon.png",
     apple: "/fevicon.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://kokalachi.com",
+    siteName: "Kokalachi",
+    title: "Kokalachi — Journeys Become Friendships",
+    description:
+      "Kokalachi designs immersive, slow-paced group journeys for conscious travelers. Replace tourist traps with authentic human connection and lifelong friendships.",
+    images: [
+      {
+        url: "/fevicon.png",
+        width: 512,
+        height: 512,
+        alt: "Kokalachi Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Kokalachi — Journeys Become Friendships",
+    description:
+      "Immersive, slow-paced group journeys for conscious travelers. Real connections. Real places. No tourist traps.",
+    images: ["/fevicon.png"],
+    creator: "@kokalachi",
+    site: "@kokalachi",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
   },
 };
 
