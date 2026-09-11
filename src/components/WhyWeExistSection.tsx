@@ -518,7 +518,7 @@ export function WhyWeExistSection() {
             So, we decided to build a better way to do it.
           </h3>
           <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">
-            At Kokalachi, we bring together people who share a love for travel —
+            At Kokalachi, we bring together people who share a love for travel
             so you can stop waiting and start exploring.
           </p>
         </div>

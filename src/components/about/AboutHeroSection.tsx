@@ -71,11 +71,13 @@ export function AboutHeroSection() {
                 Our Story <ArrowRight size={18} />
               </button>
               
-              <button className="flex items-center gap-3 text-[#0E5A60] font-medium hover:text-[#D35400] transition-colors group">
-                <div className="w-10 h-10 rounded-full border border-[#0E5A60] group-hover:border-[#D35400] flex items-center justify-center transition-colors">
-                  <Play size={18} />
+              <button className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-white/30 hover:bg-white/40 backdrop-blur-md text-[#0E5A60] hover:text-[#C85A24] font-medium text-sm shadow-sm hover:shadow-md transition-all group cursor-pointer">
+                <div className="w-8 h-8 rounded-full bg-[#0E5A60] group-hover:bg-[#C85A24] text-white flex items-center justify-center transition-colors shadow-sm shrink-0">
+                  <Play size={14} className="fill-white text-white translate-x-[1px]" />
                 </div>
-                <span className="text-sm">Watch Our Journey</span>
+                <span className="font-semibold tracking-tight text-[#0E5A60] group-hover:text-[#C85A24] transition-colors">
+                  Watch Our Journey
+                </span>
               </button>
             </div>
           </div>
