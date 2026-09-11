@@ -129,40 +129,42 @@ export function HowItWorksSection() {
               </svg>
             </div>
 
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.02]">
+            <div className="relative">
               {/* Top-Left Number Pill */}
-              <div className="absolute top-4 left-4 w-11 h-11 rounded-full bg-[#D96C2C] text-white font-extrabold text-base flex items-center justify-center border-2 border-white shadow-md z-20">
+              <div className="absolute -top-2 left-2 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#C85A24] text-white font-extrabold text-base sm:text-lg flex items-center justify-center border-2 border-white shadow-xl z-30 pointer-events-none">
                 01
               </div>
 
-              {/* Circle Photo — Woman browsing phone UI */}
-              <img
-                src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=85&w=800"
-                alt="Woman holding phone browsing upcoming journeys"
-                className="w-full h-full object-cover object-center"
-              />
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                {/* Circle Photo — Woman browsing phone UI */}
+                <img
+                  src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=85&w=800"
+                  alt="Woman holding phone browsing upcoming journeys"
+                  className="w-full h-full object-cover object-center"
+                />
 
-              {/* Phone App UI Overlay Representation */}
-              <div className="absolute inset-0 bg-black/10 flex items-center justify-center p-6">
-                <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-white/40 w-44 text-left space-y-2 transform -rotate-3 scale-95">
-                  <div className="text-[10px] font-extrabold text-[#0E5A60] uppercase tracking-wider">
-                    Upcoming Journeys
-                  </div>
-                  <div className="space-y-1.5">
-                    <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md bg-[#0E5A60] text-white text-[9px] font-bold flex items-center justify-center">
-                        BALI
-                      </div>
-                      <div className="text-[9px] font-bold text-[#0E5A60]">
-                        Island Escape
-                      </div>
+                {/* Phone App UI Overlay Representation */}
+                <div className="absolute inset-0 bg-black/10 flex items-center justify-center p-6">
+                  <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-white/40 w-44 text-left space-y-2 transform -rotate-3 scale-95">
+                    <div className="text-[10px] font-extrabold text-[#0E5A60] uppercase tracking-wider">
+                      Upcoming Journeys
                     </div>
-                    <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md bg-[#D96C2C] text-white text-[9px] font-bold flex items-center justify-center">
-                        JAPAN
+                    <div className="space-y-1.5">
+                      <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-[#0E5A60] text-white text-[9px] font-bold flex items-center justify-center">
+                          BALI
+                        </div>
+                        <div className="text-[9px] font-bold text-[#0E5A60]">
+                          Island Escape
+                        </div>
                       </div>
-                      <div className="text-[9px] font-bold text-[#0E5A60]">
-                        Autumn Trail
+                      <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-md bg-[#D96C2C] text-white text-[9px] font-bold flex items-center justify-center">
+                          JAPAN
+                        </div>
+                        <div className="text-[9px] font-bold text-[#0E5A60]">
+                          Autumn Trail
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -187,58 +189,60 @@ export function HowItWorksSection() {
 
           {/* STEP 02 */}
           <div className="flex flex-col items-center relative z-10 group">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-900 transition-transform duration-300 group-hover:scale-[1.02]">
+            <div className="relative">
               {/* Top-Left Number Pill */}
-              <div className="absolute top-4 left-4 w-11 h-11 rounded-full bg-[#D96C2C] text-white font-extrabold text-base flex items-center justify-center border-2 border-white shadow-md z-20">
+              <div className="absolute -top-2 left-2 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#C85A24] text-white font-extrabold text-base sm:text-lg flex items-center justify-center border-2 border-white shadow-xl z-30 pointer-events-none">
                 02
               </div>
 
-              {/* Background Image — Hands holding phone */}
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=85&w=800"
-                alt="Person checking group chat"
-                className="w-full h-full object-cover object-center opacity-40"
-              />
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-900 transition-transform duration-300 group-hover:scale-[1.02]">
+                {/* Background Image — Hands holding phone */}
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=85&w=800"
+                  alt="Person checking group chat"
+                  className="w-full h-full object-cover object-center opacity-40"
+                />
 
-              {/* Realistic WhatsApp Style Pre-Trip Chat UI Mockup */}
-              <div className="absolute inset-0 flex items-center justify-center p-4">
-                <div className="bg-[#0B141A] text-white rounded-2xl p-3 shadow-2xl border border-white/20 w-52 text-left space-y-2 font-sans">
-                  {/* Chat Header */}
-                  <div className="flex items-center gap-2 border-b border-white/10 pb-1.5">
-                    <div className="w-6 h-6 rounded-full bg-teal-600 text-[10px] font-bold flex items-center justify-center text-white">
-                      🌴
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-bold text-slate-100">
-                        Sri Lanka Escape 🌴
+                {/* Realistic WhatsApp Style Pre-Trip Chat UI Mockup */}
+                <div className="absolute inset-0 flex items-center justify-center p-4">
+                  <div className="bg-[#0B141A] text-white rounded-2xl p-3 shadow-2xl border border-white/20 w-52 text-left space-y-2 font-sans">
+                    {/* Chat Header */}
+                    <div className="flex items-center gap-2 border-b border-white/10 pb-1.5">
+                      <div className="w-6 h-6 rounded-full bg-teal-600 text-[10px] font-bold flex items-center justify-center text-white">
+                        🌴
                       </div>
-                      <div className="text-[8px] text-emerald-400 font-medium">
-                        12 members active
+                      <div>
+                        <div className="text-[10px] font-bold text-slate-100">
+                          Sri Lanka Escape 🌴
+                        </div>
+                        <div className="text-[8px] text-emerald-400 font-medium">
+                          12 members active
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Chat Messages */}
-                  <div className="space-y-1.5 text-[9px] leading-tight">
-                    <div className="bg-[#202C33] p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
-                      <div className="text-[#D96C2C] font-bold text-[8px]">
-                        Ananya
+                    {/* Chat Messages */}
+                    <div className="space-y-1.5 text-[9px] leading-tight">
+                      <div className="bg-[#202C33] p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
+                        <div className="text-[#D96C2C] font-bold text-[8px]">
+                          Ananya
+                        </div>
+                        <div className="text-slate-200">
+                          Hi everyone! Can&apos;t wait for this trip! 🖐️
+                        </div>
                       </div>
-                      <div className="text-slate-200">
-                        Hi everyone! Can&apos;t wait for this trip! 🖐️
+                      <div className="bg-[#202C33] p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
+                        <div className="text-teal-400 font-bold text-[8px]">
+                          Rohit
+                        </div>
+                        <div className="text-slate-200">
+                          Hey! I love photography too! 📷
+                        </div>
                       </div>
-                    </div>
-                    <div className="bg-[#202C33] p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
-                      <div className="text-teal-400 font-bold text-[8px]">
-                        Rohit
-                      </div>
-                      <div className="text-slate-200">
-                        Hey! I love photography too! 📷
-                      </div>
-                    </div>
-                    <div className="bg-[#005C4B] p-1.5 rounded-lg rounded-tr-none ml-auto max-w-[85%] text-right">
-                      <div className="text-emerald-100">
-                        This group already feels amazing! 🔥
+                      <div className="bg-[#005C4B] p-1.5 rounded-lg rounded-tr-none ml-auto max-w-[85%] text-right">
+                        <div className="text-emerald-100">
+                          This group already feels amazing! 🔥
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -285,18 +289,20 @@ export function HowItWorksSection() {
               </svg>
             </div>
 
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.02]">
+            <div className="relative">
               {/* Top-Left Number Pill */}
-              <div className="absolute top-4 left-4 w-11 h-11 rounded-full bg-[#D96C2C] text-white font-extrabold text-base flex items-center justify-center border-2 border-white shadow-md z-20">
+              <div className="absolute -top-2 left-2 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#C85A24] text-white font-extrabold text-base sm:text-lg flex items-center justify-center border-2 border-white shadow-xl z-30 pointer-events-none">
                 03
               </div>
 
-              {/* Circle Photo — Friends laughing on beach sunset */}
-              <img
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=800"
-                alt="Friends laughing and enjoying sunset together"
-                className="w-full h-full object-cover object-center"
-              />
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.02]">
+                {/* Circle Photo — Friends laughing on beach sunset */}
+                <img
+                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=800"
+                  alt="Friends laughing and enjoying sunset together"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
             </div>
 
             {/* Bottom Overlapping Icon Badge */}

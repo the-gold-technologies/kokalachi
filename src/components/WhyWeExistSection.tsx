@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   BookOpen,
   Users,
+  RotateCcw,
 } from "lucide-react";
 
 const kokalachiPhotos = [
@@ -52,16 +53,74 @@ const kokalachiPhotos = [
 
 export function WhyWeExistSection() {
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
+  // Chat animation steps:
+  // 0: Rohit ("Guys, shall we do Bali...?")
+  // 1: Neha ("I'm in!")
+  // 2: Aman ("Sorry guys, can't get leave...")
+  // 3: Priya ("Maybe next year?")
+  // 4: System ("No replies...")
+  // 5: Finished -> Left side fades, Right side active & bright
+  const [step, setStep] = useState(0);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
+  // Photo carousel auto timer - only slides when the right side is active (step === 5)
   useEffect(() => {
+    if (step !== 5) return;
+
     const timer = setInterval(() => {
       setActivePhotoIdx((prev) => (prev + 1) % kokalachiPhotos.length);
-    }, 3500);
+    }, 2000);
     return () => clearInterval(timer);
+  }, [step]);
+
+  // Intersection observer to trigger chat sequence when section is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsIntersecting(true);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
+
+  // Step advancement timer once visible
+  useEffect(() => {
+    if (!isIntersecting) return;
+
+    if (step < 5) {
+      // 1.4s delay per individual message
+      const timer = setTimeout(() => {
+        setStep((prev) => prev + 1);
+      }, 1400);
+      return () => clearTimeout(timer);
+    } else {
+      // Step === 5 (Finished state): hold for 9 seconds before auto-restarting the loop
+      const resetTimer = setTimeout(() => {
+        setStep(0);
+      }, 9000);
+      return () => clearTimeout(resetTimer);
+    }
+  }, [isIntersecting, step]);
+
+  const handleReplay = () => {
+    setStep(0);
+  };
+
+  const isLeftFaded = step === 5;
+  const isRightFaded = step < 5;
 
   return (
     <section
+      ref={sectionRef}
       id="why-we-exist"
       className="py-12 sm:py-14 lg:py-16 bg-[#FAF5EE] relative overflow-hidden select-none"
     >
@@ -94,12 +153,18 @@ export function WhyWeExistSection() {
         <div className="relative max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch text-left">
             {/* ==================== LEFT CARD: THE OLD WAY (col-span-5) ==================== */}
-            <div className="lg:col-span-5 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative shadow-none h-full border border-[#E3DACB]/80">
+            <div
+              className={`lg:col-span-5 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative h-full border border-[#E3DACB]/80 transition-all duration-700 ${
+                isLeftFaded
+                  ? "opacity-40 grayscale-[40%] scale-[0.98] blur-[0.3px]"
+                  : "opacity-100 scale-100 shadow-md"
+              }`}
+            >
               <div className="flex flex-col h-full justify-between">
                 {/* Header Badge Pill */}
                 <div className="flex justify-center mb-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DFD6C7] text-[#5C5248] text-[11px] font-extrabold uppercase tracking-wider font-sans">
-                    <X size={13} className="text-[#5C5248] stroke-[3]" />
+                  <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#D6CBB8] text-[#3D352E] text-xs sm:text-sm font-bold uppercase tracking-wider font-sans border border-[#C5B7A0] shadow-sm">
+                    <X size={15} className="text-[#DC2626] stroke-[4]" />
                     <span>THE OLD WAY</span>
                   </div>
                 </div>
@@ -109,7 +174,11 @@ export function WhyWeExistSection() {
                   {/* Left Handwritten Callout Annotations */}
                   <div className="hidden sm:block pointer-events-none">
                     {/* Callout 1: Excitement */}
-                    <div className="absolute -left-2 top-28 text-right">
+                    <div
+                      className={`absolute -left-2 top-28 text-right transition-opacity duration-500 ${
+                        step >= 0 ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
                         Excitement
                       </span>
@@ -128,7 +197,11 @@ export function WhyWeExistSection() {
                     </div>
 
                     {/* Callout 2: Plans change */}
-                    <div className="absolute -left-2 top-60 text-right">
+                    <div
+                      className={`absolute -left-2 top-60 text-right transition-opacity duration-500 ${
+                        step >= 2 ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
                         Plans change
                       </span>
@@ -147,7 +220,11 @@ export function WhyWeExistSection() {
                     </div>
 
                     {/* Callout 3: The trip never happens */}
-                    <div className="absolute -left-4 bottom-24 text-right">
+                    <div
+                      className={`absolute -left-4 bottom-24 text-right transition-opacity duration-500 ${
+                        step >= 4 ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold leading-tight block text-right max-w-[100px] font-script">
                         The trip <br /> never happens
                       </span>
@@ -167,7 +244,7 @@ export function WhyWeExistSection() {
                   </div>
 
                   {/* WhatsApp Style Chat Phone Frame */}
-                  <div className="bg-[#EEE7DC] rounded-3xl p-4 sm:p-6 border border-[#E3DACB] flex-1 flex flex-col justify-between space-y-4 shadow-none font-sans">
+                  <div className="bg-[#EEE7DC] rounded-3xl p-4 sm:p-6 border border-[#E3DACB] flex-1 flex flex-col justify-between space-y-4 shadow-none font-sans min-h-[360px]">
                     {/* Chat Header */}
                     <div className="flex items-center justify-between pb-3 border-b border-black/10">
                       <div className="flex items-center gap-3">
@@ -195,9 +272,15 @@ export function WhyWeExistSection() {
                     </div>
 
                     {/* Messages Container spanning full inner height */}
-                    <div className="flex-1 flex flex-col justify-between space-y-4 pt-1 pb-1 font-sans">
+                    <div className="flex-1 flex flex-col justify-between space-y-3 pt-1 pb-1 font-sans">
                       {/* Chat Message 1: Rohit */}
-                      <div className="space-y-1">
+                      <div
+                        className={`space-y-1 transition-all duration-500 transform ${
+                          step >= 0
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-3 pointer-events-none"
+                        }`}
+                      >
                         <div className="bg-white p-3 rounded-2xl rounded-tl-sm max-w-[92%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1 font-sans">
                           <span className="font-bold text-emerald-700 block text-[11px] font-sans">
                             Rohit
@@ -216,8 +299,14 @@ export function WhyWeExistSection() {
                         </div>
                       </div>
 
-                      {/* Chat Message 2: Neha & Aman */}
-                      <div className="space-y-2.5 font-sans">
+                      {/* Chat Message 2: Neha */}
+                      <div
+                        className={`font-sans transition-all duration-500 transform ${
+                          step >= 1
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-3 pointer-events-none"
+                        }`}
+                      >
                         <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
                           <span className="font-bold text-rose-600 block text-[10px] font-sans">
                             Neha
@@ -229,7 +318,16 @@ export function WhyWeExistSection() {
                             </span>
                           </p>
                         </div>
+                      </div>
 
+                      {/* Chat Message 3: Aman */}
+                      <div
+                        className={`font-sans transition-all duration-500 transform ${
+                          step >= 2
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-3 pointer-events-none"
+                        }`}
+                      >
                         <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm font-sans">
                           <span className="font-bold text-emerald-800 block text-[10px] font-sans">
                             Aman
@@ -243,8 +341,14 @@ export function WhyWeExistSection() {
                         </div>
                       </div>
 
-                      {/* Chat Message 3: Priya & Silence */}
-                      <div className="space-y-2.5 font-sans">
+                      {/* Chat Message 4: Priya */}
+                      <div
+                        className={`font-sans transition-all duration-500 transform ${
+                          step >= 3
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-3 pointer-events-none"
+                        }`}
+                      >
                         <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
                           <span className="font-bold text-purple-600 block text-[10px] font-sans">
                             Priya
@@ -256,8 +360,16 @@ export function WhyWeExistSection() {
                             </span>
                           </p>
                         </div>
+                      </div>
 
-                        {/* Dead Chat Fade out */}
+                      {/* Chat Message 5: Silence / No replies */}
+                      <div
+                        className={`font-sans transition-all duration-500 transform ${
+                          step >= 4
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-3 pointer-events-none"
+                        }`}
+                      >
                         <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between font-sans">
                           <div className="flex items-center gap-2 font-sans">
                             <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200 font-sans">
@@ -286,18 +398,22 @@ export function WhyWeExistSection() {
             </div>
 
             {/* ==================== RIGHT CARD: THE KOKALACHI WAY (col-span-7) ==================== */}
-            <div className="lg:col-span-7 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative shadow-none h-full border border-[#E3DACB]/80">
+            <div
+              className={`lg:col-span-7 bg-[#F3ECE1] p-6 sm:p-7 lg:p-8 rounded-[32px] flex flex-col justify-between relative h-full border border-[#E3DACB]/80 transition-all duration-700 ${
+                isRightFaded
+                  ? "opacity-40 grayscale-[40%] scale-[0.98] blur-[0.3px]"
+                  : "opacity-100 scale-100 shadow-xl ring-2 ring-[#C85A24]/30"
+              }`}
+            >
               <div className="flex flex-col h-full justify-between">
                 {/* Header Badge Pill */}
-                <div className="flex justify-center mb-4">
-                  <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#C85A24] text-white shadow-sm font-sans font-bold text-xs sm:text-sm">
+                <div className="flex justify-center mb-5">
+                  <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-[#C85A24] text-white shadow-md border border-[#A64518] font-sans font-semibold text-sm sm:text-base tracking-wide">
                     <Heart
-                      size={14}
-                      className="fill-[#EF4444] text-[#EF4444] stroke-none"
+                      size={17}
+                      className="fill-white text-white stroke-none"
                     />
-                    <span className="tracking-wide font-sans">
-                      The Kokalachi Way
-                    </span>
+                    <span>The Kokalachi Way</span>
                   </div>
                 </div>
 
@@ -356,35 +472,6 @@ export function WhyWeExistSection() {
                     ))}
                   </div>
                 </div>
-
-                {/* 3 Grid Photo Thumbnails Row (Interactive Transition Triggers) */}
-                {/* <div className="grid grid-cols-3 gap-3 sm:gap-3.5 mb-4">
-                  {kokalachiPhotos.slice(1, 4).map((thumb, idx) => {
-                    const actualIdx = idx + 1;
-                    const isSelected = activePhotoIdx === actualIdx;
-                    return (
-                      <div
-                        key={idx}
-                        onClick={() => setActivePhotoIdx(actualIdx)}
-                        className={`h-28 sm:h-36 lg:h-36 rounded-2xl overflow-hidden shadow-sm relative cursor-pointer transition-all duration-300 ${
-                          isSelected
-                            ? "ring-2 ring-[#C85A24] scale-[1.02]"
-                            : "opacity-85 hover:opacity-100 hover:scale-102"
-                        }`}
-                      >
-                        <img
-                          src={thumb.image}
-                          alt={thumb.alt}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <span className="absolute bottom-2 left-2 right-2 text-white text-[10px] sm:text-xs font-bold leading-tight font-sans truncate block drop-shadow-sm">
-                          {thumb.badge}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div> */}
 
                 {/* 4 Pillars Bottom Bar */}
                 <div className="bg-[#EAE2D3] rounded-2xl p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 items-center text-[#2C221E] font-sans">

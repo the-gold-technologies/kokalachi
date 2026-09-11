@@ -166,7 +166,7 @@ export function HeroSection() {
           
           {/* Top Category Tagline */}
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
-            FOR MUSAFIRS WHO WERE ONLY EVER RESTING
+            FOR TRAVELLERS WHO WERE ONLY EVER RESTING
           </span>
 
           {/* Main Headline */}
