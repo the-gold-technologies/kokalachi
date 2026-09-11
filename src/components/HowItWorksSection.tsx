@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Compass, Users, Camera, Check } from "lucide-react";
+import { Compass, Users, Camera } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 
@@ -151,19 +151,19 @@ export function HowItWorksSection() {
                     </div>
                     <div className="space-y-1.5">
                       <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-[#0E5A60] text-white text-[9px] font-bold flex items-center justify-center">
-                          BALI
+                        <div className="w-6 h-6 rounded-md bg-[#0E5A60] text-white text-[8px] font-bold flex items-center justify-center">
+                          KASHMIR
                         </div>
                         <div className="text-[9px] font-bold text-[#0E5A60]">
-                          Island Escape
+                          Houseboat Diaries
                         </div>
                       </div>
                       <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-[#D96C2C] text-white text-[9px] font-bold flex items-center justify-center">
-                          JAPAN
+                        <div className="w-6 h-6 rounded-md bg-[#D96C2C] text-white text-[8px] font-bold flex items-center justify-center">
+                          MEGHALAYA
                         </div>
                         <div className="text-[9px] font-bold text-[#0E5A60]">
-                          Autumn Trail
+                          Roots &amp; Rainbows
                         </div>
                       </div>
                     </div>
@@ -209,11 +209,11 @@ export function HowItWorksSection() {
                     {/* Chat Header */}
                     <div className="flex items-center gap-2 border-b border-white/10 pb-1.5">
                       <div className="w-6 h-6 rounded-full bg-teal-600 text-[10px] font-bold flex items-center justify-center text-white">
-                        🌴
+                        🌿
                       </div>
                       <div>
                         <div className="text-[10px] font-bold text-slate-100">
-                          Sri Lanka Escape 🌴
+                          Meghalaya Circle 🌿
                         </div>
                         <div className="text-[8px] text-emerald-400 font-medium">
                           12 members active

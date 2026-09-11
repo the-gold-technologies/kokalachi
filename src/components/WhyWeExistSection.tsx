@@ -19,35 +19,35 @@ import {
 const kokalachiPhotos = [
   {
     image:
-      "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=85&w=1200",
-    alt: "Happy group of travellers selfie",
+      "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=1200",
+    alt: "Kashmir Houseboat & Mountains",
     captionTitle: "Real people.",
     captionSub: "Real connections.",
-    badge: "Kyoto Circle",
+    badge: "Kashmir Circle",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=1200",
-    alt: "Sunset mountain view travellers",
+      "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?auto=format&fit=crop&q=85&w=1200",
+    alt: "Meghalaya Waterfalls & Trails",
     captionTitle: "Mountain trails.",
     captionSub: "Unforgettable laughs.",
-    badge: "Meghalaya Trek",
+    badge: "Meghalaya Expedition",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=85&w=1200",
-    alt: "Outdoor group dinner",
+      "https://images.unsplash.com/photo-1583513645242-25a32d451084?auto=format&fit=crop&q=85&w=1200",
+    alt: "Kerala Tea Gardens & Backwaters",
     captionTitle: "Shared feasts.",
     captionSub: "Endless stories.",
-    badge: "Sri Lanka Slow Trail",
+    badge: "Kerala Slow Trail",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=85&w=1200",
-    alt: "Train view travellers",
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=1200",
+    alt: "Vietnam Halong Bay & Lanterns",
     captionTitle: "Scenic routes.",
     captionSub: "Lifelong bonds.",
-    badge: "Vietnam Expedition",
+    badge: "Vietnam Odyssey",
   },
 ];
 
@@ -250,17 +250,17 @@ export function WhyWeExistSection() {
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full overflow-hidden border border-slate-300">
                           <img
-                            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=120"
-                            alt="Bali Trip Group"
+                            src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=80&w=120"
+                            alt="Kashmir Trip Group"
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div>
                           <div className="font-extrabold text-[#0E5A60] text-xs sm:text-sm flex items-center gap-1 font-sans">
-                            Bali Trip? 🌴
+                            Kashmir Trip? 🏔️
                           </div>
                           <div className="text-[10px] text-slate-500 font-medium font-sans">
-                            8 members
+                            10 members
                           </div>
                         </div>
                       </div>
@@ -286,7 +286,7 @@ export function WhyWeExistSection() {
                             Rohit
                           </span>
                           <p className="font-medium text-slate-800 font-sans">
-                            Guys, shall we do Bali in August? 😍
+                            Guys, shall we do Kashmir in October? 🏔️😍
                           </p>
                           <div className="flex items-center justify-between pt-1 font-sans">
                             <div className="inline-flex items-center gap-1 text-[10px] bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
