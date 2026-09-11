@@ -57,7 +57,7 @@ export function Footer() {
             <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-[#0E5A60]/80 font-sans">
               <div className="flex items-center gap-3 hover:text-[#C85A24] transition-colors">
                 <MapPin className="w-4 h-4 text-[#C85A24] shrink-0" />
-                <span>Basecamp in Kochi, India &amp; Global Field Guides</span>
+                <span>91 Springboard, C-2, Sector 1, Noida - 201301</span>
               </div>
               <div className="flex items-center gap-3 hover:text-[#C85A24] transition-colors">
                 <Mail className="w-4 h-4 text-[#C85A24] shrink-0" />
@@ -65,7 +65,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 hover:text-[#C85A24] transition-colors">
                 <Phone className="w-4 h-4 text-[#C85A24] shrink-0" />
-                <a href="tel:+919876543210">+91 (800) KOKALACHI</a>
+                <a href="tel:+919711845700">+91 97118 45700</a>
               </div>
             </div>
 
@@ -270,7 +270,16 @@ export function Footer() {
               © {new Date().getFullYear()} Kokalachi Travel Co. Built with
             </span>
             <Heart className="w-3.5 h-3.5 text-[#EF4444] fill-[#EF4444] inline-block mx-0.5" />
-            <span>for wandering souls.</span>
+            <span>for wandering souls, by{" "}
+              <a
+                href="https://thegoldtechnologies.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#C85A24] hover:underline font-normal transition-colors"
+              >
+                TGT
+              </a>
+            .</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-slate-500">
