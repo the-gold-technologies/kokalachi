@@ -714,7 +714,7 @@ export const tripCards: TripCardData[] = [
       title: "The Majestic Sunsets | Udaipur · Royalty, Lakes & Connections",
       subtitle: "Royal Havelis, Lakeside Sunsets, an Overnight Trip that helps you meet new people sharing the love for travel, thereby turning strangers into friends",
       location: "Udaipur",
-      duration: "4 Days / 3 Nights",
+      duration: "3 Days / 2 Nights",
       rating: 4.9,
       price: 15999,
       originalPrice: 18999,
