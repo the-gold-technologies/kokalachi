@@ -12,7 +12,14 @@ import {
   X,
   ChevronDown,
   Minus,
-  Plus
+  Plus,
+  ArrowLeft,
+  Sparkles,
+  MapPin,
+  Clock,
+  Compass,
+  Heart,
+  ShieldCheck
 } from "lucide-react";
 import { tripCards, TourPackage } from "@/data/trips";
 import { TripCardItem } from "@/components/TripCardItem";
