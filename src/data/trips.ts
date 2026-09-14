@@ -727,7 +727,7 @@ export const tripCards: TripCardData[] = [
       nextDeparture: "1 Oct 2026",
       hook: "1st Oct, 2026 - (Thursday) Night Departure via Tempo Traveller to Udaipur",
       overview: [
-        "The Majestics Sunsets is a 3-night, 4-day road trip to the City of Lakes — built around the ideation that the journey towards this royal destination matters equally as much as the destination",
+        "The Majestics Sunsets is a 2-night, 3-day road trip to the City of Lakes — built around the ideation that the journey towards this royal destination matters equally as much as the destination",
         "Here's what the journey holds:",
         "Depart Delhi by Tempo Traveller on Thursday night, with ice-breakers, music, and dinner en route as the group gets to know each other before Udaipur even comes into view",
         "Check into Sarovar on Lake Pichola, then spend the evening watching the sunset over Lake Pichola followed by a heritage dinner at Shaam-e-Viraasat — The Haveli",

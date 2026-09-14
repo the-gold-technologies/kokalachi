@@ -4,32 +4,22 @@ import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { createBooking } from "@/actions/booking";
-import {
-  MapPin,
+import { 
   Calendar,
   Users,
-  ShieldCheck,
   CheckCircle2,
-  Sparkles,
   ArrowRight,
-  ArrowLeft,
   X,
   ChevronDown,
-  Clock,
-  Compass,
-  Coffee,
-  Heart,
-  Mountain,
-  Bed,
   Minus,
-  Plus,
-  Tag
+  Plus
 } from "lucide-react";
 import { tripCards, TourPackage } from "@/data/trips";
 import { TripCardItem } from "@/components/TripCardItem";
 
 function BookingWidget({ tour }: { tour: TourPackage }) {
   const [guests, setGuests] = useState(1);
+  const [travelDate, setTravelDate] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -57,7 +47,7 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       phone: formData.get("phone") as string,
-      specialRequests: formData.get("specialRequests") as string,
+      specialRequests: (formData.get("specialRequests") as string) + (travelDate ? `\nPreferred date: ${travelDate}` : ""),
       guests,
       tripId: tour.id.toString(),
       tripName: tour.title,
@@ -198,6 +188,18 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
                 <div>
                   <label htmlFor="specialRequests" className="block text-sm font-bold text-slate-700 mb-1.5">Special Requests (Optional)</label>
                   <textarea id="specialRequests" name="specialRequests" rows={3} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="Any dietary requirements, medical conditions, or other requests..."></textarea>
+                </div>
+
+                <div>
+                  <label htmlFor="travelDate" className="block text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1.5"><Calendar size={14} /> Preferred Travel Date</label>
+                  <input
+                    type="date"
+                    id="travelDate"
+                    min={new Date().toISOString().split('T')[0]}
+                    value={travelDate}
+                    onChange={(e) => setTravelDate(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors"
+                  />
                 </div>
 
                 <div className="pt-4">
@@ -614,7 +616,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                   ].map((tab) => (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveDetailTab(tab.id as any)}
+                      onClick={() => setActiveDetailTab(tab.id as "inclusions" | "essentials" | "faq")}
                       className={`flex-1 py-4 px-5 font-bold text-[13px] whitespace-nowrap transition-colors border-b-[3px] ${activeDetailTab === tab.id
                         ? "border-[#0E5A60] text-[#0E5A60] bg-white"
                         : "border-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-50"
@@ -630,7 +632,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div>
                         <h4 className="text-base font-bold text-[#0E5A60] mb-4 flex items-center gap-2">
-                          <CheckCircle2 size={18} className="text-[#0E5A60]" /> What's Included
+                          <CheckCircle2 size={18} className="text-[#0E5A60]" /> What&apos;s Included
                         </h4>
                         <ul className="space-y-3">
                           {tour.inclusions ? tour.inclusions.map((item, idx) => (
@@ -643,7 +645,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                       </div>
                       <div>
                         <h4 className="text-base font-bold text-[#0E5A60] mb-4 flex items-center gap-2">
-                          <X size={18} className="text-red-500" /> What's Not Included
+                          <X size={18} className="text-red-500" /> What&apos;s Not Included
                         </h4>
                         <ul className="space-y-3">
                           {tour.exclusions ? tour.exclusions.map((item, idx) => (

@@ -41,7 +41,7 @@ const satisfy = Satisfy({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kokalachi.com"),
   title: {
-    default: "Kokalachi — Journeys Become Friendships",
+    default: "Kokalachi - Journeys Become Friendships",
     template: "%s | Kokalachi",
   },
   description:

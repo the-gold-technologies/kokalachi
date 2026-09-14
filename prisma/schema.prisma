@@ -18,3 +18,16 @@ model Booking {
   specialRequests String?
   createdAt       DateTime @default(now())
 }
+
+model Enquiry {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  journey     String?
+  travelDate  String?
+  groupSize   String?
+  message     String
+  hearAboutUs String?
+  createdAt   DateTime @default(now())
+}

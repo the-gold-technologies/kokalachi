@@ -1,20 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
-import { ArrowRight, CheckCircle2, ShieldCheck, Mail, User, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Mail, User, Phone, Minus, Plus, Calendar } from "lucide-react";
 import { FaInstagram } from "react-icons/fa6";
+import { submitContactEnquiry } from "@/actions/contact";
 
 export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [guests, setGuests] = useState(1);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const journeyRef = useRef<HTMLSelectElement>(null);
+  const travelDateRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const hearAboutRef = useRef<HTMLSelectElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus("submitting");
-    // Simulate network request
-    setTimeout(() => {
+    const result = await submitContactEnquiry({
+      name: nameRef.current?.value ?? "",
+      email: emailRef.current?.value ?? "",
+      phone: phoneRef.current?.value ?? "",
+      journey: journeyRef.current?.value || undefined,
+      travelDate: travelDateRef.current?.value || undefined,
+      groupSize: guests === 1 ? "Just me" : `${guests} people`,
+      message: messageRef.current?.value ?? "",
+      hearAboutUs: hearAboutRef.current?.value || undefined,
+    });
+    if (result.success) {
       setFormStatus("success");
-    }, 1500);
+    } else {
+      alert("Something went wrong. Please try again.");
+      setFormStatus("idle");
+    }
   };
 
   return (
@@ -87,6 +108,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Full Name</label>
                       <input 
+                        ref={nameRef}
                         type="text" 
                         required
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
@@ -96,6 +118,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Email Address <span className="text-red-500">*</span></label>
                       <input 
+                        ref={emailRef}
                         type="email" 
                         required
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
@@ -108,6 +131,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Phone Number <span className="text-red-500">*</span></label>
                       <input 
+                        ref={phoneRef}
                         type="tel" 
                         required
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
@@ -116,8 +140,8 @@ export default function ContactPage() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">Which journey are you interested in?</label>
-                      <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all appearance-none cursor-pointer">
-                        <option value="" disabled selected>Select an option (optional)</option>
+                      <select ref={journeyRef} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all appearance-none cursor-pointer" defaultValue="">
+                        <option value="" disabled>Select an option (optional)</option>
                         <option value="kashmir">The Houseboat Diaries (Kashmir)</option>
                         <option value="meghalaya">Roots & Rainbows (Meghalaya)</option>
                         <option value="kerala">Tides & Tea Gardens (Kerala)</option>
@@ -130,44 +154,60 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Preferred Travel Dates</label>
+                      <label className="text-sm font-bold text-slate-700 flex items-center gap-1.5"><Calendar size={14} /> Preferred Travel Date</label>
                       <input 
-                        type="text" 
+                        ref={travelDateRef}
+                        type="date"
+                        min={new Date().toISOString().split('T')[0]}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
-                        placeholder="e.g., Sometime in November, or exact dates"
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-slate-700">How many of you are travelling?</label>
-                      <input 
-                        type="text" 
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
-                        placeholder="e.g., Just me · 2 · Group of 5+"
-                      />
+                      <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 w-fit">
+                        <button
+                          type="button"
+                          onClick={() => setGuests(Math.max(1, guests - 1))}
+                          className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors"
+                        >
+                          <Minus size={13} />
+                        </button>
+                        <span className="font-bold text-sm text-[#0E5A60] w-24 text-center">
+                          {guests === 1 ? "Just me" : `${guests} people`}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setGuests(Math.min(20, guests + 1))}
+                          className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors"
+                        >
+                          <Plus size={13} />
+                        </button>
+                      </div>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">How can we help? <span className="text-red-500">*</span></label>
-                    <textarea 
-                      required
-                      rows={4}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all resize-none"
-                      placeholder="Tell us what's on your mind — a question, a special request, or just 'I don't know where to start.'"
-                    />
+                      <label className="text-sm font-bold text-slate-700">How can we help? <span className="text-red-500">*</span></label>
+                      <textarea 
+                        ref={messageRef}
+                        required
+                        rows={4}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all resize-none"
+                        placeholder="Tell us what's on your mind — a question, a special request, or just 'I don't know where to start.'"
+                      />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700">How did you hear about us?</label>
-                    <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all appearance-none cursor-pointer">
-                      <option value="" disabled selected>Select an option (optional)</option>
-                      <option value="instagram">Instagram</option>
-                      <option value="friend">A friend</option>
-                      <option value="google">Google Search</option>
-                      <option value="traveller">Kokalachi Traveller</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
+                      <label className="text-sm font-bold text-slate-700">How did you hear about us?</label>
+                      <select ref={hearAboutRef} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all appearance-none cursor-pointer" defaultValue="">
+                        <option value="" disabled>Select an option (optional)</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="friend">A friend</option>
+                        <option value="google">Google Search</option>
+                        <option value="traveller">Kokalachi Traveller</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
 
                   <div className="pt-2">
                     <button 
