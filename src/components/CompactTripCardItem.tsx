@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   Calendar,
@@ -11,30 +11,10 @@ import {
   Flame,
 } from "lucide-react";
 import { TripCardData } from "@/data/trips";
+import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
 export function CompactTripCardItem({ card }: { card: TripCardData }) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    if (!card.images || card.images.length <= 1) return;
-    
-    let intervalId: NodeJS.Timeout;
-    // Add a random initial delay (0-2000ms) so cards don't slide at the exact same time
-    const initialDelay = Math.random() * 2000;
-    // Slightly randomize the interval (3000ms - 4500ms) to keep them out of sync
-    const intervalTime = 3000 + Math.random() * 1500;
-
-    const timeoutId = setTimeout(() => {
-      intervalId = setInterval(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % card.images.length);
-      }, intervalTime);
-    }, initialDelay);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [card.images]);
+  const currentImageIndex = useImageSlideshow(card.images?.length ?? 0);
 
   return (
     <Link

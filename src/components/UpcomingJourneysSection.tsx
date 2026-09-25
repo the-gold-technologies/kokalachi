@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
@@ -21,17 +21,10 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { tripCards, TripCardData } from "@/data/trips";
+import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
 function TripCardItem({ card }: { card: TripCardData }) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    if (!card.images || card.images.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % card.images.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [card.images]);
+  const currentImageIndex = useImageSlideshow(card.images?.length ?? 0);
 
   return (
     <Link

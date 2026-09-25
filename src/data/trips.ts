@@ -43,7 +43,7 @@ export interface TripCardData {
   tourPackage: TourPackage;
 }
 
-export const tripCards: TripCardData[] = [
+const allTripCards: TripCardData[] = [
   {
     id: 1,
     slug: "kashmir",
@@ -818,4 +818,15 @@ export const tripCards: TripCardData[] = [
       ]
     }
   }
+];
+
+// A trip is live (booking open) once it has real dates instead of the "Upcoming" placeholder.
+export function isBookingOpen(card: TripCardData): boolean {
+  return card.dates.trim().toLowerCase() !== "upcoming";
+}
+
+// Live trips first, then upcoming ones; original order is kept within each group.
+export const tripCards: TripCardData[] = [
+  ...allTripCards.filter(isBookingOpen),
+  ...allTripCards.filter((card) => !isBookingOpen(card)),
 ];
