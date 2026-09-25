@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  Calendar,
   Users,
   Clock,
   ArrowRight,
@@ -11,6 +10,8 @@ import {
   Flame,
 } from "lucide-react";
 import { TripCardData } from "@/data/trips";
+import { formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
 export function TripCardItem({ card }: { card: TripCardData }) {
@@ -53,9 +54,9 @@ export function TripCardItem({ card }: { card: TripCardData }) {
         <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-[#0E5A60] flex items-center gap-1.5 shadow-sm">
           <MapPin size={14} className="text-[#C85A24]" /> {card.destination}
         </div>
-        {card.tourPackage.spotsLeft && (
+        {!!getSpotsLeft(card.tourPackage) && (
           <div className="absolute top-4 right-4 z-20 bg-[#0E5A60]/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-sm flex items-center gap-1">
-            <Flame size={12} className="fill-[#D96C2C] text-[#D96C2C]" /> {card.tourPackage.spotsLeft} Spots
+            <Flame size={12} className="fill-[#D96C2C] text-[#D96C2C]" /> {getSpotsLeft(card.tourPackage)} Spots
           </div>
         )}
       </div>
@@ -74,14 +75,11 @@ export function TripCardItem({ card }: { card: TripCardData }) {
               <span className="font-medium text-[#0E5A60]">{card.duration}</span>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-slate-600">
-              <Calendar size={15} className="text-[#0E5A60] opacity-80 shrink-0" />
-              <span className="font-medium text-[#0E5A60]">{card.dates}</span>
+              <Users size={15} className="text-[#0E5A60] opacity-80 shrink-0" />
+              <span className="font-medium text-[#0E5A60] truncate">{card.groupSize}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-slate-600">
-            <Users size={15} className="text-[#0E5A60] opacity-80 shrink-0" />
-            <span className="font-medium text-[#0E5A60] truncate">{card.groupSize}</span>
-          </div>
+          <DepartureChips card={card} />
         </div>
 
         {/* Footer: Price & CTA */}
@@ -92,7 +90,7 @@ export function TripCardItem({ card }: { card: TripCardData }) {
             </p>
             <div className="flex items-baseline gap-2">
               <span className="text-xl font-black text-[#D96C2C] leading-none">
-                ₹{((card.tourPackage.price as number) || 49999).toLocaleString()}
+                {formatStartingPrice(card.tourPackage)}
               </span>
             </div>
           </div>

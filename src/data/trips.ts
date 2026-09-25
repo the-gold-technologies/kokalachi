@@ -1,10 +1,26 @@
+import { getNextDeparture, isBookingOpen } from "@/lib/departures";
+
+// One dated batch of a trip. Add a line to a trip's `departures` to open a new date;
+// past dates disappear from the site automatically.
+export interface Departure {
+  id: string;              // stable id, e.g. "udaipur-2026-10-01" — saved with each booking
+  startDate: string;       // "YYYY-MM-DD"
+  endDate: string;         // "YYYY-MM-DD"
+  price?: number;          // overrides the trip price for this date
+  originalPrice?: number;  // overrides the struck-through price for this date
+  spotsLeft?: number;      // 0 marks the date as sold out
+  status?: "open" | "soldout" | "closed"; // "closed" hides the date
+  label?: string;          // e.g. "Diwali Special"
+  note?: string;           // e.g. "Departs Delhi on 10 Dec night"
+}
+
 export interface TourPackage {
   id: number;
   title: string;
   subtitle?: string;
   location: string;
   duration: string;
-  rating: number;
+  rating?: number;
   price: number | string;
   originalPrice?: number | null;
   image: string;
@@ -13,6 +29,8 @@ export interface TourPackage {
   tagColor?: string | null;
   spotsLeft?: number;
   nextDeparture?: string;
+  // When set, dates, next departure, spots and price on the site come from here.
+  departures?: Departure[];
   hook?: string;
   overview?: string[];
   itinerary?: { day: string; title: string; journey: string; community: string; image?: string }[];
@@ -35,7 +53,7 @@ export interface TripCardData {
   locationTag: string;
   duration: string;
   groupSize: string;
-  dates: string;
+  dates?: string;          // only for trips without `departures`, e.g. "Upcoming"
   price: string;
   vibeTags: string[];
   categories: string[];
@@ -51,7 +69,6 @@ const allTripCards: TripCardData[] = [
     locationTag: "📍 Kashmir",
     duration: "4 Days / 3 Nights",
     groupSize: "10–12 Travellers",
-    dates: "Upcoming",
     price: "TBA",
     vibeTags: ["Adventure", "Nature", "Scenic", "Heritage", "Culture"],
     categories: ["Trending", "Adventure", "ScenicJourney"],
@@ -75,8 +92,9 @@ const allTripCards: TripCardData[] = [
       category: "Heritage",
       tag: "10-12 Travellers",
       tagColor: "bg-[#0E5A60]",
-      spotsLeft: 8,
-      nextDeparture: "Upcoming",
+      departures: [
+        { id: "kashmir-2026-10-17", startDate: "2026-10-17", endDate: "2026-10-20" }
+      ],
       hook: "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens — curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
       gallery: [
         "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=800",
@@ -372,7 +390,6 @@ const allTripCards: TripCardData[] = [
     locationTag: "📍 Kerala",
     duration: "5 Nights / 6 Days",
     groupSize: "Intimate Group",
-    dates: "Upcoming",
     price: "TBA",
     vibeTags: ["Heritage", "Coastal", "Culture", "Relaxed", "Scenic"],
     categories: ["Trending", "SlowTravel"],
@@ -395,8 +412,9 @@ const allTripCards: TripCardData[] = [
       category: "Coastal & Heritage",
       tag: "Intimate Group",
       tagColor: "bg-[#0E5A60]",
-      spotsLeft: 12,
-      nextDeparture: "Upcoming",
+      departures: [
+        { id: "kerala-2026-12-03", startDate: "2026-12-03", endDate: "2026-12-08" }
+      ],
       hook: "Tides & Tea Gardens is a 5-night, 6-day slow-travel journey through Kerala's colonial streets, misty Western Ghats, and quiet backwaters — designed for travellers who want the pace of the trip to match the pace of getting to know each other.",
       gallery: [
         "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=85&w=800",
@@ -700,7 +718,6 @@ const allTripCards: TripCardData[] = [
     locationTag: "📍 Udaipur",
     duration: "3 Days / 2 Nights",
     groupSize: "20 Travellers",
-    dates: "1 – 4 Oct 2026",
     price: "9,999",
     vibeTags: ["Heritage", "Culture", "Scenic", "Road Trip", "Community"],
     categories: ["Trending", "FirstTimers"],
@@ -723,13 +740,16 @@ const allTripCards: TripCardData[] = [
       category: "Heritage",
       tag: "Community",
       tagColor: "bg-amber-100 text-amber-800",
-      spotsLeft: 20,
-      nextDeparture: "1 Oct 2026",
-      hook: "1st Oct, 2026 - (Thursday) Night Departure via Tempo Traveller to Udaipur",
+      departures: [
+        { id: "udaipur-2026-10-01", startDate: "2026-10-01", endDate: "2026-10-04", spotsLeft: 20 },
+        { id: "udaipur-2026-11-13", startDate: "2026-11-13", endDate: "2026-11-16" },
+        { id: "udaipur-2026-12-11", startDate: "2026-12-11", endDate: "2026-12-13", note: "Departs Delhi on 10 Dec night" },
+      ],
+      hook: "Overnight departure via Tempo Traveller from Delhi to Udaipur",
       overview: [
         "The Majestics Sunsets is a 2-night, 3-day road trip to the City of Lakes — built around the ideation that the journey towards this royal destination matters equally as much as the destination",
         "Here's what the journey holds:",
-        "Depart Delhi by Tempo Traveller on Thursday night, with ice-breakers and music as the group gets to know each other before Udaipur even comes into view",
+        "Depart Delhi by Tempo Traveller at night, with ice-breakers and music as the group gets to know each other before Udaipur even comes into view",
         "Check into Sarovar on Lake Pichola, then spend the evening watching the sunset over Lake Pichola",
         "Explore the City Palace, Jagdish Temple, and the lanes of Old Udaipur, followed by an afternoon at Fateh Sagar Lake and Saheliyon Ki Bari",
         "Close the second night with one last evening of music, games, and conversation as a full group",
@@ -738,28 +758,28 @@ const allTripCards: TripCardData[] = [
       itinerary: [
         {
           day: "01",
-          title: "1 Oct 2026, Thursday — The Journey Begins",
+          title: "Departure Night — The Journey Begins",
           journey: "Common departure from Delhi by Tempo Traveller → Overnight journey towards Udaipur.",
           community: "The Kokalachi Moment: Ice-breaker activities and introductions on the road, with music, games, and travel conversations as the trip begins before Udaipur is even in sight. \"You came as strangers. Let the journey change that.\"",
           image: "https://images.unsplash.com/photo-1695956353120-54ce5e91632b?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "02",
-          title: "2 Oct 2026, Friday — Welcome to the City of Lakes",
+          title: "Welcome to the City of Lakes",
           journey: "Arrive in Udaipur → Check in at Sarovar on Lake Pichola → Leisure afternoon → Evening at Lake Pichola for sunset and group photographs.",
           community: "The Lake Pichola Sunset: The group gathers by the lake as the sun sets over the City of Lakes, with music, conversations, and group photographs — the signature evening of the trip.",
           image: "https://images.unsplash.com/photo-1589901164570-f9de6556e1c1?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "03",
-          title: "3 Oct 2026, Saturday — Royal Udaipur, Explored Together",
+          title: "Royal Udaipur, Explored Together",
           journey: "City Palace → Jagdish Temple → Old Udaipur lanes and local markets → Afternoon at Saheliyon Ki Bari and Fateh Sagar Lake.",
           community: "The Kokalachi Old City Experience and Sunset Moment: Photography stops, local handicraft discoveries, a chai break, and group interaction challenges through Old Udaipur's lanes, followed by an evening of music, conversations, games, and drinks back at the hotel.",
           image: "https://images.unsplash.com/photo-1622462281019-f6118fc42e46?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "04",
-          title: "4 Oct 2026, Sunday — Goodbyes, But Not Really",
+          title: "Goodbyes, But Not Really",
           journey: "Breakfast and check-out → Final photographs by Lake Pichola → Free time for shopping → Return road trip to Delhi.",
           community: "The Kokalachi Circle: Before leaving Udaipur, everyone shares \"one thing I'll take back from this trip\" — because the idea was never just to visit Udaipur, but to find the people you met along the way.",
           image: "https://images.unsplash.com/photo-1633702738734-443da2c18f3c?auto=format&fit=crop&q=85&w=800"
@@ -809,7 +829,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Where does this trip start from?",
-          answer: "The trip begins with a common departure from Delhi by Tempo Traveller on the night of 1 Oct, and returns to Delhi on 4 Oct."
+          answer: "The trip begins with a common departure from Delhi by Tempo Traveller on the night of departure, and returns to Delhi on the last day of the trip."
         },
         {
           question: "What is the cancellation policy?",
@@ -817,16 +837,137 @@ const allTripCards: TripCardData[] = [
         }
       ]
     }
+  },
+  {
+    id: 6,
+    slug: "sri-lanka-women",
+    destination: "Sri Lanka",
+    locationTag: "📍 Sri Lanka",
+    duration: "5 Days / 4 Nights",
+    groupSize: "Intimate Group",
+    price: "TBA",
+    vibeTags: ["Women Only","Island","Culture","Beach","Community"],
+    categories: ["WomenOnly","BeachEscape"],
+    images: [
+      "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1612862862126-865765df2ded?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1519566335946-e6f65f0f4fdf?auto=format&fit=crop&q=85&w=800"
+    ],
+    // Full itinerary, inclusions and price still to come — the page shows a "details coming soon" view
+    tourPackage: {
+      id: 6,
+      title: "Sri Lanka · Women-Only Journey",
+      subtitle: "An all-women group trip across the island — full itinerary coming soon",
+      location: "Sri Lanka",
+      duration: "5 Days / 4 Nights",
+      price: "TBA",
+      image: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&q=85&w=800",
+      category: "Women Only",
+      departures: [
+        { id: "sri-lanka-women-2026-11-12", startDate: "2026-11-12", endDate: "2026-11-16", label: "Women Only" }
+      ]
+    }
+  },
+  {
+    id: 7,
+    slug: "sri-lanka",
+    destination: "Sri Lanka",
+    locationTag: "📍 Sri Lanka",
+    duration: "6 Days / 5 Nights",
+    groupSize: "Intimate Group",
+    price: "TBA",
+    vibeTags: ["Island","Culture","Beach","Community"],
+    categories: ["BeachEscape"],
+    images: [
+      "https://images.unsplash.com/photo-1612862862126-865765df2ded?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1519566335946-e6f65f0f4fdf?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&q=85&w=800"
+    ],
+    // Full itinerary, inclusions and price still to come — the page shows a "details coming soon" view
+    tourPackage: {
+      id: 7,
+      title: "Sri Lanka · Island Journey",
+      subtitle: "A year-end group trip across the island — full itinerary coming soon",
+      location: "Sri Lanka",
+      duration: "6 Days / 5 Nights",
+      price: "TBA",
+      image: "https://images.unsplash.com/photo-1612862862126-865765df2ded?auto=format&fit=crop&q=85&w=800",
+      category: "Island",
+      departures: [
+        { id: "sri-lanka-2026-12-18", startDate: "2026-12-18", endDate: "2026-12-23" }
+      ]
+    }
+  },
+  {
+    id: 8,
+    slug: "beas-kund-trek",
+    destination: "Beas Kund",
+    locationTag: "📍 Beas Kund",
+    duration: "3 Days / 2 Nights",
+    groupSize: "Intimate Group",
+    price: "TBA",
+    vibeTags: ["Trek","Himalayas","Adventure","Community"],
+    categories: ["Adventure"],
+    images: [
+      "https://images.unsplash.com/photo-1620236232016-3eb7bc6ede3d?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1624881256794-a7ee33ecbb99?auto=format&fit=crop&q=85&w=800"
+    ],
+    // Full itinerary, inclusions and price still to come — the page shows a "details coming soon" view
+    tourPackage: {
+      id: 8,
+      title: "Beas Kund Trek",
+      subtitle: "A Himalayan group trek to the glacial lake at the source of the Beas — full itinerary coming soon",
+      location: "Himachal Pradesh",
+      duration: "3 Days / 2 Nights",
+      price: "TBA",
+      image: "https://images.unsplash.com/photo-1620236232016-3eb7bc6ede3d?auto=format&fit=crop&q=85&w=800",
+      category: "Trek",
+      departures: [
+        { id: "beas-kund-2026-11-20", startDate: "2026-11-20", endDate: "2026-11-22", note: "Departs Delhi on 19 Nov night" }
+      ]
+    }
+  },
+  {
+    id: 9,
+    slug: "nag-tibba-trek",
+    destination: "Nag Tibba",
+    locationTag: "📍 Nag Tibba",
+    duration: "3 Days / 2 Nights",
+    groupSize: "Intimate Group",
+    price: "TBA",
+    vibeTags: ["Trek","Himalayas","Adventure","Community"],
+    categories: ["Adventure","FirstTimers"],
+    images: [
+      "https://images.unsplash.com/photo-1697807880008-234c28ae6632?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1643284674341-659e5c67dfbd?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1697473046112-4dce673cf87d?auto=format&fit=crop&q=85&w=800"
+    ],
+    // Full itinerary, inclusions and price still to come — the page shows a "details coming soon" view
+    tourPackage: {
+      id: 9,
+      title: "Nag Tibba Trek",
+      subtitle: "A weekend group trek to the highest peak of the Nag Tibba range in Uttarakhand — full itinerary coming soon",
+      location: "Uttarakhand",
+      duration: "3 Days / 2 Nights",
+      price: "TBA",
+      image: "https://images.unsplash.com/photo-1697807880008-234c28ae6632?auto=format&fit=crop&q=85&w=800",
+      category: "Trek",
+      departures: [
+        { id: "nag-tibba-2026-11-20", startDate: "2026-11-20", endDate: "2026-11-22", note: "Departs Delhi on 19 Nov night" }
+      ]
+    }
   }
 ];
 
-// A trip is live (booking open) once it has real dates instead of the "Upcoming" placeholder.
-export function isBookingOpen(card: TripCardData): boolean {
-  return card.dates.trim().toLowerCase() !== "upcoming";
-}
+// Soonest departure first; trips without a bookable date go last.
+// Ties (and trips without dates) keep their order in the list above.
+const nextStart = (card: TripCardData) => getNextDeparture(card.tourPackage)?.startDate;
 
-// Live trips first, then upcoming ones; original order is kept within each group.
-export const tripCards: TripCardData[] = [
-  ...allTripCards.filter(isBookingOpen),
-  ...allTripCards.filter((card) => !isBookingOpen(card)),
-];
+export const tripCards: TripCardData[] = [...allTripCards].sort((a, b) => {
+  const aOpen = isBookingOpen(a);
+  const bOpen = isBookingOpen(b);
+  if (aOpen !== bOpen) return aOpen ? -1 : 1;
+  const aStart = nextStart(a) ?? "9999";
+  const bStart = nextStart(b) ?? "9999";
+  return aStart.localeCompare(bStart);
+});

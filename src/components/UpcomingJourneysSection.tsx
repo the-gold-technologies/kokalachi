@@ -5,7 +5,6 @@ import Link from "next/link";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import {
-  Calendar,
   Users,
   Clock,
   ArrowRight,
@@ -21,6 +20,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { tripCards, TripCardData } from "@/data/trips";
+import { formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
 function TripCardItem({ card }: { card: TripCardData }) {
@@ -60,9 +61,9 @@ function TripCardItem({ card }: { card: TripCardData }) {
         <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-[#0E5A60] flex items-center gap-1.5 shadow-sm">
           <MapPin size={14} className="text-[#C85A24]" /> {card.destination}
         </div>
-        {card.tourPackage.spotsLeft && (
+        {!!getSpotsLeft(card.tourPackage) && (
           <div className="absolute top-4 right-4 z-20 bg-[#D96C2C] px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-sm flex items-center gap-1">
-            <Flame size={12} className="fill-white" /> {card.tourPackage.spotsLeft} Spots
+            <Flame size={12} className="fill-white" /> {getSpotsLeft(card.tourPackage)} Spots
           </div>
         )}
       </div>
@@ -80,12 +81,11 @@ function TripCardItem({ card }: { card: TripCardData }) {
             <span className="font-medium text-[#0E5A60]">{card.duration}</span>
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-600">
-            <Calendar size={16} className="text-[#0E5A60] opacity-80" />
-            <span className="font-medium text-[#0E5A60] text-[13px]">{card.dates}</span>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-slate-600 col-span-2">
             <Users size={16} className="text-[#0E5A60] opacity-80" />
             <span className="font-medium text-[#0E5A60] text-[13px]">{card.groupSize}</span>
+          </div>
+          <div className="col-span-2">
+            <DepartureChips card={card} />
           </div>
         </div>
 
@@ -97,7 +97,7 @@ function TripCardItem({ card }: { card: TripCardData }) {
             </p>
             <div className="flex items-baseline gap-1">
               <span className="text-2xl font-black text-[#0E5A60]">
-                ₹{((card.tourPackage.price as number) || 49999).toLocaleString()}
+                {formatStartingPrice(card.tourPackage)}
               </span>
             </div>
           </div>
@@ -138,12 +138,11 @@ export function UpcomingJourneysSection() {
     { id: "BeachEscape", label: "Beach Escape", icon: Palmtree, isHeart: false },
   ];
 
+  // The slider scrolls, so show every matching trip (already sorted by next departure)
   const filteredCards =
     activeCategory === "Trending"
-      ? tripCards.slice(0, 6)
-      : tripCards
-        .filter((card) => card.categories.includes(activeCategory))
-        .slice(0, 6);
+      ? tripCards
+      : tripCards.filter((card) => card.categories.includes(activeCategory));
 
   return (
     <section
@@ -244,10 +243,13 @@ export function UpcomingJourneysSection() {
       <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
         {/* Section-end CTA Button */}
         <div className="mt-6 font-sans">
-          <button className="bg-[#0E5A60] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105 font-sans">
+          <Link
+            href="/journeys"
+            className="bg-[#0E5A60] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105 font-sans"
+          >
             <span>See All Upcoming Journeys</span>
             <ArrowRight size={18} className="stroke-[2]" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

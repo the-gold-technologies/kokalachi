@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  Calendar,
   Users,
   Clock,
   ArrowRight,
@@ -11,6 +10,8 @@ import {
   Flame,
 } from "lucide-react";
 import { TripCardData } from "@/data/trips";
+import { formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
 export function CompactTripCardItem({ card }: { card: TripCardData }) {
@@ -53,9 +54,9 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
         <div className="absolute top-3 left-3 z-20 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-semibold text-slate-700 shadow-sm flex items-center gap-1">
           <MapPin size={12} className="text-[#C85A24]" /> {card.destination}
         </div>
-        {card.tourPackage.spotsLeft && (
+        {!!getSpotsLeft(card.tourPackage) && (
           <div className="absolute top-3 right-3 z-20 bg-[#0E5A60]/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-semibold text-white shadow-sm flex items-center gap-1">
-            <Flame size={10} className="fill-[#D96C2C] text-[#D96C2C]" /> {card.tourPackage.spotsLeft} Spots
+            <Flame size={10} className="fill-[#D96C2C] text-[#D96C2C]" /> {getSpotsLeft(card.tourPackage)} Spots
           </div>
         )}
       </div>
@@ -67,21 +68,18 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
         </h3>
 
         {/* Key Stats */}
-        <div className="flex flex-col gap-1.5 mb-3">
+        <div className="flex flex-col gap-1.5 my-3">
           <div className="flex items-center flex-wrap gap-x-3 gap-y-1.5">
             <div className="flex items-center gap-1 text-[11px] text-slate-600">
               <Clock size={13} className="text-[#0E5A60] opacity-80 shrink-0" />
               <span className="font-medium text-[#0E5A60]">{card.duration}</span>
             </div>
             <div className="flex items-center gap-1 text-[11px] text-slate-600">
-              <Calendar size={13} className="text-[#0E5A60] opacity-80 shrink-0" />
-              <span className="font-medium text-[#0E5A60]">{card.dates}</span>
+              <Users size={13} className="text-[#0E5A60] opacity-80 shrink-0" />
+              <span className="font-medium text-[#0E5A60] truncate">{card.groupSize}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] text-slate-600">
-            <Users size={13} className="text-[#0E5A60] opacity-80 shrink-0" />
-            <span className="font-medium text-[#0E5A60] truncate">{card.groupSize}</span>
-          </div>
+          <DepartureChips card={card} compact />
         </div>
 
         {/* Footer: Price & CTA */}
@@ -92,7 +90,7 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
             </p>
             <div className="flex items-baseline gap-1.5">
               <span className="text-lg font-bold text-[#D96C2C] leading-none">
-                ₹{((card.tourPackage.price as number) || 49999).toLocaleString()}
+                {formatStartingPrice(card.tourPackage)}
               </span>
             </div>
           </div>

@@ -21,11 +21,32 @@ import {
   Heart,
   ShieldCheck
 } from "lucide-react";
-import { tripCards, TourPackage } from "@/data/trips";
+import { tripCards, TourPackage, Departure } from "@/data/trips";
+import {
+  formatDeparture,
+  getDeparturePrice,
+  getNextDeparture,
+  getNextDepartureLabel,
+  getSpotsLeft,
+  getUpcomingDepartures,
+  hasFullDetails,
+  isSoldOut,
+} from "@/lib/departures";
 import { TripCardItem } from "@/components/TripCardItem";
+import { DeparturePicker } from "@/components/DeparturePicker";
 
-function BookingWidget({ tour }: { tour: TourPackage }) {
-  const [guests, setGuests] = useState(1);
+function BookingWidget({
+  tour,
+  departures,
+  selectedDeparture,
+  onSelectDeparture,
+}: {
+  tour: TourPackage;
+  departures: Departure[];
+  selectedDeparture?: Departure;
+  onSelectDeparture: (id: string) => void;
+}) {
+  const [guestInput, setGuests] = useState(1);
   const [travelDate, setTravelDate] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,8 +57,17 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
     setMounted(true);
   }, []);
 
-  // Determine base prices
-  const basePrice = typeof tour.price === "number" ? tour.price : 49999;
+  // Trips with departures must have one picked; older trips keep the free date input
+  const hasDepartures = !!tour.departures;
+  const maxGuests = Math.min(10, selectedDeparture?.spotsLeft ?? 10);
+  // Keep the guest count within the seats left on the chosen date
+  const guests = Math.max(1, Math.min(guestInput, maxGuests));
+
+  // Trips whose price isn't announced yet take a free "reserve my spot" request instead
+  const departurePrice = getDeparturePrice(tour, selectedDeparture);
+  const priceKnown = departurePrice != null;
+  const basePrice = departurePrice ?? 0;
+  const bookableDepartures = departures.filter((d) => !isSoldOut(d));
   
   // Calculations
   const roomTotal = basePrice * guests;
@@ -54,7 +84,9 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       phone: formData.get("phone") as string,
-      specialRequests: (formData.get("specialRequests") as string) + (travelDate ? `\nPreferred date: ${travelDate}` : ""),
+      specialRequests: (formData.get("specialRequests") as string) + (!hasDepartures && travelDate ? `\nPreferred date: ${travelDate}` : ""),
+      departureId: selectedDeparture?.id,
+      departureDate: selectedDeparture ? formatDeparture(selectedDeparture) : undefined,
       guests,
       tripId: tour.id.toString(),
       tripName: tour.title,
@@ -77,6 +109,21 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
   return (
     <>
       <div className="flex flex-col flex-1 min-h-0 h-full justify-between gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {/* Departure Picker */}
+        {hasDepartures && (
+          <div className="py-2 flex-shrink-0">
+            <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5 mb-2.5">
+              <Calendar size={15} className="text-[#0E5A60]" /> Select Your Batch
+            </h4>
+            <DeparturePicker
+              tour={tour}
+              departures={departures}
+              selectedId={selectedDeparture?.id}
+              onSelect={onSelectDeparture}
+            />
+          </div>
+        )}
+
         {/* Group Size Counter */}
         <div className="flex items-center justify-between py-2 flex-shrink-0">
           <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5">
@@ -93,7 +140,7 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
             <span className="font-bold text-sm text-[#0E5A60] w-3 text-center">{guests}</span>
             <button
               type="button"
-              onClick={() => setGuests(Math.min(10, guests + 1))}
+              onClick={() => setGuests(Math.min(maxGuests, guests + 1))}
               className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
             >
               <Plus size={12} />
@@ -102,6 +149,7 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
         </div>
 
         {/* Calculation Breakdown Box */}
+        {priceKnown ? (
         <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col flex-1 justify-between min-h-[220px]">
           <div>
             <div className="mb-4 pb-4 border-b border-slate-200">
@@ -133,25 +181,44 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
               <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
             </div>
 
-            <button 
+            <button
               onClick={() => setIsModalOpen(true)}
-              className="w-full py-3.5 cursor-pointer bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
+              disabled={hasDepartures && !selectedDeparture}
+              className="w-full py-3.5 cursor-pointer disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:translate-y-0 bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
               <span>Book Now</span>
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
             </button>
           </div>
         </div>
+        ) : (
+        <div className="bg-[#FAF4EC] rounded-2xl p-4 border border-[#F0E8D9] flex flex-col gap-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#C85A24] mb-1">Price announced soon</p>
+            <p className="text-[13px] text-slate-600 leading-relaxed">
+              Reserve your spot now — no payment needed. You&apos;ll be the first to get the full itinerary and price.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            disabled={hasDepartures && !selectedDeparture}
+            className="w-full py-3.5 cursor-pointer disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group"
+          >
+            <span>Reserve My Spot</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+          </button>
+        </div>
+        )}
       </div>
 
       {/* Booking Form Modal */}
       {isModalOpen && mounted && createPortal(
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" style={{ zIndex: 99999 }}>
-          <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-300">
-            <div className="flex items-center justify-between p-6 border-b border-slate-100">
+          <div className="bg-white rounded-3xl w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto shadow-2xl animate-in fade-in zoom-in-95 duration-300">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
               <div>
-                <h3 className="text-xl font-bold text-[#0E5A60]">Book Your Journey</h3>
-                <p className="text-sm text-slate-500 mt-1">{tour.title}</p>
+                <h3 className="text-xl font-bold text-[#0E5A60]">{priceKnown ? "Book Your Journey" : "Reserve Your Spot"}</h3>
+                <p className="text-sm text-slate-500 mt-0.5">{tour.title}</p>
               </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -166,37 +233,68 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle2 size={32} />
                 </div>
-                <h4 className="text-xl font-bold text-slate-800 mb-2">Booking Request Sent!</h4>
-                <p className="text-slate-600">Our team will reach out to you shortly to confirm your booking and process the payment.</p>
+                <h4 className="text-xl font-bold text-slate-800 mb-2">{priceKnown ? "Booking Request Sent!" : "Spot Reserved!"}</h4>
+                <p className="text-slate-600">
+                  {priceKnown
+                    ? "Our team will reach out to you shortly to confirm your booking and process the payment."
+                    : "We'll share the full itinerary and price with you on WhatsApp and email as soon as they're ready."}
+                </p>
               </div>
             ) : (
-              <form onSubmit={handleBookingSubmit} className="p-6 space-y-4">
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6 flex justify-between items-center">
-                  <span className="text-sm text-slate-600">Total for {guests} Guest{guests > 1 ? 's' : ''}</span>
-                  <span className="text-lg font-bold text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
+              <form onSubmit={handleBookingSubmit} className="px-6 py-4 space-y-3">
+                <div className="bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 mb-4 space-y-2.5">
+                  {selectedDeparture && (
+                    <div>
+                      <label htmlFor="departure" className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Your Batch</label>
+                      {bookableDepartures.length > 1 ? (
+                        <select
+                          id="departure"
+                          value={selectedDeparture.id}
+                          onChange={(e) => onSelectDeparture(e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm font-bold text-[#0E5A60] focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60]"
+                        >
+                          {bookableDepartures.map((d) => (
+                            <option key={d.id} value={d.id}>
+                              {formatDeparture(d)}{d.label ? ` · ${d.label}` : ""}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <p className="flex items-center gap-1.5 text-sm font-bold text-[#0E5A60]">
+                          <Calendar size={14} /> {formatDeparture(selectedDeparture)}
+                        </p>
+                      )}
+                      {selectedDeparture.note && <p className="text-[11px] text-slate-500 mt-1">{selectedDeparture.note}</p>}
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-slate-600">{priceKnown ? "Total for " : ""}{guests} Guest{guests > 1 ? 's' : ''}</span>
+                    <span className="text-lg font-bold text-[#0E5A60]">{priceKnown ? `₹${finalTotal.toLocaleString()}` : "Price TBA"}</span>
+                  </div>
                 </div>
 
                 <div>
                   <label htmlFor="name" className="block text-sm font-bold text-slate-700 mb-1.5">Full Name</label>
-                  <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="John Doe" />
+                  <input type="text" id="name" name="name" required className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="John Doe" />
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-1.5">Email Address</label>
-                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="john@example.com" />
+                    <input type="email" id="email" name="email" required className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="john@example.com" />
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-1.5">WhatsApp Number</label>
-                    <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="+91 98765 43210" />
+                    <input type="tel" id="phone" name="phone" required className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="+91 98765 43210" />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="specialRequests" className="block text-sm font-bold text-slate-700 mb-1.5">Special Requests (Optional)</label>
-                  <textarea id="specialRequests" name="specialRequests" rows={3} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="Any dietary requirements, medical conditions, or other requests..."></textarea>
+                  <textarea id="specialRequests" name="specialRequests" rows={2} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="Any dietary requirements, medical conditions, or other requests..."></textarea>
                 </div>
 
+                {!hasDepartures && (
                 <div>
                   <label htmlFor="travelDate" className="block text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1.5"><Calendar size={14} /> Preferred Travel Date</label>
                   <input
@@ -205,17 +303,18 @@ function BookingWidget({ tour }: { tour: TourPackage }) {
                     min={new Date().toISOString().split('T')[0]}
                     value={travelDate}
                     onChange={(e) => setTravelDate(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors"
                   />
                 </div>
+                )}
 
-                <div className="pt-4">
+                <div className="pt-2">
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-[#0E5A60] hover:bg-[#0A4348] disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold text-[15px] rounded-full shadow-md transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-[#0E5A60] hover:bg-[#0A4348] disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold text-[15px] rounded-full shadow-md transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    {isSubmitting ? "Submitting..." : "Confirm Booking Request"}
+                    {isSubmitting ? "Submitting..." : priceKnown ? "Confirm Booking Request" : "Reserve My Spot"}
                   </button>
                 </div>
               </form>
@@ -239,6 +338,9 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
   const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
   const [expandedDay, setExpandedDay] = useState<number | null>(0);
   const dayRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [selectedDepartureId, setSelectedDepartureId] = useState<string | undefined>(
+    () => trip && getNextDeparture(trip.tourPackage)?.id
+  );
 
   const toggleDay = (idx: number) => {
     const isOpening = expandedDay !== idx;
@@ -289,6 +391,12 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
   }
 
   const tour = trip.tourPackage;
+  const departures = getUpcomingDepartures(tour);
+  const selectedDeparture = departures.find((d) => d.id === selectedDepartureId && !isSoldOut(d));
+  const spotsLeft = getSpotsLeft(tour);
+  const nextDepartureLabel = getNextDepartureLabel(tour);
+  const batchCount = departures.filter((d) => !isSoldOut(d)).length;
+  const fullDetails = hasFullDetails(tour);
 
   const handleEnquiry = (e: React.FormEvent) => {
     e.preventDefault();
@@ -319,9 +427,9 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                 <span className="bg-[#0E5A60] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   {tour.category}
                 </span>
-                {tour.spotsLeft && (
+                {!!spotsLeft && (
                   <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
-                    <Sparkles size={12} /> {tour.spotsLeft} Spots Remaining
+                    <Sparkles size={12} /> {spotsLeft} Spots Remaining
                   </span>
                 )}
               </div>
@@ -345,8 +453,16 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar size={18} className="text-teal-400" />
-                  <span>Next: {tour.nextDeparture || "Upcoming"}</span>
+                  <span>Next batch: {nextDepartureLabel}</span>
                 </div>
+                {batchCount > 1 && (
+                  <a
+                    href="#book"
+                    className="bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/30 text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full transition-colors"
+                  >
+                    {batchCount} batches · View dates
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -372,8 +488,9 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                     <Calendar size={18} className="text-[#0E5A60]" />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Departure</span>
-                    <span className="text-[13px] font-bold text-[#0E5A60]">{tour.nextDeparture || "Upcoming"}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Next Batch</span>
+                    <span className="text-[13px] font-bold text-[#0E5A60]">{nextDepartureLabel}</span>
+                    {batchCount > 1 && <span className="text-[11px] text-slate-500">{batchCount} batches available</span>}
                   </div>
                 </div>
 
@@ -419,6 +536,8 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
               </div>
             </section>
 
+            {fullDetails ? (
+            <>
             {/* Overview Section */}
             <section className="space-y-4">
               <h3 className="text-2xl sm:text-3xl font-serif text-[#0E5A60] leading-tight">
@@ -713,10 +832,41 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                 </div>
               </div>
             </section>
+            </>
+            ) : (
+            /* Trips added with dates only: itinerary, inclusions and price still to come */
+            <section className="bg-[#FAF4EC] rounded-3xl border border-[#F0E8D9] p-6 sm:p-8 space-y-5">
+              <div>
+                <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C85A24] mb-1">Coming Soon</h2>
+                <h3 className="text-2xl sm:text-3xl font-serif text-[#0E5A60] leading-tight">
+                  Full Itinerary Dropping Soon
+                </h3>
+              </div>
+              <p className="text-slate-700 text-[15px] leading-relaxed">
+                The dates are locked in — we&apos;re finalising the day-by-day plan, stays and pricing for this journey.
+                Reserve your spot now with no payment, and you&apos;ll be the first to get the full details.
+              </p>
+              <ul className="space-y-2.5">
+                {[
+                  "Pick your batch and reserve — no payment needed",
+                  "We share the itinerary and price on WhatsApp and email",
+                  "Confirm and pay only once you've seen everything",
+                ].map((step, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-[14px] text-slate-700">
+                    <span className="w-6 h-6 rounded-full bg-[#0E5A60] text-white text-[12px] font-bold flex items-center justify-center shrink-0">{idx + 1}</span>
+                    <span className="pt-0.5">{step}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/contact" className="inline-flex items-center gap-1.5 text-[#D96C2C] font-bold text-[14px] hover:text-[#C85A24] transition-colors">
+                Have a question? Talk to us <ArrowRight size={15} />
+              </Link>
+            </section>
+            )}
           </div>
 
           {/* Right Column: Sticky Booking Widget */}
-          <div className="lg:col-span-4">
+          <div id="book" className="lg:col-span-4 scroll-mt-24">
             <div className="sticky top-24 bg-white p-4 rounded-[32px] border border-slate-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex flex-col max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
               {/* Top Summary Info */}
@@ -727,7 +877,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                   </div>
                   <div>
                     <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Dates</p>
-                    <p className="text-sm font-bold text-[#0E5A60]">{tour.nextDeparture || "Upcoming"}</p>
+                    <p className="text-sm font-bold text-[#0E5A60]">{selectedDeparture ? formatDeparture(selectedDeparture) : nextDepartureLabel}</p>
                   </div>
                 </div>
 
@@ -745,7 +895,12 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
               </div>
 
               {/* Booking Form State & Logic */}
-              <BookingWidget tour={tour} />
+              <BookingWidget
+                tour={tour}
+                departures={departures}
+                selectedDeparture={selectedDeparture}
+                onSelectDeparture={setSelectedDepartureId}
+              />
 
             </div>
           </div>

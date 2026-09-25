@@ -64,6 +64,11 @@ export function AdminClient({ bookings, enquiries }: { bookings: Booking[], enqu
                       </td>
                       <td className="px-6 py-4">
                         <div className="font-medium text-[#0E5A60]">{booking.tripName}</div>
+                        {booking.departureDate && (
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-[#D96C2C] mt-1">
+                            <Calendar size={12} /> {booking.departureDate}
+                          </div>
+                        )}
                         {booking.specialRequests && (
                           <div className="mt-1.5 p-2 bg-[#F7F3EC] rounded text-xs text-slate-600 border border-[#F0E8D9]">
                             <strong>Notes:</strong> {booking.specialRequests}
@@ -78,7 +83,7 @@ export function AdminClient({ bookings, enquiries }: { bookings: Booking[], enqu
                       </td>
                       <td className="px-6 py-4">
                         <div className="font-bold text-slate-800">
-                          ₹{booking.totalAmount.toLocaleString()}
+                          {booking.totalAmount > 0 ? `₹${booking.totalAmount.toLocaleString()}` : "Price TBA"}
                         </div>
                       </td>
                       <td className="px-6 py-4 text-slate-500">

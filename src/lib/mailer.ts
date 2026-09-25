@@ -27,6 +27,7 @@ interface BookingEmailData {
   guests: number
   tripId: string
   tripName: string
+  departureDate?: string
   totalAmount: number
   specialRequests?: string
 }
@@ -59,6 +60,16 @@ function emailWrapper(content: string) {
 </html>`.trim()
 }
 
+// Reservations for trips without an announced price are saved with a 0 total
+function formatAmount(amount: number) {
+  return amount > 0 ? `₹${amount.toLocaleString("en-IN")}` : "To be confirmed"
+}
+
+function departureLine(booking: BookingEmailData) {
+  if (!booking.departureDate) return ""
+  return `<p style="margin:4px 0 0;font-size:14px;color:#0E5A60;font-weight:600;font-family:Arial,sans-serif;">${booking.departureDate}</p>`
+}
+
 // ─── Admin Lead Alert ────────────────────────────────────────────────────────
 
 export async function sendAdminLeadAlert(booking: BookingEmailData) {
@@ -68,7 +79,7 @@ export async function sendAdminLeadAlert(booking: BookingEmailData) {
     return
   }
 
-  const formattedAmount = `\u20b9${booking.totalAmount.toLocaleString("en-IN")}`
+  const formattedAmount = formatAmount(booking.totalAmount)
   const receivedAt = new Date().toLocaleString("en-IN", {
     timeZone: "Asia/Kolkata",
     day: "numeric",
@@ -104,6 +115,7 @@ export async function sendAdminLeadAlert(booking: BookingEmailData) {
       <td style="padding:32px 48px 0;">
         <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:11px;color:#A89F93;letter-spacing:1px;text-transform:uppercase;">Journey</p>
         <p style="margin:0;font-size:16px;color:#0B2A3D;line-height:1.5;font-family:Arial,sans-serif;">${booking.tripName}</p>
+        ${departureLine(booking)}
       </td>
     </tr>
 
@@ -178,6 +190,7 @@ export async function sendCustomerConfirmation(booking: BookingEmailData) {
       <td style="padding:32px 48px 0;">
         <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:11px;color:#A89F93;letter-spacing:1px;text-transform:uppercase;">Your Journey</p>
         <p style="margin:0;font-size:16px;color:#0B2A3D;line-height:1.5;font-family:Arial,sans-serif;">${booking.tripName}</p>
+        ${departureLine(booking)}
       </td>
     </tr>
 
@@ -191,7 +204,7 @@ export async function sendCustomerConfirmation(booking: BookingEmailData) {
             </td>
             <td style="width:50%;vertical-align:top;">
               <p style="margin:0 0 4px;font-family:Arial,sans-serif;font-size:11px;color:#A89F93;letter-spacing:1px;text-transform:uppercase;">Estimated Total</p>
-              <p style="margin:0;font-size:20px;color:#D96C2C;font-weight:700;font-family:Arial,sans-serif;">\u20b9${booking.totalAmount.toLocaleString("en-IN")}</p>
+              <p style="margin:0;font-size:20px;color:#D96C2C;font-weight:700;font-family:Arial,sans-serif;">${formatAmount(booking.totalAmount)}</p>
             </td>
           </tr>
         </table>

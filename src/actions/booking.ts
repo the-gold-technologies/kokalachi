@@ -11,6 +11,8 @@ export async function createBooking(data: {
   guests: number
   tripId: string
   tripName: string
+  departureId?: string
+  departureDate?: string
   totalAmount: number
   specialRequests?: string
 }) {

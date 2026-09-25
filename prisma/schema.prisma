@@ -14,6 +14,8 @@ model Booking {
   guests          Int
   tripId          String
   tripName        String
+  departureId     String?
+  departureDate   String?
   totalAmount     Float
   specialRequests String?
   createdAt       DateTime @default(now())
