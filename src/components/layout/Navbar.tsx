@@ -24,6 +24,8 @@ import {
   Heart,
   ArrowRight,
 } from "lucide-react";
+import { tripCards, TripCardData } from "@/data/trips";
+import { formatShortDate, getNextDeparture, hasFullDetails, isBookingOpen } from "@/lib/departures";
 
 interface DropdownItem {
   title: string;
@@ -32,6 +34,35 @@ interface DropdownItem {
   image: string;
   href?: string;
 }
+
+// Destinations menu: a few vibes to browse by, each opening /journeys pre-filtered
+const destinationCategories = [
+  { id: "Adventure", label: "Mountains & Treks" },
+  { id: "SlowTravel", label: "Slow Travel" },
+  { id: "BeachEscape", label: "Beaches & Islands" },
+  { id: "FirstTimers", label: "First-Timer Friendly" },
+  { id: "WomenOnly", label: "Women Only" },
+]
+  .map((cat) => {
+    const trips = tripCards.filter((card) => card.categories.includes(cat.id));
+    return {
+      title: cat.label,
+      desc: `${trips.length} ${trips.length === 1 ? "journey" : "journeys"}`,
+      image: trips[0]?.images[0].replace("w=800", "w=300") ?? "",
+      href: `/journeys?category=${cat.id}`,
+    };
+  })
+  .filter((cat) => cat.image);
+
+// Big photo cards: the next bookable trips with full itineraries (featured first)
+const handpickedTrips = tripCards
+  .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
+  .slice(0, 3);
+
+const tripBadge = (card: TripCardData) => {
+  const next = getNextDeparture(card.tourPackage);
+  return card.featured ? "New" : next ? `Departs ${formatShortDate(next.startDate)}` : "Coming Soon";
+};
 
 const dropdownData: Record<string, DropdownItem[]> = {
   Destinations: [
@@ -43,30 +74,7 @@ const dropdownData: Record<string, DropdownItem[]> = {
         "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300",
       href: "/journeys",
     },
-    {
-      title: "Kashmir & Ladakh",
-      tag: "Mountains",
-      desc: "Glacial valleys, houseboats & serene passes.",
-      image:
-        "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=80&w=300",
-      href: "/journeys",
-    },
-    {
-      title: "Meghalaya & Spiti",
-      tag: "Wilderness",
-      desc: "Misty waterfalls, rugged peaks & raw nature.",
-      image:
-        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&q=80&w=300",
-      href: "/journeys",
-    },
-    {
-      title: "Kerala & South",
-      tag: "Tropical",
-      desc: "Lush tea hills, serene lagoons & coastlines.",
-      image:
-        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=300",
-      href: "/journeys",
-    },
+    ...destinationCategories,
   ],
   Tours: [
     {
@@ -235,54 +243,143 @@ export function Navbar() {
                 >
                   {link.name}
                   {link.hasDropdown && (
-                    <ChevronDown size={16} className="opacity-90" strokeWidth={2} />
+                    <ChevronDown
+                      size={16}
+                      strokeWidth={2}
+                      className={`opacity-90 transition-transform duration-300 ${
+                        activeDropdown === link.name ? "rotate-180" : ""
+                      }`}
+                    />
                   )}
                 </Link>
 
                 {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
                 {link.hasDropdown && activeDropdown === link.name && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-4 sm:p-5 w-[620px] grid grid-cols-2 gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-                      {dropdownData[link.name]?.map((item) => (
+                    {link.name === "Destinations" ? (
+                      <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[760px] xl:w-[860px] animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="grid grid-cols-[230px_1fr] gap-5">
+                          {/* Browse by vibe */}
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D96C2C] mb-3 px-2">
+                              Browse by vibe
+                            </p>
+                            <div className="flex flex-col gap-1">
+                              {destinationCategories.map((cat) => (
+                                <Link
+                                  key={cat.title}
+                                  href={cat.href}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className="flex items-center gap-3 p-2 rounded-xl hover:bg-[#FAF6F0] transition-colors group/cat"
+                                >
+                                  <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-slate-100">
+                                    <img
+                                      src={cat.image}
+                                      alt={cat.title}
+                                      className="w-full h-full object-cover group-hover/cat:scale-110 transition-transform duration-500"
+                                    />
+                                  </div>
+                                  <div className="flex flex-col min-w-0 flex-1">
+                                    <span className="font-bold text-[13px] text-[#0E5A60] group-hover/cat:text-[#D96C2C] transition-colors leading-snug">
+                                      {cat.title}
+                                    </span>
+                                    <span className="text-[11px] text-slate-500">{cat.desc}</span>
+                                  </div>
+                                  <ArrowRight className="w-3.5 h-3.5 text-[#D96C2C] opacity-0 -translate-x-1 group-hover/cat:opacity-100 group-hover/cat:translate-x-0 transition-all" />
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Handpicked trips as photo cards */}
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D96C2C] mb-3">
+                              Handpicked for you
+                            </p>
+                            <div className="grid grid-cols-2 grid-rows-2 gap-3 h-[300px]">
+                              {handpickedTrips.map((card, i) => (
+                                <Link
+                                  key={card.slug}
+                                  href={`/journeys/${card.slug}`}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className={`relative rounded-2xl overflow-hidden group/trip bg-slate-200 ${i === 0 ? "row-span-2" : ""}`}
+                                >
+                                  <img
+                                    src={card.images[0]}
+                                    alt={card.destination}
+                                    className="absolute inset-0 w-full h-full object-cover group-hover/trip:scale-110 transition-transform duration-700"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                                  <span className="absolute top-3 left-3 text-[9.5px] font-bold uppercase tracking-wider text-white bg-[#D96C2C] px-2.5 py-1 rounded-full shadow-sm">
+                                    {tripBadge(card)}
+                                  </span>
+                                  <div className="absolute bottom-0 left-0 right-0 px-3.5 pb-3.5">
+                                    <p className={`font-serif font-semibold text-white leading-tight ${i === 0 ? "text-2xl" : "text-lg"}`}>
+                                      {card.destination}
+                                    </p>
+                                    <p className="text-[11px] text-white/80 mt-1 flex items-center gap-1">
+                                      {card.duration}
+                                      <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover/trip:opacity-100 group-hover/trip:translate-x-0 transition-all" />
+                                    </p>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
+                          <span>Handcrafted slow-travel journeys across India &amp; beyond</span>
+                          <Link
+                            href={link.href}
+                            onClick={() => setActiveDropdown(null)}
+                            className="font-bold text-[#0E5A60] hover:text-[#D96C2C] flex items-center gap-1.5 transition-colors shrink-0"
+                          >
+                            <span>Explore all journeys</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                    ) : (
+                    <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[720px] animate-in fade-in slide-in-from-top-2 duration-200">
+                      {/* Photo tiles: one tall, one wide, two small */}
+                      <div className="grid grid-cols-3 grid-rows-2 gap-3 h-[320px]">
+                      {dropdownData[link.name]?.map((item, i) => (
                         <Link
                           key={item.title}
                           href={item.href || "#"}
                           onClick={() => setActiveDropdown(null)}
-                          className="flex items-center gap-3.5 p-2.5 rounded-2xl hover:bg-[#FAF6F0] border border-transparent hover:border-amber-900/10 transition-all duration-300 group/item text-left"
+                          className={`relative rounded-2xl overflow-hidden group/item bg-slate-200 text-left ${i === 0 ? "row-span-2" : i === 1 ? "col-span-2" : ""}`}
                         >
-                          {/* Rich Visual Image Thumbnail */}
-                          <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden shrink-0 shadow-sm relative bg-slate-100">
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                          </div>
-
-                          {/* Content */}
-                          <div className="flex flex-col min-w-0 flex-1">
-                            {item.tag && (
-                              <span className="text-[9.5px] font-bold uppercase tracking-wider text-[#D96C2C] bg-[#D96C2C]/10 px-2 py-0.5 rounded-full inline-block mb-1 w-fit">
-                                {item.tag}
-                              </span>
-                            )}
-                            <span className="font-bold text-xs sm:text-[13px] text-[#0E5A60] group-hover/item:text-[#D96C2C] leading-snug transition-colors line-clamp-1">
-                              {item.title}
+                          <img
+                            src={item.image.replace("w=300", "w=800")}
+                            alt={item.title}
+                            className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                          {item.tag && (
+                            <span className="absolute top-3 left-3 text-[9.5px] font-bold uppercase tracking-wider text-white bg-[#D96C2C] px-2.5 py-1 rounded-full shadow-sm">
+                              {item.tag}
                             </span>
-                            <span className="text-[11px] text-slate-500 leading-snug line-clamp-2 mt-0.5">
+                          )}
+                          <div className="absolute bottom-0 left-0 right-0 px-3.5 pb-3.5">
+                            {/* One line each, so the text stays inside the dark fade at the bottom */}
+                            <p className={`font-serif font-semibold text-white leading-tight flex items-center gap-1.5 ${i === 1 ? "text-xl" : "text-base"}`}>
+                              <span className="truncate">{item.title}</span>
+                              <ArrowRight className="w-4 h-4 shrink-0 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all" />
+                            </p>
+                            <p className="text-[11px] text-white/80 mt-1 leading-snug truncate">
                               {item.desc}
-                            </span>
+                            </p>
                           </div>
                         </Link>
                       ))}
+                      </div>
 
                       {/* Dropdown Footer CTA Strip */}
-                      <div className="col-span-2 pt-3 mt-1 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
+                      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
                         <span>
-                          {link.name === "Destinations"
-                            ? "Handcrafted slow-travel destinations across India"
-                            : link.name === "Tours"
+                          {link.name === "Tours"
                             ? "Curated solo-friendly group adventures & retreats"
                             : "Real memories & stories from the Kokalachi tribe"}
                         </span>
@@ -296,6 +393,7 @@ export function Navbar() {
                         </Link>
                       </div>
                     </div>
+                    )}
                   </div>
                 )}
               </div>

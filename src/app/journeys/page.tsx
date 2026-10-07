@@ -1,10 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { tripCards } from "@/data/trips";
 import { CompactTripCardItem } from "@/components/CompactTripCardItem";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { Flame, Compass, Heart, Mountain, Coffee, Palmtree } from "lucide-react";
+
+// Opens the page pre-filtered when linked as /journeys?category=Adventure (e.g. from the navbar)
+function CategoryFromUrl({ onCategory }: { onCategory: (id: string) => void }) {
+  const category = useSearchParams().get("category");
+  useEffect(() => {
+    if (category) onCategory(category);
+  }, [category, onCategory]);
+  return null;
+}
 
 export default function AllJourneysPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -28,6 +38,9 @@ export default function AllJourneysPage() {
 
   return (
     <div className="min-h-screen font-sans text-slate-800  pb-20">
+      <Suspense fallback={null}>
+        <CategoryFromUrl onCategory={setActiveCategory} />
+      </Suspense>
       
       {/* Hero Section (Matching Detailed Page) */}
       <div className="relative h-[60vh] min-h-[400px] w-full">

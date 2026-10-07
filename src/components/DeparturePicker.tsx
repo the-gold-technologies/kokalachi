@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ChevronRight } from "lucide-react";
 import { Departure, TourPackage } from "@/data/trips";
 import {
   formatDayDate,
@@ -88,7 +89,7 @@ export function DeparturePicker({
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <p className={`text-[13px] font-bold text-[#0E5A60] ${soldOut ? "line-through" : ""}`}>
-                    {formatDayDate(d.startDate)} <span className="text-slate-400 font-medium">→</span> {formatDayDate(d.endDate)}
+                    {formatDayDate(d.startDate)} <ChevronRight size={12} className="inline-block align-[-1px] text-slate-400 stroke-[2.5]" /> {formatDayDate(d.endDate)}
                   </p>
                   {d.note && <p className="text-[11px] text-slate-500 mt-0.5">{d.note}</p>}
                   <div className="flex items-center gap-2 mt-1">

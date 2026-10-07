@@ -58,10 +58,145 @@ export interface TripCardData {
   vibeTags: string[];
   categories: string[];
   images: string[];
+  featured?: boolean;      // pins the trip to the front of every list, e.g. the newest launch
   tourPackage: TourPackage;
 }
 
 const allTripCards: TripCardData[] = [
+  {
+    id: 10,
+    slug: "manali",
+    destination: "Manali",
+    locationTag: "📍 Manali",
+    duration: "4 Days / 3 Nights",
+    groupSize: "Intimate Group",
+    price: "7,999",
+    vibeTags: ["Mountains", "Cafés", "Road Trip", "Scenic", "Community"],
+    categories: ["Trending", "FirstTimers", "Adventure"],
+    featured: true,
+    images: [
+      "https://images.unsplash.com/photo-1597167231350-d057a45dc868?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1590265788376-5d99eb11976e?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1623416225940-abdc8359edf4?auto=format&fit=crop&q=85&w=800"
+    ],
+    tourPackage: {
+      id: 10,
+      title: "Valleys & Vistas: A Journey Through Manali",
+      subtitle: "Pine Valleys, Mountain Cafés & Cozy Fireside Evenings",
+      location: "Manali",
+      duration: "3 Nights / 4 Days",
+      rating: 5,
+      price: 7819,
+      gstAmount: 180,
+      originalPrice: null,
+      image: "https://images.unsplash.com/photo-1597167231350-d057a45dc868?auto=format&fit=crop&q=85&w=800",
+      category: "Mountains",
+      tag: "Triple Sharing",
+      tagColor: "bg-[#0E5A60]",
+      departures: [
+        { id: "manali-2026-10-29", startDate: "2026-10-29", endDate: "2026-11-01", note: "Overnight departure from Delhi by AC Tempo Traveller" }
+      ],
+      hook: "Overnight Departure · Tempo Traveller · Manali",
+      gallery: [
+        "https://images.unsplash.com/photo-1597167231350-d057a45dc868?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1590265788376-5d99eb11976e?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1706696448543-a08dee17cea7?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1623416225940-abdc8359edf4?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1516406742981-2b7d67ec4ae8?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1726266140611-90e75629f2a7?auto=format&fit=crop&q=85&w=800"
+      ],
+      overview: [
+        "Valleys & Vistas: A Journey Through Manali is a 3-night, 4-day road trip into the Himalayas, built for travellers who want their group to feel like regulars at the same mountain café by the end of it.",
+        "Here's what the journey holds:",
+        "• Leave Delhi by AC Tempo Traveller in the evening, with a highway dinner stop and a midnight chai pause as the group gets to know each other on the overnight drive up",
+        "• Arrive in Manali, hike to Jogni Falls, and visit Hadimba and Manu Temples before an afternoon spent café-hopping through Old Manali's wood-fired pizza spots and bakery lanes",
+        "• Take a scenic drive to Sissu for valley views and adventure activities, closing the day with a bonfire, music, and games back at the hotel",
+        "• Squeeze in one last café stop and some souvenir shopping before the overnight drive back to Delhi, with postcards written and photos exchanged along the way"
+      ],
+      itinerary: [
+        {
+          day: "Day 01",
+          title: "The Night Drive to the Hills",
+          journey: "Evening assembly in Delhi → Board AC Tempo Traveller → En-route highway dinner stop → Overnight journey across the Himalayas.",
+          community: "\"Two Truths & A Travel Lie\" and Highway Chai Stop: An icebreaker session aboard the Tempo Traveller as the group leaves the city, paired with a midnight roadside chai pause.",
+          image: "https://images.unsplash.com/photo-1726266140611-90e75629f2a7?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 02",
+          title: "Old-Town Charm & Café Hopping",
+          journey: "Morning arrival in Manali → Hotel check-in and breakfast → Afternoon hike to Jogni Falls → Visit Hadimba Temple and Manu Temple → Old Manali café exploration → Evening walk at Mall Road.",
+          community: "The Old Manali Café Crawl and Local Food Quest: Pairing up to explore Old Manali's famous wood-fired pizza spots and bakery lanes, concluding with a group shopping trip along Mall Road.",
+          image: "https://images.unsplash.com/photo-1590265788376-5d99eb11976e?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 03",
+          title: "Snow Peaks & Fireside Vibes",
+          journey: "Breakfast → Scenic drive to Sissu (adventure activities and valley views) → Evening hotel return.",
+          community: "The Trans Himalaya Reset and Fireside Jam Session: Trip to Sissu followed by an evening bonfire, music playlist swap, and group games back at the hotel.",
+          image: "https://images.unsplash.com/photo-1623416225940-abdc8359edf4?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 04",
+          title: "Mountain Farewell & Return",
+          journey: "Morning breakfast and checkout → Last-minute café pause and souvenir shopping → Board Tempo Traveller for Delhi → En-route lunch stop → Late-night arrival in Delhi.",
+          community: "The Circle Postcard Ritual and Frame Photo Exchange: Writing physical postcards to fellow travellers during the drive back and sharing the master media folder before reaching Delhi.",
+          image: "https://images.unsplash.com/photo-1571677465484-2dd540924245?auto=format&fit=crop&q=85&w=800"
+        }
+      ],
+      inclusions: [
+        "Delhi–Manali–Delhi AC Tempo Traveller transfers",
+        "Hotel stay (Triple Sharing)",
+        "Daily breakfasts",
+        "Daily dinners",
+        "Guided excursions as per itinerary (Jogni Falls, Hadimba & Manu Temple, Sissu)",
+        "Kokalachi community experiences",
+        "Trip coordination"
+      ],
+      exclusions: [
+        "Travel to and from the Delhi departure point",
+        "Meals throughout the trip, unless explicitly mentioned",
+        "Personal expenses, café purchases, shopping, and tips",
+        "Travel insurance",
+        "Entry fees for optional sightseeing not listed in the itinerary",
+        "Any costs arising from unforeseen circumstances, such as road closures or weather disruptions"
+      ],
+      whatToPack: [
+        "Layered clothing: warm jackets, thermals, and woollens, as Manali and Sissu can get cold even outside peak winter",
+        "Comfortable, sturdy shoes for the Jogni Falls hike and walking through Old Manali's lanes",
+        "A neck pillow or light blanket for the overnight Tempo Traveller journeys both ways",
+        "A light raincoat, since mountain weather can shift quickly",
+        "Sunscreen and sunglasses, especially for the Sissu valley drive",
+        "A power bank for the long road journeys",
+        "Cash in small denominations for Old Manali's cafés and local markets",
+        "A valid photo ID for hotel check-in"
+      ],
+      weather: [
+        "Manali's weather shifts significantly by season, so this should be refined once your exact travel dates are confirmed, but as a general guide:",
+        "October–February: Cold, with winter (Dec–Feb) bringing snowfall and sub-zero nights, so heavy woollens are essential",
+        "March–June: Pleasant and cool, ideal for café-hopping and valley drives",
+        "July–September: Monsoon season, with the possibility of landslides affecting mountain routes like Sissu",
+        "Sissu, being higher altitude, is consistently colder than Manali town. Pack an extra layer for that leg of the trip regardless of season"
+      ],
+      faqs: [
+        {
+          question: "Where does this trip start from?",
+          answer: "The trip begins with a common evening departure from Delhi by AC Tempo Traveller, and returns to Delhi late at night on Day 4."
+        },
+        {
+          question: "What is the room type?",
+          answer: "Stays are on a Triple Sharing basis."
+        },
+        {
+          question: "Need Assistance in Air Fare, Visa, Permit?",
+          answer: "Not applicable for this trip. It's a road journey by AC Tempo Traveller with a common departure point in Delhi, so no flights or permits are required."
+        },
+        {
+          question: "What is the cancellation policy?",
+          answer: "Contact us for more details"
+        }
+      ]
+    }
+  },
   {
     id: 1,
     slug: "kashmir",
@@ -95,19 +230,19 @@ const allTripCards: TripCardData[] = [
       departures: [
         { id: "kashmir-2026-10-17", startDate: "2026-10-17", endDate: "2026-10-20" }
       ],
-      hook: "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens — curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
+      hook: "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
       gallery: [
         "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1593417376544-4c4201061e22?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens — curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
+        "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
         "Here's what the journey holds:",
         "• Begin in Srinagar with a scenic drive to Pahalgam, winding through saffron fields with a stop at Awantipora's cricket bat factory",
         "• Settle riverside at Hotel Lidder Resort for the first two nights",
         "• Trek toward Aru Valley and Betaab Valley, framed by pine canyons and glacier views",
-        "• Wander through Srinagar's Mughal gardens — Chasma Shahi, Nishat Bagh & Shalimar Bagh",
+        "• Wander through Srinagar's Mughal gardens: Chasma Shahi, Nishat Bagh & Shalimar Bagh",
         "• Close the trip with a sunset shikara ride and a night aboard a deluxe houseboat on Dal Lake",
         "• Traditional Wazwan feast, riverside bonfire storytelling, and a few Kokalachi-signature \"get to know your tribe\" moments woven into every day"
       ],
@@ -177,9 +312,9 @@ const allTripCards: TripCardData[] = [
         "Lunches and dinners outside of the moments listed above are not included, so you can explore local food spots with your group at your own pace"
       ],
       whatToPack: [
-        "Layered clothing — light woollens for the day, a warmer jacket for evenings and higher altitudes (Aru Valley, Betaab Valley)",
+        "Layered clothing: light woollens for the day, a warmer jacket for evenings and higher altitudes (Aru Valley, Betaab Valley)",
         "A comfortable pair of walking/trekking shoes for the Kolahai Glacier base trail",
-        "A light rain jacket or poncho — September sees occasional showers",
+        "A light rain jacket or poncho. September sees occasional showers",
         "Sunscreen, sunglasses, and a cap for daytime activities",
         "A power bank and universal adapter",
         "A valid photo ID (mandatory for domestic flights and permits)",
@@ -188,9 +323,9 @@ const allTripCards: TripCardData[] = [
         "Cash in small denominations for local markets and personal expenses"
       ],
       weather: [
-        "Kashmir in early September is at the tail end of its warm season — pleasant days, cool nights, and the first hints of autumn beginning to show in the valleys.",
+        "Kashmir in early September is at the tail end of its warm season: pleasant days, cool nights, and the first hints of autumn beginning to show in the valleys.",
         "Srinagar: Daytime highs of around 24°C (75°F), dropping to about 12°C (54°F) at night",
-        "Pahalgam: Cooler, given the altitude — daytime highs of around 16–17°C (60–63°F), with nights dropping to 4–5°C (39–42°F)",
+        "Pahalgam: Cooler given the altitude, with daytime highs of around 16–17°C (60–63°F) and nights dropping to 4–5°C (39–42°F)",
         "Occasional light rain is possible; layering is your best bet over heavy clothing, since afternoons can feel mild even when mornings and evenings are crisp"
       ],
       faqs: [
@@ -200,7 +335,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Need Assistance in Air Fare, Visa, Permit?",
-          answer: "Yes — our team can help you plan your flights to Srinagar and guide you through any permits Kashmir travel may require. Reach out to us on WhatsApp and we'll take it from there."
+          answer: "Yes, our team can help you plan your flights to Srinagar and guide you through any permits Kashmir travel may require. Reach out to us on WhatsApp and we'll take it from there."
         },
         {
           question: "Where does this trip start from?",
@@ -208,7 +343,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "I am travelling solo. Who will I share a room with?",
-          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room, so you're never rooming with a stranger by chance — our team curates roommate pairings the same way we curate the group itself. If you'd prefer your own space, the Private Room option is available at checkout."
+          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room, so you're never rooming with a stranger by chance. Our team curates roommate pairings the same way we curate the group itself. If you'd prefer your own space, the Private Room option is available at checkout."
         },
         {
           question: "What is the cancellation policy?",
@@ -250,14 +385,14 @@ const allTripCards: TripCardData[] = [
       tagColor: "bg-[#0E5A60]",
       spotsLeft: 12,
       nextDeparture: "Upcoming",
-      hook: "This Journey of Roots & Rainbows is a 5-night, 6-day plunge into Meghalaya's rainforests, canyons, and living-root bridges — built for travellers who want their group chat buzzing long after the last waterfall dip.",
+      hook: "This Journey of Roots & Rainbows is a 5-night, 6-day plunge into Meghalaya's rainforests, canyons, and living-root bridges, built for travellers who want their group chat buzzing long after the last waterfall dip.",
       gallery: [
         "https://images.unsplash.com/photo-1593813738953-fb3c93e0769d?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1689089526066-c7e6e95ee265?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "This Journey of Roots & Rainbows is a 5-night, 6-day plunge into Meghalaya's rainforests, canyons, and living-root bridges — built for travellers who want their group chat buzzing long after the last waterfall dip.",
+        "This Journey of Roots & Rainbows is a 5-night, 6-day plunge into Meghalaya's rainforests, canyons, and living-root bridges, built for travellers who want their group chat buzzing long after the last waterfall dip.",
         "Here's what the journey holds:",
         "• Land in Guwahati and drive into Shillong, pausing at Umiam Lake before an evening street-food walk through Police Bazaar",
         "• Stand above the clouds at Laitlum Canyons, then cool off with a swim under Krang Suri Waterfall",
@@ -344,19 +479,19 @@ const allTripCards: TripCardData[] = [
         "Lunches and dinners outside of the moments listed above are not included"
       ],
       whatToPack: [
-        "Sturdy trekking shoes with good grip — the Nongriat descent involves 3,200 steps and can be slippery",
+        "Sturdy trekking shoes with good grip. The Nongriat descent involves 3,200 steps and can be slippery",
         "A quick-dry change of clothes for the waterfall swim at Krang Suri",
-        "A light raincoat or poncho — Meghalaya is one of the wettest regions in the world",
+        "A light raincoat or poncho. Meghalaya is one of the wettest regions in the world",
         "Layered clothing for cooler mornings and evenings in Shillong and Cherrapunjee",
         "A dry bag or waterproof pouch for phones and cameras",
         "A reusable water bottle and a basic first-aid kit for the trek",
         "A valid photo ID",
-        "Cash in small denominations — card acceptance is limited in Cherrapunjee and Nongriat"
+        "Cash in small denominations. Card acceptance is limited in Cherrapunjee and Nongriat"
       ],
       weather: [
-        "Expected Weather & Temperature Meghalaya's climate depends heavily on the season — it's known globally for its rainfall, so conditions can shift quickly between misty and clear.",
+        "Expected Weather & Temperature Meghalaya's climate depends heavily on the season. It's known globally for its rainfall, so conditions can shift quickly between misty and clear.",
         "Expect cool, humid mornings and evenings, with daytime temperatures generally comfortable for trekking",
-        "Rain is possible at any time of year in this region, even outside the monsoon months — pack for it regardless of your travel dates",
+        "Rain is possible at any time of year in this region, even outside the monsoon months. Pack for it regardless of your travel dates",
         "Trails can be slippery after rainfall, so grip-focused footwear matters more than warmth here"
       ],
       faqs: [
@@ -366,7 +501,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Need Assistance in Air Fare, Visa, Permit?",
-          answer: "Yes — our team can help you plan your flights to Guwahati. No special permits are required for Indian nationals travelling to Meghalaya."
+          answer: "Yes, our team can help you plan your flights to Guwahati. No special permits are required for Indian nationals travelling to Meghalaya."
         },
         {
           question: "Where does this trip start from?",
@@ -374,7 +509,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "I am travelling solo. Who will I share a room with?",
-          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room — our team curates roommate pairings the same way we curate the group itself. Prefer your own space? The Private Room option is available at checkout."
+          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room. Our team curates roommate pairings the same way we curate the group itself. Prefer your own space? The Private Room option is available at checkout."
         },
         {
           question: "What is the cancellation policy?",
@@ -415,14 +550,14 @@ const allTripCards: TripCardData[] = [
       departures: [
         { id: "kerala-2026-12-03", startDate: "2026-12-03", endDate: "2026-12-08" }
       ],
-      hook: "Tides & Tea Gardens is a 5-night, 6-day slow-travel journey through Kerala's colonial streets, misty Western Ghats, and quiet backwaters — designed for travellers who want the pace of the trip to match the pace of getting to know each other.",
+      hook: "Tides & Tea Gardens is a 5-night, 6-day slow-travel journey through Kerala's colonial streets, misty Western Ghats, and quiet backwaters, designed for travellers who want the pace of the trip to match the pace of getting to know each other.",
       gallery: [
         "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1583513645242-25a32d451084?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1597735881932-d9664c9bbcea?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "Tides & Tea Gardens is a 5-night, 6-day slow-travel journey through Kerala's colonial streets, misty Western Ghats, and quiet backwaters — designed for travellers who want the pace of the trip to match the pace of getting to know each other.",
+        "Tides & Tea Gardens is a 5-night, 6-day slow-travel journey through Kerala's colonial streets, misty Western Ghats, and quiet backwaters, designed for travellers who want the pace of the trip to match the pace of getting to know each other.",
         "Here's what the journey holds:",
         "• Wander Fort Kochi's heritage lanes, photograph the Chinese fishing nets, and catch sunset at Fort Kochi Beach",
         "• Head into the Western Ghats to Vagamon's meadows, pine forests, and tea gardens for a digital-detox afternoon",
@@ -519,8 +654,8 @@ const allTripCards: TripCardData[] = [
       weather: [
         "Kerala's climate is generally warm and humid, tempered by the coast on one end and the cooler Western Ghats on the other.",
         "Coastal areas (Kochi, Varkala): Warm and humid through most of the year, with sea breezes keeping evenings comfortable",
-        "Western Ghats (Vagamon, Ponmudi): Noticeably cooler, especially in the early mornings and evenings — mist is common",
-        "Rain is possible depending on your travel dates, particularly during the monsoon months — check closer to departure and pack a light raincoat regardless"
+        "Western Ghats (Vagamon, Ponmudi): Noticeably cooler, especially in the early mornings and evenings. Mist is common",
+        "Rain is possible depending on your travel dates, particularly during the monsoon months. Check closer to departure and pack a light raincoat regardless"
       ],
       faqs: [
         {
@@ -529,7 +664,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Need Assistance in Air Fare, Visa, Permit?",
-          answer: "Yes — our team can help you plan your flights into Kochi and out of Trivandrum. No special permits are required for Indian nationals travelling to Kerala."
+          answer: "Yes, our team can help you plan your flights into Kochi and out of Trivandrum. No special permits are required for Indian nationals travelling to Kerala."
         },
         {
           question: "Where does this trip start from?",
@@ -537,7 +672,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "I am travelling solo. Who will I share a room with?",
-          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room — our team curates roommate pairings the same way we curate the group itself. Prefer your own space? The Private Room option is available at checkout."
+          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room. Our team curates roommate pairings the same way we curate the group itself. Prefer your own space? The Private Room option is available at checkout."
         },
         {
           question: "What is the cancellation policy?",
@@ -579,18 +714,18 @@ const allTripCards: TripCardData[] = [
       tagColor: "bg-[#0E5A60]",
       spotsLeft: 12,
       nextDeparture: "Upcoming",
-      hook: "The Thunder Dragon Trail is a 5-night, 6-day journey through Bhutan's monasteries, mountain passes, and valleys — built for travellers looking for more than sightseeing, and open to a little reflection along the way.",
+      hook: "The Thunder Dragon Trail is a 5-night, 6-day journey through Bhutan's monasteries, mountain passes, and valleys, built for travellers looking for more than sightseeing, and open to a little reflection along the way.",
       gallery: [
         "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1580649851649-992b28f56e98?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1555821108-3fb2763b226a?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "The Thunder Dragon Trail is a 5-night, 6-day journey through Bhutan's monasteries, mountain passes, and valleys — built for travellers looking for more than sightseeing, and open to a little reflection along the way.",
+        "The Thunder Dragon Trail is a 5-night, 6-day journey through Bhutan's monasteries, mountain passes, and valleys, built for travellers looking for more than sightseeing, and open to a little reflection along the way.",
         "Here's what the journey holds:",
         "• Arrive in Paro and cross the Iron Bridge at Tamchhog Lhakhang en route to Thimphu, setting personal intentions with a traditional butter tea tasting",
         "• Try your hand at traditional archery, explore Thimphu's art schools, and take in the valley from Sangaygang Viewpoint",
-        "• Cross Dochula Pass — home to 108 stupas — and write personal wishes on prayer flags before reaching Punakha Dzong",
+        "• Cross Dochula Pass, home to 108 stupas, and write personal wishes on prayer flags before reaching Punakha Dzong",
         "• Walk through the Royal Botanical Garden and Paro's dzongs, building up to the trip's biggest moment",
         "• Hike to the legendary Tiger's Nest Monastery, pacing each other up the climb before a farewell night in Paro"
       ],
@@ -672,19 +807,19 @@ const allTripCards: TripCardData[] = [
         "Lunches and dinners outside of the moments listed above are not included"
       ],
       whatToPack: [
-        "Layered clothing — mornings and evenings in Thimphu and Paro are cool even when afternoons are mild",
-        "Sturdy, broken-in hiking shoes for the Tiger's Nest climb — this is a real trek, not a casual walk",
+        "Layered clothing: mornings and evenings in Thimphu and Paro are cool even when afternoons are mild",
+        "Sturdy, broken-in hiking shoes for the Tiger's Nest climb. This is a real trek, not a casual walk",
         "A light jacket or fleece for Dochula Pass, which sits above 3,000m and is notably colder than the valleys",
         "A reusable water bottle and some energy snacks for the hike",
-        "Modest clothing for visiting dzongs and monasteries — shoulders and knees should be covered",
+        "Modest clothing for visiting dzongs and monasteries. Shoulders and knees should be covered",
         "A valid passport and any required visa documentation (arranged in advance for Bhutan)",
         "A power bank, as charging points can be limited on the road",
-        "Cash in small denominations — card acceptance is limited outside major towns"
+        "Cash in small denominations. Card acceptance is limited outside major towns"
       ],
       weather: [
-        "Bhutan's climate varies sharply with altitude — Thimphu and Paro sit in cooler mountain valleys, and Dochula Pass is colder still.",
+        "Bhutan's climate varies sharply with altitude. Thimphu and Paro sit in cooler mountain valleys, and Dochula Pass is colder still.",
         "Expect cool mornings and evenings throughout the trip, even when midday sun feels pleasant",
-        "Dochula Pass (3,080m) can be significantly colder and windier than the valley towns — a warm layer is essential here specifically",
+        "Dochula Pass (3,080m) can be significantly colder and windier than the valley towns. A warm layer is essential here specifically",
         "Conditions can shift quickly at altitude, so pack for a wider temperature range than the valley forecast alone would suggest"
       ],
       faqs: [
@@ -694,7 +829,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Need Assistance in Air Fare, Visa, Permit?",
-          answer: "Yes — Bhutan requires advance visa arrangements for most nationalities, and our team will guide you through this as part of booking, along with flight planning into Paro."
+          answer: "Yes, Bhutan requires advance visa arrangements for most nationalities, and our team will guide you through this as part of booking, along with flight planning into Paro."
         },
         {
           question: "Where does this trip start from?",
@@ -702,7 +837,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "I am travelling solo. Who will I share a room with?",
-          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room — our team curates roommate pairings the same way we curate the group itself. Prefer your own space? The Private Room option is available at checkout."
+          answer: "You'll be matched with a fellow solo traveller of the same gender in the Double Sharing Room. Our team curates roommate pairings the same way we curate the group itself. Prefer your own space? The Private Room option is available at checkout."
         },
         {
           question: "What is the cancellation policy?",
@@ -747,7 +882,7 @@ const allTripCards: TripCardData[] = [
       ],
       hook: "Overnight departure via Tempo Traveller from Delhi to Udaipur",
       overview: [
-        "The Majestics Sunsets is a 2-night, 3-day road trip to the City of Lakes — built around the ideation that the journey towards this royal destination matters equally as much as the destination",
+        "The Majestics Sunsets is a 2-night, 3-day road trip to the City of Lakes, built around the ideation that the journey towards this royal destination matters equally as much as the destination",
         "Here's what the journey holds:",
         "Depart Delhi by Tempo Traveller at night, with ice-breakers and music as the group gets to know each other before Udaipur even comes into view",
         "Check into Sarovar on Lake Pichola, then spend the evening watching the sunset over Lake Pichola",
@@ -758,7 +893,7 @@ const allTripCards: TripCardData[] = [
       itinerary: [
         {
           day: "01",
-          title: "Departure Night — The Journey Begins",
+          title: "Departure Night: The Journey Begins",
           journey: "Common departure from Delhi by Tempo Traveller → Overnight journey towards Udaipur.",
           community: "The Kokalachi Moment: Ice-breaker activities and introductions on the road, with music, games, and travel conversations as the trip begins before Udaipur is even in sight. \"You came as strangers. Let the journey change that.\"",
           image: "https://images.unsplash.com/photo-1695956353120-54ce5e91632b?auto=format&fit=crop&q=85&w=800"
@@ -767,7 +902,7 @@ const allTripCards: TripCardData[] = [
           day: "02",
           title: "Welcome to the City of Lakes",
           journey: "Arrive in Udaipur → Check in at Sarovar on Lake Pichola → Leisure afternoon → Evening at Lake Pichola for sunset and group photographs.",
-          community: "The Lake Pichola Sunset: The group gathers by the lake as the sun sets over the City of Lakes, with music, conversations, and group photographs — the signature evening of the trip.",
+          community: "The Lake Pichola Sunset: The group gathers by the lake as the sun sets over the City of Lakes, with music, conversations, and group photographs, the signature evening of the trip.",
           image: "https://images.unsplash.com/photo-1589901164570-f9de6556e1c1?auto=format&fit=crop&q=85&w=800"
         },
         {
@@ -781,7 +916,7 @@ const allTripCards: TripCardData[] = [
           day: "04",
           title: "Goodbyes, But Not Really",
           journey: "Breakfast and check-out → Final photographs by Lake Pichola → Free time for shopping → Return road trip to Delhi.",
-          community: "The Kokalachi Circle: Before leaving Udaipur, everyone shares \"one thing I'll take back from this trip\" — because the idea was never just to visit Udaipur, but to find the people you met along the way.",
+          community: "The Kokalachi Circle: Before leaving Udaipur, everyone shares \"one thing I'll take back from this trip\", because the idea was never just to visit Udaipur, but to find the people you met along the way.",
           image: "https://images.unsplash.com/photo-1633702738734-443da2c18f3c?auto=format&fit=crop&q=85&w=800"
         }
       ],
@@ -807,16 +942,16 @@ const allTripCards: TripCardData[] = [
         "Comfortable walking shoes for the City Palace, Old Udaipur's lanes, and general sightseeing",
         "A neck pillow or light blanket for the overnight Tempo Traveller journey",
         "Sunscreen, sunglasses, and a cap for daytime sightseeing",
-        "A power bank — useful for the long road journey both ways",
-        "A camera or phone ready for the Lake Pichola sunset — this is the trip's most photographed moment",
+        "A power bank, useful for the long road journey both ways",
+        "A camera or phone ready for the Lake Pichola sunset. This is the trip's most photographed moment",
         "A valid photo ID for hotel check-in",
         "Cash in small denominations for Old Udaipur's local markets and handicraft stalls"
       ],
       weather: [
-        "Udaipur in October sits at the tail end of the monsoon, with warm, mostly dry days and pleasantly cool evenings — one of the more comfortable times of year to visit.",
+        "Udaipur in October sits at the tail end of the monsoon, with warm, mostly dry days and pleasantly cool evenings, one of the more comfortable times of year to visit.",
         "Daytime highs typically reach around 32–33°C (90–91°F)",
         "Evenings and nights cool down to around 18–20°C (65–68°F), comfortable for the Lake Pichola sunset evenings",
-        "Rain is unlikely but not impossible — a light layer for evenings is more useful than rain gear"
+        "Rain is unlikely but not impossible. A light layer for evenings is more useful than rain gear"
       ],
       faqs: [
         {
@@ -825,7 +960,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Need Assistance in Air Fare, Visa, Permit?",
-          answer: "Not applicable for this trip — it's a road journey by Tempo Traveller with a common departure point in Delhi, so no flights or permits are required."
+          answer: "Not applicable for this trip. It's a road journey by Tempo Traveller with a common departure point in Delhi, so no flights or permits are required."
         },
         {
           question: "Where does this trip start from?",
@@ -857,7 +992,7 @@ const allTripCards: TripCardData[] = [
     tourPackage: {
       id: 6,
       title: "Sri Lanka · Women-Only Journey",
-      subtitle: "An all-women group trip across the island — full itinerary coming soon",
+      subtitle: "An all-women group trip across the island. Full itinerary coming soon",
       location: "Sri Lanka",
       duration: "5 Days / 4 Nights",
       price: "TBA",
@@ -887,7 +1022,7 @@ const allTripCards: TripCardData[] = [
     tourPackage: {
       id: 7,
       title: "Sri Lanka · Island Journey",
-      subtitle: "A year-end group trip across the island — full itinerary coming soon",
+      subtitle: "A year-end group trip across the island. Full itinerary coming soon",
       location: "Sri Lanka",
       duration: "6 Days / 5 Nights",
       price: "TBA",
@@ -916,7 +1051,7 @@ const allTripCards: TripCardData[] = [
     tourPackage: {
       id: 8,
       title: "Beas Kund Trek",
-      subtitle: "A Himalayan group trek to the glacial lake at the source of the Beas — full itinerary coming soon",
+      subtitle: "A Himalayan group trek to the glacial lake at the source of the Beas. Full itinerary coming soon",
       location: "Himachal Pradesh",
       duration: "3 Days / 2 Nights",
       price: "TBA",
@@ -946,7 +1081,7 @@ const allTripCards: TripCardData[] = [
     tourPackage: {
       id: 9,
       title: "Nag Tibba Trek",
-      subtitle: "A weekend group trek to the highest peak of the Nag Tibba range in Uttarakhand — full itinerary coming soon",
+      subtitle: "A weekend group trek to the highest peak of the Nag Tibba range in Uttarakhand. Full itinerary coming soon",
       location: "Uttarakhand",
       duration: "3 Days / 2 Nights",
       price: "TBA",
@@ -959,11 +1094,12 @@ const allTripCards: TripCardData[] = [
   }
 ];
 
-// Soonest departure first; trips without a bookable date go last.
+// Featured trips first, then soonest departure; trips without a bookable date go last.
 // Ties (and trips without dates) keep their order in the list above.
 const nextStart = (card: TripCardData) => getNextDeparture(card.tourPackage)?.startDate;
 
 export const tripCards: TripCardData[] = [...allTripCards].sort((a, b) => {
+  if (!!a.featured !== !!b.featured) return a.featured ? -1 : 1;
   const aOpen = isBookingOpen(a);
   const bOpen = isBookingOpen(b);
   if (aOpen !== bOpen) return aOpen ? -1 : 1;

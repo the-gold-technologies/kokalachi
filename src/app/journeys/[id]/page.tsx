@@ -11,6 +11,7 @@ import {
   ArrowRight,
   X,
   ChevronDown,
+  ChevronRight,
   Minus,
   Plus,
   ArrowLeft,
@@ -703,7 +704,14 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                               <div>
                                 <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1.5">The Journey</p>
                                 <p className="text-slate-700 leading-relaxed text-[13px]">
-                                  {day.journey}
+                                  {day.journey.split("→").map((step, i) => (
+                                    <React.Fragment key={i}>
+                                      {i > 0 && (
+                                        <ChevronRight size={13} className="inline-block align-[-2px] mx-1 text-[#D96C2C] stroke-[2.5]" />
+                                      )}
+                                      {step.trim()}
+                                    </React.Fragment>
+                                  ))}
                                 </p>
                               </div>
                               <div className="pt-3 border-t border-[#E8DCC8]">
