@@ -9,11 +9,10 @@ import {
   ArrowRight,
   Send,
   Heart,
-  Globe,
   ShieldCheck,
   CheckCircle2,
 } from "lucide-react";
-import { FaInstagram, FaYoutube, FaWhatsapp } from "react-icons/fa6";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -72,7 +71,7 @@ export function Footer() {
             {/* Social Icons */}
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/kokalachi/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -81,29 +80,13 @@ export function Footer() {
                 <FaInstagram className="w-4 h-4" />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.facebook.com/share/1MA2Wf52Cr/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="YouTube"
+                aria-label="Facebook"
                 className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
               >
-                <FaYoutube className="w-4 h-4" />
-              </a>
-              <a
-                href="https://whatsapp.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp Community"
-                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#25D366] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
-              >
-                <FaWhatsapp className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="Global Community"
-                className="w-9 h-9 rounded-full bg-white border border-amber-900/10 hover:bg-[#C85A24] text-[#0E5A60] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-2xs"
-              >
-                <Globe className="w-4 h-4" />
+                <FaFacebookF className="w-4 h-4" />
               </a>
             </div>
           </div>

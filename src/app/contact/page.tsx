@@ -284,7 +284,7 @@ export default function ContactPage() {
                     <FaInstagram size={16} /> Instagram
                   </h4>
                   <p className="text-sm text-slate-500 mb-2">Follow the journeys as they happen, or DM us directly for quick questions.</p>
-                  <a href="https://instagram.com/kokalachi" target="_blank" rel="noreferrer" className="text-[#D96C2C] font-bold hover:underline">@kokalachi</a>
+                  <a href="https://www.instagram.com/kokalachi/" target="_blank" rel="noreferrer" className="text-[#D96C2C] font-bold hover:underline">@kokalachi</a>
                 </div>
               </div>
             </div>
