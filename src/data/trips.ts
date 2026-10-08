@@ -228,7 +228,7 @@ const allTripCards: TripCardData[] = [
       tag: "10-12 Travellers",
       tagColor: "bg-[#0E5A60]",
       departures: [
-        { id: "kashmir-2026-10-17", startDate: "2026-10-17", endDate: "2026-10-20" }
+        { id: "kashmir-2026-11-10", startDate: "2026-11-10", endDate: "2026-11-13" }
       ],
       hook: "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
       gallery: [
