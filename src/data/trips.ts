@@ -240,11 +240,11 @@ const allTripCards: TripCardData[] = [
         "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
         "Here's what the journey holds:",
         "• Begin in Srinagar with a scenic drive to Pahalgam, winding through saffron fields with a stop at Awantipora's cricket bat factory",
-        "• Settle riverside at Hotel Lidder Resort for the first two nights",
+        "• Settle into a riverside stay in Pahalgam, along the Lidder River, for the first two nights",
         "• Trek toward Aru Valley and Betaab Valley, framed by pine canyons and glacier views",
-        "• Wander through Srinagar's Mughal gardens: Chasma Shahi, Nishat Bagh & Shalimar Bagh",
+        "• Optional: wander through Srinagar's Mughal gardens (Chasma Shahi, Nishat Bagh & Shalimar Bagh)",
         "• Close the trip with a sunset shikara ride and a night aboard a deluxe houseboat on Dal Lake",
-        "• Traditional Wazwan feast, riverside bonfire storytelling, and a few Kokalachi-signature \"get to know your tribe\" moments woven into every day"
+        "• Live music, riverside bonfire storytelling, and a few Kokalachi-signature \"get to know your tribe\" moments woven into every day"
       ],
       highlights: [
         { icon: "Users", title: "Intimate Circle Size", description: "Max 12 Travellers" },
@@ -256,8 +256,8 @@ const allTripCards: TripCardData[] = [
         {
           day: "Day 01",
           title: "Saffron Trails & Woodland Bonfires",
-          journey: "Early Srinagar Airport arrival → Scenic drive to Pahalgam (100 km / 3–4 hrs) → Enroute saffron fields pause → Awantipora Cricket Bat Factory stop → Check-in at Hotel Lidder Resort, along the Lidder River.",
-          community: "\"Two Truths & A Travel Lie\" and Acoustic Bonfire Night: An icebreaker session on the coach drive to Pahalgam, followed by a riverside bonfire in the evening with fresh Kashmiri snacks, local folk music, and an open-mic storytelling session.",
+          journey: "Early Srinagar Airport arrival → Scenic drive to Pahalgam (100 km / 3–4 hrs) → Enroute saffron fields pause → Awantipora Cricket Bat Factory stop → Check-in at our riverside stay along the Lidder River.",
+          community: "\"Two Truths & A Travel Lie\" and Acoustic Bonfire Night: An icebreaker session on the coach drive to Pahalgam, followed by a riverside bonfire in the evening with fresh Kashmiri snacks, live local folk music, and an open-mic storytelling session.",
           image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=800"
         },
         {
@@ -270,8 +270,8 @@ const allTripCards: TripCardData[] = [
         {
           day: "Day 03",
           title: "Heritage Gardens & Floating Sunsets",
-          journey: "Early breakfast → Drive to Srinagar → Half-day Mughal Gardens exploration (Chasma Shahi, Nishat Bagh & Shalimar Bagh) → Sunset shikara ride to Nehru Park → Deluxe houseboat check-in.",
-          community: "The Wazwan Feast and Floating Postcard Ritual: A traditional multi-course Kashmiri Wazwan feast at a local restaurant, followed by writing physical postcards to fellow travellers on the open deck of the shikara during sunset.",
+          journey: "Early breakfast → Drive to Srinagar → Optional half-day Mughal Gardens visit (Chasma Shahi, Nishat Bagh & Shalimar Bagh) → Sunset shikara ride to Nehru Park → Deluxe houseboat check-in.",
+          community: "The Shikara Sunset and Floating Postcard Ritual: A slow sunset shikara ride across Dal Lake, writing physical postcards to fellow travellers on the open deck as the light fades.",
           image: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800"
         },
         {
@@ -283,15 +283,14 @@ const allTripCards: TripCardData[] = [
         }
       ],
       inclusions: [
-        "Accommodation at Hotel Lidder Resort and Deluxe Houseboat",
+        "Accommodation in Pahalgam and a Deluxe Houseboat in Srinagar",
         "Daily breakfast",
         "Private airport and inter-hotel transfers",
         "English-speaking guide throughout the itinerary",
         "Aru Valley and Betaab Valley excursion (Union cab)",
-        "Mughal Gardens entry (Chasma Shahi, Nishat Bagh & Shalimar Bagh)",
         "Sunset shikara ride",
-        "Bonfire evening with local snacks and music",
-        "Wazwan feast experience",
+        "Bonfire evening with local snacks",
+        "Live music evenings",
         "Kokalachi Trip Host throughout the journey"
       ],
       exclusions: [
@@ -300,13 +299,12 @@ const allTripCards: TripCardData[] = [
         "Personal expenses, shopping, and tips",
         "Travel insurance",
         "Entry fees for optional activities not listed above",
-        "Any costs arising from unforeseen circumstances, such as flight delays or natural disasters",
-        "Taxes (5% GST and 2% TCS)"
+        "Mughal Gardens visit and entry fees (optional)",
+        "Any costs arising from unforeseen circumstances, such as flight delays or natural disasters"
       ],
       meals: [
         "Day 1: Kashmiri snacks at the riverside bonfire evening",
         "Day 2: Group picnic spread at Hajin (lunch)",
-        "Day 3: Traditional multi-course Wazwan feast (dinner)",
         "Day 4: Breakfast aboard the houseboat",
         "Daily breakfast is included throughout the trip",
         "Lunches and dinners outside of the moments listed above are not included, so you can explore local food spots with your group at your own pace"
