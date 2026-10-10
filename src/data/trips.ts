@@ -68,7 +68,7 @@ const allTripCards: TripCardData[] = [
     slug: "manali",
     destination: "Manali",
     locationTag: "📍 Manali",
-    duration: "4 Days / 3 Nights",
+    duration: "3 Days / 2 Nights",
     groupSize: "Intimate Group",
     price: "7,999",
     vibeTags: ["Mountains", "Cafés", "Road Trip", "Scenic", "Community"],
@@ -84,7 +84,7 @@ const allTripCards: TripCardData[] = [
       title: "Valleys & Vistas: A Journey Through Manali",
       subtitle: "Pine Valleys, Mountain Cafés & Cozy Fireside Evenings",
       location: "Manali",
-      duration: "3 Nights / 4 Days",
+      duration: "2 Nights / 3 Days",
       rating: 5,
       price: 7819,
       gstAmount: 180,
@@ -106,7 +106,7 @@ const allTripCards: TripCardData[] = [
         "https://images.unsplash.com/photo-1726266140611-90e75629f2a7?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "Valleys & Vistas: A Journey Through Manali is a 3-night, 4-day road trip into the Himalayas, built for travellers who want their group to feel like regulars at the same mountain café by the end of it.",
+        "Valleys & Vistas: A Journey Through Manali is a 2-night, 3-day road trip into the Himalayas, built for travellers who want their group to feel like regulars at the same mountain café by the end of it.",
         "Here's what the journey holds:",
         "• Leave Delhi by AC Tempo Traveller in the evening, with a highway dinner stop and a midnight chai pause as the group gets to know each other on the overnight drive up",
         "• Arrive in Manali, hike to Jogni Falls, and visit Hadimba and Manu Temples before an afternoon spent café-hopping through Old Manali's wood-fired pizza spots and bakery lanes",
