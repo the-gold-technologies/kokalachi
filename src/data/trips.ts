@@ -204,7 +204,7 @@ const allTripCards: TripCardData[] = [
     locationTag: "📍 Kashmir",
     duration: "4 Days / 3 Nights",
     groupSize: "10–12 Travellers",
-    price: "TBA",
+    price: "15,999",
     vibeTags: ["Adventure", "Nature", "Scenic", "Heritage", "Culture"],
     categories: ["Trending", "Adventure", "ScenicJourney"],
     images: [
@@ -219,7 +219,7 @@ const allTripCards: TripCardData[] = [
       location: "Kashmir",
       duration: "3 Nights / 4 Days",
       rating: 5,
-      price: 25999,
+      price: 15999,
       gstAmount: 360,
       originalPrice: null,
       image:
@@ -972,62 +972,138 @@ const allTripCards: TripCardData[] = [
     }
   },
   {
-    id: 6,
-    slug: "sri-lanka-women",
+    id: 7,
+    slug: "sri-lanka",
     destination: "Sri Lanka",
     locationTag: "📍 Sri Lanka",
     duration: "5 Days / 4 Nights",
     groupSize: "Intimate Group",
     price: "TBA",
-    vibeTags: ["Women Only","Island","Culture","Beach","Community"],
-    categories: ["WomenOnly","BeachEscape"],
-    images: [
-      "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&q=85&w=800",
-      "https://images.unsplash.com/photo-1612862862126-865765df2ded?auto=format&fit=crop&q=85&w=800",
-      "https://images.unsplash.com/photo-1519566335946-e6f65f0f4fdf?auto=format&fit=crop&q=85&w=800"
-    ],
-    // Full itinerary, inclusions and price still to come — the page shows a "details coming soon" view
-    tourPackage: {
-      id: 6,
-      title: "Sri Lanka · Women-Only Journey",
-      subtitle: "An all-women group trip across the island. Full itinerary coming soon",
-      location: "Sri Lanka",
-      duration: "5 Days / 4 Nights",
-      price: "TBA",
-      image: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&q=85&w=800",
-      category: "Women Only",
-      departures: [
-        { id: "sri-lanka-women-2026-11-12", startDate: "2026-11-12", endDate: "2026-11-16", label: "Women Only" }
-      ]
-    }
-  },
-  {
-    id: 7,
-    slug: "sri-lanka",
-    destination: "Sri Lanka",
-    locationTag: "📍 Sri Lanka",
-    duration: "6 Days / 5 Nights",
-    groupSize: "Intimate Group",
-    price: "TBA",
-    vibeTags: ["Island","Culture","Beach","Community"],
+    vibeTags: ["Coastal", "Heritage", "Food", "Ocean", "Community"],
     categories: ["BeachEscape"],
     images: [
-      "https://images.unsplash.com/photo-1612862862126-865765df2ded?auto=format&fit=crop&q=85&w=800",
-      "https://images.unsplash.com/photo-1519566335946-e6f65f0f4fdf?auto=format&fit=crop&q=85&w=800",
-      "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?auto=format&fit=crop&q=85&w=800"
+      "https://images.unsplash.com/photo-1579989197111-928f586796a3?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1580910527739-556eb89f9d65?auto=format&fit=crop&q=85&w=800",
+      "https://images.unsplash.com/photo-1561426802-392f5b6290cf?auto=format&fit=crop&q=85&w=800"
     ],
-    // Full itinerary, inclusions and price still to come — the page shows a "details coming soon" view
+    // Price still to come — the booking widget takes a free "reserve my spot" request until it's set
     tourPackage: {
       id: 7,
-      title: "Sri Lanka · Island Journey",
-      subtitle: "A year-end group trip across the island. Full itinerary coming soon",
-      location: "Sri Lanka",
-      duration: "6 Days / 5 Nights",
+      title: "Ramparts & Whale Waters",
+      subtitle: "Galle Fort Sunsets, Southern Beaches, and a Morning Out on the Open Ocean",
+      location: "Sri Lanka · Galle & Colombo",
+      duration: "4 Nights / 5 Days",
       price: "TBA",
-      image: "https://images.unsplash.com/photo-1612862862126-865765df2ded?auto=format&fit=crop&q=85&w=800",
-      category: "Island",
+      image: "https://images.unsplash.com/photo-1579989197111-928f586796a3?auto=format&fit=crop&q=85&w=800",
+      category: "Beach Escape",
+      tag: "Intimate Group",
       departures: [
-        { id: "sri-lanka-2026-12-18", startDate: "2026-12-18", endDate: "2026-12-23" }
+        { id: "sri-lanka-2026-11-18", startDate: "2026-11-18", endDate: "2026-11-22" }
+      ],
+      hook: "Ramparts & Whale Waters is a 4-night, 5-day escape to Sri Lanka's southern coast — sunsets on the walls of Galle Fort, a morning at sea out of Mirissa, and a final night in Colombo with the people you started the week as strangers with.",
+      gallery: [
+        "https://images.unsplash.com/photo-1579989197111-928f586796a3?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1580910527739-556eb89f9d65?auto=format&fit=crop&q=85&w=800",
+        "https://images.unsplash.com/photo-1561426802-392f5b6290cf?auto=format&fit=crop&q=85&w=800"
+      ],
+      overview: [
+        "Ramparts & Whale Waters is a 4-night, 5-day escape to Sri Lanka's southern coast — sunsets on the walls of Galle Fort, a morning at sea out of Mirissa, and a final night in Colombo with the people you started the week as strangers with.",
+        "Here's what the journey holds:",
+        "• Land in Colombo, transfer straight to Galle, and open the trip with a Galle Fort walk, sunset on the ramparts, and a welcome sundowner with the group",
+        "• Spend a beach day at Unawatuna with a group picnic, then café-hop and shop through Galle Fort, with a friendly street photography competition on the side",
+        "• Head out from Mirissa on a whale-watching excursion, then try a Sri Lankan cooking class and a traditional group lunch, ending the day with a beachside sunset",
+        "• Drive up the coast to Bentota for a Madu River boat safari or turtle conservation visit, then take in Colombo's Galle Face Green, Independence Square, and Colombo Fort",
+        "• Close with a farewell dinner and the \"Best Travel Moment\" awards before flying home"
+      ],
+      itinerary: [
+        {
+          day: "Day 01",
+          title: "Arrival & Welcome Sundowner",
+          journey: "Arrival at Colombo Airport → Meet & greet and private transfer to Galle → Hotel check-in → Relax by the pool or beach → Evening Galle Fort walk → Sunset at the ramparts → Welcome dinner with the group.",
+          community: "Welcome Sundowner & Introductions: A welcome sundowner combined with group introductions and interactive icebreaker games.",
+          image: "https://images.unsplash.com/photo-1566299597203-225f611b865f?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 02",
+          title: "Galle Beach & Experiences",
+          journey: "Breakfast → Morning visit to Unawatuna Beach → Optional water activities → Lunch at a beachfront café → Afternoon free for spa, pool, or relaxation → Evening café hopping and shopping in Galle Fort → Dinner.",
+          community: "Beach Picnic & Street Photography: A group beach picnic, photoshoot, and friendly street photography competition around Galle Fort.",
+          image: "https://images.unsplash.com/photo-1645839451285-6010ab4a47d6?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 03",
+          title: "Ocean Adventure & Sunset",
+          journey: "Early breakfast → Whale-watching excursion from Mirissa → Return to hotel → Relaxation and pool time → Evening at leisure → Beachside dinner and sunset experience.",
+          community: "Cultural Culinary & Coastal Vibe: An optional coconut plantation visit and interactive Sri Lankan cooking class, followed by a traditional group lunch and a sunset gathering.",
+          image: "https://images.unsplash.com/photo-1580910527739-556eb89f9d65?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 04",
+          title: "Coastal Drive & Colombo City Tour",
+          journey: "Breakfast and check-out → En-route stop at Bentota (Madu River boat safari / turtle conservation) → Continue to Colombo and check in → Colombo city tour (Galle Face Green, Independence Square, Colombo Fort, shopping) → Evening farewell dinner.",
+          community: "Farewell Dinner & Best Travel Moment Awards: A group farewell dinner featuring the \"Best Travel Moment\" awards presentation.",
+          image: "https://images.unsplash.com/photo-1663654558464-a5680b70e04f?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 05",
+          title: "The Unbroken Circle",
+          journey: "Breakfast → Free time depending on flight → Transfer to Colombo Airport → Departure for India.",
+          community: "The Circle Alumni Onboarding: Photo exchange and official onboarding into the Kokalachi alumni network before departure.",
+          image: "https://images.unsplash.com/photo-1653151106233-8e928c21bc1a?auto=format&fit=crop&q=85&w=800"
+        }
+      ],
+      inclusions: [
+        "Private airport meet & greet and transfer from Colombo Airport to Galle",
+        "Accommodation in Galle and Colombo",
+        "Daily breakfast",
+        "Whale-watching excursion from Mirissa",
+        "Sri Lankan cooking class",
+        "Bentota stop (Madu River boat safari / turtle conservation) and Colombo city tour",
+        "Transfers and transport throughout the itinerary",
+        "Kokalachi community experiences",
+        "Kokalachi Trip Host throughout the journey"
+      ],
+      exclusions: [
+        "International flights to and from Colombo",
+        "Visa or electronic travel authorisation fees, if applicable",
+        "Optional water activities at Unawatuna and the optional coconut plantation visit, if charged separately",
+        "Meals not explicitly listed in the itinerary",
+        "Personal expenses, shopping, spa treatments, and tips",
+        "Travel insurance",
+        "Any costs arising from unforeseen circumstances, such as flight delays, sea conditions, or natural disasters",
+        "Taxes (5% GST and TCS), unless already included in the quoted price"
+      ],
+      whatToPack: [
+        "Valid passport (check it has at least six months of validity) and any required travel authorisation",
+        "Light, breathable clothing for warm, humid days, plus swimwear and a quick-dry towel",
+        "A light rain jacket — showers can roll in on the south-west coast in November",
+        "Motion-sickness tablets if you're prone to seasickness — the whale-watching trip is on open water",
+        "Sunscreen, sunglasses, a hat, and reef-safe sun protection if you have it",
+        "Comfortable sandals and walking shoes for Galle Fort's cobbled lanes",
+        "Modest clothing (shoulders and knees covered) if you plan to visit any temples in Colombo",
+        "A power bank and a Type D/G plug adapter (Sri Lanka uses 230V)",
+        "A little Sri Lankan rupee cash for markets and small purchases"
+      ],
+      weather: [
+        "November falls in the inter-monsoon period on Sri Lanka's south-west coast: warm and humid, with a chance of afternoon or evening showers.",
+        "Expect daytime temperatures in the high 20s to around 30°C, with warm evenings",
+        "Showers tend to be short and are usually followed by sunshine, so a light rain layer beats an umbrella",
+        "Whale-watching season off Mirissa generally begins around November, so conditions are on the early side of the season and sightings can't be guaranteed",
+        "Figures above are typical seasonal ranges, not a forecast — worth refreshing a week before departure."
+      ],
+      faqs: [
+        {
+          question: "Need Assistance in Air Fare, Visa, Permit?",
+          answer: "Yes — our team can help you plan flights into and out of Colombo and walk you through any entry documents Sri Lanka requires for Indian passport holders."
+        },
+        {
+          question: "Where does this trip start from?",
+          answer: "The trip begins and ends at Colombo Airport (Bandaranaike International), with your arrival transfer to Galle and departure transfer included."
+        },
+        {
+          question: "Need more Details about the Trip?",
+          answer: "Contact us"
+        }
       ]
     }
   },

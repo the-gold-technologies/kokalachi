@@ -58,6 +58,7 @@ export function HeroSection() {
     "Rajasthan",
     "Kashmir",
     "Meghalaya",
+    "Sri Lanka",
     "Spiti Valley",
   ];
 

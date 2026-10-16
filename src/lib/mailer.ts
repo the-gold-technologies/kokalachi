@@ -250,6 +250,7 @@ const journeyLabels: Record<string, string> = {
   meghalaya: "Roots & Rainbows (Meghalaya)",
   kerala:    "Tides & Tea Gardens (Kerala)",
   bhutan:    "The Thunder Dragon Trail (Bhutan)",
+  "sri-lanka": "Ramparts & Whale Waters (Sri Lanka)",
   help:      "Not sure yet — help me pick",
   other:     "Something else entirely",
 }

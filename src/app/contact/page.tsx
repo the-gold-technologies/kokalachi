@@ -146,6 +146,7 @@ export default function ContactPage() {
                         <option value="meghalaya">Roots & Rainbows (Meghalaya)</option>
                         <option value="kerala">Tides & Tea Gardens (Kerala)</option>
                         <option value="bhutan">The Thunder Dragon Trail (Bhutan)</option>
+                        <option value="sri-lanka">Ramparts & Whale Waters (Sri Lanka)</option>
                         <option value="help">Not sure yet — help me pick</option>
                         <option value="other">Something else entirely</option>
                       </select>

@@ -117,7 +117,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#upcoming-journeys"
+                  href="/journeys/sri-lanka"
                   className="hover:text-[#C85A24] transition-colors flex items-center gap-1.5 group"
                 >
                   <ArrowRight className="w-3 h-3 text-[#C85A24] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
