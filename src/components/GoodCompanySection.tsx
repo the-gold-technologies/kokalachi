@@ -488,7 +488,7 @@ export function GoodCompanySection() {
         {/* BOTTOM CTA BUTTON */}
         <div>
           <a
-            href="#faqs"
+            href="/faqs#safety-and-comfort"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0E5A60] text-white hover:bg-[#0E5A60] font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg active:scale-95"
           >
             <span>Learn More About Trust &amp; Safety</span>
