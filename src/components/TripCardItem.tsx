@@ -85,7 +85,7 @@ export function TripCardItem({ card }: { card: TripCardData }) {
         {/* Footer: Price & CTA */}
         <div className="mt-auto pt-4 border-t border-slate-100 flex items-end justify-between">
           <div>
-            <p className="text-[10px] text-slate-400 font-bold tracking-wider uppercase mb-1">
+            <p className={`text-[10px] font-bold tracking-wider uppercase mb-1 ${card.tourPackage.offerLabel ? "inline-block px-1.5 py-0.5 rounded bg-[#D96C2C]/10 text-[#C85A24]" : "text-slate-400"}`}>
               {card.tourPackage.offerLabel ?? "Starting From"}
             </p>
             <div className="flex items-baseline gap-2">
@@ -93,7 +93,7 @@ export function TripCardItem({ card }: { card: TripCardData }) {
                 {formatStartingPrice(card.tourPackage)}
               </span>
               {formatStartingOriginalPrice(card.tourPackage) && (
-                <span className="text-xs font-semibold text-slate-400 line-through">
+                <span className="text-xs font-semibold text-[#D96C2C]/70 line-through decoration-[#D96C2C]">
                   {formatStartingOriginalPrice(card.tourPackage)}
                 </span>
               )}

@@ -85,7 +85,7 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
         {/* Footer: Price & CTA */}
         <div className="mt-auto pt-2 border-t border-slate-100 flex items-end justify-between">
           <div>
-            <p className="text-[9px] text-slate-400 font-bold tracking-wider uppercase mb-0.5">
+            <p className={`text-[9px] font-bold tracking-wider uppercase mb-0.5 ${card.tourPackage.offerLabel ? "inline-block px-1.5 py-0.5 rounded bg-[#D96C2C]/10 text-[#C85A24]" : "text-slate-400"}`}>
               {card.tourPackage.offerLabel ?? "Starting From"}
             </p>
             <div className="flex items-baseline gap-1.5">
@@ -93,7 +93,7 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
                 {formatStartingPrice(card.tourPackage)}
               </span>
               {formatStartingOriginalPrice(card.tourPackage) && (
-                <span className="text-[11px] font-semibold text-slate-400 line-through">
+                <span className="text-[11px] font-semibold text-[#D96C2C]/70 line-through decoration-[#D96C2C]">
                   {formatStartingOriginalPrice(card.tourPackage)}
                 </span>
               )}

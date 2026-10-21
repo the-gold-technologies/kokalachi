@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { tripCards, TripCardData } from "@/data/trips";
 import { formatShortDate, getNextDeparture, hasFullDetails, isBookingOpen } from "@/lib/departures";
+import { getSortedBlogPosts } from "@/data/blogs";
 
 interface DropdownItem {
   title: string;
@@ -111,13 +112,23 @@ const dropdownData: Record<string, DropdownItem[]> = {
     },
   ],
   Blogs: [
+    // Newest blog post first, as the big tile
+    ...getSortedBlogPosts()
+      .slice(0, 1)
+      .map((post) => ({
+        title: post.heroLead,
+        tag: "New Story",
+        desc: post.excerpt,
+        image: post.heroImage,
+        href: `/blogs/${post.slug}`,
+      })),
     {
-      title: "Traveler Memoirs",
-      tag: "Real Stories",
-      desc: "Unfiltered reflections from past travellers.",
+      title: "The Kokalachi Journal",
+      tag: "All Blogs",
+      desc: "Honest guides & stories for curious travellers.",
       image:
-        "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=300",
-      href: "/#moments",
+        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=300",
+      href: "/blogs",
     },
     {
       title: "Moments Captured",
@@ -132,14 +143,6 @@ const dropdownData: Record<string, DropdownItem[]> = {
       desc: "The story, values & beliefs behind our tribe.",
       image: "/about_why_started.jpg",
       href: "/about#why-we-started",
-    },
-    {
-      title: "Packing & Route Guides",
-      tag: "Travel Tips",
-      desc: "Essential advice for mountain & slow trails.",
-      image:
-        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=300",
-      href: "/about#what-we-believe",
     },
   ],
 };
@@ -189,7 +192,7 @@ export function Navbar() {
     { name: "About Us", href: "/about", hasDropdown: false },
     { name: "Destinations", href: "/journeys", hasDropdown: true },
     { name: "Tours", href: "/#upcoming-journeys", hasDropdown: true },
-    { name: "Blogs", href: "/#moments", hasDropdown: true },
+    { name: "Blogs", href: "/blogs", hasDropdown: true },
     { name: "Community", href: "/#good-company", hasDropdown: false },
   ];
 
@@ -381,7 +384,7 @@ export function Navbar() {
                         <span>
                           {link.name === "Tours"
                             ? "Curated solo-friendly group adventures & retreats"
-                            : "Real memories & stories from the Kokalachi tribe"}
+                            : "Guides, memories & stories from the Kokalachi tribe"}
                         </span>
                         <Link
                           href={link.href}

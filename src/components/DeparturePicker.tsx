@@ -109,7 +109,7 @@ export function DeparturePicker({
                     <>
                       <p className="text-[13px] font-black text-slate-800">₹{price.toLocaleString("en-IN")}</p>
                       {originalPrice != null && originalPrice > price && (
-                        <p className="text-[11px] text-slate-400 line-through">₹{originalPrice.toLocaleString("en-IN")}</p>
+                        <p className="text-[11px] text-[#D96C2C]/70 line-through decoration-[#D96C2C]">₹{originalPrice.toLocaleString("en-IN")}</p>
                       )}
                     </>
                   ) : (
