@@ -4,6 +4,10 @@ import { ArrowRight, CalendarDays, Clock, PenLine } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { formatBlogDate, getReadingTime, getSortedBlogPosts } from "@/data/blogs";
 
+// Link-preview version of the hero: 1200×630 JPG so WhatsApp can show it
+const HERO_OG_IMAGE =
+  "https://images.unsplash.com/photo-1735248325378-296191d6064e?fm=jpg&fit=crop&w=1200&h=630&q=75";
+
 export const metadata: Metadata = {
   title: "Blogs",
   description:
@@ -13,13 +17,16 @@ export const metadata: Metadata = {
     description:
       "Honest guides, traveller stories and slow-travel advice for anyone joining a group trip.",
     url: "https://kokalachi.com/blogs",
-    images: [{ url: "/fevicon.png", width: 512, height: 512, alt: "Kokalachi Logo" }],
+    siteName: "Kokalachi",
+    locale: "en_IN",
+    type: "website",
+    images: [{ url: HERO_OG_IMAGE, width: 1200, height: 630, alt: "Friends watching the sunset from a Himachal hilltop", type: "image/jpeg" }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "The Kokalachi Journal | Kokalachi",
     description: "Honest guides and traveller stories from the Kokalachi tribe.",
-    images: ["/fevicon.png"],
+    images: [HERO_OG_IMAGE],
   },
 };
 
@@ -30,10 +37,11 @@ export default function BlogsPage() {
     <div className="min-h-screen font-sans text-slate-800 bg-white">
       {/* Hero (matching FAQ / Contact pages) */}
       <div className="relative h-[60vh] min-h-[420px] w-full">
+        {/* Mirrored so the people sit on the right, clear of the headline */}
         <img
-          src="https://images.unsplash.com/photo-1656827741462-dc6ac1ad81f6?auto=format&fit=crop&q=85&w=2400"
-          alt="Four friends sitting on a rock, looking out over a green valley"
-          className="absolute inset-0 w-full h-full object-cover object-[center_45%]"
+          src="https://images.unsplash.com/photo-1735248325378-296191d6064e?auto=format&fit=crop&q=85&w=2400"
+          alt="Friends on a bench at the edge of a Himachal hilltop, watching the sunset"
+          className="absolute inset-0 w-full h-full object-cover object-[center_40%] -scale-x-100"
         />
         {/* Dark only behind the text, so the photo stays bright */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D]/90 via-[#0B2A3D]/25 to-transparent" />

@@ -9,7 +9,7 @@ import { TripCardItem } from "@/components/TripCardItem";
 import { BlogBlocks } from "@/components/blog/BlogBlocks";
 import { BlogToc } from "@/components/blog/BlogToc";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
-import { blogPosts, formatBlogDate, getBlogPost, getReadingTime } from "@/data/blogs";
+import { blogPosts, formatBlogDate, getBlogOgImage, getBlogPost, getReadingTime } from "@/data/blogs";
 import { tripCards } from "@/data/trips";
 import { hasFullDetails } from "@/lib/departures";
 
@@ -31,19 +31,23 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `/blogs/${post.slug}` },
     openGraph: {
       type: "article",
-      title: `${post.title} | Kokalachi`,
+      siteName: "Kokalachi",
+      locale: "en_IN",
+      title: post.title,
       description: post.excerpt,
       url: `https://kokalachi.com/blogs/${post.slug}`,
       publishedTime: post.publishedAt,
-      images: [{ url: post.heroImage, alt: post.heroAlt }],
+      authors: [post.author],
+      images: [{ url: getBlogOgImage(post), width: 1200, height: 630, alt: post.heroAlt, type: "image/jpeg" }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [post.heroImage],
+      images: [getBlogOgImage(post)],
     },
   };
 }
@@ -72,7 +76,7 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: new URL(post.heroImage, "https://kokalachi.com").href,
+    image: new URL(getBlogOgImage(post), "https://kokalachi.com").href,
     datePublished: post.publishedAt,
     author: { "@type": "Organization", name: post.author },
     publisher: { "@type": "Organization", name: "Kokalachi" },

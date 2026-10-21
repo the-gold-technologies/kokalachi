@@ -28,6 +28,7 @@ export interface BlogPost {
   author: string;
   heroImage: string;
   heroAlt: string;
+  ogImage?: string;        // optional link-preview image; left empty, it's made from heroImage
   marginNote?: string;     // handwritten note beside the intro
   intro: string[];
   sections: BlogSection[];
@@ -46,8 +47,8 @@ export const blogPosts: BlogPost[] = [
     category: "First-Timer Guide",
     publishedAt: "2026-10-21",
     author: "Team Kokalachi",
-    heroImage: "https://images.unsplash.com/photo-1667029839636-af119b059c49?auto=format&fit=crop&q=85&w=2400",
-    heroAlt: "Friends with arms raised, taking in the Himalayan view together",
+    heroImage: "https://images.unsplash.com/photo-1790488976420-696cd3a12498?auto=format&fit=crop&q=85&w=2400",
+    heroAlt: "Five friends with their arms around each other, watching a golden sunset over the sea",
     marginNote: "nervous? same. that's the point ♡",
     intro: [
       "If you're reading this, there's a good chance you're hovering over a \"Book Now\" button with a mix of excitement and nerves.",
@@ -300,6 +301,16 @@ export const blogPosts: BlogPost[] = [
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+// Link-preview image (WhatsApp, LinkedIn…): a 1200×630 JPG, since the full hero is too heavy
+// and Unsplash's auto=format can hand crawlers AVIF, which WhatsApp won't show
+export function getBlogOgImage(post: BlogPost): string {
+  if (post.ogImage) return post.ogImage;
+  if (post.heroImage.startsWith("https://images.unsplash.com/")) {
+    return `${post.heroImage.split("?")[0]}?fm=jpg&fit=crop&w=1200&h=630&q=75`;
+  }
+  return post.heroImage;
 }
 
 // Newest first
