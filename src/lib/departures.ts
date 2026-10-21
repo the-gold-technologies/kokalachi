@@ -78,6 +78,18 @@ export function formatStartingPrice(tour: TourPackage): string {
   return price != null ? `₹${price.toLocaleString("en-IN")}` : "Price TBA";
 }
 
+// Struck-through "₹7,999" beside the starting price, only when that price is discounted
+export function formatStartingOriginalPrice(tour: TourPackage): string | undefined {
+  const price = getStartingPrice(tour);
+  const departure = getUpcomingDepartures(tour).find(
+    (d) => !isSoldOut(d) && getDeparturePrice(tour, d) === price
+  );
+  const originalPrice = getDepartureOriginalPrice(tour, departure);
+  return price != null && originalPrice != null && originalPrice > price
+    ? `₹${originalPrice.toLocaleString("en-IN")}`
+    : undefined;
+}
+
 // Spots left on the next departure; trips without departures fall back to tour.spotsLeft.
 export function getSpotsLeft(tour: TourPackage): number | undefined {
   if (!tour.departures) return tour.spotsLeft;

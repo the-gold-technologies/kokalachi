@@ -10,7 +10,7 @@ import {
   Flame,
 } from "lucide-react";
 import { TripCardData } from "@/data/trips";
-import { formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft } from "@/lib/departures";
 import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
@@ -86,12 +86,17 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
         <div className="mt-auto pt-2 border-t border-slate-100 flex items-end justify-between">
           <div>
             <p className="text-[9px] text-slate-400 font-bold tracking-wider uppercase mb-0.5">
-              Starting From
+              {card.tourPackage.offerLabel ?? "Starting From"}
             </p>
             <div className="flex items-baseline gap-1.5">
               <span className="text-lg font-bold text-[#D96C2C] leading-none">
                 {formatStartingPrice(card.tourPackage)}
               </span>
+              {formatStartingOriginalPrice(card.tourPackage) && (
+                <span className="text-[11px] font-semibold text-slate-400 line-through">
+                  {formatStartingOriginalPrice(card.tourPackage)}
+                </span>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-1 rounded-full bg-[#D96C2C] text-white px-4 py-2 group-hover:bg-[#C85A24] transition-all shadow-sm hover:shadow-md">

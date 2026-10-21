@@ -20,7 +20,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { tripCards, TripCardData } from "@/data/trips";
-import { formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft } from "@/lib/departures";
 import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
@@ -93,12 +93,17 @@ function TripCardItem({ card }: { card: TripCardData }) {
         <div className="mt-auto pt-3 border-t border-slate-100 flex items-end justify-between">
           <div>
             <p className="text-xs text-slate-400 font-bold tracking-wider uppercase mb-1">
-              Starting From
+              {card.tourPackage.offerLabel ?? "Starting From"}
             </p>
             <div className="flex items-baseline gap-1">
               <span className="text-2xl font-black text-[#0E5A60]">
                 {formatStartingPrice(card.tourPackage)}
               </span>
+              {formatStartingOriginalPrice(card.tourPackage) && (
+                <span className="text-sm font-semibold text-slate-400 line-through">
+                  {formatStartingOriginalPrice(card.tourPackage)}
+                </span>
+              )}
             </div>
           </div>
           <div className="w-10 h-10 rounded-full bg-[#0E5A60] text-white flex items-center justify-center group-hover:bg-[#C85A24] transition-colors shadow-md">

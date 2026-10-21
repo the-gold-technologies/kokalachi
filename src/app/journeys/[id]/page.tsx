@@ -70,9 +70,10 @@ function BookingWidget({
   const basePrice = departurePrice ?? 0;
   const bookableDepartures = departures.filter((d) => !isSoldOut(d));
   
-  // Calculations
-  const roomTotal = basePrice * guests;
-  const gst = (tour.gstAmount || 0) * guests;
+  // Calculations — for GST-inclusive prices, split the GST back out of the costing
+  const gstPerGuest = tour.gstAmount || 0;
+  const roomTotal = (basePrice - (tour.gstIncluded ? gstPerGuest : 0)) * guests;
+  const gst = gstPerGuest * guests;
   const tcs = tour.tcsPercent ? (roomTotal * (tour.tcsPercent / 100)) : 0;
   const finalTotal = roomTotal + gst + tcs;
 

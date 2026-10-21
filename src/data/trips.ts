@@ -42,7 +42,9 @@ export interface TourPackage {
   faqs?: { question: string; answer: string }[];
   highlights?: { icon: string; title: string; description: string }[];
   gstAmount?: number;
+  gstIncluded?: boolean;   // price already includes gstAmount, so cards show the all-in price
   tcsPercent?: number;
+  offerLabel?: string;     // e.g. "Limited Offer", shown above the price on cards
   gallery?: string[];
 }
 
@@ -70,7 +72,7 @@ const allTripCards: TripCardData[] = [
     locationTag: "📍 Manali",
     duration: "3 Days / 2 Nights",
     groupSize: "Intimate Group",
-    price: "7,999",
+    price: "5,999",
     vibeTags: ["Mountains", "Cafés", "Road Trip", "Scenic", "Community"],
     categories: ["Trending", "FirstTimers", "Adventure"],
     featured: true,
@@ -86,15 +88,17 @@ const allTripCards: TripCardData[] = [
       location: "Manali",
       duration: "2 Nights / 3 Days",
       rating: 5,
-      price: 7819,
+      price: 5999,
       gstAmount: 180,
-      originalPrice: null,
+      gstIncluded: true,
+      originalPrice: 7999,
+      offerLabel: "Limited Offer",
       image: "https://images.unsplash.com/photo-1597167231350-d057a45dc868?auto=format&fit=crop&q=85&w=800",
       category: "Mountains",
       tag: "Triple Sharing",
       tagColor: "bg-[#0E5A60]",
       departures: [
-        { id: "manali-2026-10-29", startDate: "2026-10-29", endDate: "2026-11-01", note: "Overnight departure from Delhi by AC Tempo Traveller" }
+        { id: "manali-2026-10-29", startDate: "2026-10-29", endDate: "2026-11-01", label: "Limited Offer", note: "Overnight departure from Delhi by AC Tempo Traveller" }
       ],
       hook: "Overnight Departure · Tempo Traveller · Manali",
       gallery: [
