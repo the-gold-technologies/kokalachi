@@ -139,8 +139,8 @@ export default async function BlogPostPage({
         </div>
       </header>
 
-      {/* Article */}
-      <div className="relative">
+      {/* Article — clip (not hide) the glows so they can't widen the page, without breaking the sticky sidebars */}
+      <div className="relative overflow-x-clip">
         {/* Scrapbook dot grid + soft glows */}
         <div
           className="absolute inset-0 opacity-[0.035] pointer-events-none"
