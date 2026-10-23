@@ -982,7 +982,7 @@ const allTripCards: TripCardData[] = [
     locationTag: "📍 Sri Lanka",
     duration: "5 Days / 4 Nights",
     groupSize: "Intimate Group",
-    price: "TBA",
+    price: "40,000",
     vibeTags: ["Coastal", "Heritage", "Food", "Ocean", "Community"],
     categories: ["BeachEscape"],
     images: [
@@ -990,19 +990,22 @@ const allTripCards: TripCardData[] = [
       "https://images.unsplash.com/photo-1580910527739-556eb89f9d65?auto=format&fit=crop&q=85&w=800",
       "https://images.unsplash.com/photo-1561426802-392f5b6290cf?auto=format&fit=crop&q=85&w=800"
     ],
-    // Price still to come — the booking widget takes a free "reserve my spot" request until it's set
     tourPackage: {
       id: 7,
       title: "Ramparts & Whale Waters",
       subtitle: "Galle Fort Sunsets, Southern Beaches, and a Morning Out on the Open Ocean",
       location: "Sri Lanka · Galle & Colombo",
       duration: "4 Nights / 5 Days",
-      price: "TBA",
+      // ₹42,000 per person on twin sharing, ₹2,000 off for early birds; GST added on top
+      price: 40000,
+      gstAmount: 900,
+      originalPrice: 42000,
+      offerLabel: "Early Bird",
       image: "https://images.unsplash.com/photo-1579989197111-928f586796a3?auto=format&fit=crop&q=85&w=800",
       category: "Beach Escape",
-      tag: "Intimate Group",
+      tag: "Twin Sharing",
       departures: [
-        { id: "sri-lanka-2026-11-18", startDate: "2026-11-18", endDate: "2026-11-22" }
+        { id: "sri-lanka-2026-11-18", startDate: "2026-11-18", endDate: "2026-11-22", label: "Early Bird" }
       ],
       hook: "Ramparts & Whale Waters is a 4-night, 5-day escape to Sri Lanka's southern coast — sunsets on the walls of Galle Fort, a morning at sea out of Mirissa, and a final night in Colombo with the people you started the week as strangers with.",
       gallery: [
