@@ -35,6 +35,8 @@ import {
 } from "@/lib/departures";
 import { TripCardItem } from "@/components/TripCardItem";
 import { DeparturePicker } from "@/components/DeparturePicker";
+import { MetaPixel } from "@/components/analytics/MetaPixel";
+import { META_PIXEL_ID } from "@/lib/tracking";
 
 function BookingWidget({
   tour,
@@ -412,6 +414,8 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-[#0E5A60]/20">
+      {/* Meta Pixel on every trip page (see lib/tracking) */}
+      <MetaPixel pixelId={META_PIXEL_ID} />
 
       {/* Hero Section */}
       <div className="relative h-[70vh] min-h-[400px] w-full">

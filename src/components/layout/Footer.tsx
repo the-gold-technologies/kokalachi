@@ -15,6 +15,7 @@ import {
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 import { tripCards } from "@/data/trips";
 import { hasFullDetails, isBookingOpen } from "@/lib/departures";
+import { openCookieSettings } from "@/lib/consent";
 
 // Bookable trips with full itineraries (same picks as the navbar), between the two fixed links
 const journeyLinks = [
@@ -262,6 +263,9 @@ export function Footer() {
             <Link href="/terms" className="hover:text-[#F6B48A] transition-colors">
               Terms &amp; Conditions
             </Link>
+            <button type="button" onClick={openCookieSettings} className="hover:text-[#F6B48A] transition-colors cursor-pointer">
+              Cookie Settings
+            </button>
           </div>
         </div>
       </div>

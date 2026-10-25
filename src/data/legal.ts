@@ -57,7 +57,7 @@ export const privacyPolicy: LegalDocument = {
           "Payment details: records of the payments you make to us. Card and UPI details are handled by our bank or payment gateway and are not stored by us.",
           "Things you share with us: messages on WhatsApp, email or phone, reviews, and photos or videos you send us after a trip.",
         ],
-        "Information collected automatically: like most websites, our hosting provider keeps basic technical logs (such as IP address, browser type, pages visited and time of visit) to keep the site secure and working. We do not use analytics, advertising or tracking cookies.",
+        "Information collected automatically: like most websites, our hosting provider keeps basic technical logs (such as IP address, browser type, pages visited and time of visit) to keep the site secure and working. If you allow advertising cookies, our trip pages also use the Meta Pixel to measure visits from our Facebook and Instagram ads (see Cookies below).",
         "Information from others: if a friend or family member books for you, they will give us your details. Please make sure they have your permission.",
       ],
     },
@@ -95,6 +95,7 @@ export const privacyPolicy: LegalDocument = {
           "Government authorities: for visas, permits and border formalities, and whenever we are legally required to.",
           "Your fellow travellers: in the pre-trip group, other members of your trip can see your name and phone number. Let us know before you're added if you'd prefer a different way to stay in touch.",
           "Service providers: companies that host our website and database, send our emails and process payments, who handle your data on our behalf and under confidentiality.",
+          "Meta Platforms: if you allow advertising cookies, Meta receives information about that visit (such as the page, your browser and IP address) to help us measure and improve our ads. Meta handles this under its own privacy policy.",
           "Professional advisers and authorities: our accountants, lawyers or the police where needed to protect your safety, our rights or to comply with the law.",
         ],
       ],
@@ -118,8 +119,12 @@ export const privacyPolicy: LegalDocument = {
       id: "cookies",
       title: "Cookies",
       blocks: [
-        "Our website does not use analytics, advertising or tracking cookies, so there is nothing to accept or turn off.",
-        "The only cookie we set is a strictly necessary login cookie for our own team's admin area. Some images on our site load from third-party image services, which may see your IP address when your browser requests the image. If we ever add analytics or similar tools, we will update this policy and ask for your consent where required.",
+        "We keep cookies to a minimum:",
+        [
+          "Strictly necessary: a login cookie for our own team's admin area. It is never set for visitors.",
+          "Advertising (only with your consent): our trip pages can use the Meta Pixel, which sets Meta cookies (such as _fbp) to tell us how many people reached the page from our Facebook and Instagram ads and to show relevant ads to people who visited. The first time you open a trip page, we ask whether that's okay, and the Pixel only loads if you choose Accept. We don't use these cookies to identify you by name.",
+        ],
+        "You can change your choice at any time using Cookie Settings at the bottom of any page. You can also block or delete cookies in your browser settings, and control how Meta uses your activity for ads in your Facebook or Instagram ad preferences. Some images on our site load from third-party image services, which may see your IP address when your browser requests the image. We do not use any other analytics or tracking tools.",
       ],
     },
     {
