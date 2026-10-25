@@ -172,7 +172,7 @@ export function WhoTravelsSection() {
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 max-w-[1360px] text-center">
+      <div className="site-container relative z-10 text-center">
         {/* SUB-HEADER TAGLINE */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
           WHO TRAVELS WITH KOKALACHI?
@@ -190,7 +190,7 @@ export function WhoTravelsSection() {
             <span>♡ wanderers &amp; dreamers</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif">
+          <h2 className="heading-section font-normal text-[#0E5A60] font-serif">
             Find Your{" "}
             <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
               Kind

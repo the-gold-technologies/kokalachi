@@ -127,14 +127,14 @@ export function WhyWeExistSection() {
       {/* Decorative Flying Birds Outline */}
       <FlyingBirds className="hidden lg:block absolute top-12 right-16 opacity-35 text-[#0E5A60]" />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
+      <div className="site-container relative z-10 text-center">
         {/* Sub-header category tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-2.5">
           WHY WE EXIST
         </span>
 
         {/* Main Title */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-3 text-[#0E5A60]">
+        <h2 className="heading-section font-normal font-serif max-w-4xl mx-auto mb-3 text-[#0E5A60]">
           Why do so many dream trips never{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
             happen?

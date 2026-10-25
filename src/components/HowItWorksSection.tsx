@@ -1,326 +1,224 @@
-"use client";
-
 import React from "react";
-import { Compass, Users, Camera } from "lucide-react";
-import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import Link from "next/link";
+import { ArrowRight, Check, Compass, Users, Plane, Quote } from "lucide-react";
+import { SectionIntro } from "@/components/ui/SectionIntro";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
+import type { TripCardData } from "@/data/trips";
+import type { StoryEntry } from "@/data/community";
+import { formatShortDate, formatStartingPrice, getNextDeparture } from "@/lib/departures";
 
-export function HowItWorksSection() {
+interface HowItWorksSectionProps {
+  trips: TripCardData[];   // a couple of bookable trips for the step 1 preview
+  story?: StoryEntry;      // a real traveller story for the step 3 preview
+}
+
+const FALLBACK_TRAVEL_PHOTO =
+  "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=800";
+
+export function HowItWorksSection({ trips, story }: HowItWorksSectionProps) {
+  const steps = [
+    {
+      icon: Compass,
+      title: "Choose your journey",
+      text: "Browse upcoming trips with fixed dates, a full itinerary and the price upfront, then book your spot online.",
+      points: ["Small groups, fixed departure dates", "Full itinerary before you book"],
+      preview: <TripsPreview trips={trips} />,
+    },
+    {
+      icon: Users,
+      title: "Meet your group",
+      text: "Once you book, you join a private group with your fellow travellers, so you know a few faces before you leave.",
+      points: ["Say hello before departure", "Ask questions & share plans"],
+      preview: <ChatPreview />,
+    },
+    {
+      icon: Plane,
+      title: "Travel together",
+      text: "A Kokalachi trip host travels with you and takes care of stays, transport and plans. You just enjoy the journey.",
+      points: ["Trip host with you throughout", "Come home with new friends"],
+      preview: <TravelPreview story={story} />,
+    },
+  ];
+
   return (
     <section
       id="how-it-works"
       className="py-12 sm:py-14 lg:py-16 bg-[#FFFFFF] relative overflow-hidden select-none"
     >
-      {/* Decorative Flying Birds Outline (Top Left Variation) */}
       <FlyingBirds className="hidden lg:block absolute top-12 left-14 opacity-30 text-[#0E5A60]" />
 
       {/* Ambient Brand Color Glows */}
       <div className="absolute top-1/3 -left-20 w-80 h-80 bg-[#D96C2C]/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#0E5A60]/8 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 max-w-6xl text-center">
-        {/* Section Header */}
-        <div className="space-y-3 mb-10 max-w-2xl mx-auto">
-          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
-            HOW IT WORKS
-          </span>
+      <div className="site-container relative z-10">
+        <SectionIntro
+          kicker="HOW IT WORKS"
+          before="Three simple steps to your next"
+          accent="journey."
+          subtitle="From booking to the last goodbye, here's exactly what happens when you travel with us."
+        />
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-tight font-serif">
-            Three steps to your next <br />
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
-              unforgettable
-              <TitleUnderline />
-            </span>{" "}
-            journey.
-          </h2>
+        {/* Steps, joined by a dotted path on desktop */}
+        <div className="relative">
+          <div
+            aria-hidden="true"
+            className="hidden lg:block absolute top-7 left-[16.6%] right-[16.6%] border-t-2 border-dashed border-[#D96C2C]/40"
+          />
+        <ol className="relative grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8">
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <li key={step.title} className="relative flex flex-col">
+                {/* Step marker */}
+                <div className="flex flex-col items-center mb-5">
+                  <span className="relative z-10 w-14 h-14 rounded-full bg-[#0E5A60] text-white flex items-center justify-center shadow-lg ring-8 ring-white">
+                    <Icon size={22} />
+                  </span>
+                  <span className="mt-3 text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat">
+                    Step {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
 
-          <p className="text-[#0E5A60]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-xl mx-auto">
-            Joining Kokalachi is simple. We take care of the planning, so you
-            can focus on the experience.
-          </p>
+                {/* Step card */}
+                <div className="flex-1 flex flex-col bg-[#FAF6F0] rounded-[28px] border border-amber-900/10 p-4 sm:p-5 shadow-sm hover:shadow-xl transition-shadow duration-500">
+                  <div className="h-60 rounded-2xl overflow-hidden bg-white border border-amber-900/10 shadow-sm">
+                    {step.preview}
+                  </div>
+
+                  <div className="px-1 pt-5 pb-1 flex-1 flex flex-col">
+                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0E5A60] leading-snug mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-4">{step.text}</p>
+                    <ul className="mt-auto space-y-2">
+                      {step.points.map((point) => (
+                        <li key={point} className="flex items-center gap-2.5 text-sm text-[#0E5A60] font-medium">
+                          <span className="w-5 h-5 rounded-full bg-[#FDF0EC] text-[#D96C2C] flex items-center justify-center shrink-0">
+                            <Check size={12} strokeWidth={3} />
+                          </span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
         </div>
 
-        {/* 3 Steps Circle Layout Grid with Handwritten SVG Connecting Path */}
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-14 text-center items-start">
-          {/* Handwritten Curved SVG Flight Path Connecting Circles (Desktop Only) */}
-          <svg
-            className="hidden md:block absolute top-[125px] left-0 w-full h-[140px] pointer-events-none z-0 overflow-visible"
-            viewBox="0 0 1000 140"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {/* Next step */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <Link
+            href="/journeys"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg active:scale-95"
           >
-            {/* Loop-de-Loop Accent Arc between Step 1 & Step 2 */}
-            <path
-              d="M 240 30 C 290 -15, 340 -15, 320 25 C 295 65, 370 60, 420 30"
-              stroke="#D96C2C"
-              strokeWidth="2.5"
-              strokeDasharray="6 5"
-              strokeLinecap="round"
-              opacity="0.8"
-            />
-
-            {/* Loop-de-Loop Accent Arc between Step 2 & Step 3 */}
-            <path
-              d="M 580 30 C 630 -15, 680 -15, 660 25 C 635 65, 710 60, 760 30"
-              stroke="#D96C2C"
-              strokeWidth="2.5"
-              strokeDasharray="6 5"
-              strokeLinecap="round"
-              opacity="0.8"
-            />
-
-            {/* Handwritten Arrowhead near Step 3 */}
-            <path
-              d="M 748 22 L 762 31 L 748 39"
-              stroke="#D96C2C"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              opacity="0.85"
-            />
-
-            {/* Handwritten Heart doodle resting on the curve between Step 2 & 3 */}
-            <g transform="translate(650, 5) rotate(12)">
-              <path
-                d="M 12 4 C 12 1, 8 -2, 4 3 C 0 -2, -4 1, -4 4 C -4 10, 4 16, 4 16 C 4 16, 12 10, 12 4 Z"
-                fill="#D96C2C"
-                opacity="0.9"
-              />
-            </g>
-
-            {/* Micro Sparkle Stars around Heart */}
-            <path
-              d="M 680 -5 L 682 0 L 687 2 L 682 4 L 680 9 L 678 4 L 673 2 L 678 0 Z"
-              fill="#D96C2C"
-              opacity="0.7"
-            />
-
-            {/* Styled Airplane Flying along the first loop */}
-            <g transform="translate(355, 12) rotate(22)">
-              <path
-                d="M 0 0 L 16 7 L 5 9 L 3 16 L 0 11 L -7 13 Z"
-                fill="#D96C2C"
-                opacity="0.95"
-              />
-            </g>
-          </svg>
-
-          {/* STEP 01 */}
-          <div className="flex flex-col items-center relative z-10 group">
-            {/* BOTTOM LEFT HANDWRITTEN TRAVEL DOODLE (Attached to Step 01) */}
-            <div className="hidden lg:flex flex-col items-center absolute bottom-[30%] -left-20 xl:-left-36 transform -rotate-12 pointer-events-none z-30 opacity-70 hover:opacity-100 transition-opacity">
-              <span className="text-lg xl:text-xl text-[#D96C2C] font-bold leading-tight max-w-[160px] text-center font-script">
-                Choose your vibe &amp; destination! 🌴✨
-              </span>
-              <svg
-                className="w-12 h-8 text-[#D96C2C]/90 mt-1 transform rotate-45"
-                viewBox="0 0 60 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M 10 35 Q 35 30 45 10 M 36 16 L 45 10 L 48 20"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeDasharray="3 3"
-                />
-              </svg>
-            </div>
-
-            <div className="relative">
-              {/* Top-Left Number Pill */}
-              <div className="absolute -top-2 left-2 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#C85A24] text-white font-extrabold text-base sm:text-lg flex items-center justify-center border-2 border-white shadow-xl z-30 pointer-events-none">
-                01
-              </div>
-
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.02]">
-                {/* Circle Photo — Woman browsing phone UI */}
-                <img
-                  src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=85&w=800"
-                  alt="Woman holding phone browsing upcoming journeys"
-                  className="w-full h-full object-cover object-center"
-                />
-
-                {/* Phone App UI Overlay Representation */}
-                <div className="absolute inset-0 bg-black/10 flex items-center justify-center p-6">
-                  <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-white/40 w-44 text-left space-y-2 transform -rotate-3 scale-95">
-                    <div className="text-[10px] font-extrabold text-[#0E5A60] uppercase tracking-wider">
-                      Upcoming Journeys
-                    </div>
-                    <div className="space-y-1.5">
-                      <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-[#0E5A60] text-white text-[8px] font-bold flex items-center justify-center">
-                          KASHMIR
-                        </div>
-                        <div className="text-[9px] font-bold text-[#0E5A60]">
-                          Houseboat Diaries
-                        </div>
-                      </div>
-                      <div className="bg-[#F7F3EC] p-1.5 rounded-lg flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-[#D96C2C] text-white text-[8px] font-bold flex items-center justify-center">
-                          MEGHALAYA
-                        </div>
-                        <div className="text-[9px] font-bold text-[#0E5A60]">
-                          Roots &amp; Rainbows
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Overlapping Icon Badge */}
-            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0E5A60] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
-              <Compass size={24} />
-            </div>
-
-            {/* Title & Description */}
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] mb-2 font-serif">
-              Discover a Journey
-            </h3>
-            <p className="text-[#0E5A60]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
-              Browse upcoming journeys and choose the one that excites you the
-              most.
-            </p>
-          </div>
-
-          {/* STEP 02 */}
-          <div className="flex flex-col items-center relative z-10 group">
-            <div className="relative">
-              {/* Top-Left Number Pill */}
-              <div className="absolute -top-2 left-2 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#C85A24] text-white font-extrabold text-base sm:text-lg flex items-center justify-center border-2 border-white shadow-xl z-30 pointer-events-none">
-                02
-              </div>
-
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-900 transition-transform duration-300 group-hover:scale-[1.02]">
-                {/* Background Image — Hands holding phone */}
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=85&w=800"
-                  alt="Person checking group chat"
-                  className="w-full h-full object-cover object-center opacity-40"
-                />
-
-                {/* Realistic WhatsApp Style Pre-Trip Chat UI Mockup */}
-                <div className="absolute inset-0 flex items-center justify-center p-4">
-                  <div className="bg-[#0B141A] text-white rounded-2xl p-3 shadow-2xl border border-white/20 w-52 text-left space-y-2 font-sans">
-                    {/* Chat Header */}
-                    <div className="flex items-center gap-2 border-b border-white/10 pb-1.5">
-                      <div className="w-6 h-6 rounded-full bg-teal-600 text-[10px] font-bold flex items-center justify-center text-white">
-                        🌿
-                      </div>
-                      <div>
-                        <div className="text-[10px] font-bold text-slate-100">
-                          Meghalaya Circle 🌿
-                        </div>
-                        <div className="text-[8px] text-emerald-400 font-medium">
-                          12 members active
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Chat Messages */}
-                    <div className="space-y-1.5 text-[9px] leading-tight">
-                      <div className="bg-[#202C33] p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
-                        <div className="text-[#D96C2C] font-bold text-[8px]">
-                          Ananya
-                        </div>
-                        <div className="text-slate-200">
-                          Hi everyone! Can&apos;t wait for this trip! 🖐️
-                        </div>
-                      </div>
-                      <div className="bg-[#202C33] p-1.5 rounded-lg rounded-tl-none max-w-[85%]">
-                        <div className="text-teal-400 font-bold text-[8px]">
-                          Rohit
-                        </div>
-                        <div className="text-slate-200">
-                          Hey! I love photography too! 📷
-                        </div>
-                      </div>
-                      <div className="bg-[#005C4B] p-1.5 rounded-lg rounded-tr-none ml-auto max-w-[85%] text-right">
-                        <div className="text-emerald-100">
-                          This group already feels amazing! 🔥
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Overlapping Icon Badge */}
-            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0E5A60] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
-              <Users size={24} />
-            </div>
-
-            {/* Title & Description */}
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] mb-2 font-serif">
-              Meet Your Circle
-            </h3>
-            <p className="text-[#0E5A60]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
-              Join a thoughtfully curated group of travellers who are just as
-              excited about the journey as you are.
-            </p>
-          </div>
-
-          {/* STEP 03 */}
-          <div className="flex flex-col items-center relative z-10 group">
-            {/* UPPER RIGHT HANDWRITTEN TRAVEL DOODLE (Attached to Step 03) */}
-            <div className="hidden lg:flex flex-col items-center absolute -top-12 -right-20 xl:-right-28 transform rotate-12 pointer-events-none z-30 opacity-70 hover:opacity-100 transition-opacity">
-              <span className="text-lg xl:text-xl text-[#0E5A60] font-bold leading-tight max-w-[170px] text-center font-script">
-                &ldquo;Strangers into lifelong friends&rdquo; 📸♡
-              </span>
-              <svg
-                className="w-12 h-8 text-[#0E5A60]/90 mt-1 transform -rotate-12"
-                viewBox="0 0 60 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M 50 5 Q 25 10 15 30 M 12 20 L 15 30 L 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeDasharray="3 3"
-                />
-              </svg>
-            </div>
-
-            <div className="relative">
-              {/* Top-Left Number Pill */}
-              <div className="absolute -top-2 left-2 sm:left-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#C85A24] text-white font-extrabold text-base sm:text-lg flex items-center justify-center border-2 border-white shadow-xl z-30 pointer-events-none">
-                03
-              </div>
-
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-white shadow-xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.02]">
-                {/* Circle Photo — Friends laughing on beach sunset */}
-                <img
-                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=800"
-                  alt="Friends laughing and enjoying sunset together"
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-            </div>
-
-            {/* Bottom Overlapping Icon Badge */}
-            <div className="w-14 h-14 rounded-full bg-[#F7F3EC] text-[#0E5A60] flex items-center justify-center border-2 border-white shadow-md z-20 -mt-7 mb-5 group-hover:bg-[#0E5A60] group-hover:text-white transition-colors">
-              <Camera size={24} />
-            </div>
-
-            {/* Title & Description */}
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] mb-2 font-serif">
-              Travel Together
-            </h3>
-            <p className="text-[#0E5A60]/75 text-sm leading-relaxed max-w-xs mx-auto font-normal">
-              Explore incredible destinations, share unforgettable moments, and
-              return home with memories and friendships that last.
-            </p>
-          </div>
+            <span>Explore upcoming journeys</span>
+            <ArrowRight size={16} />
+          </Link>
+          <Link href="/faqs" className="text-sm font-semibold text-[#0E5A60]/80 hover:text-[#D96C2C] transition-colors">
+            Have questions? Read the FAQs
+          </Link>
         </div>
       </div>
     </section>
+  );
+}
+
+// Step 1: real upcoming trips, the way they appear on the journeys page
+function TripsPreview({ trips }: { trips: TripCardData[] }) {
+  return (
+    <div className="h-full p-4 flex flex-col">
+      <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-slate-400 mb-3">Upcoming journeys</p>
+      <div className="space-y-2.5 flex-1">
+        {trips.map((trip) => {
+          const next = getNextDeparture(trip.tourPackage);
+          return (
+            <div key={trip.slug} className="flex items-center gap-3 rounded-xl border border-slate-100 bg-[#FDFBF7] p-2">
+              <img
+                src={trip.images[0].replace("w=800", "w=160")}
+                alt={trip.destination}
+                loading="lazy"
+                className="w-12 h-12 rounded-lg object-cover shrink-0"
+              />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-[#0E5A60] truncate">{trip.destination}</p>
+                <p className="text-[11px] text-slate-500 truncate">
+                  {trip.duration}
+                  {next && ` · ${formatShortDate(next.startDate)}`}
+                </p>
+              </div>
+              <p className="text-sm font-bold text-[#D96C2C] shrink-0">{formatStartingPrice(trip.tourPackage)}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="mt-3 rounded-full bg-[#D96C2C] text-white text-xs font-bold text-center py-2.5">Book your spot</div>
+    </div>
+  );
+}
+
+// Step 2: what the pre-trip group looks like (illustrative)
+function ChatPreview() {
+  return (
+    <div className="h-full flex flex-col bg-[#EFEAE2]">
+      <div className="bg-[#0E5A60] text-white px-4 py-3 flex items-center gap-3">
+        <div className="flex -space-x-2">
+          {["P", "A", "R"].map((letter, i) => (
+            <span
+              key={letter}
+              className={`w-7 h-7 rounded-full border-2 border-[#0E5A60] text-[10px] font-bold flex items-center justify-center ${
+                ["bg-[#D96C2C]", "bg-[#6F8F84]", "bg-[#E5B588] text-[#0B2A3D]"][i]
+              }`}
+            >
+              {letter}
+            </span>
+          ))}
+        </div>
+        <div className="min-w-0">
+          <p className="text-xs font-bold truncate">Your pre-trip group</p>
+          <p className="text-[10px] text-white/70">You + your fellow travellers</p>
+        </div>
+      </div>
+      <div className="flex-1 p-3.5 space-y-2 text-xs flex flex-col justify-center">
+        <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 max-w-[85%] shadow-xs">
+          <p className="text-[10px] font-bold text-[#D96C2C]">Priya</p>
+          <p className="text-slate-700">Hi everyone! First group trip for me 🙌</p>
+        </div>
+        <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 max-w-[85%] shadow-xs">
+          <p className="text-[10px] font-bold text-[#0E5A60]">Arjun</p>
+          <p className="text-slate-700">Same here! Who&apos;s making the playlist? 🎶</p>
+        </div>
+        <div className="bg-[#DCF8C6] rounded-2xl rounded-tr-sm px-3 py-2 max-w-[85%] self-end shadow-xs">
+          <p className="text-slate-700">Can&apos;t wait to meet you all ✨</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Step 3: a real trip photo and a line from a real traveller
+function TravelPreview({ story }: { story?: StoryEntry }) {
+  return (
+    <div className="relative h-full">
+      <img
+        src={story?.trip.coverImage ?? FALLBACK_TRAVEL_PHOTO}
+        alt={story ? `${story.trip.destination} trip` : "Friends travelling together"}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D]/90 via-[#0B2A3D]/20 to-transparent" />
+      {story && (
+        <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+          <Quote size={18} className="text-[#D96C2C] fill-[#D96C2C] mb-1.5" />
+          <p className="font-serif italic text-sm leading-snug line-clamp-2">{story.story.pullQuote}</p>
+          <p className="text-[11px] text-white/75 mt-1.5">
+            — {story.story.authors.map((a) => a.name.split(" ")[0]).join(" & ")}, {story.trip.destination}
+          </p>
+        </div>
+      )}
+    </div>
   );
 }

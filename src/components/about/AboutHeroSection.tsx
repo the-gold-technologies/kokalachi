@@ -33,7 +33,7 @@ export function AboutHeroSection() {
       {/* Soft Left-Side White Gradient Overlay for better text readability */}
       <div className="absolute inset-0 w-full lg:w-[55%] backdrop-blur-[2px] [-webkit-mask-image:linear-gradient(to_right,black_50%,transparent_100%)] [mask-image:linear-gradient(to_right,black_50%,transparent_100%)] bg-gradient-to-r from-white/90 via-white/60 to-transparent pointer-events-none z-0" />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-30 z-10 relative">
+      <div className="site-container z-10 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           
           {/* Left Column: Headline & Narrative */}
@@ -47,7 +47,7 @@ export function AboutHeroSection() {
               </div>
 
               {/* Main Editorial Title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
+              <h1 className="heading-hero font-medium text-[#0E5A60] font-serif tracking-tight">
                 Built on Friendships.<br />
                 Made for{" "}
                 <span className="relative inline-block font-script font-medium text-[1.22em] text-[#0E5A60]">

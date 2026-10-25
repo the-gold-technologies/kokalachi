@@ -124,7 +124,8 @@ export const faqCategories: FaqCategory[] = [
       },
       {
         question: "What is the cancellation and refund policy?",
-        answer: "The policy for each trip is shown at checkout.",
+        answer:
+          "When our team connects with you to confirm your booking, they'll explain the cancellation and refund terms for your journey and confirm them in writing before you pay. Read our [Terms & Conditions](/terms) for how cancellations work.",
       },
     ],
   },

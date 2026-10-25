@@ -156,12 +156,12 @@ export function UpcomingJourneysSection() {
     >
       <FlyingBirds className="hidden lg:block absolute top-14 right-12 opacity-35 text-[#0E5A60]" />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
+      <div className="site-container relative z-10 text-center">
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
           UPCOMING JOURNEYS
         </span>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal leading-tight font-serif max-w-4xl mx-auto mb-4 text-[#0E5A60]">
+        <h2 className="heading-section font-normal font-serif max-w-4xl mx-auto mb-4 text-[#0E5A60]">
           Where will your next{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
             journey
@@ -235,8 +235,8 @@ export function UpcomingJourneysSection() {
       {/* Horizontal Slider Layout */}
       <div
         ref={sliderRef}
-        className="w-full overflow-x-auto snap-x snap-mandatory pt-2 pb-12 pl-4 md:pl-8 xl:pl-[calc((100vw-1280px)/2+32px)] scroll-pl-4 md:scroll-pl-8 xl:scroll-pl-[calc((100vw-1280px)/2+32px)] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] text-left"
-      >        <div className="flex gap-4 lg:gap-6 w-max pr-4 md:pr-8 xl:pr-[calc((100vw-1280px)/2+32px)] h-full">
+        className="w-full overflow-x-auto snap-x snap-mandatory pt-2 pb-12 pl-5 md:pl-8 xl:pl-[calc((100vw-80rem)/2+2rem)] scroll-pl-5 md:scroll-pl-8 xl:scroll-pl-[calc((100vw-80rem)/2+2rem)] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] text-left"
+      >        <div className="flex gap-4 lg:gap-6 w-max pr-5 md:pr-8 xl:pr-[calc((100vw-80rem)/2+2rem)] h-full">
           {filteredCards.map((card) => (
             <div key={card.id} className="w-[80vw] sm:w-[300px] md:w-[340px] shrink-0 snap-start h-auto">
               <TripCardItem card={card} />
@@ -245,7 +245,7 @@ export function UpcomingJourneysSection() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-7xl text-center">
+      <div className="site-container relative z-10 text-center">
         {/* Section-end CTA Button */}
         <div className="mt-6 font-sans">
           <Link

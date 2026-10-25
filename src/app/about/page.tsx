@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/layout/Navbar";
 import { AboutHeroSection } from "@/components/about/AboutHeroSection";
 import { WhyWeStartedSection } from "@/components/about/WhyWeStartedSection";
 import { WhatWeBelieveSection } from "@/components/about/WhatWeBelieveSection";
@@ -29,10 +28,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col  text-slate-900 antialiased  selection:text-white">
-      {/* Navigation Header */}
-      <Navbar />
-
-      <main className="flex-grow">
+      <div className="flex-grow">
         {/* Step 1: About Hero */}
         <AboutHeroSection />
 
@@ -50,7 +46,7 @@ export default function AboutPage() {
 
         {/* Step 6: Join the Tribe (Final CTA) */}
         <JoinTribeSection />
-      </main>
+      </div>
     </div>
   );
 }

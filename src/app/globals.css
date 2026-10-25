@@ -22,6 +22,48 @@
   --color-gray-bg: #F7F3EC;
 }
 
+/* One page gutter for the navbar, every section and the footer, so all edges line up.
+   site-container: full-width section content. site-x: the same side padding for narrower blocks. */
+@utility site-x {
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Heading scale used site-wide: page heroes one step bigger than section headings */
+@utility heading-hero {
+  font-size: 2.25rem;
+  line-height: 1.12;
+  @media (width >= 40rem) {
+    font-size: 3rem;
+  }
+  @media (width >= 64rem) {
+    font-size: 3.75rem;
+  }
+}
+
+@utility heading-section {
+  font-size: 1.875rem;
+  line-height: 1.2;
+  @media (width >= 40rem) {
+    font-size: 2.25rem;
+  }
+  @media (width >= 64rem) {
+    font-size: 2.75rem;
+  }
+}
+
+@utility site-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

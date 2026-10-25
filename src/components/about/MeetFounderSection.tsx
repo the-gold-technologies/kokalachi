@@ -10,7 +10,7 @@ export function MeetFounderSection() {
       id="meet-the-founder"
       className="py-16 bg-white relative overflow-hidden select-none"
     >
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 max-w-7xl">
+      <div className="site-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Founder Photo Card with Abstract Geometric Accent Shapes */}
           <div className="lg:col-span-5 relative flex justify-center">
@@ -52,7 +52,7 @@ export function MeetFounderSection() {
             </span>
 
             {/* Bold Headline matching website typography */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[40px]  font-medium text-[#0E5A60] leading-tight font-serif">
+            <h2 className="heading-section font-medium text-[#0E5A60] font-serif">
               Some ideas take decades to find their {" "}
               <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
                 moment.

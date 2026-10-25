@@ -10,12 +10,12 @@ export function ExploreJourneysSection() {
 
   return (
     <section className="py-16 bg-white relative">
-      <div className="container mx-auto px-4 md:px-0 max-w-7xl">
+      <div className="site-container">
         <div className="mb-10 lg:mb-14 text-left">
           <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-3">
             UPCOMING TRIPS
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-[40px]  font-serif font-semibold text-[#0E5A60]">
+          <h2 className="heading-section font-serif font-semibold text-[#0E5A60]">
             Explore Our {" "}
             <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
               Journeys.

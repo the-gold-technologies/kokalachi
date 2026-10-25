@@ -154,7 +154,8 @@ export function Navbar() {
     return null;
   }
   
-  const isHomePage = pathname === "/";
+  // Pages whose hero is light (cream), so the see-through navbar needs dark text there
+  const onLightHero = pathname === "/about";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -193,31 +194,33 @@ export function Navbar() {
     { name: "Destinations", href: "/journeys", hasDropdown: true },
     { name: "Tours", href: "/#upcoming-journeys", hasDropdown: true },
     { name: "Blogs", href: "/blogs", hasDropdown: true },
-    { name: "Community", href: "/#good-company", hasDropdown: false },
+    { name: "Community", href: "/community", hasDropdown: false },
   ];
 
-  // We want the Navbar to always have the solid white pill background 
-  // on non-home pages so it doesn't get lost on dark hero images.
-  const isSolid = isScrolled || !isHomePage;
+  // See-through over the hero on every page, white pill once scrolled
+  const isSolid = isScrolled;
+  const darkText = isSolid || onLightHero;
 
   return (
     <>
       <header
-        className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${
-          isSolid
-            ? "top-4 w-[90%] max-w-[1300px] bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border border-gray-100/80 rounded-full py-3 pl-6 pr-3 "
-            : "top-0 w-full max-w-full bg-transparent py-6"
+        className={`fixed inset-x-0 z-50 transition-all duration-500 ease-in-out ${
+          isSolid ? "top-4" : "top-0 py-3"
         }`}
       >
+        {/* Same gutter as every section; the pill reaches a little past it so the logo & CTA line up with page content */}
+        <div className="site-container">
         <div
-          className={`mx-auto flex items-center justify-between ${
-            isSolid ? "w-full" : "container mx-auto px-6 md:px-12 lg:px-30"
+          className={`flex items-center justify-between rounded-full border -mx-3 px-3 md:-mx-5 md:px-5 py-3 transition-all duration-500 ease-in-out ${
+            isSolid
+              ? "bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border-gray-100/80"
+              : "bg-transparent border-transparent"
           }`}
         >
           {/* Main Logo Image */}
           <Link href="/" className="flex items-center gap-3">
             <img
-              src={isSolid ? "/logo-clean.png" : "/clean_logo_lighter.png"}
+              src={darkText ? "/logo-clean.png" : "/clean_logo_lighter.png"}
               alt="Kokalachi Logo"
               className={`w-auto object-contain hover:scale-105 transition-transform ${
                 isSolid ? "h-6" : "h-7"
@@ -239,7 +242,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={`flex items-center gap-1 font-medium text-xs uppercase tracking-widest transition-colors duration-300 font-montserrat ${
-                    isSolid
+                    darkText
                       ? "text-[#0E5A60] hover:text-[#C85A24]"
                       : "text-white/90 hover:text-white"
                   }`}
@@ -423,7 +426,7 @@ export function Navbar() {
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(true)}
               className={`p-1 transition-colors ${
-                isSolid
+                darkText
                   ? "text-[#0E5A60] hover:text-[#C85A24]"
                   : "text-white hover:text-white/80"
               }`}
@@ -432,6 +435,7 @@ export function Navbar() {
               <Menu size={26} />
             </button>
           </div>
+        </div>
         </div>
       </header>
 

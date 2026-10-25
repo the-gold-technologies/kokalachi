@@ -9,7 +9,7 @@ import { TitleUnderline } from "@/components/ui/TitleUnderline";
 export function JoinTribeSection() {
   return (
     <section id="join-the-tribe" className="py-12 bg-white relative overflow-hidden select-none">
-      <div className="container max-w-7xl mx-auto px-4 lg:px-0 relative z-10">
+      <div className="site-container relative z-10">
         
         {/* Banner Container */}
         <div className="bg-[#FAF5EE] rounded-[40px] shadow-sm border border-amber-900/10 relative overflow-hidden flex flex-col lg:flex-row items-stretch">
@@ -33,7 +33,7 @@ export function JoinTribeSection() {
             </div>
 
             {/* Main Title */}
-            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-medium text-[#0E5A60] leading-[1.12] font-serif mb-6 tracking-tight">
+            <h2 className="heading-section font-medium text-[#0E5A60] font-serif mb-6 tracking-tight">
               Your next journey is <br/>waiting. So are your people.
             </h2>
 

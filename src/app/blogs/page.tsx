@@ -48,14 +48,14 @@ export default function BlogsPage() {
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/25 to-transparent" />
 
         <div className="absolute inset-0 flex items-end pb-10 sm:pb-12">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+          <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   The Kokalachi Journal
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold font-serif text-white leading-[1.1] mb-5 max-w-4xl">
+              <h1 className="heading-hero font-semibold font-serif text-white mb-5 max-w-4xl">
                 Stories for the{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-white">
                   curious traveller.
@@ -78,7 +78,7 @@ export default function BlogsPage() {
         />
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[420px] bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
+        <div className="site-container relative z-10">
           <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-8">
             Fresh off the press
           </span>

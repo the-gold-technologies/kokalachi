@@ -162,7 +162,7 @@ export function HeroSection() {
       </div>
 
       {/* Hero Main Content Container */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-30 z-10 relative">
+      <div className="site-container z-10 relative">
         <div className="max-w-[780px] text-left space-y-4 md:space-y-7 2xl:space-y-7">
           
           {/* Top Category Tagline */}
@@ -171,7 +171,7 @@ export function HeroSection() {
           </span>
 
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[64px] font-normal text-white leading-[1] tracking-tight font-serif">
+          <h1 className="heading-hero font-normal text-white tracking-tight font-serif">
             Find your circle. <br />
             Find your next{" "}
             <span className="relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]">

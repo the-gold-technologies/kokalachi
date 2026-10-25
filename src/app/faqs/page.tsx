@@ -31,7 +31,7 @@ const jsonLd = {
     category.items.map((item) => ({
       "@type": "Question",
       name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer },
+      acceptedAnswer: { "@type": "Answer", text: item.answer.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") },
     })),
   ),
 };
@@ -56,14 +56,14 @@ export default function FaqsPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />
 
         <div className="absolute inset-0 flex items-end pb-10 sm:pb-12">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+          <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   FAQs
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold font-serif text-white leading-[1.1] mb-5 max-w-4xl">
+              <h1 className="heading-hero font-semibold font-serif text-white mb-5 max-w-4xl">
                 Questions?{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-white">
                   We&apos;ve got you.

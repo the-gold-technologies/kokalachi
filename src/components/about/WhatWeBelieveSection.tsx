@@ -46,7 +46,7 @@ export function WhatWeBelieveSection() {
 
   return (
     <section id="what-we-believe" className="py-16 relative overflow-hidden select-none">
-      <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-10 relative z-10">
+      <div className="site-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center">
           
           {/* Left Column: Content & Pillars */}
@@ -60,7 +60,7 @@ export function WhatWeBelieveSection() {
                 </span>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl lg:text-[40px]  font-medium text-[#0E5A60] leading-[1.15] font-serif tracking-tight">
+              <h2 className="heading-section font-medium text-[#0E5A60] font-serif tracking-tight">
                 The Kokalachi {" "}
                 <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
                  Way

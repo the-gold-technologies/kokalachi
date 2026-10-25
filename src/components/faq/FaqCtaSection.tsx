@@ -6,7 +6,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 export function FaqCtaSection() {
   return (
     <section id="still-have-questions" className="pb-16 lg:pb-20 bg-white">
-      <div className="container max-w-7xl mx-auto px-4 md:px-8">
+      <div className="site-container">
         <div className="bg-[#FAF5EE] rounded-[40px] border border-amber-900/10 shadow-sm relative overflow-hidden px-6 py-12 sm:px-12 lg:py-16 text-center">
           {/* Decorative Ambient Glows */}
           <div className="absolute -top-20 -right-20 w-72 h-72 bg-[#C85A24]/10 rounded-full blur-3xl pointer-events-none" />
@@ -16,7 +16,7 @@ export function FaqCtaSection() {
             <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-4">
               Still Have Questions?
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-medium text-[#0E5A60] leading-[1.12] font-serif mb-8 tracking-tight">
+            <h2 className="heading-section font-medium text-[#0E5A60] font-serif mb-8 tracking-tight">
               We&apos;re a message away.
             </h2>
 

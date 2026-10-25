@@ -103,7 +103,7 @@ export default async function BlogPostPage({
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/25 to-transparent" />
 
         <div className="absolute inset-0 flex items-end pb-10 sm:pb-14">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+          <div className="site-container">
             <div className="max-w-4xl animate-fade-in-up">
               <Link
                 href="/blogs"
@@ -116,7 +116,7 @@ export default async function BlogPostPage({
                   {post.category}
                 </span>
               </div>
-              <h1 className="text-[34px] sm:text-5xl lg:text-[64px] font-semibold font-serif text-white leading-[1.08] mb-6">
+              <h1 className="heading-hero font-semibold font-serif text-white mb-6">
                 {post.heroLead}{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-[#FFD9BF]">
                   {post.heroAccent}
@@ -149,7 +149,7 @@ export default async function BlogPostPage({
         <div className="absolute top-40 -left-40 w-[420px] h-[420px] bg-[#D96C2C]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-[60%] -right-40 w-[420px] h-[420px] bg-[#0E5A60]/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10 py-14 sm:py-20">
+        <div className="site-container relative z-10 py-14 sm:py-20">
           {/* Chapters | article (kept to a readable line length) | trip & share sidebar */}
           <div className="grid grid-cols-1 lg:grid-cols-[200px_minmax(0,1fr)] xl:grid-cols-[200px_minmax(0,1fr)_260px] gap-10 lg:gap-12">
             <aside className="hidden lg:block">
@@ -324,7 +324,7 @@ export default async function BlogPostPage({
 
       {/* CTA */}
       <section className="pb-16 lg:pb-20">
-        <div className="container max-w-7xl mx-auto px-4 md:px-8">
+        <div className="site-container">
           <div className="bg-[#FAF5EE] rounded-[40px] border border-amber-900/10 shadow-sm relative overflow-hidden px-6 py-12 sm:px-12 lg:py-16 text-center">
             <div className="absolute -top-20 -right-20 w-72 h-72 bg-[#C85A24]/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-24 -left-16 w-72 h-72 bg-[#0E5A60]/10 rounded-full blur-3xl pointer-events-none" />
@@ -333,7 +333,7 @@ export default async function BlogPostPage({
               <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-4">
                 Your first chai stop is waiting
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-medium text-[#0E5A60] leading-[1.12] font-serif mb-5 tracking-tight">
+              <h2 className="heading-section font-medium text-[#0E5A60] font-serif mb-5 tracking-tight">
                 {post.cta.title}
               </h2>
               <p className="text-[#0E5A60]/80 text-sm sm:text-base leading-relaxed mb-8">{post.cta.text}</p>
@@ -362,12 +362,12 @@ export default async function BlogPostPage({
       {/* Trips to try it on */}
       {relatedTrips.length > 0 && (
         <section className="pb-20 lg:pb-24">
-          <div className="container max-w-7xl mx-auto px-4 md:px-8">
+          <div className="site-container">
             <div className="text-center mb-10">
               <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
                 Made for first-timers
               </span>
-              <h2 className="text-3xl sm:text-4xl font-serif text-[#0E5A60]">
+              <h2 className="heading-section font-serif text-[#0E5A60]">
                 Trips to say{" "}
                 <span className="relative inline-block font-script text-[1.15em]">
                   yes

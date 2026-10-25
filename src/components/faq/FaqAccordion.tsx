@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 import type { FaqCategory } from "@/data/faqs";
+import { BlogRichText } from "@/components/blog/BlogRichText";
 
 interface FaqAccordionProps {
   categories: FaqCategory[];
@@ -44,7 +45,7 @@ export function FaqAccordion({ categories }: FaqAccordionProps) {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-8 max-w-7xl py-12 lg:py-16">
+    <div className="site-container py-12 lg:py-16">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-14">
         {/* Category Tabs: horizontal scroller on mobile, sticky sidebar on desktop */}
         <nav
@@ -140,7 +141,7 @@ export function FaqAccordion({ categories }: FaqAccordionProps) {
                       >
                         <div className="overflow-hidden">
                           <p className="px-5 sm:px-6 pb-5 text-slate-600 text-[14px] sm:text-[15px] leading-relaxed">
-                            {item.answer}
+                            <BlogRichText text={item.answer} />
                           </p>
                         </div>
                       </div>

@@ -50,14 +50,14 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />
 
         <div className="absolute inset-0 flex items-end pb-10 sm:pb-12">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+          <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   Get In Touch
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold font-serif text-white leading-[1.1] mb-6 max-w-4xl">
+              <h1 className="heading-hero font-semibold font-serif text-white mb-6 max-w-4xl">
                 Got a question before you{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-white">
                   join the tribe?
@@ -71,7 +71,7 @@ export default function ContactPage() {
       </div>
 
       {/* Main Content Area */}
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl py-12 lg:py-16 relative z-10">
+      <div className="site-container py-12 lg:py-16 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           
           {/* Left Column: Form */}

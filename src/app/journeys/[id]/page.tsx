@@ -423,7 +423,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />
 
         <div className="absolute inset-0 flex items-end pb-10 sm:pb-20">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+          <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-6">
                 <span className="bg-[#0E5A60] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
@@ -435,7 +435,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                   </span>
                 )}
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold font-serif text-white leading-[1.1] mb-2">
+              <h1 className="heading-hero font-semibold font-serif text-white mb-2">
                 {tour.title}
               </h1>
               {tour.subtitle && (
@@ -472,7 +472,7 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
       </div>
 
       {/* Main Content Area */}
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl py-12">
+      <div className="site-container py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8">
 
           {/* Left Column: Flowing Content */}
@@ -919,9 +919,9 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
 
       {/* Explore More Journeys Section */}
       <div className="py-16 lg:py-24 mt-12 border-t border-[#0E5A60]/10">
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <div className="site-container">
           <div className="mb-10 lg:mb-14">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-[#0E5A60]">
+            <h2 className="heading-section font-serif font-bold text-[#0E5A60]">
               Explore Other Journeys
             </h2>
             <p className="text-slate-600 mt-3 text-lg font-sans">

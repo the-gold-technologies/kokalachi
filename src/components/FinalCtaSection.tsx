@@ -25,7 +25,7 @@ export function FinalCtaSection() {
       {/* Decorative Ambient Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-80 bg-[#C85A24]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10 max-w-4xl text-center">
+      <div className="mx-auto site-x max-w-4xl relative z-10 text-center">
         {/* Sub-header Category Tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-4">
           YOUR NEXT CHAPTER
@@ -43,7 +43,7 @@ export function FinalCtaSection() {
             <span>♡ your story starts here</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-normal text-[#0E5A60] leading-[1.2] font-serif">
+          <h2 className="heading-section font-normal text-[#0E5A60] font-serif">
             Somewhere, someone else is looking for{" "}
             <span className="font-semibold text-[#0E5A60]">
               exactly the trip you are.
