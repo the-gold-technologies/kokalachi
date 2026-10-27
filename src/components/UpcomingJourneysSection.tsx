@@ -9,17 +9,15 @@ import {
   Clock,
   ArrowRight,
   MapPin,
-  Flame,
-  Compass,
   Heart,
-  Mountain,
-  Coffee,
-  Palmtree,
+  Flame,
   Train,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { tripCards, TripCardData } from "@/data/trips";
+import type { TripCardData } from "@/data/trips";
+import type { UpcomingJourneysContent, VibeCategory } from "@/types/cms";
+import { filterTripsByVibe, isHeartVibe, vibeIcon } from "@/lib/vibes";
 import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft } from "@/lib/departures";
 import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
@@ -118,7 +116,13 @@ function TripCardItem({ card }: { card: TripCardData }) {
   );
 }
 
-export function UpcomingJourneysSection() {
+interface UpcomingJourneysSectionProps {
+  content: UpcomingJourneysContent;
+  trips: TripCardData[];
+  vibes: VibeCategory[];
+}
+
+export function UpcomingJourneysSection({ content, trips, vibes }: UpcomingJourneysSectionProps) {
   const [activeCategory, setActiveCategory] = useState("Trending");
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -134,20 +138,13 @@ export function UpcomingJourneysSection() {
     }
   };
 
-  const categories = [
-    { id: "Trending", label: "Trending", icon: Flame, isHeart: false },
-    { id: "FirstTimers", label: "First Timers", icon: Compass, isHeart: false },
-    { id: "WomenOnly", label: "Women Only", icon: Heart, isHeart: true },
-    { id: "Adventure", label: "Adventure", icon: Mountain, isHeart: false },
-    { id: "SlowTravel", label: "Slow Travel", icon: Coffee, isHeart: false },
-    { id: "BeachEscape", label: "Beach Escape", icon: Palmtree, isHeart: false },
-  ];
+  // "Trending" leads here, so the separate "All" filter is left to /journeys
+  const categories = vibes
+    .filter((v) => v.id !== "All")
+    .map((v) => ({ ...v, icon: vibeIcon(v.id), isHeart: isHeartVibe(v.id) }));
 
-  // The slider scrolls, so show every matching trip (already sorted by next departure)
-  const filteredCards =
-    activeCategory === "Trending"
-      ? tripCards
-      : tripCards.filter((card) => card.categories.includes(activeCategory));
+  // The slider scrolls, so Trending shows every trip (already sorted by next departure)
+  const filteredCards = activeCategory === "Trending" ? trips : filterTripsByVibe(trips, activeCategory);
 
   return (
     <section
@@ -158,21 +155,20 @@ export function UpcomingJourneysSection() {
 
       <div className="site-container relative z-10 text-center">
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
-          UPCOMING JOURNEYS
+          {content.tag}
         </span>
 
         <h2 className="heading-section font-normal font-serif max-w-4xl mx-auto mb-4 text-[#0E5A60]">
-          Where will your next{" "}
+          {content.headline}{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
-            journey
+            {content.scriptAccent}
             <TitleUnderline />
-          </span>{" "}
-          begin?
+          </span>
+          {content.headlineSuffix && <> {content.headlineSuffix}</>}
         </h2>
 
         <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
-          Every Kokalachi journey is curated end-to-end — the destination, the
-          pace, and the people. Pick the one that&apos;s calling you.
+          {content.subtitle}
         </p>
 
         {/* Filter Pills Row with Unified Icon Styling & Navigation */}
@@ -249,10 +245,10 @@ export function UpcomingJourneysSection() {
         {/* Section-end CTA Button */}
         <div className="mt-6 font-sans">
           <Link
-            href="/journeys"
+            href={content.ctaLink}
             className="bg-[#0E5A60] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-medium text-base shadow-md hover:shadow-xl transition-all inline-flex items-center gap-2.5 cursor-pointer hover:scale-105 font-sans"
           >
-            <span>See All Upcoming Journeys</span>
+            <span>{content.ctaText}</span>
             <ArrowRight size={18} className="stroke-[2]" />
           </Link>
         </div>

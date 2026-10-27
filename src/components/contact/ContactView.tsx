@@ -6,8 +6,15 @@ import { ArrowRight, CheckCircle2, ShieldCheck, Mail, User, Phone, Minus, Plus, 
 import { FaInstagram } from "react-icons/fa6";
 import { submitContactEnquiry } from "@/actions/contact";
 import type { ContactSections } from "@/types/cms";
+import type { HeadingTag } from "@/lib/content";
 
-export function ContactView({ sections }: { sections: ContactSections }) {
+export function ContactView({
+  sections,
+  headingTag: Heading = "h1",
+}: {
+  sections: ContactSections;
+  headingTag?: HeadingTag;
+}) {
   const hero = sections.ContactHeroSection;
   const form = sections.ContactFormSection;
   const sidebar = sections.ContactSidebarSection;
@@ -61,13 +68,13 @@ export function ContactView({ sections }: { sections: ContactSections }) {
                   {hero.tagline}
                 </span>
               </div>
-              <h1 className="heading-hero font-semibold font-serif text-white mb-6 max-w-4xl">
+              <Heading className="heading-hero font-semibold font-serif text-white mb-6 max-w-4xl">
                 <span className="whitespace-pre-line">{hero.headline}</span>{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-white">
                   {hero.scriptAccent}
                   <TitleUnderline />
                 </span>
-              </h1>
+              </Heading>
               
             </div>
           </div>

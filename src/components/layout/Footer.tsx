@@ -13,21 +13,29 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
-import { tripCards } from "@/data/trips";
+import type { TripCardData } from "@/data/trips";
+import type { SiteConfig } from "@/types/cms";
 import { hasFullDetails, isBookingOpen } from "@/lib/departures";
 import { openCookieSettings } from "@/lib/consent";
 
-// Bookable trips with full itineraries (same picks as the navbar), between the two fixed links
-const journeyLinks = [
-  { label: "Upcoming Trips", href: "/journeys" },
-  ...tripCards
-    .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
-    .slice(0, 3)
-    .map((card) => ({ label: card.destination, href: `/journeys/${card.slug}` })),
-  { label: "Private Group Tours", href: "/contact" },
-];
+interface FooterProps {
+  trips: TripCardData[];
+  site: SiteConfig; // contact details & social links from CMS → SEO → Global
+}
 
-export function Footer() {
+export function Footer({ trips, site }: FooterProps) {
+  const footerLogo = site.socialLinks?.footerLogo;
+
+  // Bookable trips with full itineraries (same picks as the navbar), between the two fixed links
+  const journeyLinks = [
+    { label: "Upcoming Trips", href: "/journeys" },
+    ...trips
+      .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
+      .slice(0, 3)
+      .map((card) => ({ label: card.destination, href: `/journeys/${card.slug}` })),
+    { label: "Private Group Tours", href: "/contact" },
+  ];
+
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -53,11 +61,11 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-5">
             <div className="flex items-start justify-start">
               <Link href="/" className="inline-block">
-                <img
-                  src="/clean_logo_lighter.png"
+                {footerLogo && <img
+                  src={footerLogo}
                   alt="Kokalachi Logo"
                   className="h-8 sm:h-9 w-auto object-contain hover:scale-105 transition-transform"
-                />
+                />}
                 <span className="block mt-2.5 text-[10px] font-montserrat font-bold uppercase tracking-[0.35em] text-[#CFE3DF]">
                   Travel. Connect. Belong
                 </span>
@@ -70,24 +78,31 @@ export function Footer() {
             </p>
 
             <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-white/80 font-sans">
-              <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
-                <MapPin className="w-4 h-4 text-[#F6B48A] shrink-0" />
-                <span>91 Springboard, C-2, Sector 1, Noida - 201301</span>
-              </div>
-              <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
-                <Mail className="w-4 h-4 text-[#F6B48A] shrink-0" />
-                <a href="mailto:hello@kokalachi.com">hello@kokalachi.com</a>
-              </div>
-              <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
-                <Phone className="w-4 h-4 text-[#F6B48A] shrink-0" />
-                <a href="tel:+919711845700">+91 97118 45700</a>
-              </div>
+              {site.address && (
+                <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
+                  <MapPin className="w-4 h-4 text-[#F6B48A] shrink-0" />
+                  <span>{site.address}</span>
+                </div>
+              )}
+              {site.email && (
+                <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
+                  <Mail className="w-4 h-4 text-[#F6B48A] shrink-0" />
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                </div>
+              )}
+              {site.phone && (
+                <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
+                  <Phone className="w-4 h-4 text-[#F6B48A] shrink-0" />
+                  <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}>{site.phone}</a>
+                </div>
+              )}
             </div>
 
             {/* Social Icons */}
             <div className="flex items-center gap-3 pt-2">
+              {site.instagramUrl && (
               <a
-                href="https://www.instagram.com/kokalachi/"
+                href={site.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -95,8 +110,10 @@ export function Footer() {
               >
                 <FaInstagram className="w-4 h-4" />
               </a>
+              )}
+              {site.facebookUrl && (
               <a
-                href="https://www.facebook.com/share/1MA2Wf52Cr/?mibextid=wwXIfr"
+                href={site.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -104,6 +121,7 @@ export function Footer() {
               >
                 <FaFacebookF className="w-4 h-4" />
               </a>
+              )}
             </div>
           </div>
 

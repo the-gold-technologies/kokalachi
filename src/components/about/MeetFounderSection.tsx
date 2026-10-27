@@ -3,8 +3,12 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { TitleUnderline } from "../ui/TitleUnderline";
+import type { MeetFounderContent } from "@/types/cms";
 
-export function MeetFounderSection() {
+export function MeetFounderSection({ content }: { content: MeetFounderContent }) {
+  // One paragraph per blank line in the CMS story
+  const paragraphs = content.story.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+
   return (
     <section
       id="meet-the-founder"
@@ -22,7 +26,7 @@ export function MeetFounderSection() {
             {/* Founder Image Container */}
             <div className="relative w-full max-w-sm sm:max-w-md h-[440px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl bg-slate-100 z-10 border border-amber-900/10 group">
               <img
-                src="/founders.png"
+                src={content.founderPhoto}
                 alt="Kokalachi Founders"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
@@ -31,10 +35,10 @@ export function MeetFounderSection() {
               <div className="absolute flex gap-4 w-fit bottom-5 right-5 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-lg items-center">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#C85A24] font-montserrat block">
-                    CO-FOUNDERS
+                    {content.badge}
                   </span>
                   <h4 className="text-base font-bold text-[#0E5A60] font-serif">
-                    Rachit &amp; Hitesh
+                    {content.founderNames}
                   </h4>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-[#C85A24] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
@@ -48,14 +52,14 @@ export function MeetFounderSection() {
           <div className="lg:col-span-7 space-y-5 text-left pr-6">
             {/* Category Tag */}
             <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block">
-              MEET THE FOUNDERS
+              {content.tagline}
             </span>
 
             {/* Bold Headline matching website typography */}
             <h2 className="heading-section font-medium text-[#0E5A60] font-serif">
-              Some ideas take decades to find their {" "}
+              {content.headline}{" "}
               <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
-                moment.
+                {content.scriptAccent}
                 <div className="absolute bottom-1 left-0 w-full">
                    <TitleUnderline />
                 </div>
@@ -64,32 +68,23 @@ export function MeetFounderSection() {
 
             <div className="space-y-3 text-[#0E5A60]/85 text-base sm:text-md font-sans leading-relaxed">
               <p className="text-xl font-medium">
-                Kokalachi is one of them.
+                {content.leadQuote}
               </p>
-              <p>
-                We&apos;ve been friends for over 35 years through countless conversations, road trips, family holidays, and adventures along the way. And somewhere in all of it, we noticed the same thing, again and again: the destination was rarely what stayed with us. It was always the people we shared it with.
-              </p>
-              <p>
-                Hitesh has spent 28 years in the travel industry, designing holidays and helping thousands of travellers explore the world. Rachit has spent his own years chasing curiosity hiking mountains, riding scenic highways, chasing adventure sports, and finding the hidden stays most travellers never discover.
-              </p>
-              <p>
-                Between the two of us, one thing became clear travel isn&apos;t just about seeing new places. It&apos;s about finding the people who make those places unforgettable.
-              </p>
-              <p>
-                That&apos;s why we built Kokalachi. Not as another travel company but as a community where meaningful journeys begin with meaningful people.
-              </p>
+              {paragraphs.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
               <p className="font-medium text-[#C85A24]">
-                We hope you&apos;ll join us on one.
+                {content.closingNote}
               </p>
             </div>
 
             {/* Handwritten Footer Line */}
             <div className="">
               <p className="font-script text-xl sm:text-2xl lg:text-[26px] text-[#0E5A60] font-bold flex flex-wrap items-center gap-2 whitespace-nowrap">
-                <span>Rachit Ahuja &amp; Hitesh Kalra</span>
+                <span>{content.founderFullName}</span>
                 <span className="text-[#C85A24] font-normal mx-1">—</span>
                 <span className="text-[#C85A24]">
-                  Co-Founders, Kokalachi ♡
+                  {content.founderTitle}
                 </span>
               </p>
             </div>

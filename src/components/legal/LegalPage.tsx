@@ -1,11 +1,11 @@
 import React from "react";
 import { Mail } from "lucide-react";
-import { BlogRichText } from "@/components/blog/BlogRichText";
-import { company, type LegalDocument } from "@/data/legal";
+import type { LegalDocument } from "@/data/legal";
+import type { HeadingTag } from "@/lib/content";
 import { formatBlogDate } from "@/data/blogs";
 
 // Shared layout for the Privacy Policy and Terms pages
-export function LegalPage({ doc }: { doc: LegalDocument }) {
+export function LegalPage({ doc, headingTag: Heading = "h1" }: { doc: LegalDocument; headingTag?: HeadingTag }) {
   return (
     <div className="min-h-screen font-sans text-slate-800 bg-white">
       {/* Header band (dark, so the see-through navbar stays readable) */}
@@ -19,7 +19,7 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
           <span className="inline-block bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm mb-4">
             Legal
           </span>
-          <h1 className="heading-hero font-semibold font-serif text-white mb-4">{doc.title}</h1>
+          <Heading className="heading-hero font-semibold font-serif text-white mb-4">{doc.title}</Heading>
           <p className="text-white/85 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">{doc.intro}</p>
           <p className="mt-5 text-[11px] uppercase tracking-widest font-bold text-white/60">
             Last updated {formatBlogDate(doc.updatedOn)}
@@ -59,26 +59,11 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
                   <span className="text-[#D96C2C]/60 tabular-nums">{i + 1}.</span>
                   <span>{section.title}</span>
                 </h2>
-                <div className="space-y-4 text-[15px] sm:text-base text-slate-700 leading-relaxed">
-                  {section.blocks.map((block, j) =>
-                    Array.isArray(block) ? (
-                      <ul key={j} className="space-y-2.5">
-                        {block.map((item, k) => (
-                          <li key={k} className="flex gap-3">
-                            <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#D96C2C] shrink-0" />
-                            <span>
-                              <BlogRichText text={item} />
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p key={j}>
-                        <BlogRichText text={block} />
-                      </p>
-                    ),
-                  )}
-                </div>
+                {/* Admin-authored rich text from the CMS */}
+                <div
+                  className="cms-rich-text text-[15px] sm:text-base text-slate-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: section.html }}
+                />
               </section>
             ))}
 
@@ -89,10 +74,10 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
                 <p className="text-sm text-slate-600">We&apos;re happy to explain anything in plain words.</p>
               </div>
               <a
-                href={`mailto:${company.email}`}
+                href={`mailto:${doc.questionsEmail}`}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0E5A60] hover:bg-[#0B2A3D] text-white text-sm font-medium transition-colors shrink-0"
               >
-                <Mail size={16} /> {company.email}
+                <Mail size={16} /> {doc.questionsEmail}
               </a>
             </div>
           </article>

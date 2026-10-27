@@ -4,9 +4,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Send } from "lucide-react";
-import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import type { JoinTribeContent } from "@/types/cms";
 
-export function JoinTribeSection() {
+export function JoinTribeSection({ content }: { content: JoinTribeContent }) {
   return (
     <section id="join-the-tribe" className="py-12 bg-white relative overflow-hidden select-none">
       <div className="site-container relative z-10">
@@ -28,36 +28,35 @@ export function JoinTribeSection() {
             {/* Category Tagline */}
             <div className="flex items-center gap-4 mb-6">
               <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block">
-                JOIN THE TRIBE
+                {content.tagline}
               </span>
             </div>
 
             {/* Main Title */}
-            <h2 className="heading-section font-medium text-[#0E5A60] font-serif mb-6 tracking-tight">
-              Your next journey is <br/>waiting. So are your people.
+            <h2 className="heading-section font-medium text-[#0E5A60] font-serif mb-6 tracking-tight whitespace-pre-line">
+              {content.headline}
             </h2>
 
             {/* Paragraph Copy */}
             <p className="text-[#64748B] text-[15px] sm:text-[16px] leading-relaxed max-w-xl mb-8">
-              Somewhere out there is a group of travellers who are just as
-              ready to explore, connect, and make memories as you are.
+              {content.description}
             </p>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link
-                href="/#upcoming-journeys"
+                href={content.primaryButtonLink}
                 className="bg-[#245856] hover:bg-[#1A4240] text-white px-7 py-3.5 rounded-full font-medium text-[13px] shadow-md transition-all inline-flex items-center gap-2 shrink-0"
               >
-                <span>Explore Upcoming Trips</span>
+                <span>{content.primaryButtonText}</span>
                 <ArrowRight size={16} />
               </Link>
               <Link
-                href="/#upcoming-journeys"
+                href={content.secondaryButtonLink}
                 className="bg-white hover:bg-slate-50 text-[#0E5A60] px-7 py-3.5 rounded-full font-bold text-[13px] shadow-sm transition-all inline-flex items-center gap-2 shrink-0"
               >
                 <Send size={16} className="text-[#D35400] -rotate-12" />
-                <span>Find your Next Journey</span>
+                <span>{content.secondaryButtonText}</span>
               </Link>
             </div>
           </div>
@@ -76,13 +75,13 @@ export function JoinTribeSection() {
             </div>
             {/* Blob Image */}
             <div className="relative w-[95%] lg:w-[110%] h-[280px] lg:h-[350px] z-10 lg:-mr-10 mb-6 lg:mb-6 shadow-lg" style={{ borderRadius: '300px 300px 200px 100px / 300px 200px 100px 150px', overflow: 'hidden' }}>
-              <Image src="/about_why_started.jpg" fill className="object-cover object-top" alt="Group on mountain" />
+              <Image src={content.blobImage} fill className="object-cover object-top" alt="Group on mountain" />
             </div>
 
             {/* Note Polaroid */}
             <div className="absolute bottom-[10%] -right-4 lg:right-[20px] rotate-[8deg] bg-white p-5 rounded-lg shadow-xl w-[130px] z-30 border border-slate-100 flex flex-col items-center justify-center">
-               <p className="font-script text-[19px] font-bold text-[#245856] leading-[1.1] text-center">
-                 Good<br/>People<br/>Brighter<br/>Journeys
+               <p className="font-script text-[19px] font-bold text-[#245856] leading-[1.1] text-center whitespace-pre-line">
+                 {content.polaroidNote}
                </p>
                <span className="text-[#245856] mt-1 text-lg">♡</span>
             </div>
@@ -90,7 +89,7 @@ export function JoinTribeSection() {
             {/* Footer Text */}
             <div className="absolute bottom-6 right-20 z-20 hidden lg:block">
               <span className="text-slate-400 text-[9px] font-bold uppercase tracking-[0.25em] font-montserrat">
-                TRAVEL • PEOPLE • PURPOSE
+                {content.footerTag}
               </span>
             </div>
 

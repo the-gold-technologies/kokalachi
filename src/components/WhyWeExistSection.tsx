@@ -15,43 +15,10 @@ import {
   Users,
   RotateCcw,
 } from "lucide-react";
+import type { WhyWeExistContent } from "@/types/cms";
 
-const kokalachiPhotos = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=1200",
-    alt: "Kashmir Houseboat & Mountains",
-    captionTitle: "Real people.",
-    captionSub: "Real connections.",
-    badge: "Kashmir Circle",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?auto=format&fit=crop&q=85&w=1200",
-    alt: "Meghalaya Waterfalls & Trails",
-    captionTitle: "Mountain trails.",
-    captionSub: "Unforgettable laughs.",
-    badge: "Meghalaya Expedition",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1583513645242-25a32d451084?auto=format&fit=crop&q=85&w=1200",
-    alt: "Kerala Tea Gardens & Backwaters",
-    captionTitle: "Shared feasts.",
-    captionSub: "Endless stories.",
-    badge: "Kerala Slow Trail",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=1200",
-    alt: "Vietnam Halong Bay & Lanterns",
-    captionTitle: "Scenic routes.",
-    captionSub: "Lifelong bonds.",
-    badge: "Vietnam Odyssey",
-  },
-];
-
-export function WhyWeExistSection() {
+export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
+  const kokalachiPhotos = content.photos;
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   // Chat animation steps:
   // 0: Rohit ("Guys, shall we do Bali...?")
@@ -130,23 +97,21 @@ export function WhyWeExistSection() {
       <div className="site-container relative z-10 text-center">
         {/* Sub-header category tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-2.5">
-          WHY WE EXIST
+          {content.tag}
         </span>
 
         {/* Main Title */}
         <h2 className="heading-section font-normal font-serif max-w-4xl mx-auto mb-3 text-[#0E5A60]">
-          Why do so many dream trips never{" "}
+          {content.headline}{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
-            happen?
+            {content.scriptAccent}
             <TitleUnderline />
           </span>
         </h2>
 
         {/* Short, reduced intro copy */}
         <p className="text-[#0E5A60]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-2xl mx-auto mb-8 font-sans">
-          Most bucket list trips get postponed when schedules clash and life
-          gets in the way. Finding the right travel companions shouldn&apos;t be
-          this hard.
+          {content.description}
         </p>
 
         {/* Side-by-Side Comparison Container (Exact Original Layout) */}
@@ -165,7 +130,7 @@ export function WhyWeExistSection() {
                 <div className="flex justify-center mb-4">
                   <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#D6CBB8] text-[#3D352E] text-xs sm:text-sm font-bold uppercase tracking-wider font-sans border border-[#C5B7A0] shadow-sm">
                     <X size={15} className="text-[#DC2626] stroke-[4]" />
-                    <span>THE OLD WAY</span>
+                    <span>{content.oldWayBadge}</span>
                   </div>
                 </div>
 
@@ -257,7 +222,7 @@ export function WhyWeExistSection() {
                         </div>
                         <div>
                           <div className="font-extrabold text-[#0E5A60] text-xs sm:text-sm flex items-center gap-1 font-sans">
-                            Kashmir Trip? 🏔️
+                            {content.oldWayTitle}
                           </div>
                           <div className="text-[10px] text-slate-500 font-medium font-sans">
                             10 members
@@ -413,7 +378,7 @@ export function WhyWeExistSection() {
                       size={17}
                       className="fill-white text-white stroke-none"
                     />
-                    <span>The Kokalachi Way</span>
+                    <span>{content.newWayBadge}</span>
                   </div>
                 </div>
 

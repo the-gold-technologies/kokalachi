@@ -13,8 +13,10 @@ import {
   Check,
 } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import type { HeroContent } from "@/types/cms";
+import type { HeadingTag } from "@/lib/content";
 
-export function HeroSection() {
+export function HeroSection({ content, headingTag: Heading = "h1" }: { content: HeroContent; headingTag?: HeadingTag }) {
   const router = useRouter();
 
   // Search filter states
@@ -50,17 +52,7 @@ export function HeroSection() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const popularDestinations = [
-    "Himachal Pradesh",
-    "Uttarakhand",
-    "Ladakh",
-    "Kerala",
-    "Rajasthan",
-    "Kashmir",
-    "Meghalaya",
-    "Sri Lanka",
-    "Spiti Valley",
-  ];
+  const { popularDestinations, quickDatePresets } = content;
 
   const monthNames = [
     "January",
@@ -75,13 +67,6 @@ export function HeroSection() {
     "October",
     "November",
     "December",
-  ];
-
-  const quickDatePresets = [
-    "Flexible Dates",
-    "Next 30 Days",
-    "Upcoming Weekends",
-    "Autumn 2026",
   ];
 
   const travellerOptions = [
@@ -152,7 +137,7 @@ export function HeroSection() {
       {/* Background Image Container with Overflow Hidden */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src="/hero_bg.png"
+          src={content.backgroundImage}
           alt="Friends enjoying sunrise and mountains together"
           className="w-full h-full object-cover object-center"
         />
@@ -167,25 +152,24 @@ export function HeroSection() {
           
           {/* Top Category Tagline */}
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
-            FOR TRAVELLERS WHO WERE ONLY EVER RESTING
+            {content.tagline}
           </span>
 
           {/* Main Headline */}
-          <h1 className="heading-hero font-normal text-white tracking-tight font-serif">
-            Find your circle. <br />
-            Find your next{" "}
+          <Heading className="heading-hero font-normal text-white tracking-tight font-serif">
+            <span className="whitespace-pre-line">{content.headline}</span>{" "}
             <span className="relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]">
-              journey.
+              {content.scriptAccent}
               <div className="absolute bottom-1 left-0 w-full">
                  <TitleUnderline />
               </div>
             </span>
-          </h1>
+          </Heading>
 
           {/* Subtitle Paragraph */}
           <div className="space-y-0.5 text-white/90 text-xs sm:text-sm md:text-base font-normal leading-relaxed font-sans max-w-xl">
-            <p>Curated group trips for solo travellers.</p>
-            <p>Real people. Real stories. Real connections.</p>
+            <p>{content.subtitle1}</p>
+            <p>{content.subtitle2}</p>
           </div>
 
           {/* Spacious Search & Booking Filter Card */}
@@ -208,7 +192,7 @@ export function HeroSection() {
                 </div>
                 <div className="flex flex-col flex-1 min-w-0 pr-1">
                   <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                    Where to?
+                    {content.destPlaceholder}
                   </span>
                   <input
                     type="text"
@@ -463,7 +447,7 @@ export function HeroSection() {
             <span className="text-xs sm:text-[13px] font-normal text-white/80 mr-1">
               Popular Searches:
             </span>
-            {["Himachal Pradesh", "Uttarakhand", "Ladakh", "Kerala", "Rajasthan"].map(
+            {popularDestinations.slice(0, 5).map(
               (tag) => (
                 <button
                   key={tag}

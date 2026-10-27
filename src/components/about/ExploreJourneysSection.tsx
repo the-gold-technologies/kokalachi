@@ -1,31 +1,37 @@
 "use client";
 
 import React from "react";
-import { tripCards } from "@/data/trips";
+import type { TripCardData } from "@/data/trips";
+import type { ExploreJourneysContent } from "@/types/cms";
 import { TripCardItem } from "@/components/TripCardItem";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 
-export function ExploreJourneysSection() {
-  const featuredTrips = tripCards.slice(0, 3);
+interface ExploreJourneysSectionProps {
+  content: ExploreJourneysContent;
+  trips: TripCardData[]; // already sorted; the first three are shown
+}
+
+export function ExploreJourneysSection({ content, trips }: ExploreJourneysSectionProps) {
+  const featuredTrips = trips.slice(0, 3);
 
   return (
     <section className="py-16 bg-white relative">
       <div className="site-container">
         <div className="mb-10 lg:mb-14 text-left">
           <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-3">
-            UPCOMING TRIPS
+            {content.tagline}
           </span>
           <h2 className="heading-section font-serif font-semibold text-[#0E5A60]">
-            Explore Our {" "}
+            {content.headline}{" "}
             <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
-              Journeys.
+              {content.scriptAccent}
               <div className="absolute bottom-1 left-0 w-full">
                  <TitleUnderline />
               </div>
             </span>
           </h2>
           <p className="text-slate-600 mt-3 text-lg font-sans max-w-2xl ">
-            Find your next adventure with these handcrafted experiences.
+            {content.description}
           </p>
         </div>
 

@@ -18,7 +18,7 @@ export function SectionIntro({ kicker, before, accent, after, subtitle, classNam
         {kicker}
       </span>
       <h2 className="heading-section font-normal text-[#0E5A60] font-serif">
-        {before}{" "}
+        <span className="whitespace-pre-line">{before}</span>{" "}
         <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
           {accent}
           <TitleUnderline />
@@ -26,7 +26,7 @@ export function SectionIntro({ kicker, before, accent, after, subtitle, classNam
         {after && <> {after}</>}
       </h2>
       {subtitle && (
-        <p className="mt-5 text-[#0E5A60]/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">{subtitle}</p>
+        <p className="mt-5 text-[#0E5A60]/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto whitespace-pre-line">{subtitle}</p>
       )}
     </div>
   );

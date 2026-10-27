@@ -13,8 +13,10 @@ import {
 import type { StoryEntry } from "@/data/community";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
+import type { MomentsThatStayedContent } from "@/types/cms";
 
 interface MomentsThatStayedSectionProps {
+  content: MomentsThatStayedContent;
   stories: StoryEntry[];
   countryCount: number;
 }
@@ -54,7 +56,7 @@ const timelineSteps = [
   { icon: <Heart size={20} className="fill-white stroke-none" />, color: "bg-[#EF4444]", title: "Friendships for Life", text: "From travel buddies to life buddies." },
 ];
 
-export function MomentsThatStayedSection({ stories, countryCount }: MomentsThatStayedSectionProps) {
+export function MomentsThatStayedSection({ content, stories, countryCount }: MomentsThatStayedSectionProps) {
   if (stories.length === 0) return null;
 
   // Fill each slot of the collage from the community data
@@ -96,15 +98,12 @@ export function MomentsThatStayedSection({ stories, countryCount }: MomentsThatS
 
       <div className="site-container relative z-10 text-center">
         <SectionIntro
-          kicker="MOMENTS THAT STAYED"
-          before="In our travellers'"
-          accent="own words."
-          subtitle={
-            <>
-              Real reviews and photos from people who travelled with us
-              {countryCount > 1 ? ` across ${countryCount} countries` : ""}. Tap any card to read the full letter.
-            </>
-          }
+          kicker={content.tag}
+          before={content.headline}
+          accent={content.scriptAccent}
+          after={content.headlineSuffix}
+          // "{countries}" in the CMS subtitle becomes e.g. " across 3 countries" (empty for a single country)
+          subtitle={content.subtitle.replace("{countries}", countryCount > 1 ? ` across ${countryCount} countries` : "")}
         />
 
         {/* SCRAPBOOK COLLAGE */}

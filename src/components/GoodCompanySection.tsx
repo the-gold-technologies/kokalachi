@@ -2,51 +2,29 @@ import React from "react";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Sparkles, MessageCircle, ShieldCheck, Heart, ArrowRight } from "lucide-react";
+import type { GoodCompanyContent } from "@/types/cms";
 
-// Trust & safety: how we look after you (what the trip is like lives in DifferenceSection)
-const promises = [
-  {
-    icon: Sparkles,
-    iconStyle: "bg-[#FDF0EC] text-[#D96C2C]",
-    tag: "#firsttimers",
-    title: "First-Timer Friendly",
-    text: "Never done a group trip? Many of our journeys are made for first-timers, and you're never left to figure things out alone.",
-    image: "https://images.unsplash.com/photo-1682962232755-f1d051ddb638?auto=format&fit=crop&q=85&w=800",
-    alt: "A group of young friends smiling together",
-  },
-  {
-    icon: MessageCircle,
-    iconStyle: "bg-[#EBF3F0] text-[#0E5A60]",
-    tag: "#meetfirst",
-    title: "Meet Before You Travel",
-    text: "Get introduced to your fellow travellers in a dedicated pre-trip group, so the first hello doesn't happen at the airport.",
-    image: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=85&w=800",
-    alt: "Travellers exploring historic streets together",
-  },
-  {
-    icon: ShieldCheck,
-    iconStyle: "bg-[#EEF4F8] text-[#0E5A60]",
-    tag: "#safetyfirst",
-    title: "Safety Comes First",
-    text: "Trusted travel partners, clear community guidelines and responsive support. Your comfort is always the priority.",
-    image: "https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&q=85&w=800",
-    alt: "Serene mountain landscape view",
-  },
-  {
-    icon: Heart,
-    iconStyle: "bg-[#FDF0EC] text-[#EF4444]",
-    tag: "#respect",
-    title: "Built on Respect",
-    text: "Everyone is expected to treat fellow travellers, local communities and shared experiences with kindness.",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=85&w=800",
-    alt: "Friends gathered by the sea at sunset",
-  },
+// Trust & safety: how we look after you (what the trip is like lives in DifferenceSection). Icons follow card order.
+const ICONS = [
+  { icon: Sparkles, iconStyle: "bg-[#FDF0EC] text-[#D96C2C]" },
+  { icon: MessageCircle, iconStyle: "bg-[#EBF3F0] text-[#0E5A60]" },
+  { icon: ShieldCheck, iconStyle: "bg-[#EEF4F8] text-[#0E5A60]" },
+  { icon: Heart, iconStyle: "bg-[#FDF0EC] text-[#EF4444]" },
 ];
 
 // One torn-paper edge, reused so every card looks the same
 const TORN_EDGE = "M0,20 Q25,5 50,22 T100,10 T150,30 T200,8 T250,25 T300,12 T350,28 T400,6 T450,24 T500,15 L500,50 L0,50 Z";
 
-export function GoodCompanySection() {
+export function GoodCompanySection({ content }: { content: GoodCompanyContent }) {
+  const promises = content.cards.map((card, i) => ({
+    ...ICONS[i % ICONS.length],
+    tag: card.hashtag,
+    title: card.title,
+    text: card.description,
+    image: card.image,
+    alt: card.title,
+  }));
+
   return (
     <section
       id="good-company"
@@ -60,11 +38,11 @@ export function GoodCompanySection() {
 
       <div className="site-container relative z-10 text-center">
         <SectionIntro
-          kicker="TRAVEL WITH CONFIDENCE"
-          before="You're in"
-          accent="good"
-          after="company."
-          subtitle="Whether it's your first group trip or your tenth, you'll feel welcome, comfortable and looked after from the moment you join."
+          kicker={content.tag}
+          before={content.headline}
+          accent={content.scriptAccent}
+          after={content.headlineSuffix}
+          subtitle={content.description}
         />
 
         {/* 4 equal torn-paper cards */}

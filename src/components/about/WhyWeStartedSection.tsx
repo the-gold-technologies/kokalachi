@@ -4,8 +4,9 @@ import React from "react";
 import Image from "next/image";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { Map, CalendarX, Users } from "lucide-react";
+import type { WhyWeStartedContent } from "@/types/cms";
 
-export function WhyWeStartedSection() {
+export function WhyWeStartedSection({ content }: { content: WhyWeStartedContent }) {
   return (
     <section id="why-we-started" className="py-12 lg:py-16 relative select-none">
       <div className="site-container relative z-10">
@@ -26,16 +27,16 @@ export function WhyWeStartedSection() {
             
             {/* Main Image */}
             <div className="relative z-10 w-[85%] h-[350px] lg:h-[400px] rounded-[32px] overflow-hidden shadow-xl border-4 border-white right-4 lg:right-8">
-              <Image src="/about_why_started.jpg" fill className="object-cover" alt="Group of friends" />
+              <Image src={content.mainImage} fill className="object-cover" alt="Group of friends" />
             </div>
 
             {/* Bottom Left Polaroid */}
             <div className="absolute -bottom-2 -left-8 lg:-left-6 rotate-[-6deg] bg-white p-2.5 pb-4 rounded-xl shadow-[0_15px_40px_rgb(0,0,0,0.15)] w-[200px] z-20">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-slate-100">
-                <Image src="/about_hero_polaroid.jpg" fill className="object-cover" alt="Map and Compass" />
+                <Image src={content.polaroidImage} fill className="object-cover" alt="Map and Compass" />
               </div>
-              <p className="font-script text-xl text-center mt-3 text-[#1F3E5A] leading-[1.1] tracking-wide">
-                Plans are easy.<br/>People make it real.
+              <p className="font-script text-xl text-center mt-3 text-[#1F3E5A] leading-[1.1] tracking-wide whitespace-pre-line">
+                {content.polaroidNote}
               </p>
             </div>
           </div>
@@ -47,15 +48,14 @@ export function WhyWeStartedSection() {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <span className="text-[#D35400] text-[11px] font-black uppercase tracking-[0.15em] font-montserrat">
-                  WHY WE STARTED
+                  {content.tagline}
                 </span>
               </div>
               
               <h2 className="heading-section font-medium text-[#0E5A60] font-serif tracking-tight">
-                The problem{" "}we couldn't {" "}
-                
+                {content.headline}{" "}
                 <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
-                 ignore.
+                  {content.scriptAccent}
                   <div className="absolute bottom-1 left-0 w-full">
                      <TitleUnderline />
                   </div>
@@ -63,7 +63,7 @@ export function WhyWeStartedSection() {
               </h2>
               
               <p className="text-[#4A5568] text-base sm:text-[17px] leading-relaxed pt-2 max-w-2xl">
-                Big travel plans often stay on hold, not because the desire fades but because life gets busy and the right people are hard to find.
+                {content.description}
               </p>
             </div>
 
@@ -80,8 +80,8 @@ export function WhyWeStartedSection() {
                   <div className="w-[72px] h-[72px] rounded-full bg-[#E5F1F1] flex items-center justify-center text-[#0A2640] shadow-sm">
                     <Map size={30} strokeWidth={1.5} />
                   </div>
-                  <span className="text-xs sm:text-[13px] font-semibold text-[#0A2640] text-center leading-snug">
-                    Big plans,<br/>left on hold.
+                  <span className="text-xs sm:text-[13px] font-semibold text-[#0A2640] text-center leading-snug whitespace-pre-line">
+                    {content.item1Title}
                   </span>
                 </div>
                 
@@ -93,8 +93,8 @@ export function WhyWeStartedSection() {
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     </div>
                   </div>
-                  <span className="text-xs sm:text-[13px] font-semibold text-[#0A2640] text-center leading-snug">
-                    Schedules don't<br/>always align.
+                  <span className="text-xs sm:text-[13px] font-semibold text-[#0A2640] text-center leading-snug whitespace-pre-line">
+                    {content.item2Title}
                   </span>
                 </div>
                 
@@ -103,8 +103,8 @@ export function WhyWeStartedSection() {
                   <div className="w-[72px] h-[72px] rounded-full bg-[#FDF1DB] flex items-center justify-center text-[#0A2640] shadow-sm">
                     <Users size={30} strokeWidth={1.5} />
                   </div>
-                  <span className="text-xs sm:text-[13px] font-semibold text-[#0A2640] text-center leading-snug">
-                    The right people<br/>are hard to find.
+                  <span className="text-xs sm:text-[13px] font-semibold text-[#0A2640] text-center leading-snug whitespace-pre-line">
+                    {content.item3Title}
                   </span>
                 </div>
               </div>
@@ -114,11 +114,11 @@ export function WhyWeStartedSection() {
             {/* Bottom Conclusion */}
             <div className="space-y-2">
               <h3 className="text-3xl font-bold text-[#0A2640] leading-tight flex items-baseline gap-2">
-                <span className="font-script text-[#0A2640] italic font-semibold text-[28px]">So we built</span>
-                <span className="font-script text-[#D35400] italic font-semibold text-[30px]">Kokalachi.</span>
+                <span className="font-script text-[#0A2640] italic font-semibold text-[28px]">{content.conclusionPrefix}</span>
+                <span className="font-script text-[#D35400] italic font-semibold text-[30px]">{content.conclusionBrand}</span>
               </h3>
               <p className="text-[#4A5568] text-[14px] sm:text-[15px] leading-relaxed max-w-xl">
-                A way to bring together people who share the same pull toward the world so a trip doesn't need to wait for the stars to align.
+                {content.conclusionText}
               </p>
             </div>
           </div>

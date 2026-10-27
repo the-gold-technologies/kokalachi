@@ -4,15 +4,17 @@ import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import { Clock, ArrowRight, PenLine } from "lucide-react";
 import { formatBlogDate, getReadingTime, type BlogPost } from "@/data/blogs";
+import type { BehindKokalachiContent } from "@/types/cms";
 
 interface BehindKokalachiSectionProps {
+  content: BehindKokalachiContent;
   posts: BlogPost[]; // newest first
 }
 
 // Smaller Unsplash crops for cards; local images pass through untouched
 const sized = (src: string, width: number) => src.replace(/([?&])w=\d+/, `$1w=${width}`);
 
-export function BehindKokalachiSection({ posts }: BehindKokalachiSectionProps) {
+export function BehindKokalachiSection({ content, posts }: BehindKokalachiSectionProps) {
   const [featured, ...rest] = posts;
   if (!featured) return null;
   const more = rest.slice(0, 3);
@@ -29,25 +31,22 @@ export function BehindKokalachiSection({ posts }: BehindKokalachiSectionProps) {
         <div className="bg-[#FAF5EE] relative text-center">
           {/* Journal Tagline */}
           <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
-            FROM THE JOURNAL
+            {content.tagline}
           </span>
 
           {/* Journal Main Title */}
           <h2 className="heading-section font-normal text-[#0E5A60] font-serif mb-4 max-w-4xl mx-auto">
-            Stories that inspire your next{" "}
+            {content.headline}{" "}
             <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
-              journey
+              {content.scriptAccent}
               <TitleUnderline />
             </span>
+            {content.headlineSuffix && <> {content.headlineSuffix}</>}
           </h2>
 
           {/* Journal Subtitle Paragraph */}
-          <p className="text-[#1E3327]/80 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto mb-12 leading-relaxed font-sans">
-            Travel isn&apos;t just about destinations. It&apos;s about people,
-            cultures, conversations and the memories we bring home.
-            <br />
-            Explore stories, guides and reflections from the Kokalachi
-            community.
+          <p className="text-[#1E3327]/80 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto mb-12 leading-relaxed font-sans whitespace-pre-line">
+            {content.description}
           </p>
 
           {/* FEATURED STORY (newest post) */}
@@ -138,10 +137,10 @@ export function BehindKokalachiSection({ posts }: BehindKokalachiSectionProps) {
           {/* BOTTOM JOURNAL CTA */}
           <div className="flex items-center justify-center pt-2">
             <Link
-              href="/blogs"
+              href={content.ctaUrl}
               className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#0E5A60] hover:bg-[#061C29] text-white font-medium text-xs sm:text-sm rounded-full shadow-md hover:shadow-lg transition-all cursor-pointer hover:scale-105"
             >
-              <span>Explore the Journal</span>
+              <span>{content.ctaText}</span>
               <ArrowRight size={16} />
             </Link>
           </div>

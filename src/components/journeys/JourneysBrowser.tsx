@@ -4,6 +4,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { TripCardData } from "@/data/trips";
 import type { JourneysSections } from "@/types/cms";
+import type { HeadingTag } from "@/lib/content";
 import { CompactTripCardItem } from "@/components/CompactTripCardItem";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { Heart } from "lucide-react";
@@ -21,9 +22,10 @@ function CategoryFromUrl({ onCategory }: { onCategory: (id: string) => void }) {
 interface JourneysBrowserProps {
   trips: TripCardData[];
   sections: JourneysSections;
+  headingTag?: HeadingTag; // hero headline tag from CMS SEO
 }
 
-export function JourneysBrowser({ trips, sections }: JourneysBrowserProps) {
+export function JourneysBrowser({ trips, sections, headingTag: Heading = "h1" }: JourneysBrowserProps) {
   const [activeCategory, setActiveCategory] = useState("All");
   const hero = sections.JourneysHeroSection;
   const filter = sections.JourneysFilterSection;
@@ -55,13 +57,13 @@ export function JourneysBrowser({ trips, sections }: JourneysBrowserProps) {
                   {hero.tagline}
                 </span>
               </div>
-              <h1 className="heading-hero font-semibold font-serif text-white mb-2">
+              <Heading className="heading-hero font-semibold font-serif text-white mb-2">
                 {hero.title}{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-white">
                   {hero.scriptAccent}
                   <TitleUnderline />
                 </span>
-              </h1>
+              </Heading>
               <p className="text-slate-200 text-base md:text-lg font-normal mt-4 max-w-2xl font-sans leading-relaxed">
                 {hero.description}
               </p>

@@ -5,9 +5,11 @@ import { SectionIntro } from "@/components/ui/SectionIntro";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import type { TripCardData } from "@/data/trips";
 import type { StoryEntry } from "@/data/community";
+import type { HowItWorksContent } from "@/types/cms";
 import { formatShortDate, formatStartingPrice, getNextDeparture } from "@/lib/departures";
 
 interface HowItWorksSectionProps {
+  content: HowItWorksContent;
   trips: TripCardData[];   // a couple of bookable trips for the step 1 preview
   story?: StoryEntry;      // a real traveller story for the step 3 preview
 }
@@ -15,30 +17,30 @@ interface HowItWorksSectionProps {
 const FALLBACK_TRAVEL_PHOTO =
   "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=800";
 
-export function HowItWorksSection({ trips, story }: HowItWorksSectionProps) {
-  const steps = [
+export function HowItWorksSection({ content, trips, story }: HowItWorksSectionProps) {
+  // Step copy comes from the CMS; the icon, checklist and live preview belong to each position
+  const visuals = [
     {
       icon: Compass,
-      title: "Choose your journey",
-      text: "Browse upcoming trips with fixed dates, a full itinerary and the price upfront, then book your spot online.",
       points: ["Small groups, fixed departure dates", "Full itinerary before you book"],
       preview: <TripsPreview trips={trips} />,
     },
     {
       icon: Users,
-      title: "Meet your group",
-      text: "Once you book, you join a private group with your fellow travellers, so you know a few faces before you leave.",
       points: ["Say hello before departure", "Ask questions & share plans"],
       preview: <ChatPreview />,
     },
     {
       icon: Plane,
-      title: "Travel together",
-      text: "A Kokalachi trip host travels with you and takes care of stays, transport and plans. You just enjoy the journey.",
       points: ["Trip host with you throughout", "Come home with new friends"],
       preview: <TravelPreview story={story} />,
     },
   ];
+  const steps = content.steps.slice(0, visuals.length).map((step, i) => ({
+    ...visuals[i],
+    title: step.title,
+    text: step.description,
+  }));
 
   return (
     <section
@@ -53,10 +55,11 @@ export function HowItWorksSection({ trips, story }: HowItWorksSectionProps) {
 
       <div className="site-container relative z-10">
         <SectionIntro
-          kicker="HOW IT WORKS"
-          before="Three simple steps to your next"
-          accent="journey."
-          subtitle="From booking to the last goodbye, here's exactly what happens when you travel with us."
+          kicker={content.tag}
+          before={content.headline}
+          accent={content.scriptAccent}
+          after={content.headlineSuffix}
+          subtitle={content.description}
         />
 
         {/* Steps, joined by a dotted path on desktop */}

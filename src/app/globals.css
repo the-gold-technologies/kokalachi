@@ -137,3 +137,39 @@
 .animate-hero-zoom {
   animation: heroZoom 8.5s ease-out forwards;
 }
+
+/* Rich text from the CMS (legal pages): same look as the hand-built blocks it replaced */
+.cms-rich-text {
+  & > * + * { margin-top: 1rem; }
+  & ul, & ol { display: flex; flex-direction: column; gap: 0.625rem; }
+  & li { position: relative; padding-left: 1.125rem; }
+  & ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: #d96c2c;
+  }
+  & ol { counter-reset: item; }
+  & ol > li::before {
+    counter-increment: item;
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    color: #d96c2c;
+    font-weight: 600;
+  }
+  & a {
+    font-weight: 600;
+    color: #c85a24;
+    text-decoration: underline;
+    text-decoration-color: rgb(217 108 44 / 0.4);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  & a:hover { text-decoration-color: #d96c2c; }
+  & strong { font-weight: 600; color: #0e5a60; }
+}

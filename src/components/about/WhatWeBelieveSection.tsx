@@ -4,45 +4,19 @@ import React from "react";
 import Image from "next/image";
 import { Users, Mountain, ShieldCheck, Heart, UserPlus } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import type { WhatWeBelieveContent } from "@/types/cms";
 
-export function WhatWeBelieveSection() {
-  const pillars = [
-    {
-      title: "Curated travel groups,\nreal connection.",
-      desc: "We keep our journeys in alignment with the interests of travellers. Curated groups make it easy to actually know the people you're travelling with.",
-      icon: <Users size={22} strokeWidth={1.5} />,
-      iconBg: "bg-[#E5F1F1]",
-      iconColor: "text-[#0E5A60]",
-    },
-    {
-      title: "The people matter\nas much as the place.",
-      desc: "A great destination and the wrong group can still make for a forgettable trip. We curate for compatibility first, because that's what makes a journey unforgettable.",
-      icon: <Mountain size={22} strokeWidth={1.5} />,
-      iconBg: "bg-[#FDF1DB]",
-      iconColor: "text-[#D35400]",
-    },
-    {
-      title: "Trust is earned before\nthe trip starts.",
-      desc: "From verified travellers to pre-trip introductions, we believe the first hello shouldn't happen at the airport — comfort and trust are built long before departure.",
-      icon: <ShieldCheck size={22} strokeWidth={1.5} />,
-      iconBg: "bg-[#E5F1F1]",
-      iconColor: "text-[#0E5A60]",
-    },
-    {
-      title: "Respect is\nnon-negotiable.",
-      desc: "For fellow travellers, for hosts, for local communities. Every Kokalachi journey is built on the expectation that everyone shows up with kindness.",
-      icon: <Heart size={22} strokeWidth={1.5} />,
-      iconBg: "bg-[#FFEAE6]",
-      iconColor: "text-[#D35400]",
-    },
-    {
-      title: "We won't compromise\nyour experience to fill a seat.",
-      desc: "We'll always choose the right group over a full one. That's a promise, not a slogan.",
-      icon: <UserPlus size={22} strokeWidth={1.5} />,
-      iconBg: "bg-[#FDF1DB]",
-      iconColor: "text-[#D35400]",
-    }
-  ];
+// Pillar copy comes from the CMS; icons follow pillar order
+const PILLAR_ICONS = [
+  { icon: <Users size={22} strokeWidth={1.5} />, iconBg: "bg-[#E5F1F1]", iconColor: "text-[#0E5A60]" },
+  { icon: <Mountain size={22} strokeWidth={1.5} />, iconBg: "bg-[#FDF1DB]", iconColor: "text-[#D35400]" },
+  { icon: <ShieldCheck size={22} strokeWidth={1.5} />, iconBg: "bg-[#E5F1F1]", iconColor: "text-[#0E5A60]" },
+  { icon: <Heart size={22} strokeWidth={1.5} />, iconBg: "bg-[#FFEAE6]", iconColor: "text-[#D35400]" },
+  { icon: <UserPlus size={22} strokeWidth={1.5} />, iconBg: "bg-[#FDF1DB]", iconColor: "text-[#D35400]" },
+];
+
+export function WhatWeBelieveSection({ content }: { content: WhatWeBelieveContent }) {
+  const pillars = content.pillars.map((pillar, i) => ({ ...pillar, ...PILLAR_ICONS[i % PILLAR_ICONS.length] }));
 
   return (
     <section id="what-we-believe" className="py-16 relative overflow-hidden select-none">
@@ -56,14 +30,14 @@ export function WhatWeBelieveSection() {
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <span className="text-[#D35400] text-[11px] font-black uppercase tracking-[0.15em] font-montserrat">
-                  WHAT WE BELIEVE
+                  {content.tagline}
                 </span>
               </div>
               
               <h2 className="heading-section font-medium text-[#0E5A60] font-serif tracking-tight">
-                The Kokalachi {" "}
+                {content.headline}{" "}
                 <span className="relative inline-block font-script font-normal text-[1.3em] text-[#0E5A60]">
-                 Way
+                  {content.scriptAccent}
                   <div className="absolute bottom-1 left-0 w-full">
                      <TitleUnderline />
                   </div>
@@ -71,7 +45,7 @@ export function WhatWeBelieveSection() {
               </h2>
               
               <p className="text-[#4A5568] text-[15px] sm:text-[16px] leading-relaxed max-w-2xl">
-                Everything we design every itinerary, every group, every detail comes back to a handful of things we simply won't compromise on.
+                {content.description}
               </p>
             </div>
 
@@ -98,7 +72,7 @@ export function WhatWeBelieveSection() {
             {/* Bottom Footer Text */}
             <div className="flex items-center gap-4">
               <span className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.15em] font-montserrat">
-                BETTER PEOPLE. BRIGHTER JOURNEYS.
+                {content.footerNote}
               </span>
               <div className="h-[1px] flex-grow max-w-[150px] bg-slate-200"></div>
             </div>
@@ -119,16 +93,16 @@ export function WhatWeBelieveSection() {
             
             {/* Main Image */}
             <div className="relative z-10 w-[95%] h-[400px] lg:h-[450px] rounded-[24px] overflow-hidden shadow-xl border-4 border-white transform rotate-[1deg] mr-8 lg:mr-0">
-              <Image src="/hero_group_sunset_bg.jpg" fill className="object-cover" alt="Group sitting together" />
+              <Image src={content.mainImage} fill className="object-cover" alt="Group sitting together" />
             </div>
 
             {/* Bottom Right Polaroid */}
             <div className="absolute bottom-10 right-0 lg:-right-8 rotate-[8deg] bg-white p-2.5 pb-4 rounded-xl shadow-[0_15px_40px_rgb(0,0,0,0.15)] w-[210px] z-20">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-lg border border-slate-100">
-                <Image src="/about_belief_respect.jpg" fill className="object-cover object-center" alt="Wooden signpost" />
+                <Image src={content.polaroidImage} fill className="object-cover object-center" alt="Wooden signpost" />
               </div>
-              <p className="font-script text-[17px] text-center mt-3 text-[#0E5A60] leading-tight tracking-wide">
-                Always a better way<br/>to travel
+              <p className="font-script text-[17px] text-center mt-3 text-[#0E5A60] leading-tight tracking-wide whitespace-pre-line">
+                {content.polaroidCaption}
               </p>
             </div>
 

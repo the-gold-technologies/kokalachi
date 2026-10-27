@@ -2,43 +2,23 @@ import React from "react";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Users, MessageSquare, UserCheck, Compass } from "lucide-react";
+import type { DifferenceContent } from "@/types/cms";
 
-// What the trip itself is like (trust & safety lives in GoodCompanySection)
-const differences = [
-  {
-    icon: Users,
-    title: "Curated, Not Crowded",
-    text: "Groups are built around compatibility, not headcount, so conversations happen naturally and no one is left on the sidelines.",
-    image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=85&w=800",
-    alt: "A small group of friends gathered together",
-  },
-  {
-    icon: MessageSquare,
-    title: "Built for Connection",
-    text: "Shared meals, downtime and activities that spark conversation are part of the plan, not a checklist of monuments.",
-    image: "https://images.unsplash.com/photo-1625463006115-09f08489f591?auto=format&fit=crop&q=85&w=800",
-    alt: "Two travellers laughing together over a phone",
-  },
-  {
-    icon: UserCheck,
-    title: "Hosted, End to End",
-    text: "A Kokalachi trip host travels with your group and handles the logistics, so you can stay present instead of managing details.",
-    image: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=85&w=800",
-    alt: "A group of hikers together in the mountains",
-  },
-  {
-    icon: Compass,
-    title: "Thoughtfully Planned",
-    text: "From the pace of each day to the choice of stays, every journey is built with intention, never stitched from a template.",
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=85&w=800",
-    alt: "A travel map with a camera, notebook and guidebooks",
-  },
-];
+// What the trip itself is like (trust & safety lives in GoodCompanySection). Icons follow card order.
+const ICONS = [Users, MessageSquare, UserCheck, Compass];
 
 // One torn-paper edge, reused so every card ends the same way
 const TORN_EDGE = "0,0 5,16 10,2 15,18 20,4 25,16 30,3 35,17 40,2 45,16 50,3 55,18 60,4 65,16 70,2 75,17 80,3 85,16 90,2 95,15 100,0 100,20 0,20";
 
-export function DifferenceSection() {
+export function DifferenceSection({ content }: { content: DifferenceContent }) {
+  const differences = content.features.map((feature, i) => ({
+    icon: ICONS[i % ICONS.length],
+    title: feature.title,
+    text: feature.description,
+    image: feature.image,
+    alt: feature.caption || feature.title,
+  }));
+
   return (
     <section
       id="difference"
@@ -52,10 +32,11 @@ export function DifferenceSection() {
 
       <div className="site-container relative z-10">
         <SectionIntro
-          kicker="WHY KOKALACHI"
-          before="More than a trip. Here's what makes us"
-          accent="different."
-          subtitle="Great places become unforgettable when you share them with the right people. Everything we plan starts there."
+          kicker={content.tag}
+          before={content.headline}
+          accent={content.scriptAccent}
+          after={content.headlineSuffix}
+          subtitle={content.subtitleStatement}
         />
 
         {/* 4 equal polaroid cards */}

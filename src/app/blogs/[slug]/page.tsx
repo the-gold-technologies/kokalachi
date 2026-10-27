@@ -9,15 +9,16 @@ import { TripCardItem } from "@/components/TripCardItem";
 import { BlogBlocks } from "@/components/blog/BlogBlocks";
 import { BlogToc } from "@/components/blog/BlogToc";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
-import { blogPosts, formatBlogDate, getBlogOgImage, getBlogPost, getReadingTime } from "@/data/blogs";
-import { tripCards } from "@/data/trips";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { formatBlogDate, getBlogOgImage, getReadingTime } from "@/data/blogs";
+import { getBlogPost, getBlogPosts, getTrips } from "@/lib/content";
 import { hasFullDetails } from "@/lib/departures";
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+// Prerender every post at build; posts published later in the CMS render on first visit, then stay cached
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
-
-export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -25,13 +26,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getBlogPost(slug);
   if (!post) return {};
 
   return {
-    title: post.title,
-    description: post.excerpt,
-    alternates: { canonical: `/blogs/${post.slug}` },
+    title: post.seo.metaTitle || post.title,
+    description: post.seo.metaDescription || post.excerpt,
+    keywords: post.seo.targetKeywords ?? undefined,
+    alternates: { canonical: post.seo.canonicalUrl || `/blogs/${post.slug}` },
+    ...(post.seo.noIndex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "article",
       siteName: "Kokalachi",
@@ -58,20 +61,20 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const [post, trips] = await Promise.all([getBlogPost(slug), getTrips()]);
   if (!post) notFound();
 
   const readingTime = getReadingTime(post);
   const relatedTrips = post.relatedCategory
-    ? tripCards
+    ? trips
         .filter((card) => card.categories.includes(post.relatedCategory!) && hasFullDetails(card.tourPackage))
         .slice(0, 3)
     : [];
   const nextTrip = relatedTrips[0];
   const shareText =encodeURIComponent(`${post.title} https://kokalachi.com/blogs/${post.slug}`);
 
-  // BlogPosting structured data for search engines
-  const jsonLd = {
+  // BlogPosting structured data for search engines (the CMS can supply its own)
+  const jsonLd = post.seo.schema || {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
@@ -85,10 +88,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="min-h-screen font-sans text-slate-800 bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd schema={jsonLd} />
       <ReadingProgress targetId="article-body" />
 
       {/* Hero */}
@@ -257,14 +257,14 @@ export default async function BlogPostPage({
 
               {/* Share */}
               <div className="xl:hidden mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-dashed border-[#0E5A60]/25 px-6 py-5">
-                <p className="font-script text-2xl text-[#0E5A60]">Know a nervous first-timer? Send them this.</p>
+                <p className="font-script text-2xl text-[#0E5A60]">{post.share.note}</p>
                 <a
                   href={`https://wa.me/?text=${shareText}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1EBE5A] text-white px-5 py-2.5 text-sm font-bold shadow-sm transition-colors shrink-0"
                 >
-                  <FaWhatsapp size={17} /> Share on WhatsApp
+                  <FaWhatsapp size={17} /> {post.share.buttonText}
                 </a>
               </div>
             </article>
@@ -283,7 +283,7 @@ export default async function BlogPostPage({
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <span className="absolute top-3 left-3 bg-[#D96C2C] text-white text-[9.5px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                        First-timer pick
+                        {post.sidebarBadge}
                       </span>
                     </div>
                     <div className="p-5">
@@ -303,17 +303,15 @@ export default async function BlogPostPage({
 
                 <div className="relative rounded-[24px] bg-[#FFF6DF] border border-amber-900/10 p-5 rotate-[-1.5deg] shadow-[0_12px_30px_rgba(140,94,60,0.12)]">
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-[#D96C2C]/25 border-y border-[#D96C2C]/20 rotate-[-4deg]" />
-                  <p className="font-script text-2xl text-[#C85A24] mb-1">psst…</p>
-                  <p className="text-sm text-[#5B4636] leading-relaxed mb-4">
-                    Know a nervous first-timer? Send this their way.
-                  </p>
+                  <p className="font-script text-2xl text-[#C85A24] mb-1">{post.share.title}</p>
+                  <p className="text-sm text-[#5B4636] leading-relaxed mb-4">{post.share.note}</p>
                   <a
                     href={`https://wa.me/?text=${shareText}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1EBE5A] text-white px-4 py-2.5 text-xs font-bold shadow-sm transition-colors"
                   >
-                    <FaWhatsapp size={15} /> Share on WhatsApp
+                    <FaWhatsapp size={15} /> {post.share.buttonText}
                   </a>
                 </div>
               </div>
@@ -331,7 +329,7 @@ export default async function BlogPostPage({
 
             <div className="relative z-10 max-w-2xl mx-auto">
               <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#D35400] font-montserrat block mb-4">
-                Your first chai stop is waiting
+                {post.cta.eyebrow}
               </span>
               <h2 className="heading-section font-medium text-[#0E5A60] font-serif mb-5 tracking-tight">
                 {post.cta.title}
@@ -340,17 +338,17 @@ export default async function BlogPostPage({
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
-                  href="/#upcoming-journeys"
+                  href={post.cta.primaryUrl}
                   className="w-full sm:w-auto bg-[#D96C2C] hover:bg-[#C85A24] text-white px-7 py-3.5 rounded-full font-bold text-sm shadow-md shadow-[#D96C2C]/20 hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center justify-center gap-2.5"
                 >
-                  <span>Explore Upcoming Trips</span>
+                  <span>{post.cta.primaryText}</span>
                   <ArrowRight size={16} />
                 </Link>
                 <Link
-                  href="/faqs"
+                  href={post.cta.secondaryUrl}
                   className="w-full sm:w-auto text-[#0E5A60] hover:text-[#C85A24] px-4 py-3.5 font-bold text-sm transition-colors inline-flex items-center justify-center gap-1.5"
                 >
-                  <span>Read our FAQs</span>
+                  <span>{post.cta.secondaryText}</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>
