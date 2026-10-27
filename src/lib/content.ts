@@ -83,6 +83,8 @@ function toDeparture(d: CmsDeparture): Departure {
 
 function toTripCard(t: CmsTrip): TripCardData {
   const gallery = t.gallery ?? [];
+  // A price of 0 in the CMS means "not announced yet": the site shows "Price TBA" and takes reservations
+  const price = t.price > 0 ? t.price : "TBA";
   return {
     id: t.id,
     slug: t.slug,
@@ -90,7 +92,7 @@ function toTripCard(t: CmsTrip): TripCardData {
     locationTag: `📍 ${t.location}`,
     duration: t.duration,
     groupSize: t.groupSize,
-    price: t.price.toLocaleString("en-IN"),
+    price: typeof price === "number" ? price.toLocaleString("en-IN") : price,
     vibeTags: t.vibeTags ?? [],
     categories: t.categories ?? [],
     featured: t.isFeatured,
@@ -103,7 +105,7 @@ function toTripCard(t: CmsTrip): TripCardData {
       location: t.location,
       duration: t.duration,
       rating: t.rating,
-      price: t.price,
+      price,
       originalPrice: t.originalPrice,
       image: t.image,
       category: t.category,
