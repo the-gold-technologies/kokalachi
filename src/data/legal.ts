@@ -37,8 +37,11 @@ const slugify = (s: string) =>
     .replace(/(^-|-$)/g, "");
 
 export function toLegalDocument(content: LegalSections["LegalDocumentSection"]): LegalDocument {
+  // Normalize non-breaking spaces (&nbsp; / \u00a0) commonly emitted by rich text editors so text wraps normally
+  const cleanBody = (content.bodyHtml || "").replace(/&nbsp;|\u00a0/g, " ");
+
   // ["text before the first heading", heading 1, body 1, heading 2, body 2, ...]
-  const parts = content.bodyHtml.split(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
+  const parts = cleanBody.split(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
   const preamble = parts[0].trim();
   const sections: LegalSection[] = [];
   const used = new Set<string>();
@@ -62,7 +65,7 @@ export function toLegalDocument(content: LegalSections["LegalDocumentSection"]):
     title: content.title,
     description: content.description,
     updatedOn: content.updatedOn,
-    intro: content.intro,
+    intro: (content.intro || "").replace(/&nbsp;|\u00a0/g, " "),
     questionsEmail: content.questionsEmail,
     sections,
   };

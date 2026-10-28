@@ -52,7 +52,7 @@ export function LegalPage({ doc, headingTag: Heading = "h1" }: { doc: LegalDocum
           </aside>
 
           {/* Document */}
-          <article className="lg:col-span-8 xl:col-span-9 max-w-3xl">
+          <article className="lg:col-span-8 xl:col-span-9 max-w-3xl min-w-0">
             {doc.sections.map((section, i) => (
               <section key={section.id} id={section.id} className="scroll-mt-28 pb-9 mb-9 border-b border-slate-100 last:border-0">
                 <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0E5A60] mb-4 flex gap-3">

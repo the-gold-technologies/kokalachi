@@ -138,11 +138,30 @@
   animation: heroZoom 8.5s ease-out forwards;
 }
 
-/* Rich text from the CMS (legal pages): same look as the hand-built blocks it replaced */
+/* Rich text from the CMS (legal pages, editor content): ensure proper wrapping and responsive elements */
 .cms-rich-text {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
   & > * + * { margin-top: 1rem; }
-  & ul, & ol { display: flex; flex-direction: column; gap: 0.625rem; }
-  & li { position: relative; padding-left: 1.125rem; }
+  & p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  & ul, & ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  & li {
+    position: relative;
+    padding-left: 1.125rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
   & ul > li::before {
     content: "";
     position: absolute;
@@ -169,7 +188,30 @@
     text-decoration-color: rgb(217 108 44 / 0.4);
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
+    overflow-wrap: break-word;
+    word-break: break-all;
   }
   & a:hover { text-decoration-color: #d96c2c; }
   & strong { font-weight: 600; color: #0e5a60; }
+  & img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+  }
+  & table {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+  & pre, & code {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  & iframe {
+    max-width: 100%;
+  }
 }
