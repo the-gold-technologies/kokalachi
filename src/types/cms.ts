@@ -47,6 +47,8 @@ export interface WhyWeExistContent extends Heading {
   newWayBadge: string;
   newWayTitle: string;
   photos: { image: string; alt: string; badge: string; captionTitle: string; captionSub: string }[];
+  conclusionTitle: string;
+  conclusionDescription: string;
 }
 
 export interface HowItWorksContent extends Heading {

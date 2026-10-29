@@ -480,11 +480,10 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
         {/* BOTTOM EMPHASIS CONCLUSION */}
         <div className="max-w-3xl mx-auto mt-14 sm:mt-16 text-center">
           <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] font-serif">
-            So, we decided to build a better way to do it.
+            {content.conclusionTitle}
           </h3>
           <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">
-            At Kokalachi, we bring together people who share a love for travel
-            so you can stop waiting and start exploring.
+            {content.conclusionDescription}
           </p>
         </div>
       </div>
