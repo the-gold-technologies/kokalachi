@@ -430,11 +430,11 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
           <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <span className="bg-[#0E5A60] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   {tour.category}
                 </span>
                 {!!spotsLeft && (
-                  <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
+                  <span className="bg-white/15 backdrop-blur-md border border-white/30 text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
                     <Sparkles size={12} /> {spotsLeft} Spots Remaining
                   </span>
                 )}
