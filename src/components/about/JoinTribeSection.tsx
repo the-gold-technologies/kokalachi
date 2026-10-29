@@ -75,7 +75,7 @@ export function JoinTribeSection({ content }: { content: JoinTribeContent }) {
             </div>
             {/* Blob Image */}
             <div className="relative w-[95%] lg:w-[110%] h-[280px] lg:h-[350px] z-10 lg:-mr-10 mb-6 lg:mb-6 shadow-lg" style={{ borderRadius: '300px 300px 200px 100px / 300px 200px 100px 150px', overflow: 'hidden' }}>
-              <Image src={content.blobImage} fill className="object-cover object-top" alt="Group on mountain" />
+              <Image src={content.blobImage} fill className="object-cover object-top" alt={content.blobImageAlt} />
             </div>
 
             {/* Note Polaroid */}

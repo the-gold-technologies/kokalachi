@@ -93,13 +93,13 @@ export function WhatWeBelieveSection({ content }: { content: WhatWeBelieveConten
             
             {/* Main Image */}
             <div className="relative z-10 w-[95%] h-[400px] lg:h-[450px] rounded-[24px] overflow-hidden shadow-xl border-4 border-white transform rotate-[1deg] mr-8 lg:mr-0">
-              <Image src={content.mainImage} fill className="object-cover" alt="Group sitting together" />
+              <Image src={content.mainImage} fill className="object-cover" alt={content.mainImageAlt} />
             </div>
 
             {/* Bottom Right Polaroid */}
             <div className="absolute bottom-10 right-0 lg:-right-8 rotate-[8deg] bg-white p-2.5 pb-4 rounded-xl shadow-[0_15px_40px_rgb(0,0,0,0.15)] w-[210px] z-20">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-lg border border-slate-100">
-                <Image src={content.polaroidImage} fill className="object-cover object-center" alt="Wooden signpost" />
+                <Image src={content.polaroidImage} fill className="object-cover object-center" alt={content.polaroidImageAlt} />
               </div>
               <p className="font-script text-[17px] text-center mt-3 text-[#0E5A60] leading-tight tracking-wide whitespace-pre-line">
                 {content.polaroidCaption}

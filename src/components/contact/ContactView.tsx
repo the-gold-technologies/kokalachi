@@ -98,7 +98,7 @@ export function ContactView({
                   onClick={() => setFormStatus("idle")}
                   className="text-[#0E5A60] font-bold hover:underline"
                 >
-                  Send another message
+                  {form.sendAnotherMessageText}
                 </button>
               </div>
             ) : (
@@ -113,42 +113,42 @@ export function ContactView({
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Full Name</label>
+                      <label className="text-sm font-bold text-slate-700">{form.nameLabel}</label>
                       <input 
                         ref={nameRef}
                         type="text" 
                         required
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
-                        placeholder="e.g. Jane Doe"
+                        placeholder={form.namePlaceholder}
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Email Address <span className="text-red-500">*</span></label>
+                      <label className="text-sm font-bold text-slate-700">{form.emailLabel} <span className="text-red-500">*</span></label>
                       <input 
                         ref={emailRef}
                         type="email" 
                         required
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
-                        placeholder="e.g. jane@example.com"
+                        placeholder={form.emailPlaceholder}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Phone Number <span className="text-red-500">*</span></label>
+                      <label className="text-sm font-bold text-slate-700">{form.phoneLabel} <span className="text-red-500">*</span></label>
                       <input 
                         ref={phoneRef}
                         type="tel" 
                         required
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all"
-                        placeholder="+91 98765 43210"
+                        placeholder={form.phonePlaceholder}
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">Which journey are you interested in?</label>
+                      <label className="text-sm font-bold text-slate-700">{form.journeyLabel}</label>
                       <select ref={journeyRef} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all appearance-none cursor-pointer" defaultValue="">
-                        <option value="" disabled>Select an option (optional)</option>
+                        <option value="" disabled>{form.journeyPlaceholder}</option>
                         {form.journeyOptions.map((option) => (
                           <option key={option} value={option}>{option}</option>
                         ))}
@@ -158,7 +158,7 @@ export function ContactView({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700 flex items-center gap-1.5"><Calendar size={14} /> Preferred Travel Date</label>
+                      <label className="text-sm font-bold text-slate-700 flex items-center gap-1.5"><Calendar size={14} /> {form.travelDateLabel}</label>
                       <input 
                         ref={travelDateRef}
                         type="date"
@@ -167,7 +167,7 @@ export function ContactView({
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">How many of you are travelling?</label>
+                      <label className="text-sm font-bold text-slate-700">{form.guestsLabel}</label>
                       <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 w-fit">
                         <button
                           type="button"
@@ -177,7 +177,7 @@ export function ContactView({
                           <Minus size={13} />
                         </button>
                         <span className="font-bold text-sm text-[#0E5A60] w-24 text-center">
-                          {guests === 1 ? "Just me" : `${guests} people`}
+                          {guests === 1 ? form.guestsSoloText : `${guests} ${form.guestsPluralSuffix}`}
                         </span>
                         <button
                           type="button"
@@ -191,20 +191,20 @@ export function ContactView({
                   </div>
 
                   <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">How can we help? <span className="text-red-500">*</span></label>
+                      <label className="text-sm font-bold text-slate-700">{form.messageLabel} <span className="text-red-500">*</span></label>
                       <textarea 
                         ref={messageRef}
                         required
                         rows={4}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all resize-none"
-                        placeholder="Tell us what's on your mind — a question, a special request, or just 'I don't know where to start.'"
+                        placeholder={form.messagePlaceholder}
                       />
                   </div>
 
                   <div className="space-y-2">
-                      <label className="text-sm font-bold text-slate-700">How did you hear about us?</label>
+                      <label className="text-sm font-bold text-slate-700">{form.hearAboutLabel}</label>
                       <select ref={hearAboutRef} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0E5A60]/20 focus:border-[#0E5A60] transition-all appearance-none cursor-pointer" defaultValue="">
-                        <option value="" disabled>Select an option (optional)</option>
+                        <option value="" disabled>{form.hearAboutPlaceholder}</option>
                         {form.hearAboutOptions.map((option) => (
                           <option key={option} value={option}>{option}</option>
                         ))}
@@ -218,7 +218,7 @@ export function ContactView({
                       className="w-full sm:w-auto bg-[#0E5A60] hover:bg-[#061C29] text-white px-8 py-4 rounded-full font-bold text-base shadow-md hover:shadow-xl hover:-translate-y-1 transition-all inline-flex items-center justify-center gap-2.5 disabled:opacity-70 disabled:hover:transform-none disabled:cursor-not-allowed"
                     >
                       {formStatus === "submitting" ? (
-                        "Sending..."
+                        form.submittingButtonText
                       ) : (
                         <>
                           <span>{form.submitButtonText}</span>

@@ -28,10 +28,10 @@ const at = <T,>(list: T[], i: number): T => list[i % list.length];
 const storyHref = ({ story }: StoryEntry) => `/community#story-${story.id}`;
 
 // "Read more" cue on the quote card (the note under the subtitle covers the rest)
-function ReadHint() {
+function ReadHint({ label }: { label: string }) {
   return (
     <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#D96C2C] transition-all group-hover:gap-2">
-      Read full letter
+      {label}
       <ArrowRight size={13} />
     </span>
   );
@@ -47,14 +47,14 @@ const initials = (name: string) =>
     .map((w) => w[0].toUpperCase())
     .join("");
 
-const timelineSteps = [
-  { icon: <Plane size={20} className="stroke-[2]" />, color: "bg-[#6B7D56]", title: "Trip Ends", text: "We part ways with full hearts." },
-  { icon: <MessageCircle size={20} className="stroke-[2]" />, color: "bg-[#C85A24]", title: "WhatsApp Still Active", text: "The conversations never stop." },
-  { icon: <Cake size={20} className="stroke-[2]" />, color: "bg-[#6B7D56]", title: "Birthdays & Milestones", text: "We celebrate together, no matter the distance." },
-  { icon: <MapPin size={20} className="stroke-[2]" />, color: "bg-[#C85A24]", title: "Another Trip Booked", text: "Because some bonds deserve more adventures." },
-  { icon: <Camera size={20} className="stroke-[2]" />, color: "bg-[#6B7D56]", title: "Reunions & Meetups", text: "Different plans, same people." },
-  { icon: <Heart size={20} className="fill-white stroke-none" />, color: "bg-[#EF4444]", title: "Friendships for Life", text: "From travel buddies to life buddies." },
-];
+const timelineIconMap: Record<string, React.ReactNode> = {
+  plane: <Plane size={20} className="stroke-[2]" />,
+  message: <MessageCircle size={20} className="stroke-[2]" />,
+  cake: <Cake size={20} className="stroke-[2]" />,
+  pin: <MapPin size={20} className="stroke-[2]" />,
+  camera: <Camera size={20} className="stroke-[2]" />,
+  heart: <Heart size={20} className="fill-white stroke-none" />,
+};
 
 export function MomentsThatStayedSection({ content, stories, countryCount }: MomentsThatStayedSectionProps) {
   if (stories.length === 0) return null;
@@ -131,7 +131,7 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
 
                 {/* Top Left Washi Tape Overlay */}
                 <div className="absolute -top-3 left-28 z-30 px-3.5 py-1 bg-[#FFF4E5]/95 backdrop-blur-md text-[#8C5E3C] font-script text-xs font-bold rounded-sm border-y border-amber-900/20 shadow-md transform -rotate-3 select-none flex items-center gap-1">
-                  <span>📌 Unfiltered Moments</span>
+                  <span>{content.unfilteredMomentsLabel}</span>
                 </div>
 
                 {/* Top Right Travel Stamp */}
@@ -155,7 +155,7 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
                 {/* Corner arrow that opens into "Read full letter" on hover */}
                 <span className="absolute bottom-5 right-5 z-20 flex items-center gap-0 group-hover:gap-1.5 h-9 px-2.5 group-hover:pl-3.5 rounded-full bg-white text-[#0E5A60] group-hover:bg-[#D96C2C] group-hover:text-white shadow-lg transition-all duration-500">
                   <span className="max-w-0 group-hover:max-w-[90px] overflow-hidden whitespace-nowrap text-[11px] font-bold transition-all duration-500">
-                    Read letter
+                    {content.readLetterLabel}
                   </span>
                   <ArrowUpRight size={16} className="shrink-0 group-hover:rotate-45 transition-transform duration-500" />
                 </span>
@@ -186,7 +186,7 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
                       </div>
                     </div>
                     <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">
-                      Chat
+                      {content.chatBadgeLabel}
                     </span>
                   </div>
 
@@ -259,7 +259,7 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
                     </div>
                   </div>
 
-                  <ReadHint />
+                  <ReadHint label={content.readFullLetterLabel} />
                 </div>
               </Link>
 
@@ -267,7 +267,7 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
               <Link href={storyHref(polaroid)} className="group block p-4 pb-5 bg-[#FFFDF9] rounded-2xl border border-amber-900/15 shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-500 relative bg-paper-texture">
                 {/* Washi Tape Strip at Center Top */}
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 z-30 px-3 py-0.5 bg-[#FDE8BD]/95 text-[#7A5012] font-script text-[11px] font-bold rounded-sm border-y border-amber-900/20 shadow-md transform -rotate-1 select-none flex items-center gap-1">
-                  <span><span className="text-[#EF4444]">♡</span> Memory Lane</span>
+                  <span>{content.memoryLaneLabel}</span>
                 </div>
 
                 <div className="overflow-hidden rounded-xl h-64 lg:h-[19rem] mb-3 border border-amber-900/10">
@@ -295,11 +295,7 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
             {/* Left Title */}
             <div className="flex-shrink-0 text-center lg:text-left min-w-[210px] lg:pr-4">
               <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-normal text-[#1E293B] leading-[1.12] font-script">
-                The Journey <br />
-                Continues...{" "}
-                <span className="text-[#EF4444] font-sans text-2xl sm:text-3xl inline-block ml-1">
-                  ♡
-                </span>
+                {content.timelineTitle}
               </h3>
             </div>
 
@@ -322,19 +318,31 @@ export function MomentsThatStayedSection({ content, stories, countryCount }: Mom
               </svg>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 relative z-10 items-start">
-                {timelineSteps.map((step) => (
-                  <div key={step.title} className="flex flex-col items-center text-center group px-1">
-                    <div className={`w-11 h-11 sm:w-13 sm:h-13 rounded-full ${step.color} text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5`}>
-                      {step.icon}
+                {(content.timelineSteps || []).map((step, idx) => {
+                  const defaultColors = [
+                    "bg-[#0E5A60]",
+                    "bg-[#25D366]",
+                    "bg-[#C85A24]",
+                    "bg-[#0B2A3D]",
+                    "bg-[#D97706]",
+                    "bg-[#EF4444]",
+                  ];
+                  const color = step.color || defaultColors[idx % defaultColors.length];
+                  const text = step.text || step.description || "";
+                  return (
+                    <div key={step.title || idx} className="flex flex-col items-center text-center group px-1">
+                      <div className={`w-11 h-11 sm:w-13 sm:h-13 rounded-full ${color} text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform mb-2.5`}>
+                        {timelineIconMap[step.icon] ?? <Heart size={20} className="fill-white stroke-none" />}
+                      </div>
+                      <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
+                        {step.title}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
+                        {text}
+                      </p>
                     </div>
-                    <h4 className="font-semibold text-[#0E5A60] text-[12px] sm:text-[13px] mb-0.5 leading-snug">
-                      {step.title}
-                    </h4>
-                    <p className="text-[10px] sm:text-[11px] text-slate-600 leading-normal font-normal">
-                      {step.text}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

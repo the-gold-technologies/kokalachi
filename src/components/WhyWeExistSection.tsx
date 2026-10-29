@@ -145,7 +145,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
-                        Excitement
+                        {content.callout1Text}
                       </span>
                       <svg
                         className="w-7 h-3.5 text-[#5A4E4C] transform -rotate-12 ml-auto mt-0.5"
@@ -168,7 +168,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
-                        Plans change
+                        {content.callout2Text}
                       </span>
                       <svg
                         className="w-7 h-3.5 text-[#5A4E4C] transform -rotate-12 ml-auto mt-0.5"
@@ -191,7 +191,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold leading-tight block text-right max-w-[100px] font-script">
-                        The trip <br /> never happens
+                        {content.callout3Text}
                       </span>
                       <svg
                         className="w-7 h-3.5 text-[#5A4E4C] transform -rotate-12 ml-auto mt-0.5"
@@ -215,8 +215,8 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full overflow-hidden border border-slate-300">
                           <img
-                            src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=80&w=120"
-                            alt="Kashmir Trip Group"
+                            src={content.chatGroupImage}
+                            alt={content.oldWayTitle}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -225,7 +225,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                             {content.oldWayTitle}
                           </div>
                           <div className="text-[10px] text-slate-500 font-medium font-sans">
-                            10 members
+                            {content.chatMembersCount}
                           </div>
                         </div>
                       </div>
@@ -238,117 +238,69 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
 
                     {/* Messages Container spanning full inner height */}
                     <div className="flex-1 flex flex-col justify-between space-y-3 pt-1 pb-1 font-sans">
-                      {/* Chat Message 1: Rohit */}
-                      <div
-                        className={`space-y-1 transition-all duration-500 transform ${
-                          step >= 0
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-3 rounded-2xl rounded-tl-sm max-w-[92%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1 font-sans">
-                          <span className="font-bold text-emerald-700 block text-[11px] font-sans">
-                            Rohit
-                          </span>
-                          <p className="font-medium text-slate-800 font-sans">
-                            Guys, shall we do Kashmir in October? 🏔️😍
-                          </p>
-                          <div className="flex items-center justify-between pt-1 font-sans">
-                            <div className="inline-flex items-center gap-1 text-[10px] bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
-                              <span>❤️ 🔥 🙌 4</span>
+                      {(content.chatMessages || []).map((msg, i) => (
+                        <div
+                          key={i}
+                          className={`font-sans transition-all duration-500 transform ${
+                            step >= i
+                              ? "opacity-100 translate-y-0"
+                              : "opacity-0 translate-y-3 pointer-events-none"
+                          }`}
+                        >
+                          {(msg.isSilence || msg.isSilent) ? (
+                            <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between font-sans">
+                              <div className="flex items-center gap-2 font-sans">
+                                <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200 font-sans">
+                                  ...
+                                </span>
+                                <span className="italic text-slate-400 font-sans">
+                                  {msg.text}
+                                </span>
+                              </div>
+                              <span className="text-[9px] text-slate-400 font-sans">
+                                {msg.time}
+                              </span>
                             </div>
-                            <span className="text-[9px] text-slate-400 font-sans">
-                              10:30 AM
-                            </span>
-                          </div>
+                          ) : msg.isUser ? (
+                            <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm font-sans">
+                              <span
+                                className={`font-bold block text-[10px] font-sans ${msg.color || "text-emerald-800"}`}
+                              >
+                                {msg.sender}
+                              </span>
+                              <p className="text-slate-800 font-medium font-sans">
+                                {msg.text}{" "}
+                                <span className="text-[9px] text-slate-600 float-right mt-1 ml-2 font-sans">
+                                  {msg.time}
+                                </span>
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="bg-white p-2.5 sm:p-3 rounded-2xl rounded-tl-sm max-w-[92%] sm:max-w-[85%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1 font-sans">
+                              <span
+                                className={`font-bold block text-[10px] sm:text-[11px] font-sans ${msg.color || "text-emerald-700"}`}
+                              >
+                                {msg.sender}
+                              </span>
+                              <p className="font-medium text-slate-800 font-sans">
+                                {msg.text}
+                              </p>
+                              <div className="flex items-center justify-between pt-0.5 font-sans">
+                                {msg.reactions ? (
+                                  <div className="inline-flex items-center gap-1 text-[10px] bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
+                                    <span>{msg.reactions}</span>
+                                  </div>
+                                ) : (
+                                  <span />
+                                )}
+                                <span className="text-[9px] text-slate-400 font-sans">
+                                  {msg.time}
+                                </span>
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      </div>
-
-                      {/* Chat Message 2: Neha */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 1
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
-                          <span className="font-bold text-rose-600 block text-[10px] font-sans">
-                            Neha
-                          </span>
-                          <p className="text-slate-800 font-medium font-sans">
-                            I&apos;m in! 🙌{" "}
-                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2 font-sans">
-                              10:31 AM
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Chat Message 3: Aman */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 2
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm font-sans">
-                          <span className="font-bold text-emerald-800 block text-[10px] font-sans">
-                            Aman
-                          </span>
-                          <p className="text-slate-800 font-medium font-sans">
-                            Sorry guys, can&apos;t get leave 🙁{" "}
-                            <span className="text-[9px] text-slate-600 float-right mt-1 ml-2 font-sans">
-                              10:32 AM ✓
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Chat Message 4: Priya */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 3
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
-                          <span className="font-bold text-purple-600 block text-[10px] font-sans">
-                            Priya
-                          </span>
-                          <p className="text-slate-800 font-medium font-sans">
-                            Maybe next year?{" "}
-                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2 font-sans">
-                              10:33 AM
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Chat Message 5: Silence / No replies */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 4
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between font-sans">
-                          <div className="flex items-center gap-2 font-sans">
-                            <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200 font-sans">
-                              ...
-                            </span>
-                            <span className="italic text-slate-400 font-sans">
-                              No replies...
-                            </span>
-                          </div>
-                          <span className="text-[9px] text-slate-400 font-sans">
-                            10:45 AM
-                          </span>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>

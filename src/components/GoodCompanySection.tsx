@@ -113,10 +113,10 @@ export function GoodCompanySection({ content }: { content: GoodCompanyContent })
         </div>
 
         <a
-          href="/faqs#safety-and-comfort"
+          href={content.ctaLink}
           className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-medium text-sm transition-all duration-300 shadow-md hover:shadow-lg active:scale-95"
         >
-          <span>Learn More About Trust &amp; Safety</span>
+          <span>{content.ctaText}</span>
           <ArrowRight size={16} />
         </a>
       </div>

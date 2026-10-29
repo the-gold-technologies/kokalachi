@@ -27,13 +27,13 @@ export function WhyWeStartedSection({ content }: { content: WhyWeStartedContent 
             
             {/* Main Image */}
             <div className="relative z-10 w-[85%] h-[350px] lg:h-[400px] rounded-[32px] overflow-hidden shadow-xl border-4 border-white right-4 lg:right-8">
-              <Image src={content.mainImage} fill className="object-cover" alt="Group of friends" />
+              <Image src={content.mainImage} fill className="object-cover" alt={content.mainImageAlt} />
             </div>
 
             {/* Bottom Left Polaroid */}
             <div className="absolute -bottom-2 -left-8 lg:-left-6 rotate-[-6deg] bg-white p-2.5 pb-4 rounded-xl shadow-[0_15px_40px_rgb(0,0,0,0.15)] w-[200px] z-20">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-slate-100">
-                <Image src={content.polaroidImage} fill className="object-cover" alt="Map and Compass" />
+                <Image src={content.polaroidImage} fill className="object-cover" alt={content.polaroidImageAlt} />
               </div>
               <p className="font-script text-xl text-center mt-3 text-[#1F3E5A] leading-[1.1] tracking-wide whitespace-pre-line">
                 {content.polaroidNote}

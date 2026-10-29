@@ -17,6 +17,11 @@ export interface LegalDocument {
   updatedOn: string; // "YYYY-MM-DD"
   intro: string;
   questionsEmail: string;
+  badge: string;
+  lastUpdatedLabel: string;
+  tableOfContentsLabel: string;
+  questionsTitle: string;
+  questionsSubtitle: string;
   sections: LegalSection[];
 }
 
@@ -67,6 +72,11 @@ export function toLegalDocument(content: LegalSections["LegalDocumentSection"]):
     updatedOn: content.updatedOn,
     intro: (content.intro || "").replace(/&nbsp;|\u00a0/g, " "),
     questionsEmail: content.questionsEmail,
+    badge: content.badge,
+    lastUpdatedLabel: content.lastUpdatedLabel,
+    tableOfContentsLabel: content.tableOfContentsLabel,
+    questionsTitle: content.questionsTitle,
+    questionsSubtitle: content.questionsSubtitle,
     sections,
   };
 }

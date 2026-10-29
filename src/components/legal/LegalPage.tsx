@@ -17,12 +17,12 @@ export function LegalPage({ doc, headingTag: Heading = "h1" }: { doc: LegalDocum
         <div className="absolute -top-24 right-0 w-96 h-96 bg-[#D96C2C]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="site-container relative pt-36 sm:pt-40 pb-12 sm:pb-14">
           <span className="inline-block bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm mb-4">
-            Legal
+            {doc.badge}
           </span>
           <Heading className="heading-hero font-semibold font-serif text-white mb-4">{doc.title}</Heading>
           <p className="text-white/85 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">{doc.intro}</p>
           <p className="mt-5 text-[11px] uppercase tracking-widest font-bold text-white/60">
-            Last updated {formatBlogDate(doc.updatedOn)}
+            {doc.lastUpdatedLabel} {formatBlogDate(doc.updatedOn)}
           </p>
         </div>
       </div>
@@ -31,9 +31,9 @@ export function LegalPage({ doc, headingTag: Heading = "h1" }: { doc: LegalDocum
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Contents */}
           <aside className="lg:col-span-4 xl:col-span-3">
-            <nav aria-label="On this page" className="lg:sticky lg:top-28 bg-[#FAF6F0] rounded-3xl border border-amber-900/10 p-5">
+            <nav aria-label={doc.tableOfContentsLabel} className="lg:sticky lg:top-28 bg-[#FAF6F0] rounded-3xl border border-amber-900/10 p-5">
               <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#C85A24] font-montserrat mb-3">
-                On this page
+                {doc.tableOfContentsLabel}
               </p>
               <ol className="space-y-1">
                 {doc.sections.map((section, i) => (
@@ -70,8 +70,8 @@ export function LegalPage({ doc, headingTag: Heading = "h1" }: { doc: LegalDocum
             {/* Questions */}
             <div className="mt-4 rounded-3xl bg-[#FAF6F0] border border-amber-900/10 p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
               <div>
-                <p className="font-serif text-lg font-bold text-[#0E5A60]">Questions about this page?</p>
-                <p className="text-sm text-slate-600">We&apos;re happy to explain anything in plain words.</p>
+                <p className="font-serif text-lg font-bold text-[#0E5A60]">{doc.questionsTitle}</p>
+                <p className="text-sm text-slate-600">{doc.questionsSubtitle}</p>
               </div>
               <a
                 href={`mailto:${doc.questionsEmail}`}

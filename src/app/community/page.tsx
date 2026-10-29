@@ -64,7 +64,7 @@ export default async function CommunityPage() {
         />
         {communityTrips.map((trip, i) => (
           <div key={trip.slug} className={i % 2 === 1 ? "bg-white" : ""}>
-            <TripStoryChapter trip={trip} number={i + 1} />
+            <TripStoryChapter trip={trip} number={i + 1} labels={sections.CommunityChaptersSection} />
           </div>
         ))}
       </div>

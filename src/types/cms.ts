@@ -37,6 +37,14 @@ export interface HeroContent extends Heading {
   destPlaceholder: string;
   popularDestinations: string[];
   quickDatePresets: string[];
+  searchPlaceholder: string;
+  popularDestinationsTitle: string;
+  whenLabel: string;
+  travellersLabel: string;
+  groupSizeTitle: string;
+  searchButtonText: string;
+  popularSearchesLabel: string;
+  travellerOptions: { label: string; desc: string }[];
 }
 
 export interface WhyWeExistContent extends Heading {
@@ -49,12 +57,41 @@ export interface WhyWeExistContent extends Heading {
   photos: { image: string; alt: string; badge: string; captionTitle: string; captionSub: string }[];
   conclusionTitle: string;
   conclusionDescription: string;
+  callout1Text: string;
+  callout2Text: string;
+  callout3Text: string;
+  chatMembersCount: string;
+  chatGroupImage: string;
+  chatMessages: {
+    sender: string;
+    text: string;
+    time: string;
+    color?: string;
+    avatar?: string;
+    isUser?: boolean;
+    isSilence?: boolean;
+    isSilent?: boolean;
+    reactions?: string;
+  }[];
 }
 
 export interface HowItWorksContent extends Heading {
   tag: string;
   description: string;
   steps: { title: string; description: string; image?: string; tag?: string; stepNumber?: number }[];
+  ctaPrimaryText: string;
+  ctaPrimaryUrl: string;
+  ctaSecondaryText: string;
+  ctaSecondaryUrl: string;
+  step1UpcomingTitle: string;
+  step1BookButtonText: string;
+  step2GroupTitle: string;
+  step2GroupSubtitle: string;
+  step2Message1Author: string;
+  step2Message1Text: string;
+  step2Message2Author: string;
+  step2Message2Text: string;
+  step2Message3Text: string;
 }
 
 export interface DifferenceContent extends Heading {
@@ -67,11 +104,20 @@ export interface GoodCompanyContent extends Heading {
   tag: string;
   description: string;
   cards: { title: string; description: string; image: string; hashtag: string }[];
+  ctaText: string;
+  ctaLink: string;
 }
 
 export interface MomentsThatStayedContent extends Heading {
   tag: string;
   subtitle: string;
+  timelineTitle: string;
+  timelineSteps: { title: string; text?: string; description?: string; color?: string; icon: string }[];
+  unfilteredMomentsLabel: string;
+  readLetterLabel: string;
+  readFullLetterLabel: string;
+  chatBadgeLabel: string;
+  memoryLaneLabel: string;
 }
 
 export interface UpcomingJourneysContent extends Heading {
@@ -86,6 +132,7 @@ export interface BehindKokalachiContent extends Heading {
   description: string;
   ctaText: string;
   ctaUrl: string;
+  readStoryText: string;
 }
 
 export interface HomeSections {
@@ -122,7 +169,9 @@ export interface WhyWeStartedContent extends Heading {
   tagline: string;
   description: string;
   mainImage: string;
+  mainImageAlt: string;
   polaroidImage: string;
+  polaroidImageAlt: string;
   polaroidNote: string;
   item1Title: string;
   item2Title: string;
@@ -136,7 +185,9 @@ export interface WhatWeBelieveContent extends Heading {
   tagline: string;
   description: string;
   mainImage: string;
+  mainImageAlt: string;
   polaroidImage: string;
+  polaroidImageAlt: string;
   polaroidCaption: string;
   footerNote: string;
   pillars: { title: string; desc: string }[];
@@ -149,6 +200,7 @@ export interface MeetFounderContent extends Heading {
   founderFullName: string;
   founderTitle: string;
   founderPhoto: string;
+  imageAlt: string;
   leadQuote: string;
   story: string;
   closingNote: string;
@@ -168,6 +220,7 @@ export interface JoinTribeContent {
   secondaryButtonText: string;
   secondaryButtonLink: string;
   blobImage: string;
+  blobImageAlt: string;
   polaroidNote: string;
   footerTag: string;
 }
@@ -184,12 +237,30 @@ export interface AboutSections {
 // ---------- Contact ----------
 
 export interface ContactSections {
-  ContactHeroSection: Heading & { tagline: string; bannerImage: string };
+  ContactHeroSection: Heading & { tagline: string; bannerImage: string; bannerAlt?: string };
   ContactFormSection: {
     heading: string;
     subtitle: string;
     successTitle: string;
     successSubtitle: string;
+    sendAnotherMessageText: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    journeyLabel: string;
+    journeyPlaceholder: string;
+    travelDateLabel: string;
+    guestsLabel: string;
+    guestsSoloText: string;
+    guestsPluralSuffix: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    hearAboutLabel: string;
+    hearAboutPlaceholder: string;
+    submittingButtonText: string;
     journeyOptions: string[];
     hearAboutOptions: string[];
     submitButtonText: string;
@@ -228,7 +299,7 @@ export interface JourneysSections {
 // ---------- FAQs ----------
 
 export interface FaqsSections {
-  FaqsHeroSection: Heading & { tagline: string; description: string; bannerImage: string };
+  FaqsHeroSection: Heading & { tagline: string; description: string; bannerImage: string; bannerAlt: string };
   FaqsAccordionSection: { sidebarTitle: string; categories: FaqCategory[] };
   FaqsCtaSection: {
     tagline: string;
@@ -251,7 +322,13 @@ export interface CommunitySections {
     heroImage: string;
     heroAlt: string;
   };
-  CommunityChaptersSection: { chapters: CommunityTrip[] };
+  CommunityChaptersSection: {
+    moreMomentsLabel: string;
+    inTheirWordsLabel: string;
+    inShortLabel: string;
+    whatTheyLovedLabel: string;
+    chapters: CommunityTrip[];
+  };
   CommunityCtaSection: {
     kicker: string;
     titleLead: string;
@@ -298,6 +375,11 @@ export interface LegalSections {
     intro: string;
     bodyHtml: string;
     questionsEmail: string;
+    badge: string;
+    lastUpdatedLabel: string;
+    tableOfContentsLabel: string;
+    questionsTitle: string;
+    questionsSubtitle: string;
   };
 }
 

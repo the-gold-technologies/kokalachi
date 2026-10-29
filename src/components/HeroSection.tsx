@@ -69,11 +69,7 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
     "December",
   ];
 
-  const travellerOptions = [
-    { label: "1 Traveller", desc: "Solo explorer joining a group" },
-    { label: "2 Travellers", desc: "Travelling with a friend / partner" },
-    { label: "3+ Travellers", desc: "Small group of friends" },
-  ];
+  const travellerOptions = content.travellerOptions;
 
   // Calendar helpers
   const getDaysInMonth = (year: number, month: number) =>
@@ -198,7 +194,7 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
                     type="text"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    placeholder="Search destinations"
+                    placeholder={content.searchPlaceholder}
                     className="text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 placeholder:font-normal focus:outline-none bg-transparent w-full cursor-pointer"
                   />
                 </div>
@@ -208,7 +204,7 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
               {isDestOpen && (
                 <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
-                    Popular Destinations
+                    {content.popularDestinationsTitle}
                   </div>
                   <div className="grid grid-cols-1 gap-0.5">
                     {popularDestinations.map((dest) => (
@@ -258,7 +254,7 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
                   </div>
                   <div className="flex flex-col min-w-0 pr-1">
                     <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                      When?
+                      {content.whenLabel}
                     </span>
                     <span
                       className={`text-xs sm:text-sm font-normal truncate ${
@@ -385,7 +381,7 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
                   </div>
                   <div className="flex flex-col min-w-0 pr-1">
                     <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                      Travellers
+                      {content.travellersLabel}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
                       {selectedTravellers}
@@ -399,7 +395,7 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
               {isTravellersOpen && (
                 <div className="absolute top-full left-0 md:-left-8 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
-                    Group Size
+                    {content.groupSizeTitle}
                   </div>
                   <div className="space-y-1">
                     {travellerOptions.map((opt) => (
@@ -438,14 +434,14 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
               className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl md:rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0"
             >
               <Search className="w-4 h-4 text-white" />
-              <span>SEARCH TRIPS</span>
+              <span>{content.searchButtonText}</span>
             </button>
           </div>
 
           {/* Popular Searches Quick Tags */}
           <div className="flex flex-wrap items-center gap-2 pt-0.5 font-sans">
             <span className="text-xs sm:text-[13px] font-normal text-white/80 mr-1">
-              Popular Searches:
+              {content.popularSearchesLabel}
             </span>
             {popularDestinations.slice(0, 5).map(
               (tag) => (

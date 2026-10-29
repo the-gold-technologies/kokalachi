@@ -86,7 +86,7 @@ export function BehindKokalachiSection({ content, posts }: BehindKokalachiSectio
 
               <div className="pt-2">
                 <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1E3327] border-b border-[#1E3327] pb-0.5 group-hover:text-[#D96C2C] group-hover:border-[#D96C2C] transition-colors">
-                  <span>Read Story</span>
+                  <span>{content.readStoryText}</span>
                   <ArrowRight size={15} />
                 </span>
               </div>
