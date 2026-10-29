@@ -719,12 +719,14 @@ export default function JourneyPage({ params }: { params: Promise<{ id: string }
                                   ))}
                                 </p>
                               </div>
-                              <div className="pt-3 border-t border-[#E8DCC8]">
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-[#D96C2C] mb-1.5">Community Moment</p>
-                                <p className="text-slate-600 leading-relaxed italic text-[12px]">
-                                  {day.community}
-                                </p>
-                              </div>
+                              {day.community && (
+                                <div className="pt-3 border-t border-[#E8DCC8]">
+                                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#D96C2C] mb-1.5">Community Moment</p>
+                                  <p className="text-slate-600 leading-relaxed italic text-[12px]">
+                                    {day.community}
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
