@@ -410,11 +410,11 @@ export function JourneyDetail({ trip, otherTrips }: JourneyDetailProps) {
           <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <span className="bg-[#0E5A60] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   {tour.category}
                 </span>
                 {!!spotsLeft && (
-                  <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
+                  <span className="bg-white/15 backdrop-blur-md border border-white/30 text-white text-xs font-medium px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
                     <Sparkles size={12} /> {spotsLeft} Spots Remaining
                   </span>
                 )}
@@ -699,12 +699,14 @@ export function JourneyDetail({ trip, otherTrips }: JourneyDetailProps) {
                                   ))}
                                 </p>
                               </div>
-                              <div className="pt-3 border-t border-[#E8DCC8]">
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-[#D96C2C] mb-1.5">Community Moment</p>
-                                <p className="text-slate-600 leading-relaxed italic text-[12px]">
-                                  {day.community}
-                                </p>
-                              </div>
+                              {day.community && (
+                                <div className="pt-3 border-t border-[#E8DCC8]">
+                                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#D96C2C] mb-1.5">Community Moment</p>
+                                  <p className="text-slate-600 leading-relaxed italic text-[12px]">
+                                    {day.community}
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
