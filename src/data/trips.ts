@@ -1191,10 +1191,10 @@ const allTripCards: TripCardData[] = [
     tourPackage: {
       id: 11,
       title: "Discover Almaty",
-      subtitle: "Kok Tobe, Shymbulak's Snow Peaks, Alma-Arasan Gorge & the Bazaars of Kazakhstan's Southern Capital",
+      subtitle: "Almaty City with Kok-Tobe, Shymbulak, Arbat Street, Alma-Arasan & Shopping Tour",
       location: "Kazakhstan · Almaty",
       duration: "4 Nights / 5 Days",
-      // ₹89,900 per person, all-in: Air Astana flights from Delhi and taxes included (as per the partner flyer)
+      // INR 89,900 per person, Air Astana flight and taxes included (as per the flyer)
       price: 89900,
       image: "https://images.unsplash.com/photo-1659651117607-d2b397cf100f?auto=format&fit=crop&q=85&w=800",
       category: "International",
@@ -1202,7 +1202,7 @@ const allTripCards: TripCardData[] = [
       departures: [
         { id: "almaty-2026-11-19", startDate: "2026-11-19", endDate: "2026-11-23", label: "Fixed Departure", note: "Flies from Delhi on Air Astana" }
       ],
-      hook: "Discover Almaty is a 4-night, 5-day fixed departure to Kazakhstan's southern capital, with return Air Astana flights from Delhi, a cable-car climb to Shymbulak's 3,200 m Talgar Pass, Kok Tobe's city views, the Alma-Arasan Gorge and a day in the city's bazaars.",
+      hook: "A 4 nights / 5 days fixed departure to Almaty, Kazakhstan, on 19 November 2026, with the Air Astana flight from Delhi included.",
       gallery: [
         "https://images.unsplash.com/photo-1659651117607-d2b397cf100f?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1703573198475-f6879ec335f5?auto=format&fit=crop&q=85&w=800",
@@ -1212,109 +1212,97 @@ const allTripCards: TripCardData[] = [
         "https://images.unsplash.com/photo-1765436271393-16377d973d0e?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "Discover Almaty is a 4-night, 5-day fixed departure to Kazakhstan's southern capital, with return Air Astana flights from Delhi, a cable-car climb to Shymbulak's 3,200 m Talgar Pass, Kok Tobe's city views, the Alma-Arasan Gorge and a day in the city's bazaars.",
+        "Almaty is famous for its natural beauty, and its national park is the finest example. The park is the soul of the city, stretching from the Turgen Gorge to the Chimlogan River.",
+        "Almaty at a glance: founded in 1854, an area of 682 km², a population of 20.68 lakh, Islam as the main religion, Russian and Kazakh as the languages, and the tenge as the currency.",
         "Here's what the journey holds:",
-        "• Fly Delhi to Almaty on Air Astana, with a guide waiting at the airport to help you pick up a local SIM and exchange currency before check-in",
-        "• Walk through Panfilov Park to the Zenkov Cathedral, a Russian Orthodox cathedral built entirely of wood, then ride up to Kok Tobe for views over the city and its 372 m TV tower",
-        "• Take the cable cars up Shymbulak Ski Resort, from Combi 1 (2,260 m) and Combi 2 (2,840 m) to Talgar Pass (3,200 m), for views of the surrounding peaks and glaciers, then stroll Arbat Street's cafés and galleries",
-        "• Head into the Alma-Arasan Gorge, at 1,780 m in the Trans-Ili Alatau, known for its forests, the Prokhodnaya River and hot springs, then shop at the Green Bazaar and Rakhat chocolate factory",
-        "• Keep the last day for your own shopping before the evening flight home"
+        "• Day 1: Arrival at Almaty, with your guide helping you buy a SIM card and exchange currency",
+        "• Day 2: Almaty City with Kok-Tobe, including Panfilov Park and the Zenkov Cathedral",
+        "• Day 3: Shymbulak Ski Resort, up to Talgar Pass (3,200 m), and a walking tour of Arbat Street",
+        "• Day 4: Alma-Arasan Gorge and a shopping tour of the Green Bazaar and Rahat Chocolate Factory",
+        "• Day 5: Leisure (own shopping) and departure"
       ],
       itinerary: [
         {
           day: "Day 01",
           title: "Welcome to Almaty",
-          journey: "Fly Delhi to Almaty on Air Astana (KC 908, lands 15:10) → Meet & greet with your guide, who helps you buy a local SIM card and exchange currency → Transfer to Saraichik Hotel and check in → Evening at leisure → Overnight in Almaty",
+          journey: "Arrival at Almaty Airport on Air Astana (KC 908, departs Delhi 12:10, arrives 15:10) → Meet & greet: your guide will help you buy a SIM card and exchange currency → Transfer to the hotel → Check in and relax → Overnight at the hotel",
           community: "",
           image: "https://images.unsplash.com/photo-1765436271393-16377d973d0e?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 02",
-          title: "Almaty City & Kok Tobe",
-          journey: "Buffet breakfast at the hotel → 11:00 pick-up → Panfilov Park → Zenkov Cathedral, a wooden Russian Orthodox masterpiece → 14:00 lunch at an Indian restaurant (own expense) → 15:00 Kok Tobe by cable car, with views over the city and its 372 m TV tower → 19:00 dinner at an Indian restaurant (own expense) → 20:00 back to the hotel",
+          title: "Almaty City with Kok-Tobe",
+          journey: "Buffet breakfast at the hotel → 11:00 pick-up from the hotel → Panfilov Park, a picturesque green space in the heart of Almaty → Zenkov Cathedral, a Russian Orthodox church made entirely of wood → 14:00 lunch at an Indian restaurant (on own) → 15:00 Kok-Tobe recreational area, connected to downtown Almaty by cable car, with the 372 m TV Tower → 19:00 dinner at an Indian restaurant (on own) → 20:00 back to the hotel → Overnight at the hotel",
           community: "",
           image: "https://images.unsplash.com/photo-1703573198475-f6879ec335f5?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 03",
-          title: "Shymbulak & Arbat Street",
-          journey: "Buffet breakfast at the hotel → 11:00 drive to Shymbulak Ski Resort → Cable cars up to Combi 1 (2,260 m), Combi 2 (2,840 m) and Talgar Pass (3,200 m) for views of the peaks and glaciers → 14:00 lunch at an Indian restaurant (own expense) → Walking tour of Arbat Street's cafés, shops and art galleries → 19:00 dinner at an Indian restaurant (own expense) → 20:00 back to the hotel",
+          title: "Shymbulak + Arbat Street",
+          journey: "Buffet breakfast at the hotel → 11:00 Shymbulak Ski Resort, spread across three levels: Combi 1 (2,260 m), Combi 2 (2,840 m) and Talgar Pass (3,200 m), with views of the surrounding peaks and glaciers → 14:00 lunch at an Indian restaurant (on own) → Walking tour of Arbat Street, known for its cafés, shops and art galleries → 19:00 dinner at an Indian restaurant (on own) → 20:00 back to the hotel → Overnight at the hotel",
           community: "",
           image: "https://images.unsplash.com/photo-1716835018054-5b13e5ef53b0?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 04",
-          title: "Alma-Arasan Gorge & Shopping",
-          journey: "Buffet breakfast at the hotel → 11:00 pick-up for the Alma-Arasan Gorge (1,780 m), with its forests, the Prokhodnaya River and hot springs → 14:00 lunch at an Indian restaurant (own expense) → Shopping at the Green Bazaar and Rakhat chocolate factory → 19:00 dinner at an Indian restaurant (own expense) → 20:00 back to the hotel",
+          title: "Alma-Arasan + Shopping Tour",
+          journey: "Buffet breakfast at the hotel → 11:00 pick-up from the hotel for Alma-Arasan Gorge (1,780 m), known for its lush forests, the Prokhodnaya River and hot springs → 14:00 lunch at an Indian restaurant (on own) → Shopping tour at the Green Bazaar and Rahat Chocolate Factory → 19:00 dinner at an Indian restaurant (on own) → 20:00 back to the hotel → Overnight at the hotel",
           community: "",
           image: "https://images.unsplash.com/photo-1780511441285-032654f2b25c?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 05",
-          title: "Leisure & Departure",
-          journey: "Buffet breakfast at the hotel → Check out → Free time for your own shopping → Transfer to Almaty Airport → Fly home on Air Astana (KC 963, departs 21:20, lands in Delhi at 01:30 the next day)",
+          title: "Leisure (Own Shopping) + Departure",
+          journey: "Leisure time for your own shopping → Check out and pick-up from the hotel → Drop at the airport → Air Astana KC 963 departs Almaty 21:20, arrives Delhi 01:30 (next day)",
           community: "",
           image: "https://images.unsplash.com/photo-1787150741175-fb44645fa4b4?auto=format&fit=crop&q=85&w=800"
         }
       ],
       inclusions: [
-        "Return flights on Air Astana, Delhi–Almaty–Delhi, with in-flight meals (23 kg check-in and 7 kg cabin baggage)",
+        "Air Astana flights, Delhi–Almaty–Delhi, with meals (23 kg check-in and 7 kg hand baggage)",
         "4 nights at Saraichik Hotel, Almaty, on twin/double sharing",
-        "4 buffet breakfasts at the hotel",
-        "All tours and transfers on a shared basis",
+        "4 buffet breakfasts at the hotel restaurant",
+        "All tours and transfers on a sharing basis",
         "English-speaking guide",
-        "Complimentary water during tours (2 × 0.5 L bottles)",
-        "Entrance fees: Shymbulak cable car up to the 3rd level, Kok Tobe, and the Alma-Arasan national park eco fee",
-        "Shopping visits to Mega Park and Dostyk Plaza",
-        "Walking tours of the Green Bazaar, Rakhat chocolate factory and Arbat Street",
-        "Taxes, included in the package price"
+        "Complimentary water bottles during the tour (2 × 0.5 L)",
+        "Entrance fees: Shymbulak 3rd level cable car, Kok-Tobe, and Alma-Arasan national eco fees",
+        "Shopping: Mega Park & Dostyk Plaza",
+        "Walking tour: Green Bazaar, Lotte Factory & Arbat Street",
+        "Taxes included"
       ],
       exclusions: [
-        "Lunches and dinners (stops at Indian restaurants are planned, but meals are at your own expense)",
-        "Visa fees, if a visa is required for your passport",
-        "Local SIM card and mobile data",
-        "Travel insurance",
-        "Personal expenses, shopping and tips",
-        "Anything not listed under inclusions"
+        "Lunch and dinner at Indian restaurants (on own)",
+        "Local SIM card or international roaming plan (at personal cost)",
+        "Travel insurance"
       ],
       whatToPack: [
-        "Passport with at least six months' validity, plus a copy of your visa if one is required, your travel insurance and your tickets",
-        "A proper winter jacket, thermals, gloves, a warm hat and scarf — Shymbulak's upper levels are in snow by late November",
-        "Waterproof shoes or boots with good grip for snowy and icy paths",
-        "A universal adapter for type C and F plugs (Kazakhstan uses 220V, 50Hz)",
-        "Kazakhstani tenge in cash for small purchases, tips and the bazaars",
-        "A small first-aid kit with medicine for headaches, colds and stomach upsets",
-        "Lip balm and moisturiser for the cold, dry mountain air",
-        "A power bank for long days out with the camera"
-      ],
-      weather: [
-        "Late November in Almaty is the start of winter: cold, dry days with a chance of the season's first snow in the city.",
-        "Expect daytime temperatures of around 0–7°C in the city, dropping below freezing at night",
-        "Up at Shymbulak (2,260–3,200 m), it's much colder, often well below zero, with snow on the ground",
-        "Figures above are typical seasonal ranges, not a forecast — worth refreshing a week before departure."
+        "Passport with visa copy, plus copies of your passport and visa",
+        "Travel insurance",
+        "Tickets",
+        "Warm clothing and a proper winter jacket",
+        "Kazakhstani tenge for small purchases, tips and local markets",
+        "A small first-aid kit with medicine for headaches, colds or digestive issues",
+        "An adapter for type C and F plugs (Kazakhstan uses 220V / 50Hz)",
+        "Bottled water to avoid stomach complications"
       ],
       highlights: [
-        { icon: "Compass", title: "Flights Included", description: "Air Astana return from Delhi" },
-        { icon: "ShieldCheck", title: "English-Speaking Guide", description: "With you on every tour" },
-        { icon: "Heart", title: "Taxes Included", description: "₹89,900 all-in per person" },
-        { icon: "Users", title: "Fixed Group Departure", description: "19–23 November 2026" }
+        { icon: "Compass", title: "Flight Included", description: "Air Astana from Delhi" },
+        { icon: "ShieldCheck", title: "Certified Guide", description: "English-speaking guide" },
+        { icon: "Heart", title: "Taxes Included", description: "INR 89,900 per person" },
+        { icon: "Users", title: "Fixed Departure", description: "19 November 2026" }
       ],
       faqs: [
         {
           question: "What are the payment and cancellation terms?",
-          answer: "A 50% advance confirms your booking, and the remaining 50% is due 21 days before departure. As this is a group departure, strict cancellation terms apply: the advance is non-refundable if you cancel, and no refund is possible for cancellations within 21 days of departure. Flight tickets are issued 2 days before departure."
+          answer: "Payment: a 50% advance payment is required to confirm the booking, and the remaining 50% must be paid 21 days prior to departure. Cancellation: the entire advance amount is non-refundable in case of cancellation, and if the package is cancelled within 21 days prior to departure, no refund is applicable. As this is a group departure, strict cancellation policies apply. Tickets are issued 2 days before departure."
         },
         {
           question: "What are the flight details?",
-          answer: "Outbound on 19 November: Air Astana KC 908, Delhi 12:10 → Almaty 15:10. Return on 23 November: Air Astana KC 963, Almaty 21:20 → Delhi 01:30 (next day). Each traveller gets 23 kg of check-in baggage and 7 kg of cabin baggage."
+          answer: "19 Nov – 23 Nov, ex-Delhi: KC 908 Delhi 12:10 → Almaty 15:10, and KC 963 Almaty 21:20 → Delhi 01:30 (next day). Baggage: 23 kg check-in and 7 kg hand baggage."
         },
         {
-          question: "Where does this trip start from?",
-          answer: "The trip starts and ends at Delhi's Indira Gandhi International Airport, with the Air Astana flights to and from Almaty included."
-        },
-        {
-          question: "Do I need a visa?",
-          answer: "Entry rules depend on your passport, so please check with our team when you book. Carry your passport (and a copy of your visa, if one is required) at all times in Kazakhstan, as authorities may ask for identification."
+          question: "What travel documents do I need?",
+          answer: "Please carry your passport with a visa copy, travel insurance and your tickets. Carry your passport at all times, as Kazakhstan authorities may request identification, and keep copies of your passport and visa."
         },
         {
           question: "Need more Details about the Trip?",
