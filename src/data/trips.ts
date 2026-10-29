@@ -206,9 +206,9 @@ const allTripCards: TripCardData[] = [
     slug: "kashmir",
     destination: "Kashmir",
     locationTag: "📍 Kashmir",
-    duration: "4 Days / 3 Nights",
+    duration: "5 Days / 4 Nights",
     groupSize: "10–12 Travellers",
-    price: "15,999",
+    price: "20,999",
     vibeTags: ["Adventure", "Nature", "Scenic", "Heritage", "Culture"],
     categories: ["Trending", "Adventure", "ScenicJourney"],
     images: [
@@ -218,13 +218,12 @@ const allTripCards: TripCardData[] = [
     ],
     tourPackage: {
       id: 1,
-      title: "The Houseboat Diaries - Kashmir",
-      subtitle: "Valley of the Shepherds & Silent Waters · Saffron Fields, Pine Canyons, and Mughal Gardens",
+      title: "Kashmir: Valley of the Shepherds & Silent Waters",
+      subtitle: "Saffron Trails, Pine Canyons, and Heritage Houseboat Evenings",
       location: "Kashmir",
-      duration: "3 Nights / 4 Days",
+      duration: "4 Nights / 5 Days",
       rating: 5,
-      price: 15999,
-      gstAmount: 360,
+      price: 20999,
       originalPrice: null,
       image:
         "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800",
@@ -232,23 +231,22 @@ const allTripCards: TripCardData[] = [
       tag: "10-12 Travellers",
       tagColor: "bg-[#0E5A60]",
       departures: [
-        { id: "kashmir-2026-11-10", startDate: "2026-11-10", endDate: "2026-11-13" }
+        { id: "kashmir-2026-11-10", startDate: "2026-11-10", endDate: "2026-11-14" }
       ],
-      hook: "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
+      hook: "Kashmir: Valley of the Shepherds & Silent Waters is a 4-night, 5-day journey through saffron trails, pine canyons, Gulmarg's alpine meadows, and heritage houseboat evenings, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
       gallery: [
         "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800",
         "https://images.unsplash.com/photo-1593417376544-4c4201061e22?auto=format&fit=crop&q=85&w=800"
       ],
       overview: [
-        "Kashmir: Valley of the Shepherds & Silent Waters is a 3-night, 4-day journey through saffron fields, pine-lined canyons, and Mughal gardens, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
+        "Kashmir: Valley of the Shepherds & Silent Waters is a 4-night, 5-day journey through saffron trails, pine canyons, Gulmarg's alpine meadows, and heritage houseboat evenings, curated for travellers who want the trip to be as much about the people beside them as the postcard views ahead.",
         "Here's what the journey holds:",
-        "• Begin in Srinagar with a scenic drive to Pahalgam, winding through saffron fields with a stop at Awantipora's cricket bat factory",
-        "• Settle into a riverside stay in Pahalgam, along the Lidder River, for the first two nights",
-        "• Trek toward Aru Valley and Betaab Valley, framed by pine canyons and glacier views",
-        "• Optional: wander through Srinagar's Mughal gardens (Chasma Shahi, Nishat Bagh & Shalimar Bagh)",
-        "• Close the trip with a sunset shikara ride and a night aboard a deluxe houseboat on Dal Lake",
-        "• Live music, riverside bonfire storytelling, and a few Kokalachi-signature \"get to know your tribe\" moments woven into every day"
+        "• Begin in Srinagar with a scenic drive to Pahalgam, pausing at the saffron fields and Awantipora's cricket bat factory, and close the day with an acoustic bonfire night",
+        "• Take a Union cab excursion to Aru Valley, walking the trail with your \"Step Buddy\" before a group picnic at Hajin",
+        "• Drive to Gulmarg via the Srinagar bypass, past the saffron fields near Pampore, and explore it as a team on a photo scavenger hunt",
+        "• Ride the Gulmarg Gondola, then head to Srinagar for an optional half-day at the Mughal Gardens (Chasma Shahi, Nishat Bagh & Shalimar Bagh)",
+        "• Close with a sunset shikara ride, a night of traditional Kashmiri music and food, and a stay aboard a deluxe houseboat"
       ],
       highlights: [
         { icon: "Users", title: "Intimate Circle Size", description: "Max 12 Travellers" },
@@ -260,38 +258,45 @@ const allTripCards: TripCardData[] = [
         {
           day: "Day 01",
           title: "Saffron Trails & Woodland Bonfires",
-          journey: "Early Srinagar Airport arrival → Scenic drive to Pahalgam (100 km / 3–4 hrs) → Enroute saffron fields pause → Awantipora Cricket Bat Factory stop → Check-in at our riverside stay along the Lidder River.",
-          community: "\"Two Truths & A Travel Lie\" and Acoustic Bonfire Night: An icebreaker session on the coach drive to Pahalgam, followed by a riverside bonfire in the evening with fresh Kashmiri snacks, live local folk music, and an open-mic storytelling session.",
+          journey: "Early Srinagar Airport arrival → Scenic drive to Pahalgam (100 km / 3–4 hrs) → Enroute saffron fields pause → Awantipora Cricket Bat Factory stop → Check-in at the hotel.",
+          community: "\"Two Truths & A Travel Lie\" and Acoustic Bonfire Night: An icebreaker session on the coach drive to Pahalgam. In the evening, gather around a riverside bonfire for fresh Kashmiri snacks, local folk music, and an open-mic storytelling session.",
           image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 02",
           title: "Canyon Trails & The Tribe Picnic",
-          journey: "Breakfast → Union cab excursion to Aru Valley → Scenic hike toward Kolahai Glacier base → Betaab Valley exploration → Chandanwari snow bridge visit → Overnight at Pahalgam.",
-          community: "The Step Buddy System and Betaab Valley Picnic: Travellers pair up as \"Step Buddies\" during the Aru Valley trail walk, concluding with a group picnic at the idyllic Hajin spot and an evening pass-the-aux music session by the Lidder River.",
+          journey: "Breakfast → Union cab excursion to Aru Valley → Overnight at Pahalgam.",
+          community: "The Step Buddy System and Scenic Valley Picnic: Travellers pair up as \"Step Buddies\" during the Aru Valley trail walk, concluding with a group picnic spread at the idyllic Hajin spot and an evening pass-the-aux music session.",
           image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 03",
-          title: "Heritage Gardens & Floating Sunsets",
-          journey: "Early breakfast → Drive to Srinagar → Optional half-day Mughal Gardens visit (Chasma Shahi, Nishat Bagh & Shalimar Bagh) → Sunset shikara ride to Nehru Park → Deluxe houseboat check-in.",
-          community: "The Shikara Sunset and Floating Postcard Ritual: A slow sunset shikara ride across Dal Lake, writing physical postcards to fellow travellers on the open deck as the light fades.",
-          image: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800"
+          title: "Pahalgam to Gulmarg: The Alpine Transition",
+          journey: "Check out from Pahalgam → Scenic drive to Gulmarg via the Srinagar bypass route (approx. 4–5 hrs), with views of the valley floor, the saffron fields near Pampore, and popular avenues → Arrive in Gulmarg and check in at the hotel → Warm lunch.",
+          community: "The Gulmarg Photo Scavenger Hunt: Instead of exploring Gulmarg individually, the group splits into dynamic pairs or small teams at the base station. Each team gets a fun photo scavenger hunt list to complete across the Golf Course, St Mary's Church, Phase 1 (Kongdori) and Phase 2 (Apharwat Peak), such as \"capture the most dramatic snow selfie\", \"find a fellow traveller wearing the brightest winter jacket\", or \"pose like you're conquering Everest\".",
+          image: "https://images.unsplash.com/photo-1568889753852-196c487a536e?auto=format&fit=crop&q=85&w=800"
         },
         {
           day: "Day 04",
+          title: "Heritage Gardens & Floating Sunsets",
+          journey: "Early breakfast and Gondola ride → Drive to Srinagar → Half-day Mughal Gardens exploration (optional: Chasma Shahi, Nishat Bagh & Shalimar Bagh) → Sunset shikara ride → Deluxe houseboat check-in.",
+          community: "The Musical Feast and Floating Postcard Ritual: Writing physical postcards to fellow travellers on the open deck of the shikara during sunset, followed by an evening of traditional Kashmiri music and a traditional Kashmiri dinner.",
+          image: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?auto=format&fit=crop&q=85&w=800"
+        },
+        {
+          day: "Day 05",
           title: "The Unbroken Circle",
-          journey: "Morning breakfast on the water → Srinagar Airport transfer by coach.",
-          community: "The Circle Alumni Onboarding and Frame Photo Exchange: A final group photo on the houseboat deck, followed by official onboarding into the Kokalachi alumni network to share the master photo vault before departure.",
+          journey: "Morning breakfast → Srinagar Airport transfer by coach.",
+          community: "The Circle Alumni Onboarding and Frame Photo Exchange: A final group photo on the houseboat deck and official onboarding into the Kokalachi alumni network to share the master photo vault before departure.",
           image: "https://images.unsplash.com/photo-1593417376544-4c4201061e22?auto=format&fit=crop&q=85&w=800"
         }
       ],
       inclusions: [
-        "Accommodation in Pahalgam and a Deluxe Houseboat in Srinagar",
+        "Accommodation in Pahalgam, Gulmarg, and a Deluxe Houseboat in Srinagar",
         "Daily breakfast",
         "Private airport and inter-hotel transfers",
         "English-speaking guide throughout the itinerary",
-        "Aru Valley and Betaab Valley excursion (Union cab)",
+        "Aru Valley excursion (Union cab)",
         "Sunset shikara ride",
         "Bonfire evening with local snacks",
         "Live music evenings",
@@ -309,26 +314,27 @@ const allTripCards: TripCardData[] = [
       meals: [
         "Day 1: Kashmiri snacks at the riverside bonfire evening",
         "Day 2: Group picnic spread at Hajin (lunch)",
-        "Day 4: Breakfast aboard the houseboat",
+        "Day 5: Breakfast aboard the houseboat",
         "Daily breakfast is included throughout the trip",
         "Lunches and dinners outside of the moments listed above are not included, so you can explore local food spots with your group at your own pace"
       ],
       whatToPack: [
-        "Layered clothing: light woollens for the day, a warmer jacket for evenings and higher altitudes (Aru Valley, Betaab Valley)",
-        "A comfortable pair of walking/trekking shoes for the Kolahai Glacier base trail",
-        "A light rain jacket or poncho. September sees occasional showers",
+        "Layered clothing: light woollens for the day, a warmer jacket for evenings and higher altitudes (Aru Valley, Gulmarg)",
+        "A comfortable pair of walking/trekking shoes for the Aru Valley trail walk",
+        "A warm, waterproof jacket. November is mostly dry, but early snow is possible in Gulmarg",
         "Sunscreen, sunglasses, and a cap for daytime activities",
         "A power bank and universal adapter",
         "A valid photo ID (mandatory for domestic flights and permits)",
         "A reusable water bottle",
-        "A notebook or postcards of your own, if you'd like to add to the Floating Postcard Ritual on Day 3",
+        "A notebook or postcards of your own, if you'd like to add to the Floating Postcard Ritual on Day 4",
         "Cash in small denominations for local markets and personal expenses"
       ],
       weather: [
-        "Kashmir in early September is at the tail end of its warm season: pleasant days, cool nights, and the first hints of autumn beginning to show in the valleys.",
-        "Srinagar: Daytime highs of around 24°C (75°F), dropping to about 12°C (54°F) at night",
-        "Pahalgam: Cooler given the altitude, with daytime highs of around 16–17°C (60–63°F) and nights dropping to 4–5°C (39–42°F)",
-        "Occasional light rain is possible; layering is your best bet over heavy clothing, since afternoons can feel mild even when mornings and evenings are crisp"
+        "Kashmir in mid-November is in late autumn, turning to early winter: crisp, mostly dry days, cold nights, and the chinar trees in their last autumn colours.",
+        "Srinagar: Daytime highs of around 13–15°C, dropping to around 0°C at night",
+        "Pahalgam: Colder given the altitude, with daytime highs of around 9–11°C and nights below freezing",
+        "Gulmarg: The coldest stop, with daytime highs of around 5–7°C, nights well below freezing, and a chance of the season's first snow",
+        "Figures above are typical seasonal ranges, not a forecast, so it's worth checking again a week before departure."
       ],
       faqs: [
         {
@@ -341,7 +347,7 @@ const allTripCards: TripCardData[] = [
         },
         {
           question: "Where does this trip start from?",
-          answer: "The trip begins at Srinagar Airport, with pickup arranged as part of your package. Your journey home also ends at Srinagar Airport on Day 4."
+          answer: "The trip begins at Srinagar Airport, with pickup arranged as part of your package. Your journey home also ends at Srinagar Airport on Day 5."
         },
         {
           question: "I am travelling solo. Who will I share a room with?",
