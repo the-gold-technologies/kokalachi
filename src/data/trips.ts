@@ -1045,8 +1045,8 @@ const allTripCards: TripCardData[] = [
         },
         {
           day: "Day 03",
-          title: "Ocean Adventure & Sunset",
-          journey: "Early breakfast → Whale-watching excursion from Mirissa → Return to hotel → Relaxation and pool time → Evening at leisure → Beachside dinner and sunset experience.",
+          title: "Beach Hopping | Mirissa & Weligama",
+          journey: "After a leisurely breakfast, get ready for a sun-kissed coastal escape as we head out to explore the beautiful beaches of Mirissa and Weligama. From Mirissa's turquoise waters and palm-fringed shores to Weligama's laid-back beach vibes, enjoy scenic views, relaxed beach time, and picture-perfect moments along Sri Lanka's stunning southern coast. → Return to hotel → Relaxation / pool time → Evening at leisure → Beachside dinner / sunset experience.",
           community: "Cultural Culinary & Coastal Vibe: An optional coconut plantation visit and interactive Sri Lankan cooking class, followed by a traditional group lunch and a sunset gathering.",
           image: "https://images.unsplash.com/photo-1580910527739-556eb89f9d65?auto=format&fit=crop&q=85&w=800"
         },
