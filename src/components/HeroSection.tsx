@@ -16,7 +16,13 @@ import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import type { HeroContent } from "@/types/cms";
 import type { HeadingTag } from "@/lib/content";
 
-export function HeroSection({ content, headingTag: Heading = "h1" }: { content: HeroContent; headingTag?: HeadingTag }) {
+export function HeroSection({
+  content,
+  headingTag: Heading = "h1",
+}: {
+  content: HeroContent;
+  headingTag?: HeadingTag;
+}) {
   const router = useRouter();
 
   // Search filter states
@@ -145,7 +151,6 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
       {/* Hero Main Content Container */}
       <div className="site-container z-10 relative">
         <div className="max-w-[780px] text-left space-y-4 md:space-y-7 2xl:space-y-7">
-          
           {/* Top Category Tagline */}
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
             {content.tagline}
@@ -153,11 +158,13 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
 
           {/* Main Headline */}
           <Heading className="heading-hero font-normal text-white tracking-tight font-serif">
-            <span className="whitespace-pre-line">{content.headline}</span>{" "}
+            <span className="whitespace-pre-line">
+              {content.headline.split(".").join("\n")}
+            </span>{" "}
             <span className="relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]">
               {content.scriptAccent}
               <div className="absolute bottom-1 left-0 w-full">
-                 <TitleUnderline />
+                <TitleUnderline />
               </div>
             </span>
           </Heading>
@@ -273,7 +280,6 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
               {/* Interactive Calendar Popover — Beautiful, Full View, No Scrollbar */}
               {isDatesOpen && (
                 <div className="absolute top-full left-0 md:-left-10 mt-2 w-[310px] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-3.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  
                   {/* Quick Preset Buttons */}
                   <div className="flex flex-wrap gap-1 mb-3 pb-2.5 border-b border-slate-100">
                     {quickDatePresets.map((preset) => (
@@ -413,18 +419,21 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
                         }`}
                       >
                         <div className="flex items-center justify-between w-full">
-                          <span className="text-xs font-semibold">{opt.label}</span>
+                          <span className="text-xs font-semibold">
+                            {opt.label}
+                          </span>
                           {selectedTravellers === opt.label && (
                             <Check className="w-3.5 h-3.5 text-[#0E5A60]" />
                           )}
                         </div>
-                        <span className="text-[10px] text-slate-500">{opt.desc}</span>
+                        <span className="text-[10px] text-slate-500">
+                          {opt.desc}
+                        </span>
                       </button>
                     ))}
                   </div>
                 </div>
               )}
-              
             </div>
 
             {/* Search CTA Button */}
@@ -443,20 +452,17 @@ export function HeroSection({ content, headingTag: Heading = "h1" }: { content: 
             <span className="text-xs sm:text-[13px] font-normal text-white/80 mr-1">
               {content.popularSearchesLabel}
             </span>
-            {popularDestinations.slice(0, 5).map(
-              (tag) => (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => handleTagClick(tag)}
-                  className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/90 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/50 backdrop-blur-md transition-all cursor-pointer hover:scale-105"
-                >
-                  {tag}
-                </button>
-              )
-            )}
+            {popularDestinations.slice(0, 5).map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => handleTagClick(tag)}
+                className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/90 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/50 backdrop-blur-md transition-all cursor-pointer hover:scale-105"
+              >
+                {tag}
+              </button>
+            ))}
           </div>
-
         </div>
       </div>
     </section>
