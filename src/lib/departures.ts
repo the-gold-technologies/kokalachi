@@ -93,7 +93,9 @@ export function formatStartingOriginalPrice(tour: TourPackage): string | undefin
 // Spots left on the next departure; trips without departures fall back to tour.spotsLeft.
 export function getSpotsLeft(tour: TourPackage): number | undefined {
   if (!tour.departures) return tour.spotsLeft;
-  return getNextDeparture(tour)?.spotsLeft;
+  // No dated batch to book yet: show the spots of the "Upcoming" batch, if any
+  const next = getNextDeparture(tour);
+  return next ? next.spotsLeft : tour.spotsLeft;
 }
 
 // "17 Oct"
@@ -141,7 +143,8 @@ export function getCardDepartures(card: TripCardData): Departure[] {
 
 // Text shown on a card when there are no departures to list
 export function getCardDatesFallback(card: TripCardData): string {
-  return card.tourPackage.departures ? "New dates soon" : card.dates || "Upcoming";
+  if (card.tourPackage.departures) return card.tourPackage.nextDeparture || "New dates soon";
+  return card.dates || "Upcoming";
 }
 
 // Trips added with dates only (no itinerary yet) show a "details coming soon" page
@@ -153,7 +156,8 @@ export function hasFullDetails(tour: TourPackage): boolean {
 export function getNextDepartureLabel(tour: TourPackage): string {
   if (!tour.departures) return tour.nextDeparture || "Upcoming";
   const next = getNextDeparture(tour);
-  return next ? formatDate(next.startDate) : "New dates soon";
+  // nextDeparture holds the "Upcoming" batch label from the CMS, when there is one
+  return next ? formatDate(next.startDate) : tour.nextDeparture || "New dates soon";
 }
 
 // A trip is open for booking when it has a bookable departure (or, for older

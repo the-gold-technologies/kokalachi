@@ -15,43 +15,10 @@ import {
   Users,
   RotateCcw,
 } from "lucide-react";
+import type { WhyWeExistContent } from "@/types/cms";
 
-const kokalachiPhotos = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=85&w=1200",
-    alt: "Kashmir Houseboat & Mountains",
-    captionTitle: "Real people.",
-    captionSub: "Real connections.",
-    badge: "Kashmir Circle",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1625826415766-001bd75aaf52?auto=format&fit=crop&q=85&w=1200",
-    alt: "Meghalaya Waterfalls & Trails",
-    captionTitle: "Mountain trails.",
-    captionSub: "Unforgettable laughs.",
-    badge: "Meghalaya Expedition",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1583513645242-25a32d451084?auto=format&fit=crop&q=85&w=1200",
-    alt: "Kerala Tea Gardens & Backwaters",
-    captionTitle: "Shared feasts.",
-    captionSub: "Endless stories.",
-    badge: "Kerala Slow Trail",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=85&w=1200",
-    alt: "Vietnam Halong Bay & Lanterns",
-    captionTitle: "Scenic routes.",
-    captionSub: "Lifelong bonds.",
-    badge: "Vietnam Odyssey",
-  },
-];
-
-export function WhyWeExistSection() {
+export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
+  const kokalachiPhotos = content.photos;
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
   // Chat animation steps:
   // 0: Rohit ("Guys, shall we do Bali...?")
@@ -130,23 +97,21 @@ export function WhyWeExistSection() {
       <div className="site-container relative z-10 text-center">
         {/* Sub-header category tagline */}
         <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-2.5">
-          WHY WE EXIST
+          {content.tag}
         </span>
 
         {/* Main Title */}
         <h2 className="heading-section font-normal font-serif max-w-4xl mx-auto mb-3 text-[#0E5A60]">
-          Why do so many dream trips never{" "}
+          {content.headline}{" "}
           <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
-            happen?
+            {content.scriptAccent}
             <TitleUnderline />
           </span>
         </h2>
 
         {/* Short, reduced intro copy */}
         <p className="text-[#0E5A60]/75 text-sm sm:text-base lg:text-lg font-normal leading-relaxed max-w-2xl mx-auto mb-8 font-sans">
-          Most bucket list trips get postponed when schedules clash and life
-          gets in the way. Finding the right travel companions shouldn&apos;t be
-          this hard.
+          {content.description}
         </p>
 
         {/* Side-by-Side Comparison Container (Exact Original Layout) */}
@@ -165,7 +130,7 @@ export function WhyWeExistSection() {
                 <div className="flex justify-center mb-4">
                   <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#D6CBB8] text-[#3D352E] text-xs sm:text-sm font-bold uppercase tracking-wider font-sans border border-[#C5B7A0] shadow-sm">
                     <X size={15} className="text-[#DC2626] stroke-[4]" />
-                    <span>THE OLD WAY</span>
+                    <span>{content.oldWayBadge}</span>
                   </div>
                 </div>
 
@@ -180,7 +145,7 @@ export function WhyWeExistSection() {
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
-                        Excitement
+                        {content.callout1Text}
                       </span>
                       <svg
                         className="w-7 h-3.5 text-[#5A4E4C] transform -rotate-12 ml-auto mt-0.5"
@@ -203,7 +168,7 @@ export function WhyWeExistSection() {
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
-                        Plans change
+                        {content.callout2Text}
                       </span>
                       <svg
                         className="w-7 h-3.5 text-[#5A4E4C] transform -rotate-12 ml-auto mt-0.5"
@@ -226,7 +191,7 @@ export function WhyWeExistSection() {
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold leading-tight block text-right max-w-[100px] font-script">
-                        The trip <br /> never happens
+                        {content.callout3Text}
                       </span>
                       <svg
                         className="w-7 h-3.5 text-[#5A4E4C] transform -rotate-12 ml-auto mt-0.5"
@@ -250,17 +215,17 @@ export function WhyWeExistSection() {
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full overflow-hidden border border-slate-300">
                           <img
-                            src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&q=80&w=120"
-                            alt="Kashmir Trip Group"
+                            src={content.chatGroupImage}
+                            alt={content.oldWayTitle}
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div>
                           <div className="font-extrabold text-[#0E5A60] text-xs sm:text-sm flex items-center gap-1 font-sans">
-                            Kashmir Trip? 🏔️
+                            {content.oldWayTitle}
                           </div>
                           <div className="text-[10px] text-slate-500 font-medium font-sans">
-                            10 members
+                            {content.chatMembersCount}
                           </div>
                         </div>
                       </div>
@@ -273,117 +238,69 @@ export function WhyWeExistSection() {
 
                     {/* Messages Container spanning full inner height */}
                     <div className="flex-1 flex flex-col justify-between space-y-3 pt-1 pb-1 font-sans">
-                      {/* Chat Message 1: Rohit */}
-                      <div
-                        className={`space-y-1 transition-all duration-500 transform ${
-                          step >= 0
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-3 rounded-2xl rounded-tl-sm max-w-[92%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1 font-sans">
-                          <span className="font-bold text-emerald-700 block text-[11px] font-sans">
-                            Rohit
-                          </span>
-                          <p className="font-medium text-slate-800 font-sans">
-                            Guys, shall we do Kashmir in October? 🏔️😍
-                          </p>
-                          <div className="flex items-center justify-between pt-1 font-sans">
-                            <div className="inline-flex items-center gap-1 text-[10px] bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
-                              <span>❤️ 🔥 🙌 4</span>
+                      {(content.chatMessages || []).map((msg, i) => (
+                        <div
+                          key={i}
+                          className={`font-sans transition-all duration-500 transform ${
+                            step >= i
+                              ? "opacity-100 translate-y-0"
+                              : "opacity-0 translate-y-3 pointer-events-none"
+                          }`}
+                        >
+                          {(msg.isSilence || msg.isSilent) ? (
+                            <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between font-sans">
+                              <div className="flex items-center gap-2 font-sans">
+                                <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200 font-sans">
+                                  ...
+                                </span>
+                                <span className="italic text-slate-400 font-sans">
+                                  {msg.text}
+                                </span>
+                              </div>
+                              <span className="text-[9px] text-slate-400 font-sans">
+                                {msg.time}
+                              </span>
                             </div>
-                            <span className="text-[9px] text-slate-400 font-sans">
-                              10:30 AM
-                            </span>
-                          </div>
+                          ) : msg.isUser ? (
+                            <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm font-sans">
+                              <span
+                                className={`font-bold block text-[10px] font-sans ${msg.color || "text-emerald-800"}`}
+                              >
+                                {msg.sender}
+                              </span>
+                              <p className="text-slate-800 font-medium font-sans">
+                                {msg.text}{" "}
+                                <span className="text-[9px] text-slate-600 float-right mt-1 ml-2 font-sans">
+                                  {msg.time}
+                                </span>
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="bg-white p-2.5 sm:p-3 rounded-2xl rounded-tl-sm max-w-[92%] sm:max-w-[85%] shadow-sm border border-slate-100 text-xs text-slate-800 space-y-1 font-sans">
+                              <span
+                                className={`font-bold block text-[10px] sm:text-[11px] font-sans ${msg.color || "text-emerald-700"}`}
+                              >
+                                {msg.sender}
+                              </span>
+                              <p className="font-medium text-slate-800 font-sans">
+                                {msg.text}
+                              </p>
+                              <div className="flex items-center justify-between pt-0.5 font-sans">
+                                {msg.reactions ? (
+                                  <div className="inline-flex items-center gap-1 text-[10px] bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
+                                    <span>{msg.reactions}</span>
+                                  </div>
+                                ) : (
+                                  <span />
+                                )}
+                                <span className="text-[9px] text-slate-400 font-sans">
+                                  {msg.time}
+                                </span>
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      </div>
-
-                      {/* Chat Message 2: Neha */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 1
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
-                          <span className="font-bold text-rose-600 block text-[10px] font-sans">
-                            Neha
-                          </span>
-                          <p className="text-slate-800 font-medium font-sans">
-                            I&apos;m in! 🙌{" "}
-                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2 font-sans">
-                              10:31 AM
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Chat Message 3: Aman */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 2
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-[#D8F3C9] p-2.5 rounded-2xl rounded-tr-sm max-w-[88%] ml-auto text-xs border border-emerald-200/60 shadow-sm font-sans">
-                          <span className="font-bold text-emerald-800 block text-[10px] font-sans">
-                            Aman
-                          </span>
-                          <p className="text-slate-800 font-medium font-sans">
-                            Sorry guys, can&apos;t get leave 🙁{" "}
-                            <span className="text-[9px] text-slate-600 float-right mt-1 ml-2 font-sans">
-                              10:32 AM ✓
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Chat Message 4: Priya */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 3
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm max-w-[78%] shadow-sm border border-slate-100 text-xs font-sans">
-                          <span className="font-bold text-purple-600 block text-[10px] font-sans">
-                            Priya
-                          </span>
-                          <p className="text-slate-800 font-medium font-sans">
-                            Maybe next year?{" "}
-                            <span className="text-[9px] text-slate-400 float-right mt-1 ml-2 font-sans">
-                              10:33 AM
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Chat Message 5: Silence / No replies */}
-                      <div
-                        className={`font-sans transition-all duration-500 transform ${
-                          step >= 4
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-3 pointer-events-none"
-                        }`}
-                      >
-                        <div className="bg-white p-2.5 rounded-2xl rounded-tl-sm text-xs text-slate-500 border border-slate-100 flex items-center justify-between font-sans">
-                          <div className="flex items-center gap-2 font-sans">
-                            <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold border border-slate-200 font-sans">
-                              ...
-                            </span>
-                            <span className="italic text-slate-400 font-sans">
-                              No replies...
-                            </span>
-                          </div>
-                          <span className="text-[9px] text-slate-400 font-sans">
-                            10:45 AM
-                          </span>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -413,7 +330,7 @@ export function WhyWeExistSection() {
                       size={17}
                       className="fill-white text-white stroke-none"
                     />
-                    <span>The Kokalachi Way</span>
+                    <span>{content.newWayBadge}</span>
                   </div>
                 </div>
 
@@ -515,11 +432,10 @@ export function WhyWeExistSection() {
         {/* BOTTOM EMPHASIS CONCLUSION */}
         <div className="max-w-3xl mx-auto mt-14 sm:mt-16 text-center">
           <h3 className="text-xl sm:text-2xl font-bold text-[#0E5A60] font-serif">
-            So, we decided to build a better way to do it.
+            {content.conclusionTitle}
           </h3>
           <p className="text-base sm:text-lg text-slate-700 mt-2 leading-relaxed font-sans">
-            At Kokalachi, we bring together people who share a love for travel
-            so you can stop waiting and start exploring.
+            {content.conclusionDescription}
           </p>
         </div>
       </div>

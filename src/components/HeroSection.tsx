@@ -13,8 +13,10 @@ import {
   Check,
 } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import type { HeroContent } from "@/types/cms";
+import type { HeadingTag } from "@/lib/content";
 
-export function HeroSection() {
+export function HeroSection({ content, headingTag: Heading = "h1" }: { content: HeroContent; headingTag?: HeadingTag }) {
   const router = useRouter();
 
   // Search filter states
@@ -50,17 +52,7 @@ export function HeroSection() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const popularDestinations = [
-    "Himachal Pradesh",
-    "Uttarakhand",
-    "Ladakh",
-    "Kerala",
-    "Rajasthan",
-    "Kashmir",
-    "Meghalaya",
-    "Sri Lanka",
-    "Spiti Valley",
-  ];
+  const { popularDestinations, quickDatePresets } = content;
 
   const monthNames = [
     "January",
@@ -77,18 +69,7 @@ export function HeroSection() {
     "December",
   ];
 
-  const quickDatePresets = [
-    "Flexible Dates",
-    "Next 30 Days",
-    "Upcoming Weekends",
-    "Autumn 2026",
-  ];
-
-  const travellerOptions = [
-    { label: "1 Traveller", desc: "Solo explorer joining a group" },
-    { label: "2 Travellers", desc: "Travelling with a friend / partner" },
-    { label: "3+ Travellers", desc: "Small group of friends" },
-  ];
+  const travellerOptions = content.travellerOptions;
 
   // Calendar helpers
   const getDaysInMonth = (year: number, month: number) =>
@@ -152,7 +133,7 @@ export function HeroSection() {
       {/* Background Image Container with Overflow Hidden */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src="/hero_bg.png"
+          src={content.backgroundImage}
           alt="Friends enjoying sunrise and mountains together"
           className="w-full h-full object-cover object-center"
         />
@@ -167,25 +148,24 @@ export function HeroSection() {
           
           {/* Top Category Tagline */}
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
-            FOR TRAVELLERS WHO WERE ONLY EVER RESTING
+            {content.tagline}
           </span>
 
           {/* Main Headline */}
-          <h1 className="heading-hero font-normal text-white tracking-tight font-serif">
-            Find your circle. <br />
-            Find your next{" "}
+          <Heading className="heading-hero font-normal text-white tracking-tight font-serif">
+            <span className="whitespace-pre-line">{content.headline}</span>{" "}
             <span className="relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]">
-              journey.
+              {content.scriptAccent}
               <div className="absolute bottom-1 left-0 w-full">
                  <TitleUnderline />
               </div>
             </span>
-          </h1>
+          </Heading>
 
           {/* Subtitle Paragraph */}
           <div className="space-y-0.5 text-white/90 text-xs sm:text-sm md:text-base font-normal leading-relaxed font-sans max-w-xl">
-            <p>Curated group trips for solo travellers.</p>
-            <p>Real people. Real stories. Real connections.</p>
+            <p>{content.subtitle1}</p>
+            <p>{content.subtitle2}</p>
           </div>
 
           {/* Spacious Search & Booking Filter Card */}
@@ -208,13 +188,13 @@ export function HeroSection() {
                 </div>
                 <div className="flex flex-col flex-1 min-w-0 pr-1">
                   <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                    Where to?
+                    {content.destPlaceholder}
                   </span>
                   <input
                     type="text"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    placeholder="Search destinations"
+                    placeholder={content.searchPlaceholder}
                     className="text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 placeholder:font-normal focus:outline-none bg-transparent w-full cursor-pointer"
                   />
                 </div>
@@ -224,7 +204,7 @@ export function HeroSection() {
               {isDestOpen && (
                 <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
-                    Popular Destinations
+                    {content.popularDestinationsTitle}
                   </div>
                   <div className="grid grid-cols-1 gap-0.5">
                     {popularDestinations.map((dest) => (
@@ -274,7 +254,7 @@ export function HeroSection() {
                   </div>
                   <div className="flex flex-col min-w-0 pr-1">
                     <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                      When?
+                      {content.whenLabel}
                     </span>
                     <span
                       className={`text-xs sm:text-sm font-normal truncate ${
@@ -401,7 +381,7 @@ export function HeroSection() {
                   </div>
                   <div className="flex flex-col min-w-0 pr-1">
                     <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                      Travellers
+                      {content.travellersLabel}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
                       {selectedTravellers}
@@ -415,7 +395,7 @@ export function HeroSection() {
               {isTravellersOpen && (
                 <div className="absolute top-full left-0 md:-left-8 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
-                    Group Size
+                    {content.groupSizeTitle}
                   </div>
                   <div className="space-y-1">
                     {travellerOptions.map((opt) => (
@@ -454,16 +434,16 @@ export function HeroSection() {
               className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl md:rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0"
             >
               <Search className="w-4 h-4 text-white" />
-              <span>SEARCH TRIPS</span>
+              <span>{content.searchButtonText}</span>
             </button>
           </div>
 
           {/* Popular Searches Quick Tags */}
           <div className="flex flex-wrap items-center gap-2 pt-0.5 font-sans">
             <span className="text-xs sm:text-[13px] font-normal text-white/80 mr-1">
-              Popular Searches:
+              {content.popularSearchesLabel}
             </span>
-            {["Himachal Pradesh", "Uttarakhand", "Ladakh", "Kerala", "Rajasthan"].map(
+            {popularDestinations.slice(0, 5).map(
               (tag) => (
                 <button
                   key={tag}

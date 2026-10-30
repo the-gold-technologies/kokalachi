@@ -24,9 +24,9 @@ import {
   Heart,
   ArrowRight,
 } from "lucide-react";
-import { tripCards, TripCardData } from "@/data/trips";
+import type { TripCardData } from "@/data/trips";
+import type { BlogPost } from "@/data/blogs";
 import { formatShortDate, getNextDeparture, hasFullDetails, isBookingOpen } from "@/lib/departures";
-import { getSortedBlogPosts } from "@/data/blogs";
 
 interface DropdownItem {
   title: string;
@@ -36,124 +36,134 @@ interface DropdownItem {
   href?: string;
 }
 
-// Destinations menu: a few vibes to browse by, each opening /journeys pre-filtered
-const destinationCategories = [
-  { id: "Adventure", label: "Mountains & Treks" },
-  { id: "SlowTravel", label: "Slow Travel" },
-  { id: "BeachEscape", label: "Beaches & Islands" },
-  { id: "FirstTimers", label: "First-Timer Friendly" },
-  { id: "WomenOnly", label: "Women Only" },
-]
-  .map((cat) => {
-    const trips = tripCards.filter((card) => card.categories.includes(cat.id));
-    return {
-      title: cat.label,
-      desc: `${trips.length} ${trips.length === 1 ? "journey" : "journeys"}`,
-      image: trips[0]?.images[0].replace("w=800", "w=300") ?? "",
-      href: `/journeys?category=${cat.id}`,
-    };
-  })
-  .filter((cat) => cat.image);
-
-// Big photo cards: the next bookable trips with full itineraries (featured first)
-const handpickedTrips = tripCards
-  .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
-  .slice(0, 3);
-
 const tripBadge = (card: TripCardData) => {
   const next = getNextDeparture(card.tourPackage);
   return card.featured ? "New" : next ? `Departs ${formatShortDate(next.startDate)}` : "Coming Soon";
 };
 
-const dropdownData: Record<string, DropdownItem[]> = {
-  Destinations: [
-    {
-      title: "All Journeys",
-      tag: "Explore All",
-      desc: "Browse our complete slow-travel collection.",
-      image:
-        "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300",
-      href: "/journeys",
-    },
-    ...destinationCategories,
-  ],
-  Tours: [
-    {
-      title: "Upcoming Departures",
-      tag: "2026 Trips",
-      desc: "Handcrafted dates & itineraries for travellers.",
-      image:
-        "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300",
-      href: "/#upcoming-journeys",
-    },
-    {
-      title: "How Kokalachi Works",
-      tag: "Zero Stress",
-      desc: "Simple 3-step frictionless travel flow.",
-      image:
-        "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=300",
-      href: "/#how-it-works",
-    },
-    {
-      title: "Zero-Awkwardness",
-      tag: "Solo Friendly",
-      desc: "Vetted, curated groups of like-minded travellers.",
-      image:
-        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300",
-      href: "/about#what-we-believe",
-    },
-    {
-      title: "Custom Group Trips",
-      tag: "Private",
-      desc: "Private handcrafted travel for your circle.",
-      image:
-        "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300",
-      href: "/contact",
-    },
-  ],
-  Blogs: [
-    // Newest blog post first, as the big tile
-    ...getSortedBlogPosts()
-      .slice(0, 1)
-      .map((post) => ({
-        title: post.heroLead,
-        tag: "New Story",
-        desc: post.excerpt,
-        image: post.heroImage,
-        href: `/blogs/${post.slug}`,
-      })),
-    {
-      title: "The Kokalachi Journal",
-      tag: "All Blogs",
-      desc: "Honest guides & stories for curious travellers.",
-      image:
-        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=300",
-      href: "/blogs",
-    },
-    {
-      title: "Moments Captured",
-      tag: "Photo Diary",
-      desc: "Visual memories, polaroids & photo tracks.",
-      image: "/about_hero_polaroid.jpg",
-      href: "/#moments",
-    },
-    {
-      title: "Why We Started",
-      tag: "Our Vision",
-      desc: "The story, values & beliefs behind our tribe.",
-      image: "/about_why_started.jpg",
-      href: "/about#why-we-started",
-    },
-  ],
-};
+// Menus built from the CMS trips and newest blog post (passed in by the root layout)
+function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined) {
+  // Destinations menu: a few vibes to browse by, each opening /journeys pre-filtered
+  const destinationCategories = [
+    { id: "Adventure", label: "Mountains & Treks" },
+    { id: "SlowTravel", label: "Slow Travel" },
+    { id: "BeachEscape", label: "Beaches & Islands" },
+    { id: "FirstTimers", label: "First-Timer Friendly" },
+    { id: "WomenOnly", label: "Women Only" },
+  ]
+    .map((cat) => {
+      const trips = tripCards.filter((card) => card.categories.includes(cat.id));
+      return {
+        title: cat.label,
+        desc: `${trips.length} ${trips.length === 1 ? "journey" : "journeys"}`,
+        image: trips[0]?.images[0].replace("w=800", "w=300") ?? "",
+        href: `/journeys?category=${cat.id}`,
+      };
+    })
+    .filter((cat) => cat.image);
 
-export function Navbar() {
+  // Big photo cards: the next bookable trips with full itineraries (featured first)
+  const handpickedTrips = tripCards
+    .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
+    .slice(0, 3);
+
+  const dropdownData: Record<string, DropdownItem[]> = {
+    Destinations: [
+      {
+        title: "All Journeys",
+        tag: "Explore All",
+        desc: "Browse our complete slow-travel collection.",
+        image:
+          "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300",
+        href: "/journeys",
+      },
+      ...destinationCategories,
+    ],
+    Tours: [
+      {
+        title: "Upcoming Departures",
+        tag: "2026 Trips",
+        desc: "Handcrafted dates & itineraries for travellers.",
+        image:
+          "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300",
+        href: "/#upcoming-journeys",
+      },
+      {
+        title: "How Kokalachi Works",
+        tag: "Zero Stress",
+        desc: "Simple 3-step frictionless travel flow.",
+        image:
+          "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=300",
+        href: "/#how-it-works",
+      },
+      {
+        title: "Zero-Awkwardness",
+        tag: "Solo Friendly",
+        desc: "Vetted, curated groups of like-minded travellers.",
+        image:
+          "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300",
+        href: "/about#what-we-believe",
+      },
+      {
+        title: "Custom Group Trips",
+        tag: "Private",
+        desc: "Private handcrafted travel for your circle.",
+        image:
+          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300",
+        href: "/contact",
+      },
+    ],
+    Blogs: [
+      // Newest blog post first, as the big tile
+      ...(latestPost ? [latestPost] : [])
+        .map((post) => ({
+          title: post.heroLead,
+          tag: "New Story",
+          desc: post.excerpt,
+          image: post.heroImage,
+          href: `/blogs/${post.slug}`,
+        })),
+      {
+        title: "The Kokalachi Journal",
+        tag: "All Blogs",
+        desc: "Honest guides & stories for curious travellers.",
+        image:
+          "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=300",
+        href: "/blogs",
+      },
+      {
+        title: "Moments Captured",
+        tag: "Photo Diary",
+        desc: "Visual memories, polaroids & photo tracks.",
+        image: "/about_hero_polaroid.jpg",
+        href: "/#moments",
+      },
+      {
+        title: "Why We Started",
+        tag: "Our Vision",
+        desc: "The story, values & beliefs behind our tribe.",
+        image: "/about_why_started.jpg",
+        href: "/about#why-we-started",
+      },
+    ],
+  };
+
+  return { destinationCategories, handpickedTrips, dropdownData };
+}
+
+interface NavbarProps {
+  trips: TripCardData[];
+  latestPost?: BlogPost;
+  logos: { dark?: string | null; light?: string | null }; // from CMS → SEO → Global
+}
+
+export function Navbar({ trips, latestPost, logos }: NavbarProps) {
   const pathname = usePathname();
-  
-  if (pathname?.startsWith("/admin")) {
-    return null;
-  }
-  
+  const { destinationCategories, handpickedTrips, dropdownData } = React.useMemo(
+    () => buildMenus(trips, latestPost),
+    [trips, latestPost],
+  );
+
   // Pages whose hero is light (cream), so the see-through navbar needs dark text there
   const onLightHero = pathname === "/about";
   const [isScrolled, setIsScrolled] = useState(false);
@@ -219,13 +229,13 @@ export function Navbar() {
         >
           {/* Main Logo Image */}
           <Link href="/" className="flex items-center gap-3">
-            <img
-              src={darkText ? "/logo-clean.png" : "/clean_logo_lighter.png"}
+            {(darkText ? logos.dark : logos.light) && <img
+              src={(darkText ? logos.dark : logos.light) ?? undefined}
               alt="Kokalachi Logo"
               className={`w-auto object-contain hover:scale-105 transition-transform ${
                 isSolid ? "h-6" : "h-7"
               }`}
-            />
+            />}
           </Link>
 
           {/* Desktop Nav with Hover Dropdowns */}

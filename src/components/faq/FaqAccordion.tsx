@@ -7,9 +7,10 @@ import { BlogRichText } from "@/components/blog/BlogRichText";
 
 interface FaqAccordionProps {
   categories: FaqCategory[];
+  sidebarTitle: string;
 }
 
-export function FaqAccordion({ categories }: FaqAccordionProps) {
+export function FaqAccordion({ categories, sidebarTitle }: FaqAccordionProps) {
   const [activeCategory, setActiveCategory] = useState(categories[0]?.id);
   // Keyed as "categoryId-index" so several answers can be open at once
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
@@ -53,7 +54,7 @@ export function FaqAccordion({ categories }: FaqAccordionProps) {
           className="lg:w-64 shrink-0 sticky top-20 lg:top-28 z-20 self-start w-full py-3 lg:py-0 bg-white/95 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none"
         >
           <p className="hidden lg:block text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#C85A24] font-montserrat mb-4 px-4">
-            Browse by topic
+            {sidebarTitle}
           </p>
           <ul className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible [scrollbar-width:none]">
             {categories.map((category, idx) => (

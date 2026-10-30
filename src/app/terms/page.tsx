@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { termsAndConditions } from "@/data/legal";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { toLegalDocument } from "@/data/legal";
+import { getPage, headingTag, seoMetadata } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: termsAndConditions.title,
-  description: termsAndConditions.description,
-  alternates: { canonical: "/terms" },
-  openGraph: {
-    title: `${termsAndConditions.title} | Kokalachi`,
-    description: termsAndConditions.description,
-    url: "https://kokalachi.com/terms",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { sections, seo } = await getPage("terms");
+  const doc = sections.LegalDocumentSection;
+  return {
+    title: doc.title,
+    description: doc.description,
+    ...seoMetadata(seo, "/terms"),
+  };
+}
 
-export default function TermsPage() {
-  return <LegalPage doc={termsAndConditions} />;
+export default async function TermsPage() {
+  const { sections, seo } = await getPage("terms");
+  return (
+    <>
+      <JsonLd schema={seo?.schema} />
+      <LegalPage doc={toLegalDocument(sections.LegalDocumentSection)} headingTag={headingTag(seo?.headingOptions)} />
+    </>
+  );
 }

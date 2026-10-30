@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Users, Compass, Play, ArrowRight } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { HandDrawnHeart } from "@/components/ui/HandDrawnHeart";
+import type { AboutHeroContent } from "@/types/cms";
+import type { HeadingTag } from "@/lib/content";
 
 // Custom SVG for mountains since Lucide's mountain might look different
 const MountainsIcon = ({ size = 24, className = "" }) => (
@@ -23,12 +25,18 @@ const MountainsIcon = ({ size = 24, className = "" }) => (
   </svg>
 );
 
-export function AboutHeroSection() {
+export function AboutHeroSection({
+  content,
+  headingTag: Heading = "h1",
+}: {
+  content: AboutHeroContent;
+  headingTag?: HeadingTag;
+}) {
   return (
     <section
       id="about-hero"
       className="relative min-h-[100vh] w-full flex items-center justify-start pt-28 pb-24 lg:pt-40 lg:pb-16 bg-cover bg-center bg-no-repeat overflow-hidden select-none"
-      style={{ backgroundImage: "url('/aboutherobg.png')" }}
+      style={{ backgroundImage: `url('${content.backgroundImage}')` }}
     >
       {/* Soft Left-Side White Gradient Overlay for better text readability */}
       <div className="absolute inset-0 w-full lg:w-[55%] backdrop-blur-[2px] [-webkit-mask-image:linear-gradient(to_right,black_50%,transparent_100%)] [mask-image:linear-gradient(to_right,black_50%,transparent_100%)] bg-gradient-to-r from-white/90 via-white/60 to-transparent pointer-events-none z-0" />
@@ -42,43 +50,42 @@ export function AboutHeroSection() {
               {/* Category Tagline Badge */}
               <div className="flex flex-col items-start gap-1">
                 <span className="text-[#C85A24] text-xs sm:text-sm font-extrabold uppercase tracking-[0.15em] font-montserrat">
-                  ABOUT KOKALACHI
+                  {content.tagline}
                 </span>
               </div>
 
               {/* Main Editorial Title */}
-              <h1 className="heading-hero font-medium text-[#0E5A60] font-serif tracking-tight">
-                Built on Friendships.<br />
-                Made for{" "}
+              <Heading className="heading-hero font-medium text-[#0E5A60] font-serif tracking-tight">
+                <span className="whitespace-pre-line">{content.headline}</span>{" "}
                 <span className="relative inline-block font-script font-medium text-[1.22em] text-[#0E5A60]">
-                  Meaningful
+                  {content.scriptAccent}
                   <div className="absolute -bottom-1 left-0 w-full">
                      <TitleUnderline />
                   </div>
-                </span>{" "}
-                Journeys.
-              </h1>
+                </span>
+                {content.headlineSuffix && <> {content.headlineSuffix}</>}
+              </Heading>
 
               {/* Handwritten Subtitle */}
               <p className="text-[#1F3E5A] font-script text-xl sm:text-2xl lg:text-3xl pt-1 pb-2">
-                Same Roads. New People. Greater Stories.
+                {content.handwrittenSubtitle}
               </p>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-5 pt-6 relative">
-              <button className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0">
-                Our Story <ArrowRight size={18} />
-              </button>
+              <a href={content.primaryCtaLink} className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0">
+                {content.primaryCtaText} <ArrowRight size={18} />
+              </a>
               
-              <button className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-white/30 hover:bg-white/40 backdrop-blur-md text-[#0E5A60] hover:text-[#C85A24] font-medium text-sm shadow-sm hover:shadow-md transition-all group cursor-pointer">
+              <a href={content.secondaryCtaLink} className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-white/30 hover:bg-white/40 backdrop-blur-md text-[#0E5A60] hover:text-[#C85A24] font-medium text-sm shadow-sm hover:shadow-md transition-all group cursor-pointer">
                 <div className="w-8 h-8 rounded-full bg-[#0E5A60] group-hover:bg-[#C85A24] text-white flex items-center justify-center transition-colors shadow-sm shrink-0">
                   <Play size={14} className="fill-white text-white translate-x-[1px]" />
                 </div>
                 <span className="font-semibold tracking-tight text-[#0E5A60] group-hover:text-[#C85A24] transition-colors">
-                  Watch Our Journey
+                  {content.secondaryCtaText}
                 </span>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -92,25 +99,25 @@ export function AboutHeroSection() {
 
             <div className="absolute top-12 -left-7 -rotate-[10deg] bg-white p-2.5 pb-4 rounded-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-[210px] z-10 transition-transform duration-500 hover:z-40 hover:scale-105">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm border border-slate-100">
-                <Image src="/hero_friends_mountain_peak.jpg" fill className="object-cover" alt="New Places" />
+                <Image src={content.polaroid1Image} fill className="object-cover" alt={content.polaroid1Title} />
               </div>
-              <p className="font-script text-[1.4rem] leading-none text-center mt-3 text-slate-700 tracking-wide">New Places</p>
+              <p className="font-script text-[1.4rem] leading-none text-center mt-3 text-slate-700 tracking-wide">{content.polaroid1Title}</p>
             </div>
             
             {/* Right Polaroid (Bigger Stories) */}
             <div className="absolute top-14 left-74 rotate-[10deg] bg-white p-2.5 pb-4 rounded-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-[220px] z-20 transition-transform duration-500 hover:z-40 hover:scale-105">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm border border-slate-100">
-                <Image src="/about_hero_polaroid.jpg" fill className="object-cover" alt="Bigger Stories" />
+                <Image src={content.polaroid2Image} fill className="object-cover" alt={content.polaroid2Title} />
               </div>
-              <p className="font-script text-[1.4rem] leading-none text-center mt-3 text-slate-700 tracking-wide">Bigger Stories</p>
+              <p className="font-script text-[1.4rem] leading-none text-center mt-3 text-slate-700 tracking-wide">{content.polaroid2Title}</p>
             </div>
 
             {/* Middle Polaroid (Real Connections) */}
             <div className="absolute top-36 left-28 -rotate-[4deg] bg-white p-3 pb-6 rounded-md shadow-[0_20px_50px_rgb(0,0,0,0.2)] w-[260px] z-30 transition-transform duration-500 hover:scale-105">
               <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm border border-slate-100">
-                <Image src="/hero_group_sunset_bg.jpg" fill className="object-cover" alt="Real Connections" />
+                <Image src={content.polaroid3Image} fill className="object-cover" alt={content.polaroid3Title} />
               </div>
-              <p className="font-script text-[1.7rem] leading-none text-center mt-4 text-slate-700 tracking-wide">Real Connections</p>
+              <p className="font-script text-[1.7rem] leading-none text-center mt-4 text-slate-700 tracking-wide">{content.polaroid3Title}</p>
             </div>
 
             {/* Dashed line to heart */}
@@ -120,7 +127,7 @@ export function AboutHeroSection() {
 
             {/* Doodles & Text on the right */}
             <div className="absolute top-1 right-[-50px] -rotate-3 flex flex-col items-center z-40">
-              <p className="font-script text-[1.6rem] text-slate-700 leading-[1.15] text-center">More<br/>Than Just<br/>Destinations</p>
+              <p className="font-script text-[1.6rem] text-slate-700 leading-[1.15] text-center whitespace-pre-line">{content.doodleNote}</p>
               <div className="mt-3 text-[#1F3E5A] relative">
                 <HandDrawnHeart size={34} color="currentColor" className="opacity-90" />
                 {/* SVG accents around the heart matching the image (3 strokes on right) */}

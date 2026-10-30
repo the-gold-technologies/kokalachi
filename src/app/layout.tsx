@@ -38,89 +38,66 @@ const satisfy = Satisfy({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://kokalachi.com"),
-  title: {
-    default: "Kokalachi - Journeys Become Friendships",
-    template: "%s | Kokalachi",
-  },
-  description:
-    "Kokalachi designs immersive, slow-paced group journeys for conscious travelers. Replace tourist traps with authentic human connection and lifelong friendships.",
-  keywords: [
-    "group travel",
-    "slow travel",
-    "conscious travel",
-    "curated journeys",
-    "travel community",
-    "Kokalachi",
-    "India travel",
-    "international travel",
-    "travel experiences",
-  ],
-  authors: [{ name: "Kokalachi", url: "https://kokalachi.com" }],
-  creator: "Kokalachi",
-  publisher: "Kokalachi",
-  icons: {
-    icon: "/fevicon.png",
-    shortcut: "/fevicon.png",
-    apple: "/fevicon.png",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: "https://kokalachi.com",
-    siteName: "Kokalachi",
-    title: "Kokalachi — Journeys Become Friendships",
-    description:
-      "Kokalachi designs immersive, slow-paced group journeys for conscious travelers. Replace tourist traps with authentic human connection and lifelong friendships.",
-    images: [
-      {
-        url: "/fevicon.png",
-        width: 512,
-        height: 512,
-        alt: "Kokalachi Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary",
-    title: "Kokalachi — Journeys Become Friendships",
-    description:
-      "Immersive, slow-paced group journeys for conscious travelers. Real connections. Real places. No tourist traps.",
-    images: ["/fevicon.png"],
-    creator: "@kokalachi",
-    site: "@kokalachi",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-    },
-  },
-};
+// Site-wide metadata, all from CMS → SEO → Global; pages add their own from CMS → SEO → Pages
+const SITE_URL = "https://kokalachi.com";
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieConsent } from "@/components/analytics/CookieConsent";
+import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
+import { CustomScripts } from "@/components/analytics/CustomScripts";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getBlogPosts, getSiteConfig, getTrips } from "@/lib/content";
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSiteConfig();
+  const shareImage = site.logo ? [{ url: site.logo, alt: site.siteTitle }] : undefined;
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: site.siteTitle, template: "%s | Kokalachi" },
+    description: site.siteDescription,
+    ...(site.favicon ? { icons: { icon: site.favicon, shortcut: site.favicon, apple: site.favicon } } : {}),
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      url: SITE_URL,
+      siteName: "Kokalachi",
+      title: site.siteTitle,
+      description: site.siteDescription,
+      images: shareImage,
+    },
+    twitter: { card: "summary", title: site.siteTitle, description: site.siteDescription, images: shareImage },
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+    ...(site.searchConsoleId ? { verification: { google: site.searchConsoleId } } : {}),
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Shared with every page through the same cached CMS reads
+  const [trips, posts, site] = await Promise.all([getTrips(), getBlogPosts(), getSiteConfig()]);
+
   return (
     <html
       lang="en"
       className={`${poppins.variable} ${playball.variable} ${montserrat.variable} ${playfair.variable} ${caveat.variable} ${satisfy.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        <Navbar
+          trips={trips}
+          latestPost={posts[0]}
+          logos={{ dark: site.logo, light: site.socialLinks?.navbarLightLogo }}
+        />
         <main className="flex-grow">{children}</main>
-        <Footer />
+        <Footer trips={trips} site={site} />
         <CookieConsent />
+        {/* Site-wide SEO & tracking from CMS → SEO → Global */}
+        <JsonLd schema={site.schema} />
+        <SiteAnalytics gaId={site.googleAnalyticsId} gtmId={site.gtmId} />
+        <CustomScripts head={site.customHeaderScripts} footer={site.customFooterScripts} />
       </body>
     </html>
   );

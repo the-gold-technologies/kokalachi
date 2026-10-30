@@ -36,12 +36,20 @@ const TILE_SHAPES = ["aspect-[4/5]", "aspect-[4/3]", "aspect-square", "aspect-[3
 const TILE_TILTS = ["sm:-rotate-1", "sm:rotate-1", "sm:rotate-[1.5deg]", "sm:-rotate-[1.5deg]"];
 const TAPE_COLORS = ["bg-[#FFF4E5] text-[#8C5E3C]", "bg-[#D4EBE6] text-[#1E5D53]", "bg-[#FDE8BD] text-[#7A5012]"];
 
+interface TripStoryChapterLabels {
+  moreMomentsLabel: string;
+  inTheirWordsLabel: string;
+  inShortLabel: string;
+  whatTheyLovedLabel: string;
+}
+
 interface TripStoryChapterProps {
   trip: CommunityTrip;
   number: number;
+  labels: TripStoryChapterLabels;
 }
 
-export function TripStoryChapter({ trip, number }: TripStoryChapterProps) {
+export function TripStoryChapter({ trip, number, labels }: TripStoryChapterProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const closeViewer = useCallback(() => setOpenIndex(null), []);
 
@@ -140,7 +148,7 @@ export function TripStoryChapter({ trip, number }: TripStoryChapterProps) {
                   {isLastWithMore && (
                     <div className="absolute inset-0 bg-[#0B2A3D]/70 flex flex-col items-center justify-center text-white">
                       <span className="font-serif text-4xl">+{hiddenCount}</span>
-                      <span className="text-[11px] uppercase tracking-widest font-bold">more moments</span>
+                      <span className="text-[11px] uppercase tracking-widest font-bold">{labels.moreMomentsLabel}</span>
                     </div>
                   )}
                 </div>
@@ -159,10 +167,10 @@ export function TripStoryChapter({ trip, number }: TripStoryChapterProps) {
         <div className="space-y-10 sm:space-y-12">
           <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat flex items-center gap-3">
             <span className="h-px w-10 bg-[#C85A24]/40" />
-            In their words
+            {labels.inTheirWordsLabel}
           </p>
           {trip.stories.map((story, i) => (
-            <StoryLetter key={story.id} story={story} trip={trip} flipped={i % 2 === 1} />
+            <StoryLetter key={story.id} story={story} trip={trip} flipped={i % 2 === 1} labels={labels} />
           ))}
         </div>
       </div>
@@ -193,7 +201,17 @@ const HIGHLIGHT_ICONS: Record<HighlightIcon, LucideIcon> = {
 };
 
 // Letters start folded: summary + highlights first, the full text on demand
-function StoryLetter({ story, trip, flipped }: { story: TravellerStory; trip: CommunityTrip; flipped: boolean }) {
+function StoryLetter({
+  story,
+  trip,
+  flipped,
+  labels,
+}: {
+  story: TravellerStory;
+  trip: CommunityTrip;
+  flipped: boolean;
+  labels: TripStoryChapterLabels;
+}) {
   const [expanded, setExpanded] = useState(false);
   const firstName = story.authors[0].name.split(" ")[0];
 
@@ -252,14 +270,14 @@ function StoryLetter({ story, trip, flipped }: { story: TravellerStory; trip: Co
         {/* In short */}
         <div className="border-l-4 border-[#D96C2C] bg-[#FDF0EC]/60 rounded-r-2xl px-5 py-4 mb-7">
           <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#C85A24] font-montserrat mb-1.5">
-            In short
+            {labels.inShortLabel}
           </p>
           <p className="font-serif italic text-[17px] sm:text-lg text-[#0B2A3D] leading-relaxed">{story.summary}</p>
         </div>
 
         {/* What they loved */}
         <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-slate-400 font-montserrat mb-3">
-          What they loved
+          {labels.whatTheyLovedLabel}
         </p>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7">
           {story.highlights.map((h) => {

@@ -2,45 +2,35 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, PenLine } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
-import { formatBlogDate, getReadingTime, getSortedBlogPosts } from "@/data/blogs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { formatBlogDate, getReadingTime } from "@/data/blogs";
+import { getBlogPosts, getBlogsPage, headingTag, seoMetadata } from "@/lib/content";
 
 // Link-preview version of the hero: 1200×630 JPG so WhatsApp can show it
-const HERO_OG_IMAGE =
-  "https://images.unsplash.com/photo-1735248325378-296191d6064e?fm=jpg&fit=crop&w=1200&h=630&q=75";
+const ogImage = (src: string) =>
+  src.startsWith("https://images.unsplash.com/") ? `${src.split("?")[0]}?fm=jpg&fit=crop&w=1200&h=630&q=75` : src;
 
-export const metadata: Metadata = {
-  title: "Blogs",
-  description:
-    "The Kokalachi Journal: honest guides, traveller stories and slow-travel advice for anyone joining a group trip.",
-  openGraph: {
-    title: "The Kokalachi Journal | Kokalachi",
-    description:
-      "Honest guides, traveller stories and slow-travel advice for anyone joining a group trip.",
-    url: "https://kokalachi.com/blogs",
-    siteName: "Kokalachi",
-    locale: "en_IN",
-    type: "website",
-    images: [{ url: HERO_OG_IMAGE, width: 1200, height: 630, alt: "Friends watching the sunset from a Himachal hilltop", type: "image/jpeg" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "The Kokalachi Journal | Kokalachi",
-    description: "Honest guides and traveller stories from the Kokalachi tribe.",
-    images: [HERO_OG_IMAGE],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { sections, seo } = await getBlogsPage();
+  return seoMetadata(seo, "/blogs", ogImage(sections.BlogHeroSection.heroImage));
+}
 
-export default function BlogsPage() {
-  const [featured, ...rest] = getSortedBlogPosts();
+export default async function BlogsPage() {
+  const [{ sections, seo }, posts] = await Promise.all([getBlogsPage(), getBlogPosts()]);
+  const [featured, ...rest] = posts;
+  const hero = sections.BlogHeroSection;
+  const cta = sections.BlogCtaSection;
+  const Heading = headingTag(seo?.headingOptions);
 
   return (
     <div className="min-h-screen font-sans text-slate-800 bg-white">
+      <JsonLd schema={seo?.schema} />
       {/* Hero (matching FAQ / Contact pages) */}
       <div className="relative h-[60vh] min-h-[420px] w-full">
         {/* Mirrored so the people sit on the right, clear of the headline */}
         <img
-          src="https://images.unsplash.com/photo-1735248325378-296191d6064e?auto=format&fit=crop&q=85&w=2400"
-          alt="Friends on a bench at the edge of a Himachal hilltop, watching the sunset"
+          src={hero.heroImage}
+          alt={hero.heroAlt}
           className="absolute inset-0 w-full h-full object-cover object-[center_40%] -scale-x-100"
         />
         {/* Dark only behind the text, so the photo stays bright */}
@@ -52,19 +42,18 @@ export default function BlogsPage() {
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
-                  The Kokalachi Journal
+                  {hero.eyebrow}
                 </span>
               </div>
-              <h1 className="heading-hero font-semibold font-serif text-white mb-5 max-w-4xl">
-                Stories for the{" "}
+              <Heading className="heading-hero font-semibold font-serif text-white mb-5 max-w-4xl">
+                {hero.titleLead.trim()}{" "}
                 <span className="relative inline-block font-script font-normal text-[1.12em] text-white">
-                  curious traveller.
+                  {hero.titleAccent}
                   <TitleUnderline />
                 </span>
-              </h1>
+              </Heading>
               <p className="text-white/85 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">
-                Honest guides, little rituals and real stories from the road, for anyone who has a
-                bucket list but not yet a travel buddy.
+                {hero.description}
               </p>
             </div>
           </div>
@@ -80,7 +69,7 @@ export default function BlogsPage() {
 
         <div className="site-container relative z-10">
           <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-8">
-            Fresh off the press
+            {cta.kicker}
           </span>
 
           {/* Featured story */}
@@ -124,7 +113,7 @@ export default function BlogsPage() {
                   <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
                 </span>
                 <p className="hidden sm:block absolute bottom-6 right-8 font-script text-xl text-[#0E5A60]/60 rotate-[-4deg]">
-                  grab a chai first ☕
+                  {cta.chaiNote}
                 </p>
               </div>
             </Link>
@@ -163,16 +152,13 @@ export default function BlogsPage() {
             {/* Placeholder until more posts land */}
             <div className="rounded-[28px] border-2 border-dashed border-[#0E5A60]/20 bg-[#FAF5EE]/60 p-8 flex flex-col items-center justify-center text-center min-h-[240px] sm:col-span-2 lg:col-span-3">
               <PenLine size={26} className="text-[#D96C2C] mb-3" />
-              <p className="font-script text-3xl text-[#0E5A60] mb-2 -rotate-1">more stories brewing…</p>
-              <p className="text-sm text-slate-500 max-w-md">
-                Packing lists, route guides and traveller memoirs are on their way. Until then, the
-                best stories are the ones you go and make.
-              </p>
+              <p className="font-script text-3xl text-[#0E5A60] mb-2 -rotate-1">{cta.brewingTitle}</p>
+              <p className="text-sm text-slate-500 max-w-md">{cta.brewingDescription}</p>
               <Link
-                href="/journeys"
+                href={cta.ctaBtnUrl}
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-[#0E5A60] hover:text-[#C85A24] transition-colors"
               >
-                Find your journey <ArrowRight size={15} />
+                {cta.ctaBtnText} <ArrowRight size={15} />
               </Link>
             </div>
           </div>
