@@ -4,20 +4,22 @@
 import { cache } from "react";
 import type { Metadata } from "next";
 import { cmsGet, CmsTag } from "@/lib/cms";
-import { sortTripCards, type Departure, type TripCardData } from "@/data/trips";
+import { sortTripCards, type Departure, type TourPackage, type TripCardData } from "@/data/trips";
+import { getNextDeparture } from "@/lib/departures";
 import type { BlogPost, BlogSection } from "@/data/blogs";
 import type { CommunityTrip, StoryEntry } from "@/data/community";
 import type { BlogsSections, PageSections, PageSeo, SiteConfig } from "@/types/cms";
 
 // ---------- Trips ----------
 
+// Dates are null on an "Upcoming" batch whose dates aren't announced yet
 interface CmsDeparture {
   id: string;
-  startDate: string;
-  endDate: string;
+  startDate: string | null;
+  endDate: string | null;
   price: number | null;
   originalPrice: number | null;
-  spotsLeft: number;
+  spotsLeft: number | null;
   status: string;
   label: string | null;
   note: string | null;
@@ -67,14 +69,18 @@ interface CmsTrip {
 
 const orUndefined = <T,>(value: T | null): T | undefined => value ?? undefined;
 
-function toDeparture(d: CmsDeparture): Departure {
+type DatedCmsDeparture = CmsDeparture & { startDate: string; endDate: string };
+
+const isDated = (d: CmsDeparture): d is DatedCmsDeparture => !!d.startDate && !!d.endDate;
+
+function toDeparture(d: DatedCmsDeparture): Departure {
   return {
     id: d.id,
     startDate: d.startDate,
     endDate: d.endDate,
     price: orUndefined(d.price),
     originalPrice: orUndefined(d.originalPrice),
-    spotsLeft: d.spotsLeft,
+    spotsLeft: orUndefined(d.spotsLeft),
     status: d.status as Departure["status"],
     label: orUndefined(d.label),
     note: orUndefined(d.note),
@@ -83,8 +89,16 @@ function toDeparture(d: CmsDeparture): Departure {
 
 function toTripCard(t: CmsTrip): TripCardData {
   const gallery = t.gallery ?? [];
+  const departures = t.departures.filter(isDated).map(toDeparture);
+  // A batch without dates stands in until dates are announced: its label ("Upcoming" by default)
+  // and spots show on the site, and its price is used while there is no dated batch to book
+  const upcoming = t.departures.find((d) => !isDated(d) && d.status !== "closed");
+  const useUpcomingPrice = !!upcoming && getNextDeparture({ departures } as TourPackage) == null;
+  const basePrice = useUpcomingPrice && upcoming.price != null ? upcoming.price : t.price;
+  const originalPrice =
+    useUpcomingPrice && upcoming.originalPrice != null ? upcoming.originalPrice : t.originalPrice;
   // A price of 0 in the CMS means "not announced yet": the site shows "Price TBA" and takes reservations
-  const price = t.price > 0 ? t.price : "TBA";
+  const price = basePrice > 0 ? basePrice : "TBA";
   return {
     id: t.id,
     slug: t.slug,
@@ -106,12 +120,14 @@ function toTripCard(t: CmsTrip): TripCardData {
       duration: t.duration,
       rating: t.rating,
       price,
-      originalPrice: t.originalPrice,
+      originalPrice,
       image: t.image,
       category: t.category,
       tag: t.tag,
       tagColor: t.tagColor,
-      departures: t.departures.map(toDeparture),
+      departures,
+      spotsLeft: upcoming?.spotsLeft ?? undefined,
+      nextDeparture: upcoming ? upcoming.label || "Upcoming" : undefined,
       hook: orUndefined(t.hook),
       overview: t.overview ?? [],
       itinerary: t.itinerary ?? [],
