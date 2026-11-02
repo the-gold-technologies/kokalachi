@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import type { TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
+import { TRIP_PAGES } from "@/data/tripPages";
 import { formatShortDate, getNextDeparture, hasFullDetails, isBookingOpen } from "@/lib/departures";
 
 interface DropdownItem {
@@ -43,8 +44,8 @@ const tripBadge = (card: TripCardData) => {
 
 // Menus built from the CMS trips and newest blog post (passed in by the root layout)
 function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined) {
-  // Destinations menu: a few vibes to browse by, each opening /journeys pre-filtered
-  const destinationCategories = [
+  // Journeys menu: a few vibes to browse by, each opening /journeys pre-filtered
+  const journeyCategories = [
     { id: "Adventure", label: "Mountains & Treks" },
     { id: "SlowTravel", label: "Slow Travel" },
     { id: "BeachEscape", label: "Beaches & Islands" },
@@ -68,7 +69,7 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
     .slice(0, 3);
 
   const dropdownData: Record<string, DropdownItem[]> = {
-    Destinations: [
+    Journeys: [
       {
         title: "All Journeys",
         tag: "Explore All",
@@ -77,42 +78,20 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
           "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300",
         href: "/journeys",
       },
-      ...destinationCategories,
+      ...journeyCategories,
     ],
-    Tours: [
-      {
-        title: "Upcoming Departures",
-        tag: "2026 Trips",
-        desc: "Handcrafted dates & itineraries for travellers.",
-        image:
-          "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300",
-        href: "/#upcoming-journeys",
-      },
-      {
-        title: "How Kokalachi Works",
-        tag: "Zero Stress",
-        desc: "Simple 3-step frictionless travel flow.",
-        image:
-          "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=300",
-        href: "/#how-it-works",
-      },
-      {
-        title: "Zero-Awkwardness",
-        tag: "Solo Friendly",
-        desc: "Vetted, curated groups of like-minded travellers.",
-        image:
-          "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300",
-        href: "/about#what-we-believe",
-      },
-      {
-        title: "Custom Group Trips",
-        tag: "Private",
-        desc: "Private handcrafted travel for your circle.",
-        image:
-          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300",
-        href: "/contact",
-      },
-    ],
+    // The /trips sub-pages (text in src/data/tripPages.ts)
+    Trips: (
+      [
+        ["upcoming", "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300"],
+        ["past", "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300"],
+        ["custom", "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300"],
+        ["solo", "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300"],
+      ] as const
+    ).map(([key, image]) => {
+      const page = TRIP_PAGES[key];
+      return { title: page.label, tag: page.menuTag, desc: page.menuDesc, image, href: page.path };
+    }),
     Blogs: [
       // Newest blog post first, as the big tile
       ...(latestPost ? [latestPost] : [])
@@ -148,7 +127,7 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
     ],
   };
 
-  return { destinationCategories, handpickedTrips, dropdownData };
+  return { journeyCategories, handpickedTrips, dropdownData };
 }
 
 interface NavbarProps {
@@ -159,7 +138,7 @@ interface NavbarProps {
 
 export function Navbar({ trips, latestPost, logos }: NavbarProps) {
   const pathname = usePathname();
-  const { destinationCategories, handpickedTrips, dropdownData } = React.useMemo(
+  const { journeyCategories, handpickedTrips, dropdownData } = React.useMemo(
     () => buildMenus(trips, latestPost),
     [trips, latestPost],
   );
@@ -201,8 +180,8 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
 
   const navLinks = [
     { name: "About Us", href: "/about", hasDropdown: false },
-    { name: "Destinations", href: "/journeys", hasDropdown: true },
-    { name: "Tours", href: "/#upcoming-journeys", hasDropdown: true },
+    { name: "Journeys", href: "/journeys", hasDropdown: true },
+    { name: "Trips", href: "/trips", hasDropdown: true },
     { name: "Blogs", href: "/blogs", hasDropdown: true },
     { name: "Community", href: "/community", hasDropdown: false },
   ];
@@ -272,7 +251,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                 {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
                 {link.hasDropdown && activeDropdown === link.name && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    {link.name === "Destinations" ? (
+                    {link.name === "Journeys" ? (
                       <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[760px] xl:w-[860px] animate-in fade-in slide-in-from-top-2 duration-200">
                         <div className="grid grid-cols-[230px_1fr] gap-5">
                           {/* Browse by vibe */}
@@ -281,7 +260,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                               Browse by vibe
                             </p>
                             <div className="flex flex-col gap-1">
-                              {destinationCategories.map((cat) => (
+                              {journeyCategories.map((cat) => (
                                 <Link
                                   key={cat.title}
                                   href={cat.href}
@@ -395,8 +374,8 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                       {/* Dropdown Footer CTA Strip */}
                       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
                         <span>
-                          {link.name === "Tours"
-                            ? "Curated solo-friendly group adventures & retreats"
+                          {link.name === "Trips"
+                            ? "Every trip we run, upcoming & past"
                             : "Guides, memories & stories from the Kokalachi tribe"}
                         </span>
                         <Link

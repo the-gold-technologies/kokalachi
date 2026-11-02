@@ -92,7 +92,7 @@ export default async function RootLayout({
           logos={{ dark: site.logo, light: site.socialLinks?.navbarLightLogo }}
         />
         <main className="flex-grow">{children}</main>
-        <Footer trips={trips} site={site} />
+        <Footer site={site} />
         <CookieConsent />
         {/* Site-wide SEO & tracking from CMS → SEO → Global */}
         <JsonLd schema={site.schema} />

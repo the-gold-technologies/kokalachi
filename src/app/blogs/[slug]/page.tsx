@@ -6,6 +6,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import { TripCardItem } from "@/components/TripCardItem";
+import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { BlogBlocks } from "@/components/blog/BlogBlocks";
 import { BlogToc } from "@/components/blog/BlogToc";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
@@ -385,6 +386,8 @@ export default async function BlogPostPage({
           </div>
         </section>
       )}
+
+      <UpcomingJourneysStrip trips={trips} />
     </div>
   );
 }

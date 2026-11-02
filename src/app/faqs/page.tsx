@@ -38,7 +38,7 @@ export default async function FaqsPage() {
       <div className="relative h-[60vh] min-h-[420px] w-full">
         <img
           src={hero.bannerImage}
-          alt={hero.bannerAlt}
+          alt={hero.bannerAlt || "A map with a camera, notebook and backpack, ready for trip planning"}
           className="absolute inset-0 w-full h-full object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />

@@ -32,7 +32,6 @@ import {
   hasFullDetails,
   isSoldOut,
 } from "@/lib/departures";
-import { TripCardItem } from "@/components/TripCardItem";
 import { DeparturePicker } from "@/components/DeparturePicker";
 import { MetaPixel } from "@/components/analytics/MetaPixel";
 import { META_PIXEL_ID } from "@/lib/tracking";
@@ -332,10 +331,9 @@ function BookingWidget({
 
 interface JourneyDetailProps {
   trip: TripCardData;
-  otherTrips: TripCardData[]; // "You might also like", already excluding this trip
 }
 
-export function JourneyDetail({ trip, otherTrips }: JourneyDetailProps) {
+export function JourneyDetail({ trip }: JourneyDetailProps) {
   const [guests, setGuests] = useState(1);
   const [enquirySent, setEnquirySent] = useState(false);
   const [activeDetailTab, setActiveDetailTab] = useState<"inclusions" | "essentials" | "faq">("inclusions");
@@ -900,28 +898,6 @@ export function JourneyDetail({ trip, otherTrips }: JourneyDetailProps) {
             </div>
           </div>
 
-        </div>
-      </div>
-
-      {/* Explore More Journeys Section */}
-      <div className="py-16 lg:py-24 mt-12 border-t border-[#0E5A60]/10">
-        <div className="site-container">
-          <div className="mb-10 lg:mb-14">
-            <h2 className="heading-section font-serif font-bold text-[#0E5A60]">
-              Explore Other Journeys
-            </h2>
-            <p className="text-slate-600 mt-3 text-lg font-sans">
-              Find your next adventure with these handcrafted experiences.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {otherTrips.map(card => (
-              <div key={card.id} className="h-full">
-                <TripCardItem card={card} />
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 

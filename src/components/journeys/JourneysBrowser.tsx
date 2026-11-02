@@ -45,9 +45,11 @@ export function JourneysBrowser({ trips, sections, headingTag: Heading = "h1" }:
         <img
           src={hero.bannerImage}
           alt="All Journeys"
-          className="absolute inset-0 w-full h-full object-cover opacity-80"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />
+        {/* Same overlay as /blogs: dark only behind the text, plus a soft band so the navbar stays readable */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D]/90 via-[#0B2A3D]/25 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/25 to-transparent" />
 
         <div className="absolute inset-0 flex items-end pb-10 sm:pb-12">
           <div className="site-container">
@@ -64,7 +66,7 @@ export function JourneysBrowser({ trips, sections, headingTag: Heading = "h1" }:
                   <TitleUnderline />
                 </span>
               </Heading>
-              <p className="text-slate-200 text-base md:text-lg font-normal mt-4 max-w-2xl font-sans leading-relaxed">
+              <p className="text-white/85 text-sm sm:text-base lg:text-lg mt-4 max-w-2xl font-sans leading-relaxed">
                 {hero.description}
               </p>
             </div>

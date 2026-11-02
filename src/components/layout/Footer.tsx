@@ -13,27 +13,25 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
-import type { TripCardData } from "@/data/trips";
+import { TRIP_PAGES } from "@/data/tripPages";
 import type { SiteConfig } from "@/types/cms";
-import { hasFullDetails, isBookingOpen } from "@/lib/departures";
 import { openCookieSettings } from "@/lib/consent";
 
 interface FooterProps {
-  trips: TripCardData[];
   site: SiteConfig; // contact details & social links from CMS → SEO → Global
 }
 
-export function Footer({ trips, site }: FooterProps) {
+export function Footer({ site }: FooterProps) {
   const footerLogo = site.socialLinks?.footerLogo;
 
-  // Bookable trips with full itineraries (same picks as the navbar), between the two fixed links
+  // Listing pages rather than single trips, so every destination (including new ones) is covered.
+  // Trip page labels and paths come from src/data/tripPages.ts, same as the navbar's Trips menu.
   const journeyLinks = [
-    { label: "Upcoming Trips", href: "/journeys" },
-    ...trips
-      .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
-      .slice(0, 3)
-      .map((card) => ({ label: card.destination, href: `/journeys/${card.slug}` })),
-    { label: "Private Group Tours", href: "/contact" },
+    { label: "All Journeys", href: "/journeys" },
+    ...(["upcoming", "past", "solo", "custom"] as const).map((key) => ({
+      label: TRIP_PAGES[key].label,
+      href: TRIP_PAGES[key].path,
+    })),
   ];
 
   const [email, setEmail] = useState("");

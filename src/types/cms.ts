@@ -170,9 +170,9 @@ export interface WhyWeStartedContent extends Heading {
   tagline: string;
   description: string;
   mainImage: string;
-  mainImageAlt: string;
+  mainImageAlt?: string; // optional in the CMS; components fall back to a description
   polaroidImage: string;
-  polaroidImageAlt: string;
+  polaroidImageAlt?: string;
   polaroidNote: string;
   item1Title: string;
   item2Title: string;
@@ -186,9 +186,9 @@ export interface WhatWeBelieveContent extends Heading {
   tagline: string;
   description: string;
   mainImage: string;
-  mainImageAlt: string;
+  mainImageAlt?: string; // optional in the CMS; components fall back to a description
   polaroidImage: string;
-  polaroidImageAlt: string;
+  polaroidImageAlt?: string;
   polaroidCaption: string;
   footerNote: string;
   pillars: { title: string; desc: string }[];
@@ -201,7 +201,7 @@ export interface MeetFounderContent extends Heading {
   founderFullName: string;
   founderTitle: string;
   founderPhoto: string;
-  imageAlt: string;
+  imageAlt?: string; // optional in the CMS; the component falls back to the founders' names
   leadQuote: string;
   story: string;
   closingNote: string;
@@ -221,7 +221,7 @@ export interface JoinTribeContent {
   secondaryButtonText: string;
   secondaryButtonLink: string;
   blobImage: string;
-  blobImageAlt: string;
+  blobImageAlt?: string;
   polaroidNote: string;
   footerTag: string;
 }
@@ -300,7 +300,7 @@ export interface JourneysSections {
 // ---------- FAQs ----------
 
 export interface FaqsSections {
-  FaqsHeroSection: Heading & { tagline: string; description: string; bannerImage: string; bannerAlt: string };
+  FaqsHeroSection: Heading & { tagline: string; description: string; bannerImage: string; bannerAlt?: string };
   FaqsAccordionSection: { sidebarTitle: string; categories: FaqCategory[] };
   FaqsCtaSection: {
     tagline: string;

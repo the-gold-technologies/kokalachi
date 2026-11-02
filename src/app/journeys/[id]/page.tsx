@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JourneyDetail } from "@/components/journeys/JourneyDetail";
+import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getTrip, getTrips } from "@/lib/content";
 
@@ -36,7 +37,9 @@ export default async function JourneyPage({ params }: Props) {
   return (
     <>
       <JsonLd schema={trip.seo.schema} />
-      <JourneyDetail trip={trip} otherTrips={trips.filter((t) => t.id !== trip.id).slice(0, 3)} />
+      <JourneyDetail trip={trip} />
+      {/* Other trips to explore, leaving out this one */}
+      <UpcomingJourneysStrip trips={trips} excludeSlug={trip.slug} />
     </>
   );
 }

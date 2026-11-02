@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, PenLine } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { formatBlogDate, getReadingTime } from "@/data/blogs";
-import { getBlogPosts, getBlogsPage, headingTag, seoMetadata } from "@/lib/content";
+import { getBlogPosts, getBlogsPage, getTrips, headingTag, seoMetadata } from "@/lib/content";
 
 // Link-preview version of the hero: 1200×630 JPG so WhatsApp can show it
 const ogImage = (src: string) =>
@@ -16,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogsPage() {
-  const [{ sections, seo }, posts] = await Promise.all([getBlogsPage(), getBlogPosts()]);
+  const [{ sections, seo }, posts, trips] = await Promise.all([getBlogsPage(), getBlogPosts(), getTrips()]);
   const [featured, ...rest] = posts;
   const hero = sections.BlogHeroSection;
   const cta = sections.BlogCtaSection;
@@ -164,6 +165,8 @@ export default async function BlogsPage() {
           </div>
         </div>
       </section>
+
+      <UpcomingJourneysStrip trips={trips} />
     </div>
   );
 }

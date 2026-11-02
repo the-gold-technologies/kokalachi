@@ -45,6 +45,15 @@ export function getUpcomingDepartures(tour: TourPackage): Departure[] {
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
 }
 
+// Departures that have already started (the ones getUpcomingDepartures drops), newest first.
+// Closed dates are left out, since they may never have run.
+export function getPastDepartures(tour: TourPackage): Departure[] {
+  const today = todayIST();
+  return (tour.departures ?? [])
+    .filter((d) => d.startDate < today && d.status !== "closed")
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
+}
+
 export function isSoldOut(departure: Departure): boolean {
   return departure.status === "soldout" || departure.spotsLeft === 0;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import {
   MapPin,
@@ -14,13 +14,20 @@ import {
 } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import type { HeroContent } from "@/types/cms";
+import type { TripCardData } from "@/data/trips";
+import { datesFromSelection, destinationSuggestions, searchTarget } from "@/lib/tripSearch";
 import type { HeadingTag } from "@/lib/content";
+
+// Today in India as "YYYY-MM-DD" (trip dates are Indian dates)
+const todayIST = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date());
 
 export function HeroSection({
   content,
+  trips,
   headingTag: Heading = "h1",
 }: {
   content: HeroContent;
+  trips: TripCardData[]; // for the search: where it leads, and which destinations to suggest
   headingTag?: HeadingTag;
 }) {
   const router = useRouter();
@@ -35,10 +42,10 @@ export function HeroSection({
   const [isDatesOpen, setIsDatesOpen] = useState(false);
   const [isTravellersOpen, setIsTravellersOpen] = useState(false);
 
-  // Interactive Calendar state
-  const [calMonth, setCalMonth] = useState(8); // September (0-indexed)
-  const [calYear, setCalYear] = useState(2026);
-  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  // Interactive Calendar state: opens on the current month; pickedDate is the chosen day ("YYYY-MM-DD")
+  const [calMonth, setCalMonth] = useState(() => Number(todayIST().slice(5, 7)) - 1); // 0-indexed
+  const [calYear, setCalYear] = useState(() => Number(todayIST().slice(0, 4)));
+  const [pickedDate, setPickedDate] = useState<string | null>(null);
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +66,8 @@ export function HeroSection({
   }, []);
 
   const { popularDestinations, quickDatePresets } = content;
+  // CMS destinations that have trips, plus trip destinations the list doesn't cover
+  const suggestions = useMemo(() => destinationSuggestions(trips, popularDestinations), [trips, popularDestinations]);
 
   const monthNames = [
     "January",
@@ -101,40 +110,41 @@ export function HeroSection({
     }
   };
 
+  const isoForDay = (day: number) =>
+    `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
   const handleDateSelect = (day: number) => {
-    setSelectedDay(day);
+    setPickedDate(isoForDay(day));
     const formatted = `${monthNames[calMonth].slice(0, 3)} ${day}, ${calYear}`;
     setSelectedDates(formatted);
     setIsDatesOpen(false);
   };
 
   const handlePresetSelect = (preset: string) => {
-    setSelectedDay(null);
+    setPickedDate(null);
     setSelectedDates(preset);
     setIsDatesOpen(false);
   };
 
-  const handleSearch = () => {
-    const section = document.getElementById("upcoming-journeys");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push("/journeys");
-    }
+  // One matching trip opens that trip; otherwise /trips/upcoming opens with the filters applied
+  // (see lib/tripSearch). Travellers doesn't narrow anything: every trip takes solo travellers and groups.
+  const handleSearch = (query = destination) => {
+    const dates = datesFromSelection(selectedDates === "Select dates" ? "" : selectedDates, pickedDate ?? undefined);
+    router.push(searchTarget(trips, query, dates));
   };
 
+  // Popular searches search straight away (keeping any dates already chosen)
   const handleTagClick = (dest: string) => {
     setDestination(dest);
-    const section = document.getElementById("upcoming-journeys");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    handleSearch(dest);
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full flex items-center justify-start pt-28 pb-24 lg:pt-40 lg:pb-16 select-none"
+      // z-20 lifts the hero (and its search dropdowns) above the next section, whose content sits
+      // at z-10; it stays below the navbar (z-50) and the mobile menu (z-60)
+      className="relative z-20 min-h-screen w-full flex items-center justify-start pt-28 pb-24 lg:pt-40 lg:pb-16 select-none"
     >
       {/* Background Image Container with Overflow Hidden */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -201,6 +211,12 @@ export function HeroSection({
                     type="text"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleSearch();
+                      }
+                    }}
                     placeholder={content.searchPlaceholder}
                     className="text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 placeholder:font-normal focus:outline-none bg-transparent w-full cursor-pointer"
                   />
@@ -214,7 +230,7 @@ export function HeroSection({
                     {content.popularDestinationsTitle}
                   </div>
                   <div className="grid grid-cols-1 gap-0.5">
-                    {popularDestinations.map((dest) => (
+                    {suggestions.map((dest) => (
                       <button
                         key={dest}
                         type="button"
@@ -347,16 +363,20 @@ export function HeroSection({
                       length: getDaysInMonth(calYear, calMonth),
                     }).map((_, i) => {
                       const dayNum = i + 1;
-                      const isSelected = selectedDay === dayNum;
+                      const isSelected = pickedDate === isoForDay(dayNum);
+                      const isPast = isoForDay(dayNum) < todayIST();
                       return (
                         <button
                           key={`day-${dayNum}`}
                           type="button"
+                          disabled={isPast}
                           onClick={() => handleDateSelect(dayNum)}
                           className={`w-8 h-8 rounded-full text-xs font-medium flex items-center justify-center transition-all ${
                             isSelected
                               ? "bg-[#0E5A60] text-white font-bold shadow-sm scale-105"
-                              : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                              : isPast
+                                ? "text-slate-300 cursor-not-allowed"
+                                : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                           }`}
                         >
                           {dayNum}
@@ -439,7 +459,7 @@ export function HeroSection({
             {/* Search CTA Button */}
             <button
               type="button"
-              onClick={handleSearch}
+              onClick={() => handleSearch()}
               className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl md:rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0"
             >
               <Search className="w-4 h-4 text-white" />
@@ -452,7 +472,7 @@ export function HeroSection({
             <span className="text-xs sm:text-[13px] font-normal text-white/80 mr-1">
               {content.popularSearchesLabel}
             </span>
-            {popularDestinations.slice(0, 5).map((tag) => (
+            {suggestions.slice(0, 5).map((tag) => (
               <button
                 key={tag}
                 type="button"

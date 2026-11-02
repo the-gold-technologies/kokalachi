@@ -38,7 +38,7 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col bg-white text-slate-900 antialiased selection:bg-[#0E5A60] selection:text-white">
       <div className="flex-grow">
         {/* Section 1: Hero — Brand introduction, value proposition & primary CTA */}
-        <HeroSection content={sections.HeroSection} headingTag={headingTag(site.headingOptions)} />
+        <HeroSection content={sections.HeroSection} trips={trips} headingTag={headingTag(site.headingOptions)} />
 
         {/* Section 2: Why We Exist — Pain points of planning & problem framing */}
         <WhyWeExistSection content={sections.WhyWeExistSection} />

@@ -1,4 +1,5 @@
 import { getBlogPosts, getPageSeoRows, getSiteConfig, getTrips } from "@/lib/content";
+import { TRIP_PAGES, TRIP_PAGE_ORDER } from "@/data/tripPages";
 
 // CMS → SEO → Sitemap & Robots decides what is served here: nothing when the sitemap is switched
 // off, the uploaded XML when there is one, otherwise a sitemap built from the CMS content below.
@@ -26,6 +27,8 @@ export async function GET() {
         path: page.slug === "home" ? "" : `/${page.slug}`,
         priority: page.slug === "home" ? "1.0" : "0.8",
       })),
+    // The /trips pages aren't CMS pages, so they're listed from their config
+    ...TRIP_PAGE_ORDER.map((key) => ({ path: TRIP_PAGES[key].path, priority: key === "all" ? "0.8" : "0.7" })),
     ...trips.filter((trip) => !trip.seo.noIndex).map((trip) => ({ path: `/journeys/${trip.slug}`, priority: "0.7" })),
     ...posts
       .filter((post) => !post.seo.noIndex)

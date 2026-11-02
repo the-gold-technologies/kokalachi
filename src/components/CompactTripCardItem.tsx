@@ -23,7 +23,7 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
       className="bg-white rounded-3xl p-2 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col border border-slate-100 relative cursor-pointer font-sans h-full"
     >
       {/* Image Section */}
-      <div className="relative h-40 w-full overflow-hidden rounded-2xl mb-2 bg-slate-100">
+      <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl mb-3 bg-slate-100">
         {card.images &&
           card.images.map((img, idx) => (
             <img
@@ -62,13 +62,13 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
       </div>
 
       {/* Content Section */}
-      <div className="px-2 pb-2">
-        <h3 className="text-md font-bold text-[#0E5A60] font-serif leading-tight mb-2 group-hover:text-[#0E5A60] transition-colors line-clamp-2">
+      <div className="px-2 pb-2 flex flex-col flex-1">
+        <h3 className="text-base sm:text-lg font-bold text-[#0E5A60] font-serif leading-tight mb-1 group-hover:text-[#0E5A60] transition-colors line-clamp-2">
           {card.tourPackage.title}
         </h3>
 
         {/* Key Stats */}
-        <div className="flex flex-col gap-1.5 my-3">
+        <div className="flex flex-col gap-1.5 my-2.5">
           <div className="flex items-center flex-wrap gap-x-3 gap-y-1.5">
             <div className="flex items-center gap-1 text-[11px] text-slate-600">
               <Clock size={13} className="text-[#0E5A60] opacity-80 shrink-0" />

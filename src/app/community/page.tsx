@@ -5,7 +5,8 @@ import { FaInstagram } from "react-icons/fa6";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { TripStoryChapter } from "@/components/community/TripStoryChapter";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPage, headingTag, seoMetadata } from "@/lib/content";
+import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
+import { getPage, getTrips, headingTag, seoMetadata } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { sections, seo } = await getPage("community");
@@ -14,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CommunityPage() {
-  const { sections, seo } = await getPage("community");
+  const [{ sections, seo }, trips] = await Promise.all([getPage("community"), getTrips()]);
   const hero = sections.CommunityHeroSection;
   const communityTrips = sections.CommunityChaptersSection.chapters;
   const cta = sections.CommunityCtaSection;
@@ -68,6 +69,9 @@ export default async function CommunityPage() {
           </div>
         ))}
       </div>
+
+      {/* Upcoming Journeys, placed before the CTA */}
+      <UpcomingJourneysStrip trips={trips} inline />
 
       {/* ================= SHARE YOUR STORY ================= */}
       <section className="relative py-20 sm:py-24 overflow-hidden border-t border-amber-900/10">
