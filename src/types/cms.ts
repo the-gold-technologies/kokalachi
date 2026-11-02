@@ -78,7 +78,7 @@ export interface WhyWeExistContent extends Heading {
 export interface HowItWorksContent extends Heading {
   tag: string;
   description: string;
-  steps: { title: string; description: string; image?: string; tag?: string; stepNumber?: number }[];
+  steps: { title: string; description: string; points?: string[] }[];
   ctaPrimaryText: string;
   ctaPrimaryUrl: string;
   ctaSecondaryText: string;
@@ -92,6 +92,7 @@ export interface HowItWorksContent extends Heading {
   step2Message2Author: string;
   step2Message2Text: string;
   step2Message3Text: string;
+  step3Image?: string;
 }
 
 export interface DifferenceContent extends Heading {

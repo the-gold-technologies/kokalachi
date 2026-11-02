@@ -17,29 +17,27 @@ interface HowItWorksSectionProps {
 const FALLBACK_TRAVEL_PHOTO =
   "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=85&w=800";
 
+// The checklist lines the site showed before they moved into the CMS. Only used while a step has
+// never been saved with points; safe to delete once How It Works is saved in the CMS.
+const UNSAVED_POINTS = [
+  ["Small groups, fixed departure dates", "Full itinerary before you book"],
+  ["Say hello before departure", "Ask questions & share plans"],
+  ["Trip host with you throughout", "Come home with new friends"],
+];
+
 export function HowItWorksSection({ content, trips, story }: HowItWorksSectionProps) {
-  // Step copy comes from the CMS; the icon, checklist and live preview belong to each position
+  // Step text and checklist come from the CMS; the icon and live preview belong to each position
   const visuals = [
-    {
-      icon: Compass,
-      points: ["Small groups, fixed departure dates", "Full itinerary before you book"],
-      preview: <TripsPreview trips={trips} content={content} />,
-    },
-    {
-      icon: Users,
-      points: ["Say hello before departure", "Ask questions & share plans"],
-      preview: <ChatPreview content={content} />,
-    },
-    {
-      icon: Plane,
-      points: ["Trip host with you throughout", "Come home with new friends"],
-      preview: <TravelPreview story={story} />,
-    },
+    { icon: Compass, preview: <TripsPreview trips={trips} content={content} /> },
+    { icon: Users, preview: <ChatPreview content={content} /> },
+    { icon: Plane, preview: <TravelPreview story={story} image={content.step3Image} /> },
   ];
   const steps = content.steps.slice(0, visuals.length).map((step, i) => ({
     ...visuals[i],
     title: step.title,
     text: step.description,
+    // Until the section is saved once with checklist points, keep showing the original ones
+    points: (step.points ?? UNSAVED_POINTS[i]).filter((point) => point.trim()),
   }));
 
   return (
@@ -94,6 +92,7 @@ export function HowItWorksSection({ content, trips, story }: HowItWorksSectionPr
                       {step.title}
                     </h3>
                     <p className="text-slate-600 text-sm leading-relaxed mb-4">{step.text}</p>
+                    {step.points.length > 0 && (
                     <ul className="mt-auto space-y-2">
                       {step.points.map((point) => (
                         <li key={point} className="flex items-center gap-2.5 text-sm text-[#0E5A60] font-medium">
@@ -104,6 +103,7 @@ export function HowItWorksSection({ content, trips, story }: HowItWorksSectionPr
                         </li>
                       ))}
                     </ul>
+                    )}
                   </div>
                 </div>
               </li>
@@ -202,12 +202,12 @@ function ChatPreview({ content }: { content: HowItWorksContent }) {
   );
 }
 
-// Step 3: a real trip photo and a line from a real traveller
-function TravelPreview({ story }: { story?: StoryEntry }) {
+// Step 3: the CMS photo (or the story's own trip photo) and a line from a real traveller
+function TravelPreview({ story, image }: { story?: StoryEntry; image?: string }) {
   return (
     <div className="relative h-full">
       <img
-        src={story?.trip.coverImage ?? FALLBACK_TRAVEL_PHOTO}
+        src={image || (story?.trip.coverImage ?? FALLBACK_TRAVEL_PHOTO)}
         alt={story ? `${story.trip.destination} trip` : "Friends travelling together"}
         loading="lazy"
         className="absolute inset-0 w-full h-full object-cover"
