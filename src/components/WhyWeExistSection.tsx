@@ -20,26 +20,24 @@ import type { WhyWeExistContent } from "@/types/cms";
 export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
   const kokalachiPhotos = content.photos;
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
-  // Chat animation steps:
-  // 0: Rohit ("Guys, shall we do Bali...?")
-  // 1: Neha ("I'm in!")
-  // 2: Aman ("Sorry guys, can't get leave...")
-  // 3: Priya ("Maybe next year?")
-  // 4: System ("No replies...")
-  // 5: Finished -> Left side fades, Right side active & bright
+  // Chat animation: step i reveals message i; step === finalStep means all messages are in,
+  // the chat fades and the Kokalachi card lights up.
+  const messages = content.chatMessages || [];
+  const finalStep = messages.length;
+  const lastMsgIdx = Math.max(finalStep - 1, 0);
   const [step, setStep] = useState(0);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Photo carousel auto timer - only slides when the right side is active (step === 5)
   useEffect(() => {
-    if (step !== 5) return;
+    if (step !== finalStep) return;
 
     const timer = setInterval(() => {
       setActivePhotoIdx((prev) => (prev + 1) % kokalachiPhotos.length);
     }, 2000);
     return () => clearInterval(timer);
-  }, [step]);
+  }, [step, finalStep, kokalachiPhotos.length]);
 
   // Intersection observer to trigger chat sequence when section is visible
   useEffect(() => {
@@ -63,27 +61,27 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
   useEffect(() => {
     if (!isIntersecting) return;
 
-    if (step < 5) {
+    if (step < finalStep) {
       // 1.4s delay per individual message
       const timer = setTimeout(() => {
         setStep((prev) => prev + 1);
       }, 1400);
       return () => clearTimeout(timer);
     } else {
-      // Step === 5 (Finished state): hold for 9 seconds before auto-restarting the loop
+      // Finished state: hold for 9 seconds before auto-restarting the loop
       const resetTimer = setTimeout(() => {
         setStep(0);
       }, 9000);
       return () => clearTimeout(resetTimer);
     }
-  }, [isIntersecting, step]);
+  }, [isIntersecting, step, finalStep]);
 
   const handleReplay = () => {
     setStep(0);
   };
 
-  const isLeftFaded = step === 5;
-  const isRightFaded = step < 5;
+  const isLeftFaded = step === finalStep;
+  const isRightFaded = step < finalStep;
 
   return (
     <section
@@ -164,7 +162,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                     {/* Callout 2: Plans change */}
                     <div
                       className={`absolute -left-2 top-60 text-right transition-opacity duration-500 ${
-                        step >= 2 ? "opacity-100" : "opacity-0"
+                        step >= Math.min(2, lastMsgIdx) ? "opacity-100" : "opacity-0"
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold whitespace-nowrap block font-script">
@@ -187,7 +185,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                     {/* Callout 3: The trip never happens */}
                     <div
                       className={`absolute -left-4 bottom-24 text-right transition-opacity duration-500 ${
-                        step >= 4 ? "opacity-100" : "opacity-0"
+                        step >= lastMsgIdx ? "opacity-100" : "opacity-0"
                       }`}
                     >
                       <span className="text-sm sm:text-base text-[#4A3E3D] font-bold leading-tight block text-right max-w-[100px] font-script">
@@ -238,7 +236,7 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
 
                     {/* Messages Container spanning full inner height */}
                     <div className="flex-1 flex flex-col justify-between space-y-3 pt-1 pb-1 font-sans">
-                      {(content.chatMessages || []).map((msg, i) => (
+                      {messages.map((msg, i) => (
                         <div
                           key={i}
                           className={`font-sans transition-all duration-500 transform ${
