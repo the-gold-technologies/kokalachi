@@ -90,6 +90,9 @@ export default async function RootLayout({
           trips={trips}
           latestPost={posts[0]}
           logos={{ dark: site.logo, light: site.socialLinks?.navbarLightLogo }}
+          whatsapp={site.socialLinks?.whatsapp}
+          phone={site.phone}
+          topBar={site.topBar}
         />
         <main className="flex-grow">{children}</main>
         <Footer site={site} />

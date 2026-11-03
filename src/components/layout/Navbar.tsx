@@ -1,566 +1,371 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  ChevronDown,
-  User,
-  Menu,
-  X,
-  MapPin,
-  Star,
-  FileText,
-  Info,
-  Briefcase,
-  Users,
-  HelpCircle,
-  AlertTriangle,
-  Image as ImageIcon,
-  Compass,
-  Phone,
-  Mountain,
-  ShieldCheck,
-  Heart,
-  ArrowRight,
-} from "lucide-react";
+import { ChevronDown, Menu, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
+import { PiAddressBookTabs } from "react-icons/pi";
 import type { TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
-import { TRIP_PAGES } from "@/data/tripPages";
-import { formatShortDate, getNextDeparture, hasFullDetails, isBookingOpen } from "@/lib/departures";
+import type { TopBarConfig } from "@/types/cms";
+import { buildNavData, isCurrent, NAV_ITEMS, whatsappHref, type MenuKey } from "./nav/navData";
+import { NavPanel, PANEL_BG } from "./nav/NavPanels";
+import { MobileMenu } from "./nav/MobileMenu";
+import { TopBar } from "./nav/TopBar";
 
-interface DropdownItem {
-  title: string;
-  tag?: string;
-  desc: string;
-  image: string;
-  href?: string;
-}
-
-const tripBadge = (card: TripCardData) => {
-  const next = getNextDeparture(card.tourPackage);
-  return card.featured ? "New" : next ? `Departs ${formatShortDate(next.startDate)}` : "Coming Soon";
-};
-
-// Menus built from the CMS trips and newest blog post (passed in by the root layout)
-function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined) {
-  // Journeys menu: a few vibes to browse by, each opening /journeys pre-filtered
-  const journeyCategories = [
-    { id: "Adventure", label: "Mountains & Treks" },
-    { id: "SlowTravel", label: "Slow Travel" },
-    { id: "BeachEscape", label: "Beaches & Islands" },
-    { id: "FirstTimers", label: "First-Timer Friendly" },
-    { id: "WomenOnly", label: "Women Only" },
-  ]
-    .map((cat) => {
-      const trips = tripCards.filter((card) => card.categories.includes(cat.id));
-      return {
-        title: cat.label,
-        desc: `${trips.length} ${trips.length === 1 ? "journey" : "journeys"}`,
-        image: trips[0]?.images[0].replace("w=800", "w=300") ?? "",
-        href: `/journeys?category=${cat.id}`,
-      };
-    })
-    .filter((cat) => cat.image);
-
-  // Big photo cards: the next bookable trips with full itineraries (featured first)
-  const handpickedTrips = tripCards
-    .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
-    .slice(0, 3);
-
-  const dropdownData: Record<string, DropdownItem[]> = {
-    Journeys: [
-      {
-        title: "All Journeys",
-        tag: "Explore All",
-        desc: "Browse our complete slow-travel collection.",
-        image:
-          "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300",
-        href: "/journeys",
-      },
-      ...journeyCategories,
-    ],
-    // The /trips sub-pages (text in src/data/tripPages.ts)
-    Trips: (
-      [
-        ["upcoming", "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300"],
-        ["past", "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300"],
-        ["custom", "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300"],
-        ["solo", "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300"],
-      ] as const
-    ).map(([key, image]) => {
-      const page = TRIP_PAGES[key];
-      return { title: page.label, tag: page.menuTag, desc: page.menuDesc, image, href: page.path };
-    }),
-    Blogs: [
-      // Newest blog post first, as the big tile
-      ...(latestPost ? [latestPost] : [])
-        .map((post) => ({
-          title: post.heroLead,
-          tag: "New Story",
-          desc: post.excerpt,
-          image: post.heroImage,
-          href: `/blogs/${post.slug}`,
-        })),
-      {
-        title: "The Kokalachi Journal",
-        tag: "All Blogs",
-        desc: "Honest guides & stories for curious travellers.",
-        image:
-          "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=300",
-        href: "/blogs",
-      },
-      {
-        title: "Moments Captured",
-        tag: "Photo Diary",
-        desc: "Visual memories, polaroids & photo tracks.",
-        image: "/about_hero_polaroid.jpg",
-        href: "/#moments",
-      },
-      {
-        title: "Why We Started",
-        tag: "Our Vision",
-        desc: "The story, values & beliefs behind our tribe.",
-        image: "/about_why_started.jpg",
-        href: "/about#why-we-started",
-      },
-    ],
-  };
-
-  return { journeyCategories, handpickedTrips, dropdownData };
-}
+// Journeys · Trips · Blogs · Community · About Us, where the first three open a menu on hover
+// (or click / Enter). A value line above says what we sell; WhatsApp and Contact Us sit on the right.
 
 interface NavbarProps {
   trips: TripCardData[];
   latestPost?: BlogPost;
   logos: { dark?: string | null; light?: string | null }; // from CMS → SEO → Global
+  whatsapp?: string | null; // CMS → SEO → Global → social links (number or wa.me link)
+  phone?: string | null;
+  topBar?: TopBarConfig | null; // CMS → SEO → Global → Top bar
 }
 
-export function Navbar({ trips, latestPost, logos }: NavbarProps) {
+export function Navbar({ trips, latestPost, logos, whatsapp, phone, topBar }: NavbarProps) {
   const pathname = usePathname();
-  const { journeyCategories, handpickedTrips, dropdownData } = React.useMemo(
-    () => buildMenus(trips, latestPost),
-    [trips, latestPost],
-  );
+  const data = useMemo(() => buildNavData(trips, latestPost, topBar), [trips, latestPost, topBar]);
+  const wa = whatsappHref(whatsapp);
+  const tel = phone ? `tel:${phone.replace(/[^+\d]/g, "")}` : null;
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [openMenu, setOpenMenu] = useState<MenuKey | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  // Sliding highlight behind the hovered/open menu label
+  const [pill, setPill] = useState({ left: 0, width: 0, visible: false });
+
+  const headerRef = useRef<HTMLElement>(null);
+  const triggers = useRef<Partial<Record<MenuKey, HTMLButtonElement | null>>>({});
+
+  // Close everything after a navigation (also covers the browser back button)
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpenMenu(null);
+    setMobileOpen(false);
+    setPill((p) => ({ ...p, visible: false }));
+  }
+
+  const movePillTo = (el: HTMLElement | null | undefined) => {
+    if (el) setPill({ left: el.offsetLeft, width: el.offsetWidth, visible: true });
+  };
+
+  const closeMenu = useCallback(() => {
+    setOpenMenu(null);
+    setPill((p) => ({ ...p, visible: false }));
+  }, []);
+
+  // Hover intent: a short delay before opening (so passing the mouse over doesn't flash a menu)
+  // and a grace period before closing (so the mouse can travel from the label down to the panel).
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearTimers = () => {
+    if (openTimer.current) clearTimeout(openTimer.current);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    openTimer.current = closeTimer.current = null;
+  };
+  useEffect(() => clearTimers, []);
+
+  const hoverOpen = (key: MenuKey, el: HTMLButtonElement) => {
+    clearTimers();
+    movePillTo(el);
+    // Already browsing the menus: switch at once. Otherwise wait a moment.
+    if (openMenu) setOpenMenu(key);
+    else openTimer.current = setTimeout(() => setOpenMenu(key), 140);
+  };
+  const scheduleClose = () => {
+    clearTimers();
+    closeTimer.current = setTimeout(closeMenu, 260);
+  };
+  const keepOpen = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = null;
+  };
+
+  // Click still works for keyboard and touch. A mouse click never closes a menu the hover just opened.
+  const lastPointer = useRef<string>("");
+  const clickMenu = (key: MenuKey, el: HTMLButtonElement) => {
+    clearTimers();
+    movePillTo(el);
+    if (openMenu === key && lastPointer.current !== "mouse") closeMenu();
+    else setOpenMenu(key);
+  };
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // While a menu is open: Esc closes it (focus back on its label), a click outside closes it
+  useEffect(() => {
+    if (!openMenu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      triggers.current[openMenu]?.focus();
+      closeMenu();
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (!headerRef.current?.contains(e.target as Node)) closeMenu();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, [openMenu, closeMenu]);
+
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   // Pages whose hero is light (cream), so the see-through navbar needs dark text there
   const onLightHero = pathname === "/about";
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [expandedMobileDropdown, setExpandedMobileDropdown] = useState<
-    string | null
-  >(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
-
-  const navLinks = [
-    { name: "About Us", href: "/about", hasDropdown: false },
-    { name: "Journeys", href: "/journeys", hasDropdown: true },
-    { name: "Trips", href: "/trips", hasDropdown: true },
-    { name: "Blogs", href: "/blogs", hasDropdown: true },
-    { name: "Community", href: "/community", hasDropdown: false },
-  ];
-
-  // See-through over the hero on every page, white pill once scrolled
-  const isSolid = isScrolled;
+  const isSolid = isScrolled || openMenu !== null;
   const darkText = isSolid || onLightHero;
+  const logo = darkText ? logos.dark : logos.light;
 
   return (
     <>
+      {/* Dim the page while a menu is open; clicking it closes the menu */}
+      <div
+        aria-hidden
+        className={`fixed inset-0 z-40 hidden lg:block bg-[#0B2A3D]/30 backdrop-blur-[2px] transition-opacity duration-300 ${
+          openMenu ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
       <header
+        ref={headerRef}
         className={`fixed inset-x-0 z-50 transition-all duration-500 ease-in-out ${
-          isSolid ? "top-4" : "top-0 py-3"
+          isScrolled ? "top-4" : "top-0 pb-2"
         }`}
       >
-        {/* Same gutter as every section; the pill reaches a little past it so the logo & CTA line up with page content */}
-        <div className="site-container">
+        {/* Soft shade behind the see-through navbar so white text reads on bright photos */}
         <div
-          className={`flex items-center justify-between rounded-full border -mx-3 px-3 md:-mx-5 md:px-5 py-3 transition-all duration-500 ease-in-out ${
-            isSolid
-              ? "bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border-gray-100/80"
-              : "bg-transparent border-transparent"
+          aria-hidden
+          className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[150%] bg-gradient-to-b from-[#0B2A3D]/55 via-[#0B2A3D]/20 to-transparent transition-opacity duration-500 ${
+            isScrolled || onLightHero ? "opacity-0" : "opacity-100"
           }`}
-        >
-          {/* Main Logo Image */}
-          <Link href="/" className="flex items-center gap-3">
-            {(darkText ? logos.dark : logos.light) && <img
-              src={(darkText ? logos.dark : logos.light) ?? undefined}
-              alt="Kokalachi Logo"
-              className={`w-auto object-contain hover:scale-105 transition-transform ${
-                isSolid ? "h-6" : "h-7"
-              }`}
-            />}
-          </Link>
+        />
 
-          {/* Desktop Nav with Hover Dropdowns */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <div
-                key={link.name}
-                className="relative py-2"
-                onMouseEnter={() =>
-                  link.hasDropdown && setActiveDropdown(link.name)
+        {/* Top bar: rotating facts + live trip info (CMS → SEO → Global → Top bar). Folds away once scrolled. */}
+        {data.showTopBar && (
+          <div
+            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-in-out ${
+              isScrolled ? "grid-rows-[0fr] opacity-0" : "grid-rows-[1fr] opacity-100"
+            }`}
+          >
+            <div className="overflow-hidden">
+              <TopBar facts={data.facts} ticker={data.ticker} light={onLightHero} hidden={isScrolled} />
+            </div>
+          </div>
+        )}
+
+        {/* Same gutter as every section; the pill reaches a little past it so the logo & CTA line up with page content */}
+        <div className={`site-container ${isScrolled ? "" : "pt-1.5"}`}>
+          <div
+            className={`flex items-center justify-between rounded-full border -mx-3 px-3 md:-mx-5 md:px-5 py-2.5 transition-all duration-500 ease-in-out ${
+              isSolid
+                ? "bg-white/95 backdrop-blur-md shadow-[0_15px_40px_rgba(28,43,56,0.12)] border-gray-100/80"
+                : "bg-transparent border-transparent"
+            }`}
+          >
+            <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Kokalachi home">
+              {logo && (
+                <img
+                  src={logo}
+                  alt="Kokalachi"
+                  className="h-7 w-auto object-contain"
+                />
+              )}
+            </Link>
+
+            {/* Desktop menus: click to open */}
+            <nav
+              aria-label="Main"
+              className="hidden lg:flex relative items-center"
+              onMouseLeave={() => {
+                if (openMenu) {
+                  movePillTo(triggers.current[openMenu]);
+                  scheduleClose();
+                } else {
+                  clearTimers();
+                  setPill((p) => ({ ...p, visible: false }));
                 }
-                onMouseLeave={() => link.hasDropdown && setActiveDropdown(null)}
-              >
-                <Link
-                  href={link.href}
-                  className={`flex items-center gap-1 font-medium text-xs uppercase tracking-widest transition-colors duration-300 font-montserrat ${
-                    darkText
-                      ? "text-[#0E5A60] hover:text-[#C85A24]"
-                      : "text-white/90 hover:text-white"
+              }}
+            >
+              <span
+                aria-hidden
+                className={`absolute top-1/2 -translate-y-1/2 h-9 rounded-full transition-all duration-300 ease-out ${
+                  darkText ? "bg-[#0E5A60]/[0.07]" : "bg-white/15"
+                } ${pill.visible ? "opacity-100" : "opacity-0"}`}
+                style={{ left: pill.left, width: pill.width }}
+              />
+              {NAV_ITEMS.map((item) => {
+                const current = isCurrent(item, pathname);
+                const currentDot = current && (
+                  <span
+                    aria-hidden
+                    className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-[#D96C2C]"
+                  />
+                );
+                const textClass = (active: boolean) =>
+                  active
+                    ? darkText
+                      ? "text-[#D96C2C]"
+                      : "text-white"
+                    : darkText
+                      ? "text-[#0B2A3D] hover:text-[#0E5A60]"
+                      : "text-white/90 hover:text-white";
+                const base =
+                  "relative z-10 flex items-center gap-1.5 px-4 xl:px-5 h-10 rounded-full text-[14.5px] font-medium transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-[#D96C2C]/60";
+
+                if (item.kind === "link") {
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      aria-current={current ? "page" : undefined}
+                      onMouseEnter={(e) => {
+                        // Hovering a plain link while a menu is open closes the menu
+                        clearTimers();
+                        setOpenMenu(null);
+                        movePillTo(e.currentTarget);
+                      }}
+                      onFocus={(e) => movePillTo(e.currentTarget)}
+                      className={`${base} ${textClass(current)}`}
+                    >
+                      {item.label}
+                      {currentDot}
+                    </Link>
+                  );
+                }
+
+                const { key } = item;
+                const isOpen = openMenu === key;
+                return (
+                  <button
+                    key={key}
+                    ref={(el) => {
+                      triggers.current[key] = el;
+                    }}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls="nav-panel"
+                    aria-haspopup="true"
+                    onPointerDown={(e) => {
+                      lastPointer.current = e.pointerType;
+                    }}
+                    onKeyDown={() => {
+                      lastPointer.current = "";
+                    }}
+                    onClick={(e) => clickMenu(key, e.currentTarget)}
+                    onMouseEnter={(e) => hoverOpen(key, e.currentTarget)}
+                    onFocus={(e) => movePillTo(e.currentTarget)}
+                    className={`${base} ${textClass(isOpen)}`}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      size={15}
+                      strokeWidth={2.25}
+                      className={`opacity-70 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    />
+                    {currentDot}
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Desktop actions: chat (easy first step) + Contact Us */}
+            <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+              {(wa || tel) && (
+                <a
+                  href={wa ?? tel ?? undefined}
+                  target={wa ? "_blank" : undefined}
+                  rel={wa ? "noopener noreferrer" : undefined}
+                  aria-label={wa ? "Chat with us on WhatsApp" : "Call us"}
+                  title={wa ? "Chat with us on WhatsApp" : "Call us"}
+                  className={`grid place-items-center h-11 w-10 transition-all hover:scale-110 ${
+                    darkText ? "text-[#0E5A60] hover:text-[#25D366]" : "text-white hover:text-[#25D366]"
                   }`}
                 >
-                  {link.name}
-                  {link.hasDropdown && (
-                    <ChevronDown
-                      size={16}
-                      strokeWidth={2}
-                      className={`opacity-90 transition-transform duration-300 ${
-                        activeDropdown === link.name ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </Link>
+                  {wa ? <FaWhatsapp size={32} /> : <Phone size={26} />}
+                </a>
+              )}
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[13.5px] font-semibold pl-5 pr-4 py-2.5 shadow-[0_6px_16px_rgba(217,108,44,0.32)] hover:shadow-[0_8px_22px_rgba(217,108,44,0.42)] transition-all"
+              >
+                Contact Us
+                <PiAddressBookTabs className="w-5 h-5 transition-transform group-hover:scale-110" />
+              </Link>
+            </div>
 
-                {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
-                {link.hasDropdown && activeDropdown === link.name && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    {link.name === "Journeys" ? (
-                      <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[760px] xl:w-[860px] animate-in fade-in slide-in-from-top-2 duration-200">
-                        <div className="grid grid-cols-[230px_1fr] gap-5">
-                          {/* Browse by vibe */}
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D96C2C] mb-3 px-2">
-                              Browse by vibe
-                            </p>
-                            <div className="flex flex-col gap-1">
-                              {journeyCategories.map((cat) => (
-                                <Link
-                                  key={cat.title}
-                                  href={cat.href}
-                                  onClick={() => setActiveDropdown(null)}
-                                  className="flex items-center gap-3 p-2 rounded-xl hover:bg-[#FAF6F0] transition-colors group/cat"
-                                >
-                                  <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-slate-100">
-                                    <img
-                                      src={cat.image}
-                                      alt={cat.title}
-                                      className="w-full h-full object-cover group-hover/cat:scale-110 transition-transform duration-500"
-                                    />
-                                  </div>
-                                  <div className="flex flex-col min-w-0 flex-1">
-                                    <span className="font-bold text-[13px] text-[#0E5A60] group-hover/cat:text-[#D96C2C] transition-colors leading-snug">
-                                      {cat.title}
-                                    </span>
-                                    <span className="text-[11px] text-slate-500">{cat.desc}</span>
-                                  </div>
-                                  <ArrowRight className="w-3.5 h-3.5 text-[#D96C2C] opacity-0 -translate-x-1 group-hover/cat:opacity-100 group-hover/cat:translate-x-0 transition-all" />
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+            {/* Mobile actions: chat stays one tap away, outside the drawer */}
+            <div className="flex lg:hidden items-center gap-1.5">
+              {wa && (
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with us on WhatsApp"
+                  className={`grid place-items-center h-10 w-10 rounded-full transition-colors ${
+                    darkText ? "text-[#0E5A60] hover:bg-[#0E5A60]/[0.06]" : "text-white hover:bg-white/10"
+                  }`}
+                >
+                  <FaWhatsapp size={24} />
+                </a>
+              )}
+              <button
+                id="mobile-menu-toggle"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={mobileOpen}
+                className={`grid place-items-center h-10 w-10 rounded-full transition-colors ${
+                  darkText ? "text-[#0E5A60] hover:bg-[#0E5A60]/[0.06]" : "text-white hover:bg-white/10"
+                }`}
+              >
+                <Menu size={24} />
+              </button>
+            </div>
+          </div>
 
-                          {/* Handpicked trips as photo cards */}
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#D96C2C] mb-3">
-                              Handpicked for you
-                            </p>
-                            <div className="grid grid-cols-2 grid-rows-2 gap-3 h-[300px]">
-                              {handpickedTrips.map((card, i) => (
-                                <Link
-                                  key={card.slug}
-                                  href={`/journeys/${card.slug}`}
-                                  onClick={() => setActiveDropdown(null)}
-                                  className={`relative rounded-2xl overflow-hidden group/trip bg-slate-200 ${i === 0 ? "row-span-2" : ""}`}
-                                >
-                                  <img
-                                    src={card.images[0]}
-                                    alt={card.destination}
-                                    className="absolute inset-0 w-full h-full object-cover group-hover/trip:scale-110 transition-transform duration-700"
-                                  />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-                                  <span className="absolute top-3 left-3 text-[9.5px] font-bold uppercase tracking-wider text-white bg-[#D96C2C] px-2.5 py-1 rounded-full shadow-sm">
-                                    {tripBadge(card)}
-                                  </span>
-                                  <div className="absolute bottom-0 left-0 right-0 px-3.5 pb-3.5">
-                                    <p className={`font-serif font-semibold text-white leading-tight ${i === 0 ? "text-2xl" : "text-lg"}`}>
-                                      {card.destination}
-                                    </p>
-                                    <p className="text-[11px] text-white/80 mt-1 flex items-center gap-1">
-                                      {card.duration}
-                                      <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover/trip:opacity-100 group-hover/trip:translate-x-0 transition-all" />
-                                    </p>
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
-                          <span>Handcrafted slow-travel journeys across India &amp; beyond</span>
-                          <Link
-                            href={link.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className="font-bold text-[#0E5A60] hover:text-[#D96C2C] flex items-center gap-1.5 transition-colors shrink-0"
-                          >
-                            <span>Explore all journeys</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </Link>
-                        </div>
-                      </div>
-                    ) : (
-                    <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[720px] animate-in fade-in slide-in-from-top-2 duration-200">
-                      {/* Photo tiles: one tall, one wide, two small */}
-                      <div className="grid grid-cols-3 grid-rows-2 gap-3 h-[320px]">
-                      {dropdownData[link.name]?.map((item, i) => (
-                        <Link
-                          key={item.title}
-                          href={item.href || "#"}
-                          onClick={() => setActiveDropdown(null)}
-                          className={`relative rounded-2xl overflow-hidden group/item bg-slate-200 text-left ${i === 0 ? "row-span-2" : i === 1 ? "col-span-2" : ""}`}
-                        >
-                          <img
-                            src={item.image.replace("w=300", "w=800")}
-                            alt={item.title}
-                            className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-                          {item.tag && (
-                            <span className="absolute top-3 left-3 text-[9.5px] font-bold uppercase tracking-wider text-white bg-[#D96C2C] px-2.5 py-1 rounded-full shadow-sm">
-                              {item.tag}
-                            </span>
-                          )}
-                          <div className="absolute bottom-0 left-0 right-0 px-3.5 pb-3.5">
-                            {/* One line each, so the text stays inside the dark fade at the bottom */}
-                            <p className={`font-serif font-semibold text-white leading-tight flex items-center gap-1.5 ${i === 1 ? "text-xl" : "text-base"}`}>
-                              <span className="truncate">{item.title}</span>
-                              <ArrowRight className="w-4 h-4 shrink-0 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all" />
-                            </p>
-                            <p className="text-[11px] text-white/80 mt-1 leading-snug truncate">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                      </div>
-
-                      {/* Dropdown Footer CTA Strip */}
-                      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
-                        <span>
-                          {link.name === "Trips"
-                            ? "Every trip we run, upcoming & past"
-                            : "Guides, memories & stories from the Kokalachi tribe"}
-                        </span>
-                        <Link
-                          href={link.href}
-                          onClick={() => setActiveDropdown(null)}
-                          className="font-bold text-[#0E5A60] hover:text-[#D96C2C] flex items-center gap-1.5 transition-colors shrink-0"
-                        >
-                          <span>Explore all</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                      </div>
-                    </div>
-                    )}
-                  </div>
-                )}
+          {/* The open menu: one panel whose content cross-fades when you switch menus */}
+          {openMenu && (
+            // pt-3 instead of a margin: the gap under the pill counts as part of the panel for hover
+            <div
+              id="nav-panel"
+              onMouseEnter={keepOpen}
+              onMouseLeave={scheduleClose}
+              className="hidden lg:block -mx-3 md:-mx-5 pt-3 nav-panel-in"
+            >
+              <div
+                className="rounded-[28px] border border-white shadow-[0_30px_70px_rgba(11,42,61,0.25)] p-7 xl:p-8 max-h-[calc(100vh-120px)] overflow-y-auto"
+                style={{ backgroundColor: PANEL_BG }}
+              >
+                <div key={openMenu} className="nav-content-in">
+                  <NavPanel menu={openMenu} data={data} whatsapp={wa} close={closeMenu} />
+                </div>
               </div>
-            ))}
-          </nav>
-
-          {/* Desktop Right Actions */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/contact"
-              className={`flex items-center justify-center gap-2 font-medium text-xs uppercase tracking-widest rounded-full px-6 py-3 shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer font-sans ${
-                isSolid
-                  ? "bg-[#0E5A60] hover:bg-[#0B2A3D] text-white border border-transparent"
-                  : "bg-[#0E5A60] hover:bg-[#0B2A3D] text-white border border-white/20"
-              }`}
-            >
-              <span>Contact Us</span>
-            </Link>
-          </div>
-
-          {/* Mobile Right Actions */}
-          <div className="flex lg:hidden items-center gap-4">
-            <button
-              id="mobile-menu-toggle"
-              onClick={() => setMobileMenuOpen(true)}
-              className={`p-1 transition-colors ${
-                darkText
-                  ? "text-[#0E5A60] hover:text-[#C85A24]"
-                  : "text-white hover:text-white/80"
-              }`}
-              aria-label="Open menu"
-            >
-              <Menu size={26} />
-            </button>
-          </div>
-        </div>
+            </div>
+          )}
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 z-[60] transition-opacity duration-300 lg:hidden ${
-          mobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-      >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-
-        {/* Drawer */}
-        <div
-          className={`absolute top-0 right-0 h-full w-[80%] max-w-sm bg-[#F8F5EE] shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          {/* Drawer Header */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-[#1C2B38]"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <div className="w-8 h-8 shrink-0 rounded-full overflow-hidden border border-[#3E7C7A]/30">
-                <img
-                  src="/logo.png"
-                  alt="Kokalachi Logo"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-lg font-bold tracking-wider text-[#1C2B38]">
-                Kokalachi
-              </span>
-            </Link>
-            <button
-              id="mobile-menu-close"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-[#6B7C85] hover:text-[#1C2B38] transition-colors p-1"
-              aria-label="Close menu"
-            >
-              <X size={24} />
-            </button>
-          </div>
-
-          {/* Nav Links Scroll Area */}
-          <nav
-            className="flex flex-col px-6 py-6 gap-1 flex-1 overflow-y-auto"
-            style={{
-              scrollbarWidth: "thin",
-              scrollbarColor: "#3E7C7A transparent",
-            }}
-          >
-            {navLinks.map((link, idx) => (
-              <div key={link.name} className="flex flex-col">
-                <Link
-                  href={link.href}
-                  onClick={(e) => {
-                    if (link.hasDropdown) {
-                      e.preventDefault();
-                      setExpandedMobileDropdown(
-                        expandedMobileDropdown === link.name ? null : link.name,
-                      );
-                    } else {
-                      setMobileMenuOpen(false);
-                    }
-                  }}
-                  className={`flex items-center justify-between py-3.5 px-4 rounded-xl font-bold text-base transition-all ${
-                    link.name === "About Us"
-                      ? "text-white bg-[#3E7C7A] border border-[#3E7C7A]/30"
-                      : "text-[#1C2B38] hover:text-[#3E7C7A] hover:bg-[#3E7C7A]/5"
-                  }`}
-                  style={{ animationDelay: `${idx * 50}ms` }}
-                >
-                  {link.name}
-                  {link.hasDropdown && (
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform duration-200 ${
-                        expandedMobileDropdown === link.name
-                          ? "rotate-180 text-[#3E7C7A]"
-                          : "text-[#6B7C85]"
-                      }`}
-                    />
-                  )}
-                </Link>
-
-                {/* Mobile Dropdown Accordion List */}
-                {link.hasDropdown && expandedMobileDropdown === link.name && (
-                  <div className="flex flex-col pl-3 pr-2 py-2 gap-2 border-l-2 border-[#3E7C7A]/20 ml-4 mt-1 transition-all duration-300">
-                    {dropdownData[link.name]?.map((item) => (
-                      <Link
-                        key={item.title}
-                        href={item.href || "#"}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-3 p-2 text-sm font-semibold text-slate-700 hover:text-[#0E5A60] hover:bg-white/70 rounded-xl transition-colors"
-                      >
-                        <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-xs bg-slate-100">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                          <span className="text-xs font-bold text-[#0E5A60] truncate">{item.title}</span>
-                          <span className="text-[10.5px] text-slate-500 truncate">{item.desc}</span>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          {/* Drawer Footer */}
-          <div className="px-6 py-6 border-t border-gray-200 flex flex-col gap-4">
-            {/* Contact Us CTA Button */}
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 bg-[#0E5A60] text-white hover:bg-[#061C29] rounded-full px-6 py-3.5 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer font-sans"
-            >
-              <Phone size={15} />
-              <span>Contact Us</span>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <MobileMenu
+        open={mobileOpen}
+        onClose={closeMobile}
+        data={data}
+        logo={logos.dark}
+        pathname={pathname}
+        whatsapp={wa}
+        phone={phone}
+      />
     </>
   );
 }

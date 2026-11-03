@@ -425,4 +425,26 @@ export interface SiteConfig {
   facebookUrl: string | null;
   youtubeUrl: string | null;
   linkedinUrl: string | null;
+  topBar?: TopBarConfig | null; // the slim bar above the navbar
+}
+
+// CMS → SEO → Global → Top bar. Every field is optional: anything left empty falls back to the
+// website's defaults, so the bar works before (and without) any of this being filled in.
+export interface TopBarConfig {
+  enabled?: boolean; // false hides the bar on every page
+  // Left side, rotating. {departures} and {destinations} are replaced with live counts from the
+  // trips, e.g. "{departures} departures across {destinations} destinations".
+  facts?: string[];
+  // Right side, rotating: your own chips (sales, announcements), shown before the trip updates
+  messages?: TopBarMessage[];
+  // Right side: also show the automatic trip updates (next departure, offers, last seats). Default true.
+  showTripUpdates?: boolean;
+}
+
+export interface TopBarMessage {
+  label: string; // orange pill, e.g. "Diwali Sale"
+  text: string; // e.g. "Flat ₹2,000 off all November trips"
+  link?: string; // "/trips/upcoming" or a full URL
+  startDate?: string; // "YYYY-MM-DD", shown from this day (India time)
+  endDate?: string; // "YYYY-MM-DD", hidden after this day
 }

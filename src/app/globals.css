@@ -215,3 +215,33 @@
     max-width: 100%;
   }
 }
+
+/* Navbar menus: the panel drops in once, then its content cross-fades between menus */
+@keyframes navPanelIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes navContentIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.nav-panel-in {
+  transform-origin: top center;
+  animation: navPanelIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.nav-content-in {
+  animation: navContentIn 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.nav-stagger > * {
+  animation: navContentIn 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.nav-stagger > *:nth-child(2) { animation-delay: 40ms; }
+.nav-stagger > *:nth-child(3) { animation-delay: 80ms; }
+.nav-stagger > *:nth-child(4) { animation-delay: 120ms; }
+.nav-stagger > *:nth-child(5) { animation-delay: 160ms; }
+.nav-stagger > *:nth-child(6) { animation-delay: 200ms; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-panel-in,
+  .nav-content-in,
+  .nav-stagger > * { animation: none; }
+}
