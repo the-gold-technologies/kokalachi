@@ -337,6 +337,19 @@ export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
   return data;
 });
 
+// Menu link names from CMS → Navigation → Menu Links, by link id ("nav-trips" → "Trips").
+// Only the names come from the CMS; the navbar keeps its own URLs and default names,
+// so a CMS outage just shows the defaults.
+export const getNavLabels = cache(async (): Promise<Record<string, string>> => {
+  try {
+    const { data } = await cmsGet<{ id: string; label: string }[]>("/nav-links", [CmsTag.site]);
+    return Object.fromEntries(data.filter((l) => l.label?.trim()).map((l) => [l.id, l.label.trim()]));
+  } catch (error) {
+    console.error("[cms] menu link names unavailable, using defaults:", error);
+    return {};
+  }
+});
+
 // ---------- SEO ----------
 
 // Metadata from a CMS SEO block. CMS titles are complete ("All Journeys | Kokalachi"),

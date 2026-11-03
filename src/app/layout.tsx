@@ -47,7 +47,7 @@ import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { CustomScripts } from "@/components/analytics/CustomScripts";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getBlogPosts, getSiteConfig, getTrips } from "@/lib/content";
+import { getBlogPosts, getNavLabels, getSiteConfig, getTrips } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteConfig();
@@ -78,7 +78,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // Shared with every page through the same cached CMS reads
-  const [trips, posts, site] = await Promise.all([getTrips(), getBlogPosts(), getSiteConfig()]);
+  const [trips, posts, site, navLabels] = await Promise.all([
+    getTrips(),
+    getBlogPosts(),
+    getSiteConfig(),
+    getNavLabels(),
+  ]);
 
   return (
     <html
@@ -89,6 +94,7 @@ export default async function RootLayout({
         <Navbar
           trips={trips}
           latestPost={posts[0]}
+          navLabels={navLabels}
           logos={{ dark: site.logo, light: site.socialLinks?.navbarLightLogo }}
         />
         <main className="flex-grow">{children}</main>

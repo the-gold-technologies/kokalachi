@@ -37,25 +37,54 @@ interface DropdownItem {
   href?: string;
 }
 
+// Default menu names, by the link ids used in CMS → Navigation → Menu Links
+// (kokalachi-cms/src/lib/navLinks.ts). Admins can rename links there; the URLs stay here.
+const NAV_LABELS = {
+  "nav-about": "About Us",
+  "nav-journeys": "Journeys",
+  "nav-journeys-all": "All Journeys",
+  "nav-journeys-adventure": "Mountains & Treks",
+  "nav-journeys-slow": "Slow Travel",
+  "nav-journeys-beach": "Beaches & Islands",
+  "nav-journeys-first": "First-Timer Friendly",
+  "nav-journeys-women": "Women Only",
+  "nav-trips": "Trips",
+  "nav-trips-upcoming": TRIP_PAGES.upcoming.label,
+  "nav-trips-past": TRIP_PAGES.past.label,
+  "nav-trips-custom": TRIP_PAGES.custom.label,
+  "nav-trips-solo": TRIP_PAGES.solo.label,
+  "nav-blogs": "Blogs",
+  "nav-blogs-all": "The Kokalachi Journal",
+  "nav-blogs-moments": "Moments Captured",
+  "nav-blogs-why": "Why We Started",
+  "nav-community": "Community",
+  "nav-contact": "Contact Us",
+} as const;
+
+type NavId = keyof typeof NAV_LABELS;
+type NavLabel = (id: NavId) => string;
+
 const tripBadge = (card: TripCardData) => {
   const next = getNextDeparture(card.tourPackage);
   return card.featured ? "New" : next ? `Departs ${formatShortDate(next.startDate)}` : "Coming Soon";
 };
 
 // Menus built from the CMS trips and newest blog post (passed in by the root layout)
-function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined) {
+function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined, label: NavLabel) {
   // Journeys menu: a few vibes to browse by, each opening /journeys pre-filtered
-  const journeyCategories = [
-    { id: "Adventure", label: "Mountains & Treks" },
-    { id: "SlowTravel", label: "Slow Travel" },
-    { id: "BeachEscape", label: "Beaches & Islands" },
-    { id: "FirstTimers", label: "First-Timer Friendly" },
-    { id: "WomenOnly", label: "Women Only" },
-  ]
+  const journeyCategories = (
+    [
+      { id: "Adventure", navId: "nav-journeys-adventure" },
+      { id: "SlowTravel", navId: "nav-journeys-slow" },
+      { id: "BeachEscape", navId: "nav-journeys-beach" },
+      { id: "FirstTimers", navId: "nav-journeys-first" },
+      { id: "WomenOnly", navId: "nav-journeys-women" },
+    ] as const
+  )
     .map((cat) => {
       const trips = tripCards.filter((card) => card.categories.includes(cat.id));
       return {
-        title: cat.label,
+        title: label(cat.navId),
         desc: `${trips.length} ${trips.length === 1 ? "journey" : "journeys"}`,
         image: trips[0]?.images[0].replace("w=800", "w=300") ?? "",
         href: `/journeys?category=${cat.id}`,
@@ -68,10 +97,11 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
     .filter((card) => isBookingOpen(card) && hasFullDetails(card.tourPackage))
     .slice(0, 3);
 
-  const dropdownData: Record<string, DropdownItem[]> = {
-    Journeys: [
+  // Keyed by the top-level link's id
+  const dropdownData: Partial<Record<NavId, DropdownItem[]>> = {
+    "nav-journeys": [
       {
-        title: "All Journeys",
+        title: label("nav-journeys-all"),
         tag: "Explore All",
         desc: "Browse our complete slow-travel collection.",
         image:
@@ -80,8 +110,8 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
       },
       ...journeyCategories,
     ],
-    // The /trips sub-pages (text in src/data/tripPages.ts)
-    Trips: (
+    // The /trips sub-pages (tag & description in src/data/tripPages.ts, names from the CMS)
+    "nav-trips": (
       [
         ["upcoming", "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300"],
         ["past", "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300"],
@@ -90,9 +120,9 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
       ] as const
     ).map(([key, image]) => {
       const page = TRIP_PAGES[key];
-      return { title: page.label, tag: page.menuTag, desc: page.menuDesc, image, href: page.path };
+      return { title: label(`nav-trips-${key}`), tag: page.menuTag, desc: page.menuDesc, image, href: page.path };
     }),
-    Blogs: [
+    "nav-blogs": [
       // Newest blog post first, as the big tile
       ...(latestPost ? [latestPost] : [])
         .map((post) => ({
@@ -103,7 +133,7 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
           href: `/blogs/${post.slug}`,
         })),
       {
-        title: "The Kokalachi Journal",
+        title: label("nav-blogs-all"),
         tag: "All Blogs",
         desc: "Honest guides & stories for curious travellers.",
         image:
@@ -111,14 +141,14 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
         href: "/blogs",
       },
       {
-        title: "Moments Captured",
+        title: label("nav-blogs-moments"),
         tag: "Photo Diary",
         desc: "Visual memories, polaroids & photo tracks.",
         image: "/about_hero_polaroid.jpg",
         href: "/#moments",
       },
       {
-        title: "Why We Started",
+        title: label("nav-blogs-why"),
         tag: "Our Vision",
         desc: "The story, values & beliefs behind our tribe.",
         image: "/about_why_started.jpg",
@@ -133,14 +163,16 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined)
 interface NavbarProps {
   trips: TripCardData[];
   latestPost?: BlogPost;
+  navLabels: Record<string, string>; // menu link names from CMS → Navigation → Menu Links, by id
   logos: { dark?: string | null; light?: string | null }; // from CMS → SEO → Global
 }
 
-export function Navbar({ trips, latestPost, logos }: NavbarProps) {
+export function Navbar({ trips, latestPost, navLabels, logos }: NavbarProps) {
   const pathname = usePathname();
+  const label = React.useCallback<NavLabel>((id) => navLabels[id] || NAV_LABELS[id], [navLabels]);
   const { journeyCategories, handpickedTrips, dropdownData } = React.useMemo(
-    () => buildMenus(trips, latestPost),
-    [trips, latestPost],
+    () => buildMenus(trips, latestPost, label),
+    [trips, latestPost, label],
   );
 
   // Pages whose hero is light (cream), so the see-through navbar needs dark text there
@@ -178,13 +210,15 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { name: "About Us", href: "/about", hasDropdown: false },
-    { name: "Journeys", href: "/journeys", hasDropdown: true },
-    { name: "Trips", href: "/trips", hasDropdown: true },
-    { name: "Blogs", href: "/blogs", hasDropdown: true },
-    { name: "Community", href: "/community", hasDropdown: false },
-  ];
+  const navLinks = (
+    [
+      { id: "nav-about", href: "/about", hasDropdown: false },
+      { id: "nav-journeys", href: "/journeys", hasDropdown: true },
+      { id: "nav-trips", href: "/trips", hasDropdown: true },
+      { id: "nav-blogs", href: "/blogs", hasDropdown: true },
+      { id: "nav-community", href: "/community", hasDropdown: false },
+    ] as const
+  ).map((link) => ({ ...link, name: label(link.id) }));
 
   // See-through over the hero on every page, white pill once scrolled
   const isSolid = isScrolled;
@@ -221,10 +255,10 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
           <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <div
-                key={link.name}
+                key={link.id}
                 className="relative py-2"
                 onMouseEnter={() =>
-                  link.hasDropdown && setActiveDropdown(link.name)
+                  link.hasDropdown && setActiveDropdown(link.id)
                 }
                 onMouseLeave={() => link.hasDropdown && setActiveDropdown(null)}
               >
@@ -242,16 +276,16 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                       size={16}
                       strokeWidth={2}
                       className={`opacity-90 transition-transform duration-300 ${
-                        activeDropdown === link.name ? "rotate-180" : ""
+                        activeDropdown === link.id ? "rotate-180" : ""
                       }`}
                     />
                   )}
                 </Link>
 
                 {/* Enhanced Premium Dropdown Menu Layout with Hover Bridge */}
-                {link.hasDropdown && activeDropdown === link.name && (
+                {link.hasDropdown && activeDropdown === link.id && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-3.5 z-50">
-                    {link.name === "Journeys" ? (
+                    {link.id === "nav-journeys" ? (
                       <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[760px] xl:w-[860px] animate-in fade-in slide-in-from-top-2 duration-200">
                         <div className="grid grid-cols-[230px_1fr] gap-5">
                           {/* Browse by vibe */}
@@ -339,7 +373,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                     <div className="bg-white/98 backdrop-blur-2xl text-slate-800 rounded-[28px] border border-white/80 shadow-[0_25px_60px_rgba(0,0,0,0.22)] p-5 w-[720px] animate-in fade-in slide-in-from-top-2 duration-200">
                       {/* Photo tiles: one tall, one wide, two small */}
                       <div className="grid grid-cols-3 grid-rows-2 gap-3 h-[320px]">
-                      {dropdownData[link.name]?.map((item, i) => (
+                      {dropdownData[link.id]?.map((item, i) => (
                         <Link
                           key={item.title}
                           href={item.href || "#"}
@@ -374,7 +408,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                       {/* Dropdown Footer CTA Strip */}
                       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
                         <span>
-                          {link.name === "Trips"
+                          {link.id === "nav-trips"
                             ? "Every trip we run, upcoming & past"
                             : "Guides, memories & stories from the Kokalachi tribe"}
                         </span>
@@ -405,7 +439,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                   : "bg-[#0E5A60] hover:bg-[#0B2A3D] text-white border border-white/20"
               }`}
             >
-              <span>Contact Us</span>
+              <span>{label("nav-contact")}</span>
             </Link>
           </div>
 
@@ -485,21 +519,21 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
             }}
           >
             {navLinks.map((link, idx) => (
-              <div key={link.name} className="flex flex-col">
+              <div key={link.id} className="flex flex-col">
                 <Link
                   href={link.href}
                   onClick={(e) => {
                     if (link.hasDropdown) {
                       e.preventDefault();
                       setExpandedMobileDropdown(
-                        expandedMobileDropdown === link.name ? null : link.name,
+                        expandedMobileDropdown === link.id ? null : link.id,
                       );
                     } else {
                       setMobileMenuOpen(false);
                     }
                   }}
                   className={`flex items-center justify-between py-3.5 px-4 rounded-xl font-bold text-base transition-all ${
-                    link.name === "About Us"
+                    link.id === "nav-about"
                       ? "text-white bg-[#3E7C7A] border border-[#3E7C7A]/30"
                       : "text-[#1C2B38] hover:text-[#3E7C7A] hover:bg-[#3E7C7A]/5"
                   }`}
@@ -510,7 +544,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                     <ChevronDown
                       size={16}
                       className={`transition-transform duration-200 ${
-                        expandedMobileDropdown === link.name
+                        expandedMobileDropdown === link.id
                           ? "rotate-180 text-[#3E7C7A]"
                           : "text-[#6B7C85]"
                       }`}
@@ -519,9 +553,9 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
                 </Link>
 
                 {/* Mobile Dropdown Accordion List */}
-                {link.hasDropdown && expandedMobileDropdown === link.name && (
+                {link.hasDropdown && expandedMobileDropdown === link.id && (
                   <div className="flex flex-col pl-3 pr-2 py-2 gap-2 border-l-2 border-[#3E7C7A]/20 ml-4 mt-1 transition-all duration-300">
-                    {dropdownData[link.name]?.map((item) => (
+                    {dropdownData[link.id]?.map((item) => (
                       <Link
                         key={item.title}
                         href={item.href || "#"}
@@ -556,7 +590,7 @@ export function Navbar({ trips, latestPost, logos }: NavbarProps) {
               className="w-full flex items-center justify-center gap-2 bg-[#0E5A60] text-white hover:bg-[#061C29] rounded-full px-6 py-3.5 font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer font-sans"
             >
               <Phone size={15} />
-              <span>Contact Us</span>
+              <span>{label("nav-contact")}</span>
             </Link>
           </div>
         </div>
