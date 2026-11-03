@@ -66,6 +66,8 @@ export function HeroSection({
   }, []);
 
   const { popularDestinations, quickDatePresets } = content;
+  // "Find your circle. Find your next" → one line per sentence
+  const headlineLines = content.headline.split(".").map((line) => line.trim());
   // CMS destinations that have trips, plus trip destinations the list doesn't cover
   const suggestions = useMemo(() => destinationSuggestions(trips, popularDestinations), [trips, popularDestinations]);
 
@@ -151,7 +153,7 @@ export function HeroSection({
         <img
           src={content.backgroundImage}
           alt="Friends enjoying sunrise and mountains together"
-          className="w-full h-full object-cover object-center"
+          className="hero-bg w-full h-full object-cover object-center"
         />
 
         {/* Soft Left-Side Backdrop Blur with Feathered Fade */}
@@ -160,20 +162,20 @@ export function HeroSection({
 
       {/* Hero Main Content Container */}
       <div className="site-container z-10 relative">
-        <div className="max-w-[780px] text-left space-y-4 md:space-y-7 2xl:space-y-7">
+        <div className="max-w-[780px] text-left space-y-4 md:space-y-6 2xl:space-y-6">
           {/* Tagline as a little route: each word is a stop, joined by a dashed trail that draws in.
               "Connect.Travel.Belong" in the CMS → Connect ┄ Travel ┄ belong (last word handwritten). */}
           {(() => {
             const stops = content.tagline.split(/[.·•,|]+/).map((w) => w.trim()).filter(Boolean);
             if (stops.length < 2) {
               return (
-                <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
+                <span style={{ "--d": "0.15s" } as React.CSSProperties} className="hero-in text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
                   {content.tagline}
                 </span>
               );
             }
             return (
-              <p aria-label={stops.join(", ")} className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-montserrat">
+              <p aria-label={stops.join(", ")} style={{ "--d": "0.15s" } as React.CSSProperties} className="hero-in flex flex-wrap items-center gap-x-1.5 gap-y-1 h-4 font-montserrat">
                 {stops.map((word, i) => {
                   const last = i === stops.length - 1;
                   return (
@@ -191,7 +193,7 @@ export function HeroSection({
                             strokeLinecap="round"
                             strokeDasharray="2.5 3.5"
                             className="tagline-trail"
-                            style={{ animationDelay: `${0.25 + i * 0.35}s` }}
+                            style={{ animationDelay: `${0.45 + i * 0.3}s` }}
                           />
                           <circle cx="33" cy="4" r="1.6" fill="currentColor" />
                         </svg>
@@ -212,19 +214,34 @@ export function HeroSection({
 
           {/* Main Headline */}
           <Heading className="heading-hero font-normal text-white tracking-tight font-serif">
+            {/* Same structure as before (one pre-line span, lines split at the full stops), so the
+                spacing doesn't change; each line is an inline-block that slides up from behind an edge */}
             <span className="whitespace-pre-line">
-              {content.headline.split(".").join("\n")}
+              {headlineLines.map((line, i) => (
+                <React.Fragment key={i}>
+                  {i > 0 && "\n"}
+                  <span className="hero-line inline-block" style={{ "--d": `${0.3 + i * 0.14}s` } as React.CSSProperties}>
+                    {line}
+                  </span>
+                </React.Fragment>
+              ))}
             </span>{" "}
-            <span className="relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]">
+            <span
+              style={{ "--d": `${0.32 + headlineLines.length * 0.14}s` } as React.CSSProperties}
+              className="hero-accent relative inline-block font-script font-normal text-[1.3em] text-[#F3B748]"
+            >
               {content.scriptAccent}
-              <div className="absolute bottom-1 left-0 w-full">
+              <div
+                style={{ "--d": `${0.75 + headlineLines.length * 0.14}s` } as React.CSSProperties}
+                className="hero-underline absolute bottom-1 left-0 w-full"
+              >
                 <TitleUnderline />
               </div>
             </span>
           </Heading>
 
           {/* Subtitle Paragraph */}
-          <div className="space-y-0.5 text-white/90 text-xs sm:text-sm md:text-base font-normal leading-relaxed font-sans max-w-xl">
+          <div style={{ "--d": "0.8s" } as React.CSSProperties} className="hero-in space-y-0.5 text-white/90 text-xs sm:text-sm md:text-base font-normal leading-relaxed font-sans max-w-xl">
             <p>{content.subtitle1}</p>
             <p>{content.subtitle2}</p>
           </div>
@@ -232,7 +249,8 @@ export function HeroSection({
           {/* Spacious Search & Booking Filter Card */}
           <div
             ref={searchContainerRef}
-            className="bg-white rounded-2xl md:rounded-2xl p-2 shadow-[0_25px_60px_rgba(0,0,0,0.35)] border border-white/40 max-w-[880px] w-full flex flex-col md:flex-row items-stretch md:items-center relative z-30 font-sans"
+            style={{ "--d": "0.95s" } as React.CSSProperties}
+            className="hero-card bg-white rounded-2xl md:rounded-2xl p-2 shadow-[0_25px_60px_rgba(0,0,0,0.35)] border border-white/40 max-w-[880px] w-full flex flex-col md:flex-row items-stretch md:items-center relative z-30 font-sans"
           >
             {/* Field 1: Where to? (Generous Width for Full Text Visibility) */}
             <div className="relative flex-[1.35] min-w-[200px]">
@@ -512,7 +530,7 @@ export function HeroSection({
           </div>
 
           {/* Popular searches: plain text links; a hand-drawn underline sketches in on hover */}
-          <div className="flex flex-wrap items-center gap-x-1 gap-y-2 pt-0.5 font-sans">
+          <div style={{ "--d": "1.15s" } as React.CSSProperties} className="hero-in flex flex-wrap items-center gap-x-1 gap-y-2 pt-0.5 font-sans">
             <span className="leading-none text-xs sm:text-[13px] font-thin text-white/70 mr-2">
               {content.popularSearchesLabel}
             </span>

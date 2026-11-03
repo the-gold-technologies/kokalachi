@@ -255,3 +255,42 @@
 @media (prefers-reduced-motion: reduce) {
   .tagline-trail { animation: none; }
 }
+
+/* ── Hero first-load sequence ─────────────────────────────────────────────────
+   Photo settles like a sunrise → tagline → headline lines slide up → "journey." focuses in and its
+   underline draws → subtitle, search card and popular searches rise in. --d sets each delay. */
+@keyframes heroBg {
+  from { transform: scale(1.08); filter: brightness(0.55) saturate(0.85); }
+  to { transform: scale(1); filter: brightness(1) saturate(1); }
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes heroLine {
+  /* Slides up while its clip opens from the bottom, so it seems to rise from behind a fixed edge */
+  from { transform: translateY(100%); clip-path: inset(-20% -5% 100% -5%); }
+  to { transform: none; clip-path: inset(-20% -5% -30% -5%); }
+}
+@keyframes heroAccent {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes heroUnderline {
+  /* The wrapper has no height (the underline hangs below it), so reveal a taller band */
+  from { clip-path: inset(-24px 100% -24px 0); }
+  to { clip-path: inset(-24px 0 -24px 0); }
+}
+@keyframes heroCard {
+  from { opacity: 0; transform: translateY(26px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+.hero-bg { animation: heroBg 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero-in { animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both; }
+.hero-line { animation: heroLine 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both; }
+.hero-accent { animation: heroAccent 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both; }
+.hero-underline { animation: heroUnderline 0.8s cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0s) both; }
+.hero-card { animation: heroCard 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s) both; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .hero-in, .hero-line, .hero-accent, .hero-underline, .hero-card { animation: none; }
+}
