@@ -18,6 +18,8 @@ import { TopBar } from "./nav/TopBar";
 // Journeys · Trips · Blogs · Community · About Us, where the first three open a menu on hover
 // (or click / Enter). A value line above says what we sell; WhatsApp and Contact Us sit on the right.
 
+const LIGHT_HERO_PAGES: string[] = [];
+
 interface NavbarProps {
   trips: TripCardData[];
   latestPost?: BlogPost;
@@ -45,7 +47,10 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
   const [pill, setPill] = useState({ left: 0, width: 0, visible: false });
 
   const headerRef = useRef<HTMLElement>(null);
-  const triggers = useRef<Partial<Record<MenuKey, HTMLButtonElement | null>>>({});
+  const triggers = useRef<Partial<Record<MenuKey, HTMLElement | null>>>({});
+  // The menu item of the section you're on; the hidden pill waits there, so on hover it glides
+  // out from the current section instead of from the edge
+  const currentItem = useRef<HTMLElement | null>(null);
 
   // Close everything after a navigation (also covers the browser back button)
   const [lastPath, setLastPath] = useState(pathname);
@@ -60,10 +65,16 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
     if (el) setPill({ left: el.offsetLeft, width: el.offsetWidth, visible: true });
   };
 
+  // Hide the hover pill, parked on the current section (it shows there as the active pill)
+  const hidePill = useCallback(() => {
+    const el = currentItem.current;
+    setPill((p) => (el ? { left: el.offsetLeft, width: el.offsetWidth, visible: false } : { ...p, visible: false }));
+  }, []);
+
   const closeMenu = useCallback(() => {
     setOpenMenu(null);
-    setPill((p) => ({ ...p, visible: false }));
-  }, []);
+    hidePill();
+  }, [hidePill]);
 
   // Hover intent: a short delay before opening (so passing the mouse over doesn't flash a menu)
   // and a grace period before closing (so the mouse can travel from the label down to the panel).
@@ -76,7 +87,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
   };
   useEffect(() => clearTimers, []);
 
-  const hoverOpen = (key: MenuKey, el: HTMLButtonElement) => {
+  const hoverOpen = (key: MenuKey, el: HTMLElement) => {
     clearTimers();
     movePillTo(el);
     // Already browsing the menus: switch at once. Otherwise wait a moment.
@@ -94,7 +105,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
 
   // Click still works for keyboard and touch. A mouse click never closes a menu the hover just opened.
   const lastPointer = useRef<string>("");
-  const clickMenu = (key: MenuKey, el: HTMLButtonElement) => {
+  const clickMenu = (key: MenuKey, el: HTMLElement) => {
     clearTimers();
     movePillTo(el);
     if (openMenu === key && lastPointer.current !== "mouse") closeMenu();
@@ -129,8 +140,9 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
-  // Pages whose hero is light (cream), so the see-through navbar needs dark text there
-  const onLightHero = pathname === "/about";
+  // Pages whose hero is light, so the see-through navbar needs dark text there. None right now:
+  // every page (About included) opens on a dark photo banner.
+  const onLightHero = LIGHT_HERO_PAGES.includes(pathname);
   const isSolid = isScrolled || openMenu !== null;
   const darkText = isSolid || onLightHero;
   const darkLogo = trimmedLogo(logos.dark);
@@ -221,7 +233,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                   scheduleClose();
                 } else {
                   clearTimers();
-                  setPill((p) => ({ ...p, visible: false }));
+                  hidePill();
                 }
               }}
             >
@@ -234,12 +246,10 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
               />
               {data.items.map((item) => {
                 const current = isCurrent(item, pathname);
-                const currentDot = current && (
-                  <span
-                    aria-hidden
-                    className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-[#D96C2C]"
-                  />
-                );
+                // The section you're on gets the same soft pill as hover. While the sliding hover pill
+                // is showing, it takes over, so two pills never show at once.
+                const currentBg =
+                  current && !pill.visible ? (darkText ? "bg-[#0E5A60]/[0.07] text-[#0E5A60]" : "bg-white/15 text-white") : "";
                 const textClass = (active: boolean) =>
                   active
                     ? darkText
@@ -255,6 +265,10 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                   return (
                     <Link
                       key={item.href}
+                      ref={(el) => {
+                        if (current) currentItem.current = el;
+                        else if (currentItem.current === el) currentItem.current = null;
+                      }}
                       href={item.href}
                       aria-current={current ? "page" : undefined}
                       onMouseEnter={(e) => {
@@ -264,10 +278,9 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                         movePillTo(e.currentTarget);
                       }}
                       onFocus={(e) => movePillTo(e.currentTarget)}
-                      className={`${base} ${textClass(current)}`}
+                      className={`${base} ${textClass(false)} ${currentBg}`}
                     >
                       {item.label}
-                      {currentDot}
                     </Link>
                   );
                 }
@@ -275,25 +288,45 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                 const { key } = item;
                 const isOpen = openMenu === key;
                 return (
-                  <button
+                  // A link to the section's main page (/journeys, /trips, /blogs): a mouse opens the menu
+                  // on hover and goes to the page on click; on touch the first tap opens the menu and
+                  // the second goes to the page; on a keyboard Enter goes to the page, ↓ or Space opens it.
+                  <Link
                     key={key}
+                    href={item.href}
                     ref={(el) => {
                       triggers.current[key] = el;
+                      if (current) currentItem.current = el;
+                      else if (currentItem.current === el) currentItem.current = null;
                     }}
-                    type="button"
                     aria-expanded={isOpen}
                     aria-controls="nav-panel"
                     aria-haspopup="true"
+                    aria-current={current ? "page" : undefined}
                     onPointerDown={(e) => {
                       lastPointer.current = e.pointerType;
                     }}
-                    onKeyDown={() => {
+                    onKeyDown={(e) => {
                       lastPointer.current = "";
+                      if (e.key === "ArrowDown" || e.key === " ") {
+                        e.preventDefault();
+                        clearTimers();
+                        movePillTo(e.currentTarget);
+                        setOpenMenu(key);
+                      }
                     }}
-                    onClick={(e) => clickMenu(key, e.currentTarget)}
+                    onClick={(e) => {
+                      const touch = lastPointer.current === "touch" || lastPointer.current === "pen";
+                      if (touch && !isOpen) {
+                        e.preventDefault();
+                        clickMenu(key, e.currentTarget);
+                      } else {
+                        closeMenu();
+                      }
+                    }}
                     onMouseEnter={(e) => hoverOpen(key, e.currentTarget)}
                     onFocus={(e) => movePillTo(e.currentTarget)}
-                    className={`${base} ${textClass(isOpen)}`}
+                    className={`${base} ${textClass(isOpen)} ${isOpen ? "" : currentBg}`}
                   >
                     {item.label}
                     <ChevronDown
@@ -301,8 +334,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                       strokeWidth={2.25}
                       className={`opacity-70 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                     />
-                    {currentDot}
-                  </button>
+                  </Link>
                 );
               })}
             </nav>

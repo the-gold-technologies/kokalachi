@@ -1,30 +1,11 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
-import { Users, Compass, Play, ArrowRight } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
-import { HandDrawnHeart } from "@/components/ui/HandDrawnHeart";
 import type { AboutHeroContent } from "@/types/cms";
 import type { HeadingTag } from "@/lib/content";
 
-// Custom SVG for mountains since Lucide's mountain might look different
-const MountainsIcon = ({ size = 24, className = "" }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-  </svg>
-);
-
+// Same banner as the other pages (Journeys, Community, FAQs, Contact): a darkened photo, an orange
+// tag, a white serif headline with a handwritten accent, and a short line below. Text from
+// CMS → About → Hero (the CTA buttons and polaroid fields there aren't shown in this layout).
 export function AboutHeroSection({
   content,
   headingTag: Heading = "h1",
@@ -33,114 +14,39 @@ export function AboutHeroSection({
   headingTag?: HeadingTag;
 }) {
   return (
-    <section
-      id="about-hero"
-      className="relative min-h-[100vh] w-full flex items-center justify-start pt-28 pb-24 lg:pt-40 lg:pb-16 bg-cover bg-center bg-no-repeat overflow-hidden select-none"
-      style={{ backgroundImage: `url('${content.backgroundImage}')` }}
-    >
-      {/* Soft Left-Side White Gradient Overlay for better text readability */}
-      <div className="absolute inset-0 w-full lg:w-[55%] backdrop-blur-[2px] [-webkit-mask-image:linear-gradient(to_right,black_50%,transparent_100%)] [mask-image:linear-gradient(to_right,black_50%,transparent_100%)] bg-gradient-to-r from-white/90 via-white/60 to-transparent pointer-events-none z-0" />
+    <section id="about-hero" className="relative h-[60vh] min-h-[420px] w-full">
+      <img
+        src={content.backgroundImage}
+        alt="Friends sharing a sunrise over the mountains"
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />
 
-      <div className="site-container z-10 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          
-          {/* Left Column: Headline & Narrative */}
-          <div className="lg:col-span-6 space-y-5 text-left">
-            <div className="space-y-3">
-              {/* Category Tagline Badge */}
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-[#C85A24] text-xs sm:text-sm font-extrabold uppercase tracking-[0.15em] font-montserrat">
-                  {content.tagline}
-                </span>
-              </div>
-
-              {/* Main Editorial Title */}
-              <Heading className="heading-hero font-medium text-[#0E5A60] font-serif tracking-tight">
-                <span className="whitespace-pre-line">{content.headline}</span>{" "}
-                <span className="relative inline-block font-script font-medium text-[1.22em] text-[#0E5A60]">
-                  {content.scriptAccent}
-                  <div className="absolute -bottom-1 left-0 w-full">
-                     <TitleUnderline />
-                  </div>
-                </span>
-                {content.headlineSuffix && <> {content.headlineSuffix}</>}
-              </Heading>
-
-              {/* Handwritten Subtitle */}
-              <p className="text-[#1F3E5A] font-script text-xl sm:text-2xl lg:text-3xl pt-1 pb-2">
+      <div className="absolute inset-0 flex items-end pb-10 sm:pb-12">
+        <div className="site-container">
+          <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                {content.tagline}
+              </span>
+            </div>
+            <Heading className="heading-hero font-semibold font-serif text-white mb-5 max-w-4xl">
+              {/* A new line after each sentence: "Built on Friendships." / "Made for Meaningful Journeys." */}
+              <span className="whitespace-pre-line">{content.headline.trim().replace(/\.\s+/g, ".\n")}</span>{" "}
+              <span className="relative inline-block font-script font-normal text-[1.12em] text-white mr-1">
+                {content.scriptAccent}
+                <TitleUnderline />
+              </span>
+              {content.headlineSuffix && <>{" "}{content.headlineSuffix}</>}
+            </Heading>
+            {content.handwrittenSubtitle && (
+              <p className="text-white/85 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl">
                 {content.handwrittenSubtitle}
               </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-5 pt-6 relative">
-              <a href={content.primaryCtaLink} className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0">
-                {content.primaryCtaText} <ArrowRight size={18} />
-              </a>
-              
-              <a href={content.secondaryCtaLink} className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-white/30 hover:bg-white/40 backdrop-blur-md text-[#0E5A60] hover:text-[#C85A24] font-medium text-sm shadow-sm hover:shadow-md transition-all group cursor-pointer">
-                <div className="w-8 h-8 rounded-full bg-[#0E5A60] group-hover:bg-[#C85A24] text-white flex items-center justify-center transition-colors shadow-sm shrink-0">
-                  <Play size={14} className="fill-white text-white translate-x-[1px]" />
-                </div>
-                <span className="font-semibold tracking-tight text-[#0E5A60] group-hover:text-[#C85A24] transition-colors">
-                  {content.secondaryCtaText}
-                </span>
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Visual Photo Card Stack */}
-          <div className="lg:col-span-6 relative h-[450px] hidden lg:block w-full scale-95 origin-center">
-            
-            {/* Dashed line connecting card 1 and card 3 (Two distinct hops) */}
-            <svg className="absolute top-[50px] left-[150px] w-[180px] h-[80px] text-[#2c3e50] opacity-60 z-0" viewBox="0 0 180 80" style={{ fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeDasharray: "5 7", strokeLinecap: "round" }}>
-              <path d="M 0,50 Q 40,0 90,40 Q 140,0 180,60" />
-            </svg>
-
-            <div className="absolute top-12 -left-7 -rotate-[10deg] bg-white p-2.5 pb-4 rounded-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-[210px] z-10 transition-transform duration-500 hover:z-40 hover:scale-105">
-              <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm border border-slate-100">
-                <Image src={content.polaroid1Image} fill className="object-cover" alt={content.polaroid1Title} />
-              </div>
-              <p className="font-script text-[1.4rem] leading-none text-center mt-3 text-slate-700 tracking-wide">{content.polaroid1Title}</p>
-            </div>
-            
-            {/* Right Polaroid (Bigger Stories) */}
-            <div className="absolute top-14 left-74 rotate-[10deg] bg-white p-2.5 pb-4 rounded-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-[220px] z-20 transition-transform duration-500 hover:z-40 hover:scale-105">
-              <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm border border-slate-100">
-                <Image src={content.polaroid2Image} fill className="object-cover" alt={content.polaroid2Title} />
-              </div>
-              <p className="font-script text-[1.4rem] leading-none text-center mt-3 text-slate-700 tracking-wide">{content.polaroid2Title}</p>
-            </div>
-
-            {/* Middle Polaroid (Real Connections) */}
-            <div className="absolute top-36 left-28 -rotate-[4deg] bg-white p-3 pb-6 rounded-md shadow-[0_20px_50px_rgb(0,0,0,0.2)] w-[260px] z-30 transition-transform duration-500 hover:scale-105">
-              <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm border border-slate-100">
-                <Image src={content.polaroid3Image} fill className="object-cover" alt={content.polaroid3Title} />
-              </div>
-              <p className="font-script text-[1.7rem] leading-none text-center mt-4 text-slate-700 tracking-wide">{content.polaroid3Title}</p>
-            </div>
-
-            {/* Dashed line to heart */}
-            <svg className="absolute top-[210px] right-[100px] w-[70px] h-[50px] text-[#2c3e50] opacity-60 z-0" viewBox="0 0 70 90" style={{ fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeDasharray: "5 7", strokeLinecap: "round" }}>
-              <path d="M 0,0 Q 40,20 20,90" />
-            </svg>
-
-            {/* Doodles & Text on the right */}
-            <div className="absolute top-1 right-[-50px] -rotate-3 flex flex-col items-center z-40">
-              <p className="font-script text-[1.6rem] text-slate-700 leading-[1.15] text-center whitespace-pre-line">{content.doodleNote}</p>
-              <div className="mt-3 text-[#1F3E5A] relative">
-                <HandDrawnHeart size={34} color="currentColor" className="opacity-90" />
-                {/* SVG accents around the heart matching the image (3 strokes on right) */}
-                <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 pointer-events-none text-[#1F3E5A]" viewBox="0 0 64 64" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
-                   <path d="M 46,24 L 52,20 M 48,32 L 56,32 M 46,40 L 52,44" />
-                </svg>
-              </div>
-            </div>
-
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
-

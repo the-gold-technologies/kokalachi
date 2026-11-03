@@ -395,8 +395,9 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
       {/* Meta Pixel on every trip page (see lib/tracking) */}
       <MetaPixel pixelId={META_PIXEL_ID} />
 
-      {/* Hero Section */}
-      <div className="relative h-[70vh] min-h-[400px] w-full">
+      {/* Hero Section: at least 70% of the screen, and taller when the title is long. The top padding
+          keeps the content clear of the fixed navbar, so a long title never runs into it. */}
+      <div className="relative min-h-[70vh] w-full flex items-end">
         <img
           src={(tour.gallery && tour.gallery.length > 0) ? tour.gallery[0] : tour.image}
           alt={tour.title}
@@ -404,10 +405,10 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B2A3D] via-[#0B2A3D]/30 to-black/30" />
 
-        <div className="absolute inset-0 flex items-end pb-10 sm:pb-20">
+        <div className="relative z-10 w-full pt-32 md:pt-52 pb-10 sm:pb-16">
           <div className="site-container">
             <div className="max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-              <div className="flex flex-wrap items-center gap-3 mb-6">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-[#D96C2C] text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   {tour.category}
                 </span>
@@ -417,11 +418,11 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
                   </span>
                 )}
               </div>
-              <h1 className="heading-hero font-semibold font-serif text-white mb-2">
+              <h1 className="text-[30px] leading-[1.15] sm:text-[38px] lg:text-[46px] font-semibold font-serif text-white mb-3 max-w-5xl">
                 {tour.title}
               </h1>
               {tour.subtitle && (
-                <h2 className="text-md sm:text-lg lg:text-xl font-sans text-white/95 font-normal tracking-wide mb-6 max-w-4xl leading-relaxed italic">
+                <h2 className="text-[15px] sm:text-base lg:text-lg font-sans text-white/95 font-normal tracking-wide mb-5 max-w-3xl leading-relaxed italic">
                   {tour.subtitle}
                 </h2>
               )}
