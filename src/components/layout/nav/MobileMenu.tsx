@@ -178,9 +178,6 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
         </div>
 
         <div className="flex-1 overflow-y-auto overscroll-contain pb-4">
-          <p className="px-5 pt-4 text-[13px] text-slate-600 leading-snug">
-            Small-group, solo-friendly trips across India &amp; beyond.
-          </p>
 
           {data.leavingSoon.length > 0 && (
             <div className="pt-4">
@@ -249,35 +246,33 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
           </div>
         </div>
 
-        <div className="px-5 py-4 border-t border-[#E9E1D3] flex flex-col gap-2.5 bg-white/60">
+        {/* Two ways to reach us, side by side: Contact Us, and WhatsApp (or a call if no WhatsApp is set) */}
+        <div className="px-5 py-4 border-t border-[#E9E1D3] grid grid-flow-col auto-cols-fr gap-2.5 bg-white/60">
           <Link
             href="/contact"
             onClick={onClose}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[14px] font-semibold py-3.5 shadow-md transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[13.5px] font-semibold py-3 shadow-md transition-colors"
           >
-            {data.contactLabel} <Contact className="w-[18px] h-[18px]" />
+            {data.contactLabel} <Contact className="w-4 h-4" />
           </Link>
-          {(whatsapp || tel) && (
-            <div className="grid grid-flow-col auto-cols-fr gap-2.5">
-              {whatsapp && (
-                <a
-                  href={whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0E5A60]/20 bg-white text-[#0B2A3D] text-[13px] font-semibold py-3"
-                >
-                  <FaWhatsapp className="w-4 h-4 text-[#25D366]" /> WhatsApp
-                </a>
-              )}
-              {tel && (
-                <a
-                  href={tel}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0E5A60]/20 bg-white text-[#0B2A3D] text-[13px] font-semibold py-3"
-                >
-                  <Phone className="w-4 h-4 text-[#0E5A60]" /> Call us
-                </a>
-              )}
-            </div>
+          {whatsapp ? (
+            <a
+              href={whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0E5A60]/20 bg-white text-[#0B2A3D] text-[13.5px] font-semibold py-3"
+            >
+              <FaWhatsapp className="w-4 h-4 text-[#25D366]" /> WhatsApp
+            </a>
+          ) : (
+            tel && (
+              <a
+                href={tel}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#0E5A60]/20 bg-white text-[#0B2A3D] text-[13.5px] font-semibold py-3"
+              >
+                <Phone className="w-4 h-4 text-[#0E5A60]" /> Call us
+              </a>
+            )
           )}
         </div>
       </div>

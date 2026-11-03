@@ -159,9 +159,10 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
         />
 
         {/* Top bar: rotating facts + live trip info (CMS → SEO → Global → Top bar). Folds away once scrolled. */}
+        {/* Hidden on phones: the small screen keeps just the logo, WhatsApp and the menu */}
         {data.showTopBar && (
           <div
-            className={`grid transition-[grid-template-rows,opacity] duration-500 ease-in-out ${
+            className={`hidden md:grid transition-[grid-template-rows,opacity] duration-500 ease-in-out ${
               isScrolled ? "grid-rows-[0fr] opacity-0" : "grid-rows-[1fr] opacity-100"
             }`}
           >

@@ -161,10 +161,54 @@ export function HeroSection({
       {/* Hero Main Content Container */}
       <div className="site-container z-10 relative">
         <div className="max-w-[780px] text-left space-y-4 md:space-y-7 2xl:space-y-7">
-          {/* Top Category Tagline */}
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
-            {content.tagline}
-          </span>
+          {/* Tagline as a little route: each word is a stop, joined by a dashed trail that draws in.
+              "Connect.Travel.Belong" in the CMS → Connect ┄ Travel ┄ belong (last word handwritten). */}
+          {(() => {
+            const stops = content.tagline.split(/[.·•,|]+/).map((w) => w.trim()).filter(Boolean);
+            if (stops.length < 2) {
+              return (
+                <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
+                  {content.tagline}
+                </span>
+              );
+            }
+            return (
+              <p aria-label={stops.join(", ")} className="flex flex-wrap items-center gap-x-1.5 gap-y-1 font-montserrat">
+                {stops.map((word, i) => {
+                  const last = i === stops.length - 1;
+                  return (
+                    <span key={`${word}-${i}`} aria-hidden className="flex items-center gap-1.5">
+                      {i > 0 && (
+                        <svg
+                          viewBox="0 0 34 8"
+                          fill="none"
+                          className="w-5 sm:w-6 h-1.5 text-[#F6B48A]/80 overflow-visible"
+                        >
+                          <path
+                            d="M1 5 Q 17 0.5 33 4"
+                            stroke="currentColor"
+                            strokeWidth="1.4"
+                            strokeLinecap="round"
+                            strokeDasharray="2.5 3.5"
+                            className="tagline-trail"
+                            style={{ animationDelay: `${0.25 + i * 0.35}s` }}
+                          />
+                          <circle cx="33" cy="4" r="1.6" fill="currentColor" />
+                        </svg>
+                      )}
+                      {last ? (
+                        <span className="font-caveat normal-case text-[18px] sm:text-[22px] leading-none text-[#F3B748] -translate-y-px [text-shadow:0_1px_8px_rgba(0,0,0,0.35)]">
+                          {word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-white/85">{word}</span>
+                      )}
+                    </span>
+                  );
+                })}
+              </p>
+            );
+          })()}
 
           {/* Main Headline */}
           <Heading className="heading-hero font-normal text-white tracking-tight font-serif">
@@ -269,7 +313,7 @@ export function HeroSection({
                   setIsDestOpen(false);
                   setIsTravellersOpen(false);
                 }}
-                className="flex items-center justify-between gap-2 px-3.5 py-2 hover:bg-slate-50/90 rounded-xl md:rounded-full transition-colors cursor-pointer text-left"
+                className="flex items-center justify-between gap-2 pl-1 pr-3 md:px-3.5 py-2 hover:bg-slate-50/90 rounded-xl md:rounded-full transition-colors cursor-pointer text-left"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
@@ -399,7 +443,7 @@ export function HeroSection({
                   setIsDestOpen(false);
                   setIsDatesOpen(false);
                 }}
-                className="flex items-center justify-between gap-2 px-3.5 py-2 hover:bg-slate-50/90 rounded-xl md:rounded-full transition-colors cursor-pointer text-left"
+                className="flex items-center justify-between gap-2 pl-1 pr-3 md:px-3.5 py-2 hover:bg-slate-50/90 rounded-xl md:rounded-full transition-colors cursor-pointer text-left"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
@@ -467,20 +511,38 @@ export function HeroSection({
             </button>
           </div>
 
-          {/* Popular Searches Quick Tags */}
-          <div className="flex flex-wrap items-center gap-2 pt-0.5 font-sans">
-            <span className="text-xs sm:text-[13px] font-normal text-white/80 mr-1">
+          {/* Popular searches: plain text links; a hand-drawn underline sketches in on hover */}
+          <div className="flex flex-wrap items-center gap-x-1 gap-y-2 pt-0.5 font-sans">
+            <span className="leading-none text-xs sm:text-[13px] font-thin text-white/70 mr-2">
               {content.popularSearchesLabel}
             </span>
-            {suggestions.slice(0, 5).map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => handleTagClick(tag)}
-                className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/90 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/50 backdrop-blur-md transition-all cursor-pointer hover:scale-105"
-              >
-                {tag}
-              </button>
+            {suggestions.slice(0, 5).map((tag, i) => (
+              <React.Fragment key={tag}>
+                {i > 0 && <span aria-hidden className="h-1 w-1 rounded-full bg-[#F6B48A]/70 mx-1.5" />}
+                <button
+                  type="button"
+                  onClick={() => handleTagClick(tag)}
+                  className="group relative leading-none text-[13px] sm:text-sm font-normal text-white/80 hover:text-white transition-colors cursor-pointer outline-none focus-visible:text-white"
+                >
+                  {tag}
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 100 10"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    className="pointer-events-none absolute left-0 top-full mt-0.5 h-2 w-full text-[#F6B48A]"
+                  >
+                    <path
+                      d="M2 6 Q 25 2 50 5.5 T 98 4"
+                      pathLength={1}
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      className="[stroke-dasharray:1_2] [stroke-dashoffset:1] opacity-0 group-hover:opacity-100 group-hover:[stroke-dashoffset:0] group-focus-visible:opacity-100 group-focus-visible:[stroke-dashoffset:0] transition-[stroke-dashoffset,opacity] duration-500 ease-out motion-reduce:transition-none"
+                    />
+                  </svg>
+                </button>
+              </React.Fragment>
             ))}
           </div>
         </div>
