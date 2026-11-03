@@ -34,3 +34,8 @@ export interface CommunityTrip {
 }
 
 export type StoryEntry = { trip: CommunityTrip; story: TravellerStory };
+
+// Each trip has its own page; a story link opens that page at the traveller's letter (it unfolds)
+export const tripStoriesHref = (trip: Pick<CommunityTrip, "slug">) => `/community/${trip.slug}`;
+export const storyHref = (trip: Pick<CommunityTrip, "slug">, story: Pick<TravellerStory, "id">) =>
+  `${tripStoriesHref(trip)}#story-${story.id}`;

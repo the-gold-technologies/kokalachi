@@ -1,4 +1,5 @@
-import { getBlogPosts, getPageSeoRows, getSiteConfig, getTrips } from "@/lib/content";
+import { getBlogPosts, getCommunityTrips, getPageSeoRows, getSiteConfig, getTrips } from "@/lib/content";
+import { tripStoriesHref } from "@/data/community";
 
 // CMS → SEO → Sitemap & Robots decides what is served here: nothing when the sitemap is switched
 // off, the uploaded XML when there is one, otherwise a sitemap built from the CMS content below.
@@ -17,7 +18,12 @@ export async function GET() {
   if (!site.sitemapEnabled) return new Response("Sitemap disabled", { status: 404 });
   if (site.sitemapCustomContent?.trim()) return xmlResponse(site.sitemapCustomContent);
 
-  const [pages, trips, posts] = await Promise.all([getPageSeoRows(), getTrips(), getBlogPosts()]);
+  const [pages, trips, posts, communityTrips] = await Promise.all([
+    getPageSeoRows(),
+    getTrips(),
+    getBlogPosts(),
+    getCommunityTrips(),
+  ]);
 
   const urls: { path: string; priority: string; lastmod?: string }[] = [
     ...pages
@@ -28,6 +34,8 @@ export async function GET() {
         priority: page.slug === "home" ? "1.0" : page.slug.startsWith("trips/") ? "0.7" : "0.8",
       })),
     ...trips.filter((trip) => !trip.seo.noIndex).map((trip) => ({ path: `/journeys/${trip.slug}`, priority: "0.7" })),
+    // Each trip's community story page
+    ...communityTrips.map((trip) => ({ path: tripStoriesHref(trip), priority: "0.6" })),
     ...posts
       .filter((post) => !post.seo.noIndex)
       .map((post) => ({ path: `/blogs/${post.slug}`, priority: "0.6", lastmod: post.publishedAt })),

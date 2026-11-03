@@ -47,9 +47,10 @@ interface TripStoryChapterProps {
   trip: CommunityTrip;
   number: number;
   labels: TripStoryChapterLabels;
+  showHeader?: boolean; // off on the trip's own page, where the banner already says it all
 }
 
-export function TripStoryChapter({ trip, number, labels }: TripStoryChapterProps) {
+export function TripStoryChapter({ trip, number, labels, showHeader = true }: TripStoryChapterProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const closeViewer = useCallback(() => setOpenIndex(null), []);
 
@@ -62,6 +63,7 @@ export function TripStoryChapter({ trip, number, labels }: TripStoryChapterProps
     <section id={trip.slug} className="relative py-14 sm:py-20 scroll-mt-28">
       <div className="site-container relative z-10">
         {/* Chapter header */}
+        {showHeader && (
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 sm:mb-12">
           <div className="flex items-start gap-4 sm:gap-6">
             <span className="font-serif text-5xl sm:text-6xl lg:text-7xl text-[#D96C2C]/25 leading-none select-none">
@@ -103,6 +105,7 @@ export function TripStoryChapter({ trip, number, labels }: TripStoryChapterProps
             )}
           </div>
         </div>
+        )}
 
         {/* Photo & video wall */}
         <div className="columns-2 md:columns-3 lg:columns-4 gap-4 sm:gap-5 mb-14 sm:mb-16">
@@ -165,8 +168,7 @@ export function TripStoryChapter({ trip, number, labels }: TripStoryChapterProps
 
         {/* Traveller letters */}
         <div className="space-y-10 sm:space-y-12">
-          <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat flex items-center gap-3">
-            <span className="h-px w-10 bg-[#C85A24]/40" />
+          <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat">
             {labels.inTheirWordsLabel}
           </p>
           {trip.stories.map((story, i) => (

@@ -10,7 +10,7 @@ import {
   ArrowRight,
   ArrowUpRight,
 } from "lucide-react";
-import type { StoryEntry } from "@/data/community";
+import { storyHref as storyLink, type StoryEntry } from "@/data/community";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
 import type { MomentsThatStayedContent } from "@/types/cms";
@@ -24,8 +24,8 @@ interface MomentsThatStayedSectionProps {
 // Cycles through the list, so the collage stays full even with only a few stories
 const at = <T,>(list: T[], i: number): T => list[i % list.length];
 
-// Each card opens that traveller's letter on /community (it unfolds on arrival)
-const storyHref = ({ story }: StoryEntry) => `/community#story-${story.id}`;
+// Each card opens that traveller's letter on its trip's page (it unfolds on arrival)
+const storyHref = ({ trip, story }: StoryEntry) => storyLink(trip, story);
 
 // "Read more" cue on the quote card (the note under the subtitle covers the rest)
 function ReadHint({ label }: { label: string }) {
