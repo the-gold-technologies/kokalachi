@@ -2,7 +2,7 @@
 
 import React from "react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
-import { ShieldCheck, Mail, User } from "lucide-react";
+import { ShieldCheck, Mail, User, MapPin } from "lucide-react";
 import { FaInstagram } from "react-icons/fa6";
 import { ContactForm } from "@/components/contact/ContactForm";
 import type { ContactSections } from "@/types/cms";
@@ -90,6 +90,26 @@ export function ContactView({
                   </div>
                 </li>
               </ul>
+            </div>
+
+            {/* Registered Office */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+              <h3 className="text-xl font-serif font-bold text-[#0E5A60] mb-6">Registered Office</h3>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#D96C2C]/10 flex items-center justify-center shrink-0">
+                  <MapPin size={20} className="text-[#D96C2C]" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-700 text-sm mb-2 uppercase tracking-wider">
+                    The Travel Chapter LLP
+                  </h4>
+                  <address className="not-italic text-sm text-slate-600 leading-relaxed">
+                    KCO88, B-128, First Floor,
+                    <br />
+                    Sector 2, Noida - 201301
+                  </address>
+                </div>
+              </div>
             </div>
 
             {/* Other Ways to Reach Us */}
