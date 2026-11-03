@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Phone, Send, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Contact, Phone, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { DestinationRow, LinkIcon, MonthCalendarTile, TicketCard } from "./NavPanels";
 import { isCurrent, type MenuKey, type MenuLink, type NavData } from "./navData";
@@ -255,7 +255,7 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
             onClick={onClose}
             className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[14px] font-semibold py-3.5 shadow-md transition-colors"
           >
-            {data.contactLabel} <Send className="w-4 h-4" />
+            {data.contactLabel} <Contact className="w-[18px] h-[18px]" />
           </Link>
           {(whatsapp || tel) && (
             <div className="grid grid-flow-col auto-cols-fr gap-2.5">

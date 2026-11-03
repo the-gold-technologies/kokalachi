@@ -3,9 +3,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Phone } from "lucide-react";
+import { ChevronDown, Contact, Menu, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
-import { PiAddressBookTabs } from "react-icons/pi";
 import type { TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
 import type { TopBarConfig } from "@/types/cms";
@@ -308,7 +307,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                 className="group inline-flex items-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[13.5px] font-semibold pl-5 pr-4 py-2.5 shadow-[0_6px_16px_rgba(217,108,44,0.32)] hover:shadow-[0_8px_22px_rgba(217,108,44,0.42)] transition-all"
               >
                 {data.contactLabel}
-                <PiAddressBookTabs className="w-5 h-5 transition-transform group-hover:scale-110" />
+                <Contact className="w-[18px] h-[18px] transition-transform duration-300 group-hover:scale-110" />
               </Link>
             </div>
 
