@@ -2,13 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { TaglineRoute } from "@/components/ui/TaglineRoute";
 import {
   Mail,
   MapPin,
   Phone,
   ArrowRight,
-  Send,
-  Heart,
   ShieldCheck,
   CheckCircle2,
 } from "lucide-react";
@@ -64,9 +63,13 @@ export function Footer({ site, tripsMenu }: FooterProps) {
                   alt="Kokalachi Logo"
                   className="h-8 sm:h-9 w-auto object-contain hover:scale-105 transition-transform"
                 />}
-                <span className="block mt-2.5 text-[10px] font-montserrat font-bold uppercase tracking-[0.35em] text-[#CFE3DF]">
-                  Travel. Connect. Belong
-                </span>
+                <TaglineRoute
+                  text="Travel. Connect. Belong"
+                  className="mt-2.5"
+                  wordClassName="text-[10px] text-[#CFE3DF]"
+                  trailClassName="text-[#CFE3DF]/60"
+                  lastClassName="text-[17px] text-[#F3B748]"
+                />
               </Link>
             </div>
             <p className="text-white/80 text-xs sm:text-sm leading-relaxed max-w-sm font-sans">
@@ -77,20 +80,20 @@ export function Footer({ site, tripsMenu }: FooterProps) {
 
             <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-white/80 font-sans">
               {site.address && (
-                <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
-                  <MapPin className="w-4 h-4 text-[#F6B48A] shrink-0" />
+                <div className="flex items-center gap-3 hover:text-[#F3B748] transition-colors">
+                  <MapPin className="w-4 h-4 text-[#F3B748] shrink-0" />
                   <span>{site.address}</span>
                 </div>
               )}
               {site.email && (
-                <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
-                  <Mail className="w-4 h-4 text-[#F6B48A] shrink-0" />
+                <div className="flex items-center gap-3 hover:text-[#F3B748] transition-colors">
+                  <Mail className="w-4 h-4 text-[#F3B748] shrink-0" />
                   <a href={`mailto:${site.email}`}>{site.email}</a>
                 </div>
               )}
               {site.phone && (
-                <div className="flex items-center gap-3 hover:text-[#F6B48A] transition-colors">
-                  <Phone className="w-4 h-4 text-[#F6B48A] shrink-0" />
+                <div className="flex items-center gap-3 hover:text-[#F3B748] transition-colors">
+                  <Phone className="w-4 h-4 text-[#F3B748] shrink-0" />
                   <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}>{site.phone}</a>
                 </div>
               )}
@@ -125,7 +128,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
 
           {/* Column 2: Explore Journeys (2 cols on lg) */}
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-[#F6B48A] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
+            <h3 className="text-[#F3B748] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
               Explore Journeys
             </h3>
             <ul className="space-y-2.5 text-xs sm:text-sm text-white/80 font-sans">
@@ -133,9 +136,9 @@ export function Footer({ site, tripsMenu }: FooterProps) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                    className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                   >
-                    <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                    <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                     <span>{item.label}</span>
                   </Link>
                 </li>
@@ -145,61 +148,61 @@ export function Footer({ site, tripsMenu }: FooterProps) {
 
           {/* Column 3: Our Ethos (2 cols on lg) */}
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-[#F6B48A] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
+            <h3 className="text-[#F3B748] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
               Our Ethos
             </h3>
             <ul className="space-y-2.5 text-xs sm:text-sm text-white/80 font-sans">
               <li>
                 <Link
                   href="/#why-we-exist"
-                  className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                  className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                   <span>Why We Exist</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/#difference"
-                  className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                  className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                   <span>The Difference</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/#good-company"
-                  className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                  className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                   <span>Trust &amp; Safety</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/community"
-                  className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                  className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                   <span>Traveler Stories</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/blogs"
-                  className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                  className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                   <span>Blogs &amp; Guides</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/faqs"
-                  className="hover:text-[#F6B48A] transition-colors flex items-center gap-1.5 group"
+                  className="hover:text-[#F3B748] transition-colors flex items-center gap-1.5 group"
                 >
-                  <ArrowRight className="w-3 h-3 text-[#F6B48A] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-3 h-3 text-[#F3B748] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                   <span>FAQs &amp; Help</span>
                 </Link>
               </li>
@@ -208,7 +211,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
 
           {/* Column 4: Newsletter Dispatch (4 cols on lg) */}
           <div className="lg:col-span-4 space-y-4">
-            <h3 className="text-[#F6B48A] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
+            <h3 className="text-[#F3B748] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
               The Secret Dispatch
             </h3>
             <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-sans">
@@ -218,7 +221,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
 
             {subscribed ? (
               <div className="p-4 rounded-2xl bg-white/10 border border-[#D96C2C]/50 text-white flex items-center gap-3 text-xs sm:text-sm animate-fade-in font-sans shadow-2xs">
-                <CheckCircle2 className="w-5 h-5 text-[#F6B48A] shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#F3B748] shrink-0" />
                 <span>
                   You&apos;re on the list! Welcome to the Kokalachi circle.
                 </span>
@@ -232,18 +235,20 @@ export function Footer({ site, tripsMenu }: FooterProps) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address..."
-                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/40 text-xs sm:text-sm focus:outline-none focus:border-[#F6B48A] focus:ring-1 focus:ring-[#F6B48A] transition-all font-sans shadow-2xs"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/15 text-white placeholder-white/40 text-xs sm:text-sm focus:outline-none focus:border-[#F3B748] focus:ring-1 focus:ring-[#F3B748] transition-all font-sans shadow-2xs"
                   />
                   <button
                     type="submit"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 px-5 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-xs font-medium flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="group absolute right-1.5 top-1.5 bottom-1.5 pl-4 pr-1.5 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <span>Join</span>
-                    <Send className="w-3 h-3 -rotate-45" />
+                    <span className="grid place-items-center h-6 w-6 rounded-full bg-white/20">
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
                   </button>
                 </div>
                 <p className="text-[11px] text-white/60 flex items-center gap-1 font-sans">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#F6B48A]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#F3B748]" />
                   <span>
                     We respect your privacy. Unsubscribe anytime in one click.
                   </span>
@@ -253,35 +258,35 @@ export function Footer({ site, tripsMenu }: FooterProps) {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-sans">
-          <p className="flex items-center gap-1.5 text-center sm:text-left">
-            <span>
-              © {new Date().getFullYear()} Kokalachi Travel Co. Built with
-            </span>
-            <Heart className="w-3.5 h-3.5 text-[#EF4444] fill-[#EF4444] inline-block mx-0.5" />
-            <span>for wandering souls, by{" "}
+        {/* Bottom Bar: copyright on the left; legal links on the right with the credit in small below */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 text-xs text-white/60 font-sans">
+          <p className="text-center sm:text-left">
+            © {new Date().getFullYear()} Kokalachi. All rights reserved.
+          </p>
+
+          <div className="flex flex-col items-center sm:items-end gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white/60">
+              <Link href="/privacy-policy" className="hover:text-[#F3B748] transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-[#F3B748] transition-colors">
+                Terms &amp; Conditions
+              </Link>
+              <button type="button" onClick={openCookieSettings} className="hover:text-[#F3B748] transition-colors cursor-pointer">
+                Cookie Settings
+              </button>
+            </div>
+            <p className="text-[10.5px] text-white/45">
+              Designed &amp; developed by{" "}
               <a
                 href="https://thegoldtechnologies.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#F6B48A] hover:underline font-normal transition-colors"
+                className="text-white/70 underline underline-offset-2 hover:text-[#F3B748] transition-colors"
               >
                 TGT
               </a>
-            .</span>
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-6 text-white/60">
-            <Link href="/privacy-policy" className="hover:text-[#F6B48A] transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-[#F6B48A] transition-colors">
-              Terms &amp; Conditions
-            </Link>
-            <button type="button" onClick={openCookieSettings} className="hover:text-[#F6B48A] transition-colors cursor-pointer">
-              Cookie Settings
-            </button>
+            </p>
           </div>
         </div>
       </div>

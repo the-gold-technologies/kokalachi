@@ -13,6 +13,7 @@ import {
   Check,
 } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
+import { TaglineRoute } from "@/components/ui/TaglineRoute";
 import type { HeroContent } from "@/types/cms";
 import type { TripCardData } from "@/data/trips";
 import { datesFromSelection, destinationSuggestions, searchTarget } from "@/lib/tripSearch";
@@ -163,54 +164,8 @@ export function HeroSection({
       {/* Hero Main Content Container */}
       <div className="site-container z-10 relative">
         <div className="max-w-[780px] text-left space-y-4 md:space-y-6 2xl:space-y-6">
-          {/* Tagline as a little route: each word is a stop, joined by a dashed trail that draws in.
-              "Connect.Travel.Belong" in the CMS → Connect ┄ Travel ┄ belong (last word handwritten). */}
-          {(() => {
-            const stops = content.tagline.split(/[.·•,|]+/).map((w) => w.trim()).filter(Boolean);
-            if (stops.length < 2) {
-              return (
-                <span style={{ "--d": "0.15s" } as React.CSSProperties} className="hero-in text-xs font-semibold uppercase tracking-[0.22em] text-white/85 block font-montserrat">
-                  {content.tagline}
-                </span>
-              );
-            }
-            return (
-              <p aria-label={stops.join(", ")} style={{ "--d": "0.15s" } as React.CSSProperties} className="hero-in flex flex-wrap items-center gap-x-1.5 gap-y-1 h-4 font-montserrat">
-                {stops.map((word, i) => {
-                  const last = i === stops.length - 1;
-                  return (
-                    <span key={`${word}-${i}`} aria-hidden className="flex items-center gap-1.5">
-                      {i > 0 && (
-                        <svg
-                          viewBox="0 0 34 8"
-                          fill="none"
-                          className="w-5 sm:w-6 h-1.5 text-[#F6B48A]/80 overflow-visible"
-                        >
-                          <path
-                            d="M1 5 Q 17 0.5 33 4"
-                            stroke="currentColor"
-                            strokeWidth="1.4"
-                            strokeLinecap="round"
-                            strokeDasharray="2.5 3.5"
-                            className="tagline-trail"
-                            style={{ animationDelay: `${0.45 + i * 0.3}s` }}
-                          />
-                          <circle cx="33" cy="4" r="1.6" fill="currentColor" />
-                        </svg>
-                      )}
-                      {last ? (
-                        <span className="font-caveat normal-case text-[18px] sm:text-[22px] leading-none text-[#F3B748] -translate-y-px [text-shadow:0_1px_8px_rgba(0,0,0,0.35)]">
-                          {word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()}
-                        </span>
-                      ) : (
-                        <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-white/85">{word}</span>
-                      )}
-                    </span>
-                  );
-                })}
-              </p>
-            );
-          })()}
+          {/* Tagline as a little route (Connect ┄• Travel ┄• Belong); the trails draw in on load */}
+          <TaglineRoute text={content.tagline} animate className="hero-in" style={{ "--d": "0.15s" } as React.CSSProperties} />
 
           {/* Main Headline */}
           <Heading className="heading-hero font-normal text-white tracking-tight font-serif">

@@ -8,7 +8,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import type { TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
 import type { TopBarConfig } from "@/types/cms";
-import { buildNavData, isCurrent, whatsappHref, type MenuKey, type NavLabels } from "./nav/navData";
+import { buildNavData, isCurrent, trimmedLogo, whatsappHref, type MenuKey, type NavLabels } from "./nav/navData";
 import type { TripsMenu } from "@/data/tripPages";
 import { NavPanel, PANEL_BG } from "./nav/NavPanels";
 import { MobileMenu } from "./nav/MobileMenu";
@@ -132,7 +132,8 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
   const onLightHero = pathname === "/about";
   const isSolid = isScrolled || openMenu !== null;
   const darkText = isSolid || onLightHero;
-  const logo = darkText ? logos.dark : logos.light;
+  const darkLogo = trimmedLogo(logos.dark);
+  const lightLogo = trimmedLogo(logos.light);
 
   return (
     <>
@@ -182,12 +183,30 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
             }`}
           >
             <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Kokalachi home">
-              {logo && (
-                <img
-                  src={logo}
-                  alt="Kokalachi"
-                  className="h-7 w-auto object-contain"
-                />
+              {/* Both logos sit in one slot and crossfade, so swapping light ↔ dark (on scroll or when a
+                  menu opens) never changes the width and the menu never shifts. The dark logo sets the
+                  slot's width; the light one is laid over it, left-aligned. 24.4px tall = the visible size
+                  of the live site's light logo (28px image with its transparent padding trimmed off). */}
+              {(darkLogo || lightLogo) && (
+                <span className="relative block h-[24.4px]">
+                  <img
+                    src={(darkLogo || lightLogo)!}
+                    alt="Kokalachi"
+                    className={`h-[24.4px] w-auto object-contain transition-opacity duration-300 ${
+                      darkText || !lightLogo ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                  {darkLogo && lightLogo && (
+                    <img
+                      src={lightLogo}
+                      alt=""
+                      aria-hidden
+                      className={`absolute inset-0 h-full w-full object-contain object-left transition-opacity duration-300 ${
+                        darkText ? "opacity-0" : "opacity-100"
+                      }`}
+                    />
+                  )}
+                </span>
               )}
             </Link>
 
@@ -367,7 +386,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
         open={mobileOpen}
         onClose={closeMobile}
         data={data}
-        logo={logos.dark}
+        logo={darkLogo}
         pathname={pathname}
         whatsapp={wa}
         phone={phone}

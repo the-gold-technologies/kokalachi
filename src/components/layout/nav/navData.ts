@@ -279,3 +279,12 @@ function buildTopBar(
 
   return { facts, ticker };
 }
+
+// Logos from the CMS can have transparent padding baked in (the light one does), which makes the
+// two logos look different sizes at the same height. Cloudinary's e_trim serves the image with
+// those edges cut off, so both fill their height exactly. Other URLs are left as they are.
+export function trimmedLogo(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (!url.includes("res.cloudinary.com") || !url.includes("/upload/") || url.includes("e_trim")) return url;
+  return url.replace("/upload/", "/upload/e_trim/");
+}
