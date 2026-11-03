@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { scrollToTopIfHome } from "@/lib/scrollToTop";
 import { TaglineRoute } from "@/components/ui/TaglineRoute";
 import {
   Mail,
@@ -57,7 +58,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
           {/* Column 1: Brand & Bio (4 cols on lg) */}
           <div className="lg:col-span-4 space-y-5">
             <div className="flex items-start justify-start">
-              <Link href="/" className="inline-block">
+              <Link href="/" onClick={scrollToTopIfHome} className="inline-block">
                 {footerLogo && <img
                   src={footerLogo}
                   alt="Kokalachi Logo"

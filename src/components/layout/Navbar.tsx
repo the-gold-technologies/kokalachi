@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { scrollToTopIfHome } from "@/lib/scrollToTop";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Contact, Menu, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -182,7 +183,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                 : "bg-transparent border-transparent"
             }`}
           >
-            <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Kokalachi home">
+            <Link href="/" onClick={scrollToTopIfHome} className="flex items-center gap-3 shrink-0" aria-label="Kokalachi home">
               {/* Both logos sit in one slot and crossfade, so swapping light ↔ dark (on scroll or when a
                   menu opens) never changes the width and the menu never shifts. The dark logo sets the
                   slot's width; the light one is laid over it, left-aligned. 24.4px tall = the visible size

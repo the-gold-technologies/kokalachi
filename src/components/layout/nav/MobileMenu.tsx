@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { scrollToTopIfHome } from "@/lib/scrollToTop";
 import { ArrowRight, ChevronDown, Contact, Phone, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { DestinationRow, LinkIcon, MonthCalendarTile, TicketCard } from "./NavPanels";
@@ -160,7 +161,14 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
         style={{ backgroundColor: DRAWER_BG }}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#E9E1D3]">
-          <Link href="/" onClick={onClose} aria-label="Kokalachi home">
+          <Link
+            href="/"
+            onClick={(e) => {
+              scrollToTopIfHome(e);
+              onClose();
+            }}
+            aria-label="Kokalachi home"
+          >
             {logo ? (
               <img src={logo} alt="Kokalachi" className="h-6 w-auto object-contain" />
             ) : (

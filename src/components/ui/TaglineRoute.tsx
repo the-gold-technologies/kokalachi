@@ -20,7 +20,7 @@ export function TaglineRoute({
   style,
   wordClassName = "text-[11px] sm:text-xs text-white/85",
   trailClassName = "text-[#F6B48A]/80",
-  lastClassName = "text-[18px] sm:text-[19px] text-[#F3B748] [text-shadow:0_1px_8px_rgba(0,0,0,0.35)]",
+  lastClassName = "text-[19px] sm:text-[21px] text-[#F3B748] [text-shadow:0_1px_8px_rgba(0,0,0,0.35)]",
   animate = false,
 }: TaglineRouteProps) {
   const stops = text

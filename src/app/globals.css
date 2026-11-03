@@ -85,6 +85,13 @@
   button, input, select, textarea, optgroup {
     font-family: inherit;
   }
+
+  /* Tailwind v4 gives buttons the default arrow cursor; show the hand on every clickable button
+     (navbar dropdowns, menu sections, chips…) like links have. Disabled ones keep the arrow. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
 }
 
 /* Onload Smooth Entry Animations */
