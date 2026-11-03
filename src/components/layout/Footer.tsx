@@ -13,25 +13,25 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { FaInstagram, FaFacebookF } from "react-icons/fa6";
-import { TRIP_PAGES } from "@/data/tripPages";
+import type { TripsMenu } from "@/data/tripPages";
 import type { SiteConfig } from "@/types/cms";
 import { openCookieSettings } from "@/lib/consent";
 
 interface FooterProps {
   site: SiteConfig; // contact details & social links from CMS → SEO → Global
+  tripsMenu: TripsMenu | null; // the /trips pages (CMS → Trips Pages); null if unavailable
 }
 
-export function Footer({ site }: FooterProps) {
+export function Footer({ site, tripsMenu }: FooterProps) {
   const footerLogo = site.socialLinks?.footerLogo;
 
   // Listing pages rather than single trips, so every destination (including new ones) is covered.
-  // Trip page labels and paths come from src/data/tripPages.ts, same as the navbar's Trips menu.
+  // The /trips sub-pages use their tab labels and order from CMS → Trips Pages.
   const journeyLinks = [
     { label: "All Journeys", href: "/journeys" },
-    ...(["upcoming", "past", "solo", "custom"] as const).map((key) => ({
-      label: TRIP_PAGES[key].label,
-      href: TRIP_PAGES[key].path,
-    })),
+    ...(tripsMenu?.pages ?? [])
+      .filter((page) => page.slug)
+      .map((page) => ({ label: page.tabLabel, href: page.path })),
   ];
 
   const [email, setEmail] = useState("");

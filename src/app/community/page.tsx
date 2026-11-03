@@ -6,7 +6,7 @@ import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { TripStoryChapter } from "@/components/community/TripStoryChapter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
-import { getPage, getTrips, headingTag, seoMetadata } from "@/lib/content";
+import { getPage, getTrips, headingTag, seoMetadata, getUpcomingJourneysStrip } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { sections, seo } = await getPage("community");
@@ -71,7 +71,7 @@ export default async function CommunityPage() {
       </div>
 
       {/* Upcoming Journeys, placed before the CTA */}
-      <UpcomingJourneysStrip trips={trips} inline />
+      <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="community" inline />
 
       {/* ================= SHARE YOUR STORY ================= */}
       <section className="relative py-20 sm:py-24 overflow-hidden border-t border-amber-900/10">

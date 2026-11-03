@@ -47,7 +47,8 @@ import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { CustomScripts } from "@/components/analytics/CustomScripts";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getBlogPosts, getSiteConfig, getTrips } from "@/lib/content";
+import { getBlogPosts, getNavLabels, getSiteConfig, getTrips, getTripsPages } from "@/lib/content";
+import { toTripsMenu } from "@/data/tripPages";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getSiteConfig();
@@ -78,7 +79,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // Shared with every page through the same cached CMS reads
-  const [trips, posts, site] = await Promise.all([getTrips(), getBlogPosts(), getSiteConfig()]);
+  const [trips, posts, site, navLabels, tripsMenu] = await Promise.all([
+    getTrips(),
+    getBlogPosts(),
+    getSiteConfig(),
+    getNavLabels(),
+    // The navbar's Trips dropdown and the footer links; they hide if the CMS can't be reached
+    getTripsPages().then(toTripsMenu, (error) => {
+      console.error("[cms] trips pages unavailable for the navbar & footer:", error);
+      return null;
+    }),
+  ]);
 
   return (
     <html
@@ -89,13 +100,15 @@ export default async function RootLayout({
         <Navbar
           trips={trips}
           latestPost={posts[0]}
+          navLabels={navLabels}
+          tripsMenu={tripsMenu}
           logos={{ dark: site.logo, light: site.socialLinks?.navbarLightLogo }}
           whatsapp={site.socialLinks?.whatsapp}
           phone={site.phone}
           topBar={site.topBar}
         />
         <main className="flex-grow">{children}</main>
-        <Footer site={site} />
+        <Footer site={site} tripsMenu={tripsMenu} />
         <CookieConsent />
         {/* Site-wide SEO & tracking from CMS → SEO → Global */}
         <JsonLd schema={site.schema} />

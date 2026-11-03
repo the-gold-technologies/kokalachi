@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -9,7 +9,8 @@ import { PiAddressBookTabs } from "react-icons/pi";
 import type { TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
 import type { TopBarConfig } from "@/types/cms";
-import { buildNavData, isCurrent, NAV_ITEMS, whatsappHref, type MenuKey } from "./nav/navData";
+import { buildNavData, isCurrent, whatsappHref, type MenuKey, type NavLabels } from "./nav/navData";
+import type { TripsMenu } from "@/data/tripPages";
 import { NavPanel, PANEL_BG } from "./nav/NavPanels";
 import { MobileMenu } from "./nav/MobileMenu";
 import { TopBar } from "./nav/TopBar";
@@ -20,15 +21,20 @@ import { TopBar } from "./nav/TopBar";
 interface NavbarProps {
   trips: TripCardData[];
   latestPost?: BlogPost;
+  navLabels?: NavLabels; // menu link names from CMS → Navigation → Menu Links, by id
+  tripsMenu?: TripsMenu | null; // the Trips dropdown (CMS → Trips Pages); null if unavailable
   logos: { dark?: string | null; light?: string | null }; // from CMS → SEO → Global
   whatsapp?: string | null; // CMS → SEO → Global → social links (number or wa.me link)
   phone?: string | null;
   topBar?: TopBarConfig | null; // CMS → SEO → Global → Top bar
 }
 
-export function Navbar({ trips, latestPost, logos, whatsapp, phone, topBar }: NavbarProps) {
+export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsapp, phone, topBar }: NavbarProps) {
   const pathname = usePathname();
-  const data = useMemo(() => buildNavData(trips, latestPost, topBar), [trips, latestPost, topBar]);
+  const data = useMemo(
+    () => buildNavData(trips, latestPost, topBar, tripsMenu, navLabels),
+    [trips, latestPost, topBar, tripsMenu, navLabels],
+  );
   const wa = whatsappHref(whatsapp);
   const tel = phone ? `tel:${phone.replace(/[^+\d]/g, "")}` : null;
 
@@ -167,7 +173,7 @@ export function Navbar({ trips, latestPost, logos, whatsapp, phone, topBar }: Na
         )}
 
         {/* Same gutter as every section; the pill reaches a little past it so the logo & CTA line up with page content */}
-        <div className={`site-container ${isScrolled ? "" : "pt-1.5"}`}>
+        <div className={`site-container ${isScrolled ? "" : "pt-1"}`}>
           <div
             className={`flex items-center justify-between rounded-full border -mx-3 px-3 md:-mx-5 md:px-5 py-2.5 transition-all duration-500 ease-in-out ${
               isSolid
@@ -206,7 +212,7 @@ export function Navbar({ trips, latestPost, logos, whatsapp, phone, topBar }: Na
                 } ${pill.visible ? "opacity-100" : "opacity-0"}`}
                 style={{ left: pill.left, width: pill.width }}
               />
-              {NAV_ITEMS.map((item) => {
+              {data.items.map((item) => {
                 const current = isCurrent(item, pathname);
                 const currentDot = current && (
                   <span
@@ -301,7 +307,7 @@ export function Navbar({ trips, latestPost, logos, whatsapp, phone, topBar }: Na
                 href="/contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[13.5px] font-semibold pl-5 pr-4 py-2.5 shadow-[0_6px_16px_rgba(217,108,44,0.32)] hover:shadow-[0_8px_22px_rgba(217,108,44,0.42)] transition-all"
               >
-                Contact Us
+                {data.contactLabel}
                 <PiAddressBookTabs className="w-5 h-5 transition-transform group-hover:scale-110" />
               </Link>
             </div>

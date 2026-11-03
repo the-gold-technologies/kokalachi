@@ -1,7 +1,7 @@
 import type { Departure, TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
 import type { TopBarConfig } from "@/types/cms";
-import { TRIP_PAGES, type TripPageKey } from "@/data/tripPages";
+import { TRIPS_NAV_IDS, type TripsMenu } from "@/data/tripPages";
 import {
   formatMonth,
   getDepartureOriginalPrice,
@@ -18,16 +18,20 @@ import {
 export type MenuKey = "journeys" | "trips" | "blogs";
 
 export type NavItem =
-  | { kind: "menu"; key: MenuKey; label: string; href: string }
-  | { kind: "link"; label: string; href: string };
+  | { kind: "menu"; key: MenuKey; navId: string; label: string; href: string }
+  | { kind: "link"; navId: string; label: string; href: string };
 
-// Top-level order of the navbar: finding a trip first, then stories and people, then who we are
+// Menu link names, by the ids in CMS → Navigation → Menu Links (admins can rename them there)
+export type NavLabels = Record<string, string>;
+
+// Top-level order of the navbar: finding a trip first, then stories and people, then who we are.
+// The labels here are the defaults; the CMS names replace them.
 export const NAV_ITEMS: NavItem[] = [
-  { kind: "menu", key: "journeys", label: "Journeys", href: "/journeys" },
-  { kind: "menu", key: "trips", label: "Trips", href: "/trips" },
-  { kind: "menu", key: "blogs", label: "Blogs", href: "/blogs" },
-  { kind: "link", label: "Community", href: "/community" },
-  { kind: "link", label: "About Us", href: "/about" },
+  { kind: "menu", key: "journeys", navId: "nav-journeys", label: "Journeys", href: "/journeys" },
+  { kind: "menu", key: "trips", navId: "nav-trips", label: "Trips", href: "/trips" },
+  { kind: "menu", key: "blogs", navId: "nav-blogs", label: "Blogs", href: "/blogs" },
+  { kind: "link", navId: "nav-community", label: "Community", href: "/community" },
+  { kind: "link", navId: "nav-about", label: "About Us", href: "/about" },
 ];
 
 export interface MenuLink {
@@ -63,6 +67,8 @@ export interface TickerItem {
 }
 
 export interface NavData {
+  items: NavItem[]; // NAV_ITEMS with the CMS names
+  contactLabel: string;
   showTopBar: boolean;
   facts: string[]; // rotating line on the left of the top bar
   ticker: TickerItem[];
@@ -88,13 +94,17 @@ function soonest(cards: TripCardData[]): Departure | undefined {
     .sort((a, b) => a.startDate.localeCompare(b.startDate))[0];
 }
 
-const TRIP_MENU: TripPageKey[] = ["upcoming", "past", "solo", "custom"];
 
 export function buildNavData(
   trips: TripCardData[],
   latestPost: BlogPost | undefined,
   topBar?: TopBarConfig | null,
+  tripsMenu?: TripsMenu | null, // CMS → Trips Pages; null when the CMS can't be reached
+  navLabels: NavLabels = {},
 ): NavData {
+  const label = (id: string, fallback: string) => navLabels[id] || fallback;
+  const items = NAV_ITEMS.map((item) => ({ ...item, label: label(item.navId, item.label) }));
+
   // Every destination we run, soonest next departure first, then the rest A–Z. One trip opens
   // the trip itself; several trips to the same place open the trip list filtered to it.
   const groups = new Map<string, TripCardData[]>();
@@ -122,10 +132,16 @@ export function buildNavData(
     )
     .map(({ link }) => link);
 
-  const tripPages = TRIP_MENU.map((key) => {
-    const page = TRIP_PAGES[key];
-    return { id: key, title: page.label, desc: page.menuDesc, href: page.path, meta: page.menuTag };
-  });
+  // The /trips sub-pages, in the CMS tab order (/trips itself is the "See all trips" button)
+  const tripPages: MenuLink[] = (tripsMenu?.pages ?? [])
+    .filter((page) => page.slug)
+    .map((page) => ({
+      id: page.slug,
+      title: label(TRIPS_NAV_IDS[page.slug] ?? "", page.tabLabel),
+      desc: page.menu?.desc ?? "",
+      href: page.path,
+      meta: page.menu?.tag || undefined,
+    }));
 
   // Months with at least one bookable departure, the next six
   const byMonth = new Map<string, number>();
@@ -156,14 +172,14 @@ export function buildNavData(
     .slice(0, 3);
 
   const blogLinks: MenuLink[] = [
-    { id: "journal", title: "The Kokalachi Journal", desc: "Honest guides & stories for curious travellers", href: "/blogs", meta: "All Blogs" },
-    { id: "moments", title: "Moments Captured", desc: "Visual memories, polaroids & photo tracks", href: "/#moments", meta: "Photo Diary" },
-    { id: "why", title: "Why We Started", desc: "The story, values & beliefs behind our tribe", href: "/about#why-we-started", meta: "Our Vision" },
+    { id: "journal", title: label("nav-blogs-all", "The Kokalachi Journal"), desc: "Honest guides & stories for curious travellers", href: "/blogs", meta: "All Blogs" },
+    { id: "moments", title: label("nav-blogs-moments", "Moments Captured"), desc: "Visual memories, polaroids & photo tracks", href: "/#moments", meta: "Photo Diary" },
+    { id: "why", title: label("nav-blogs-why", "Why We Started"), desc: "The story, values & beliefs behind our tribe", href: "/about#why-we-started", meta: "Our Vision" },
   ];
 
   const { facts, ticker } = buildTopBar(trips, topBar);
 
-  return { showTopBar: topBar?.enabled !== false, facts, ticker, destinations, tripPages, months, leavingSoon, latestPost, blogLinks };
+  return { items, contactLabel: label("nav-contact", "Contact Us"), showTopBar: topBar?.enabled !== false, facts, ticker, destinations, tripPages, months, leavingSoon, latestPost, blogLinks };
 }
 
 // Which top-level item the current page belongs to, for the "you are here" dot

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown, Phone, Send, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { DestinationRow, LinkIcon, MonthCalendarTile, TicketCard } from "./NavPanels";
-import { isCurrent, NAV_ITEMS, type MenuKey, type MenuLink, type NavData } from "./navData";
+import { isCurrent, type MenuKey, type MenuLink, type NavData } from "./navData";
 
 const DRAWER_BG = "#F8F5EE";
 
@@ -63,7 +63,7 @@ function SeeAll({ href, children, onClose }: { href: string; children: React.Rea
 
 export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phone }: MobileMenuProps) {
   // Open the accordion of the section you're in (Journeys if none)
-  const currentMenu = NAV_ITEMS.find((i) => i.kind === "menu" && isCurrent(i, pathname));
+  const currentMenu = data.items.find((i) => i.kind === "menu" && isCurrent(i, pathname));
   const [expanded, setExpanded] = useState<MenuKey | null>(
     currentMenu?.kind === "menu" ? currentMenu.key : "journeys",
   );
@@ -198,7 +198,7 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
           )}
 
           <div className="px-3 pt-3">
-            {NAV_ITEMS.map((item) => {
+            {data.items.map((item) => {
               const current = isCurrent(item, pathname);
               if (item.kind === "link") {
                 return (
@@ -255,7 +255,7 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
             onClick={onClose}
             className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-[14px] font-semibold py-3.5 shadow-md transition-colors"
           >
-            Contact Us <Send className="w-4 h-4" />
+            {data.contactLabel} <Send className="w-4 h-4" />
           </Link>
           {(whatsapp || tel) && (
             <div className="grid grid-flow-col auto-cols-fr gap-2.5">

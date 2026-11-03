@@ -8,7 +8,16 @@ import { sortTripCards, type Departure, type TourPackage, type TripCardData } fr
 import { getNextDeparture } from "@/lib/departures";
 import type { BlogPost, BlogSection } from "@/data/blogs";
 import type { CommunityTrip, StoryEntry } from "@/data/community";
-import type { BlogsSections, PageSections, PageSeo, SiteConfig } from "@/types/cms";
+import type {
+  BlogsSections,
+  CmsTripsPages,
+  PageSections,
+  PageSeo,
+  SharedSections,
+  SiteConfig,
+  UpcomingJourneysStripContent,
+} from "@/types/cms";
+import { tripsPath, type TripsPage, type TripsSection } from "@/data/tripPages";
 
 // ---------- Trips ----------
 
@@ -278,7 +287,8 @@ export const getBlogsPage = cache(async () => {
 
 // Full SEO rows for every page (CMS → SEO → Pages): adds the Open Graph fields and heading tag
 // that the page endpoints leave out. Cached under every page's tag, so any page SEO save refreshes it.
-const PAGE_SLUGS = ["home", "about", "contact", "journeys", "faqs", "community", "blogs", "terms", "privacy-policy"];
+// "trips" also covers its sub-pages: the CMS pings it for any trips page SEO save
+const PAGE_SLUGS = ["home", "about", "contact", "journeys", "faqs", "community", "blogs", "terms", "privacy-policy", "trips"];
 
 export const getPageSeoRows = cache(async () => {
   const { data } = await cmsGet<(PageSeo & { slug: string })[]>("/seo?type=pages", PAGE_SLUGS.map(CmsTag.page));
@@ -335,6 +345,99 @@ export async function getCommunityStats() {
 export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
   const { data } = await cmsGet<SiteConfig>("/seo", [CmsTag.site]);
   return data;
+});
+
+// Menu link names from CMS → Navigation → Menu Links, by link id ("nav-trips" → "Trips").
+// Only the names come from the CMS; the navbar keeps its own URLs and default names,
+// so a CMS outage just shows the defaults.
+export const getNavLabels = cache(async (): Promise<Record<string, string>> => {
+  try {
+    const { data } = await cmsGet<{ id: string; label: string }[]>("/nav-links", [CmsTag.site]);
+    return Object.fromEntries(data.filter((l) => l.label?.trim()).map((l) => [l.id, l.label.trim()]));
+  } catch (error) {
+    console.error("[cms] menu link names unavailable, using defaults:", error);
+    return {};
+  }
+});
+
+// ---------- Trips pages ----------
+
+// /trips and its sub-pages: text, hero photos, tab order and SEO (CMS → Static Pages → Trips Pages
+// and SEO → Page Settings). Tagged "page:trips" (the CMS pings it for any trips page or trips SEO
+// save) and "site" (menu link names and reordering).
+export const getTripsPages = cache(async (): Promise<TripsSection> => {
+  const { data } = await cmsGet<CmsTripsPages>("/trips-pages", [CmsTag.page("trips"), CmsTag.site]);
+  const main = data.sections.AllTripsSection;
+  if (!main) throw new Error('[cms] The All Trips page has no content yet. Save it once in the CMS.');
+
+  const allTrips: TripsPage = {
+    slug: "",
+    path: tripsPath(""),
+    tabLabel: main.tabLabel,
+    tagline: main.tagline,
+    headline: main.headline,
+    scriptAccent: main.scriptAccent,
+    description: main.description,
+    heroImage: main.heroImage,
+    layout: "list",
+    list: "all",
+    listTitle: main.listTitle,
+    listSubtitle: main.listSubtitle,
+    notes: [],
+    howItWorksLabel: "",
+    howItWorksTitle: "",
+    steps: [],
+    enquiryTag: "",
+    menu: null,
+    seo: data.seo,
+  };
+
+  const subPages = [...data.pages]
+    .sort((a, b) => a.order - b.order)
+    .map(({ slug, content: c, seo }): TripsPage => ({
+      slug,
+      path: tripsPath(slug),
+      tabLabel: c.tabLabel,
+      tagline: c.tagline,
+      headline: c.headline,
+      scriptAccent: c.scriptAccent,
+      description: c.description,
+      // A page without its own photo uses the All Trips one
+      heroImage: c.heroImage || main.heroImage,
+      layout: c.layout,
+      list: c.list,
+      listTitle: c.listTitle,
+      listSubtitle: c.listSubtitle,
+      notes: c.notes ?? [],
+      howItWorksLabel: c.howItWorksLabel,
+      howItWorksTitle: c.howItWorksTitle,
+      steps: c.steps ?? [],
+      enquiryTag: c.enquiryTag,
+      menu: { tag: c.menuTag, desc: c.menuDesc, image: c.menuImage },
+      seo,
+    }));
+
+  return { pages: [allTrips, ...subPages], menuFooterText: main.menuFooterText };
+});
+
+// One trips page by its slug ("" for /trips), or undefined if the CMS doesn't have it
+export const getTripsPage = cache(async (slug: string): Promise<TripsPage | undefined> => {
+  const { pages } = await getTripsPages();
+  return pages.find((page) => page.slug === slug);
+});
+
+// ---------- Shared sections ----------
+
+// Sections shown on many pages (CMS → Static Pages → Shared Sections).
+// A CMS outage hides the strip rather than breaking the page it sits on.
+export const getUpcomingJourneysStrip = cache(async (): Promise<UpcomingJourneysStripContent | null> => {
+  try {
+    const { data } = await cmsGet<SharedSections>("/shared-sections", [CmsTag.page("shared"), CmsTag.site]);
+    return data.UpcomingJourneysStripSection ?? null;
+  } catch (error) {
+    console.error("[cms] Upcoming Journeys strip unavailable, hiding it:", error);
+    return null;
+  }
 });
 
 // ---------- SEO ----------

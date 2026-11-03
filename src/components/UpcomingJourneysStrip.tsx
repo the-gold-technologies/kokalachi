@@ -7,21 +7,29 @@ import type { TripCardData } from "@/data/trips";
 import { TripCardItem } from "@/components/TripCardItem";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { isUpcomingTrip } from "@/lib/tripFilters";
+import { UPCOMING_TRIPS_PATH } from "@/data/tripPages";
+import type { StripPage, UpcomingJourneysStripContent } from "@/types/cms";
 
 // A short "upcoming journeys" strip: a left-aligned heading in the site's style, then a slider
 // of trip cards. Separate from the home page's full Upcoming Journeys section on purpose.
 // Each page adds it itself: as its last section (just above the footer), or with `inline`
 // just before the page's closing CTA (About, Community). Home has its own full section instead.
+// Text and the pages it shows on come from CMS → Static Pages → Shared Sections.
 export function UpcomingJourneysStrip({
   trips: allTrips,
+  content,
+  page,
   excludeSlug,
   inline = false,
 }: {
   trips: TripCardData[];
+  content: UpcomingJourneysStripContent | null; // null if the CMS doesn't have it
+  page: StripPage; // this page, checked against the CMS "Show on" list
   excludeSlug?: string; // leave out the trip being viewed
   inline?: boolean;     // before a CTA (full section spacing) rather than as the page's last section
 }) {
   const sliderRef = useRef<HTMLDivElement>(null);
+  if (!content || !content.showOn.includes(page)) return null;
   // Same rule as /trips/upcoming: trips with dates ahead (or new ones awaiting dates), site order
   const trips = allTrips.filter((card) => isUpcomingTrip(card) && card.slug !== excludeSlug);
   if (trips.length === 0) return null;
@@ -37,26 +45,28 @@ export function UpcomingJourneysStrip({
       <div className="site-container flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-8">
         <div className="max-w-2xl">
           <span className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
-            Upcoming Journeys
+            {content.tag}
           </span>
           <h2 id="upcoming-journeys-strip-heading" className="heading-section font-normal font-serif text-[#0E5A60]">
-            Your next trip is{" "}
-            <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
-              waiting.
-              <TitleUnderline />
-            </span>
+            {content.headline}{" "}
+            {content.scriptAccent && (
+              <span className="relative inline-block font-script font-normal text-[1.12em] text-[#0E5A60]">
+                {content.scriptAccent}
+                <TitleUnderline />
+              </span>
+            )}
           </h2>
-          <p className="mt-4 text-[#0E5A60]/75 text-base sm:text-lg leading-relaxed">
-            Small-group trips with dates open now. Find one that fits your calendar.
-          </p>
+          {content.description && (
+            <p className="mt-4 text-[#0E5A60]/75 text-base sm:text-lg leading-relaxed">{content.description}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
           <Link
-            href="/trips/upcoming"
+            href={UPCOMING_TRIPS_PATH}
             className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0E5A60] hover:text-[#D96C2C] transition-colors"
           >
-            View all <ArrowRight size={16} className="stroke-[2.5]" />
+            {content.viewAllText} <ArrowRight size={16} className="stroke-[2.5]" />
           </Link>
           <div className="hidden lg:flex items-center gap-2">
             <button

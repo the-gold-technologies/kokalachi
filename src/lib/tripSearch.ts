@@ -1,7 +1,7 @@
 import type { TripCardData } from "@/data/trips";
 import { getUpcomingDepartures } from "@/lib/departures";
 import { NO_FILTERS, isUpcomingTrip, matchesDates, matchesQuery, type TripFilters } from "@/lib/tripFilters";
-import { TRIP_PAGES } from "@/data/tripPages";
+import { UPCOMING_TRIPS_PATH } from "@/data/tripPages";
 
 // The home page search ("Where to? / When? / Travellers"): turns what was picked into a page.
 // One matching trip opens that trip; otherwise /trips/upcoming opens with the filters applied.
@@ -87,7 +87,7 @@ export function searchTarget(trips: TripCardData[], query: string, dates: Partia
   if (dates.weekend) params.set("weekend", "1");
 
   const queryString = params.toString();
-  return queryString ? `${TRIP_PAGES.upcoming.path}?${queryString}` : TRIP_PAGES.upcoming.path;
+  return queryString ? `${UPCOMING_TRIPS_PATH}?${queryString}` : UPCOMING_TRIPS_PATH;
 }
 
 /**

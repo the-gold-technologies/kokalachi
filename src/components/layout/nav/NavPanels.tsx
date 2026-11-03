@@ -125,9 +125,9 @@ export function LinkIcon({ id, className }: { id: string; className?: string }) 
       return <CalendarDays className={className} />;
     case "past":
       return <History className={className} />;
-    case "solo":
+    case "solo-travellers":
       return <User className={className} />;
-    case "custom":
+    case "custom-group-trip":
       return <Users className={className} />;
     case "journal":
       return <BookOpen className={className} />;

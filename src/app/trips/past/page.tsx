@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { TripsListingPage, tripsMetadata } from "@/components/trips/TripsListingPage";
+import { TripsPageView, tripsMetadata } from "@/components/trips/TripsListingPage";
 
-export const metadata: Metadata = tripsMetadata("past");
+// /trips/past: content and SEO from CMS → Static Pages → Trips Pages and SEO → Page Settings
+export function generateMetadata(): Promise<Metadata> {
+  return tripsMetadata("past");
+}
 
-// Trips with departures that have already started, most recent first
-export default function PastTripsPage() {
-  return <TripsListingPage pageKey="past" />;
+export default function Page() {
+  return <TripsPageView slug="past" />;
 }

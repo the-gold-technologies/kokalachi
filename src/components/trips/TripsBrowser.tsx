@@ -6,11 +6,11 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowRight, CalendarDays, CalendarSearch, MapPin, Search, X } from "lucide-react";
 import type { TripCardData } from "@/data/trips";
 import type { HeadingTag } from "@/lib/content";
-import { TRIP_PAGES, type TripPageKey } from "@/data/tripPages";
+import type { TripsPage, TripsTab } from "@/data/tripPages";
 import { formatDate } from "@/lib/departures";
 import { CompactTripCardItem } from "@/components/CompactTripCardItem";
 import { PastTripCard } from "@/components/trips/PastTripCard";
-import { TripsHero, TripsTabs } from "@/components/trips/TripsHeader";
+import { TripsHero, TripsNotes, TripsTabs } from "@/components/trips/TripsHeader";
 import {
   NO_FILTERS,
   destinationOptions,
@@ -73,15 +73,14 @@ const fieldClass =
 
 interface TripsBrowserProps {
   trips: TripCardData[];
-  pageKey: Exclude<TripPageKey, "custom">;
-  heroImage: string;
+  page: TripsPage; // a trips page whose layout is "list"
+  pages: TripsTab[]; // every trips page, for the tabs
+  customTripPath?: string; // the enquiry page, offered when nothing matches the filters
   headingTag?: HeadingTag;
-  intro?: React.ReactNode; // extra block above the trip list (e.g. the solo travellers notes)
 }
 
-export function TripsBrowser({ trips, pageKey, heroImage, headingTag, intro }: TripsBrowserProps) {
-  const page = TRIP_PAGES[pageKey];
-  const list = page.list ?? "all";
+export function TripsBrowser({ trips, page, pages, customTripPath, headingTag }: TripsBrowserProps) {
+  const list = page.list;
   const pathname = usePathname();
   // draft: what's picked in the filter bar; filters: what the list shows (applied on Search)
   const [draft, setDraft] = useState<TripFilters>(NO_FILTERS);
@@ -116,7 +115,7 @@ export function TripsBrowser({ trips, pageKey, heroImage, headingTag, intro }: T
         <FiltersFromUrl onLoad={loadFilters} />
       </Suspense>
 
-      <TripsHero page={page} image={heroImage} headingTag={headingTag} />
+      <TripsHero page={page} headingTag={headingTag} />
 
       {/* Filters: destination, month and date */}
       <div className="site-container relative z-10 -mt-8">
@@ -217,17 +216,19 @@ export function TripsBrowser({ trips, pageKey, heroImage, headingTag, intro }: T
         </form>
       </div>
 
-      {intro}
+      <TripsNotes notes={page.notes} />
 
       <section className="site-container pt-10">
         {/* Section heading on the left, the trips tabs on the right */}
         <div className="mb-6 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="shrink-0">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0E5A60]">{page.listTitle}</h2>
-            <p className="text-sm text-slate-500 mt-1">{page.listSubtitle}</p>
+            {page.listTitle && (
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0E5A60]">{page.listTitle}</h2>
+            )}
+            {page.listSubtitle && <p className="text-sm text-slate-500 mt-1">{page.listSubtitle}</p>}
           </div>
           <div className="min-w-0">
-            <TripsTabs active={pageKey} query={query} />
+            <TripsTabs pages={pages} active={page.slug} query={query} />
           </div>
         </div>
 
@@ -260,12 +261,14 @@ export function TripsBrowser({ trips, pageKey, heroImage, headingTag, intro }: T
                   <X size={14} /> Clear filters
                 </button>
                 {/* Somewhere we don't go yet? A private trip can be planned there */}
+                {customTripPath && (
                 <Link
-                  href={TRIP_PAGES.custom.path}
+                  href={customTripPath}
                   className="inline-flex items-center gap-1.5 rounded-full bg-[#D96C2C] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-[#C85A24] transition-colors"
                 >
                   Plan a custom group trip <ArrowRight size={14} />
                 </Link>
+                )}
               </div>
             )}
           </div>

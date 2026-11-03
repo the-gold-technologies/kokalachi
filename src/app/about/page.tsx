@@ -6,7 +6,7 @@ import { MeetFounderSection } from "@/components/about/MeetFounderSection";
 import { JoinTribeSection } from "@/components/about/JoinTribeSection";
 import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getPage, getTrips, headingTag, seoMetadata } from "@/lib/content";
+import { getPage, getTrips, headingTag, seoMetadata, getUpcomingJourneysStrip } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getPage("about");
@@ -33,7 +33,7 @@ export default async function AboutPage() {
         <MeetFounderSection content={sections.MeetFounderSection} />
 
         {/* Step 5: Upcoming Journeys, placed before the CTA */}
-        <UpcomingJourneysStrip trips={trips} inline />
+        <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="about" inline />
 
         {/* Step 6: Join the Tribe (Final CTA) */}
         <JoinTribeSection content={sections.JoinTribeSection} />
