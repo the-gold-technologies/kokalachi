@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import type { TripCardData } from "@/data/trips";
 import type { BlogPost } from "@/data/blogs";
-import { TRIP_PAGES } from "@/data/tripPages";
+import { TRIPS_NAV_IDS, type TripsMenu } from "@/data/tripPages";
 import { formatShortDate, getNextDeparture, hasFullDetails, isBookingOpen } from "@/lib/departures";
 
 interface DropdownItem {
@@ -49,10 +49,10 @@ const NAV_LABELS = {
   "nav-journeys-first": "First-Timer Friendly",
   "nav-journeys-women": "Women Only",
   "nav-trips": "Trips",
-  "nav-trips-upcoming": TRIP_PAGES.upcoming.label,
-  "nav-trips-past": TRIP_PAGES.past.label,
-  "nav-trips-custom": TRIP_PAGES.custom.label,
-  "nav-trips-solo": TRIP_PAGES.solo.label,
+  "nav-trips-upcoming": "Upcoming Trips",
+  "nav-trips-past": "Past Trips",
+  "nav-trips-custom": "Custom Group Trip",
+  "nav-trips-solo": "Solo Travellers",
   "nav-blogs": "Blogs",
   "nav-blogs-all": "The Kokalachi Journal",
   "nav-blogs-moments": "Moments Captured",
@@ -70,7 +70,13 @@ const tripBadge = (card: TripCardData) => {
 };
 
 // Menus built from the CMS trips and newest blog post (passed in by the root layout)
-function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined, label: NavLabel) {
+function buildMenus(
+  tripCards: TripCardData[],
+  latestPost: BlogPost | undefined,
+  label: NavLabel,
+  tripsMenu: TripsMenu | null,
+  navLabels: Record<string, string>,
+) {
   // Journeys menu: a few vibes to browse by, each opening /journeys pre-filtered
   const journeyCategories = (
     [
@@ -110,17 +116,20 @@ function buildMenus(tripCards: TripCardData[], latestPost: BlogPost | undefined,
       },
       ...journeyCategories,
     ],
-    // The /trips sub-pages (tag & description in src/data/tripPages.ts, names from the CMS)
-    "nav-trips": (
-      [
-        ["upcoming", "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=80&w=300"],
-        ["past", "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80&w=300"],
-        ["custom", "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=300"],
-        ["solo", "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=300"],
-      ] as const
-    ).map(([key, image]) => {
-      const page = TRIP_PAGES[key];
-      return { title: label(`nav-trips-${key}`), tag: page.menuTag, desc: page.menuDesc, image, href: page.path };
+    // The /trips sub-pages in their CMS tab order (CMS → Trips Pages). A tile's name is its link in
+    // Menu Links, or the page's tab label if it has none.
+    "nav-trips": (tripsMenu?.pages ?? []).flatMap((page) => {
+      if (!page.menu) return [];
+      const navId = TRIPS_NAV_IDS[page.slug];
+      return [
+        {
+          title: (navId && navLabels[navId]) || page.tabLabel,
+          tag: page.menu.tag,
+          desc: page.menu.desc,
+          image: page.menu.image,
+          href: page.path,
+        },
+      ];
     }),
     "nav-blogs": [
       // Newest blog post first, as the big tile
@@ -164,15 +173,16 @@ interface NavbarProps {
   trips: TripCardData[];
   latestPost?: BlogPost;
   navLabels: Record<string, string>; // menu link names from CMS → Navigation → Menu Links, by id
+  tripsMenu: TripsMenu | null; // the Trips dropdown (CMS → Trips Pages); null if unavailable
   logos: { dark?: string | null; light?: string | null }; // from CMS → SEO → Global
 }
 
-export function Navbar({ trips, latestPost, navLabels, logos }: NavbarProps) {
+export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos }: NavbarProps) {
   const pathname = usePathname();
   const label = React.useCallback<NavLabel>((id) => navLabels[id] || NAV_LABELS[id], [navLabels]);
   const { journeyCategories, handpickedTrips, dropdownData } = React.useMemo(
-    () => buildMenus(trips, latestPost, label),
-    [trips, latestPost, label],
+    () => buildMenus(trips, latestPost, label, tripsMenu, navLabels),
+    [trips, latestPost, label, tripsMenu, navLabels],
   );
 
   // Pages whose hero is light (cream), so the see-through navbar needs dark text there
@@ -409,7 +419,7 @@ export function Navbar({ trips, latestPost, navLabels, logos }: NavbarProps) {
                       <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between px-2 text-xs font-medium text-slate-500">
                         <span>
                           {link.id === "nav-trips"
-                            ? "Every trip we run, upcoming & past"
+                            ? tripsMenu?.menuFooterText
                             : "Guides, memories & stories from the Kokalachi tribe"}
                         </span>
                         <Link

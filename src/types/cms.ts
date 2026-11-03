@@ -426,3 +426,60 @@ export interface SiteConfig {
   youtubeUrl: string | null;
   linkedinUrl: string | null;
 }
+
+// ---------- Trips pages (CMS → Static Pages → Trips Pages) ----------
+// /trips is the "trips" page (AllTripsSection); each sub-page is "trips/<slug>" with one
+// TripsSubPageSection. Field names match kokalachi-cms/src/lib/tripsPageContent.ts.
+
+export interface TitleText {
+  title: string;
+  text: string;
+}
+
+export interface TripsPageContent {
+  tabLabel: string; // tab under every trips hero, and the footer link
+  tagline: string; // orange pill above the headline
+  headline: string;
+  scriptAccent: string; // handwritten, underlined end of the headline
+  description: string;
+  heroImage: string;
+  listTitle: string;
+  listSubtitle: string;
+}
+
+export interface TripsSubPageContent extends TripsPageContent {
+  layout: "list" | "enquiry"; // a list of trips, or the private-trip enquiry form
+  list: "all" | "upcoming" | "past";
+  notes: TitleText[]; // list pages: cards above the trip list
+  howItWorksLabel: string; // enquiry pages
+  howItWorksTitle: string;
+  steps: TitleText[];
+  enquiryTag: string;
+  menuTag: string; // navbar Trips dropdown tile
+  menuDesc: string;
+  menuImage: string;
+}
+
+export interface CmsTripsPages {
+  sections: { AllTripsSection?: TripsPageContent & { menuFooterText: string } };
+  seo: PageSeo | null;
+  pages: { slug: string; order: number; content: TripsSubPageContent; seo: PageSeo }[];
+}
+
+// ---------- Shared sections (CMS → Static Pages → Shared Sections) ----------
+
+// Pages that can show the Upcoming Journeys strip (Shared Sections → Show on)
+export type StripPage = "about" | "community" | "blogs" | "blog-post" | "journeys" | "journey-detail" | "trips";
+
+export interface UpcomingJourneysStripContent {
+  tag: string;
+  headline: string;
+  scriptAccent: string;
+  description: string;
+  viewAllText: string;
+  showOn: StripPage[];
+}
+
+export interface SharedSections {
+  UpcomingJourneysStripSection?: UpcomingJourneysStripContent;
+}

@@ -12,7 +12,7 @@ import { BlogToc } from "@/components/blog/BlogToc";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { formatBlogDate, getBlogOgImage, getReadingTime } from "@/data/blogs";
-import { getBlogPost, getBlogPosts, getTrips } from "@/lib/content";
+import { getBlogPost, getBlogPosts, getTrips, getUpcomingJourneysStrip } from "@/lib/content";
 import { hasFullDetails } from "@/lib/departures";
 
 // Prerender every post at build; posts published later in the CMS render on first visit, then stay cached
@@ -387,7 +387,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <UpcomingJourneysStrip trips={trips} />
+      <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="blog-post" />
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { TripsListingPage, tripsMetadata } from "@/components/trips/TripsListingPage";
+import { TripsPageView, tripsMetadata } from "@/components/trips/TripsListingPage";
 
-export const metadata: Metadata = tripsMetadata("all");
+// /trips, every trip: content and SEO from CMS → Static Pages → Trips Pages and SEO → Page Settings
+export function generateMetadata(): Promise<Metadata> {
+  return tripsMetadata("");
+}
 
-// Every trip: upcoming departures first, then the ones that have already run
-export default function AllTripsPage() {
-  return <TripsListingPage pageKey="all" />;
+export default function Page() {
+  return <TripsPageView slug="" />;
 }

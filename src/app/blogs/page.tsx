@@ -5,7 +5,7 @@ import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { formatBlogDate, getReadingTime } from "@/data/blogs";
-import { getBlogPosts, getBlogsPage, getTrips, headingTag, seoMetadata } from "@/lib/content";
+import { getBlogPosts, getBlogsPage, getTrips, headingTag, seoMetadata, getUpcomingJourneysStrip } from "@/lib/content";
 
 // Link-preview version of the hero: 1200×630 JPG so WhatsApp can show it
 const ogImage = (src: string) =>
@@ -166,7 +166,7 @@ export default async function BlogsPage() {
         </div>
       </section>
 
-      <UpcomingJourneysStrip trips={trips} />
+      <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="blogs" />
     </div>
   );
 }

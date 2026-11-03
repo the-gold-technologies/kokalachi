@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { JourneysBrowser } from "@/components/journeys/JourneysBrowser";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
-import { getPage, getTrips, headingTag, seoMetadata } from "@/lib/content";
+import { getPage, getTrips, headingTag, seoMetadata, getUpcomingJourneysStrip } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getPage("journeys");
@@ -15,7 +15,7 @@ export default async function AllJourneysPage() {
     <>
       <JsonLd schema={seo?.schema} />
       <JourneysBrowser trips={trips} sections={sections} headingTag={headingTag(seo?.headingOptions)} />
-      <UpcomingJourneysStrip trips={trips} />
+      <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="journeys" />
     </>
   );
 }

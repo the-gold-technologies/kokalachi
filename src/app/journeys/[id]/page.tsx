@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { JourneyDetail } from "@/components/journeys/JourneyDetail";
 import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getTrip, getTrips } from "@/lib/content";
+import { getTrip, getTrips, getUpcomingJourneysStrip } from "@/lib/content";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -39,7 +39,12 @@ export default async function JourneyPage({ params }: Props) {
       <JsonLd schema={trip.seo.schema} />
       <JourneyDetail trip={trip} />
       {/* Other trips to explore, leaving out this one */}
-      <UpcomingJourneysStrip trips={trips} excludeSlug={trip.slug} />
+      <UpcomingJourneysStrip
+        trips={trips}
+        content={await getUpcomingJourneysStrip()}
+        page="journey-detail"
+        excludeSlug={trip.slug}
+      />
     </>
   );
 }
