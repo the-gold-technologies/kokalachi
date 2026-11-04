@@ -46,6 +46,7 @@ import { JourneySectionNav, type SectionNavItem } from "@/components/journeys/Jo
 import { TripQuickActions } from "@/components/journeys/TripQuickActions";
 import { MetaPixel } from "@/components/analytics/MetaPixel";
 import { META_PIXEL_ID } from "@/lib/tracking";
+import { imageSrcSet, sizedImage } from "@/lib/images";
 
 function BookingWidget({
   tour,
@@ -504,6 +505,7 @@ export function JourneyDetail({ trip, whatsapp }: JourneyDetailProps) {
   const nextDepartureLabel = getNextDepartureLabel(tour);
   const batchCount = departures.filter((d) => !isSoldOut(d)).length;
   const fullDetails = hasFullDetails(tour);
+  const heroPhoto = tour.gallery && tour.gallery.length > 0 ? tour.gallery[0] : tour.image;
 
   // Quick-jump links: one per section; the "Need to Know" ones also switch that panel's tab
   const detailTab = (key: "inclusions" | "essentials" | "faq", label: string, icon: React.ElementType): SectionNavItem => ({
@@ -538,8 +540,11 @@ export function JourneyDetail({ trip, whatsapp }: JourneyDetailProps) {
       {/* Hero Section: at least 70% of the screen, and taller when the title is long. The top padding
           keeps the content clear of the fixed navbar, so a long title never runs into it. */}
       <div className="relative min-h-[70vh] w-full flex items-end">
+        {/* Full-screen, so ask for a photo that size (the CMS links are card-sized, w=800) */}
         <img
-          src={(tour.gallery && tour.gallery.length > 0) ? tour.gallery[0] : tour.image}
+          src={sizedImage(heroPhoto, 2400)}
+          srcSet={imageSrcSet(heroPhoto, [1200, 1800, 2400, 3200])}
+          sizes="100vw"
           alt={tour.title}
           className="absolute inset-0 w-full h-full object-cover opacity-80"
         />
@@ -801,7 +806,13 @@ export function JourneyDetail({ trip, whatsapp }: JourneyDetailProps) {
                               {/* EXPANDED STATE (Large Header) */}
                               {isExpanded && (
                                 <div className="absolute inset-0 w-full h-full flex flex-col justify-between p-4 sm:p-5 z-10 animate-in fade-in duration-500">
-                                  <img src={day.image || tour.image} alt={day.title} className="absolute inset-0 w-full h-full object-cover z-0" />
+                                  <img
+                                    src={sizedImage(day.image || tour.image, 1400)}
+                                    srcSet={imageSrcSet(day.image || tour.image, [800, 1400])}
+                                    sizes="(min-width: 1024px) 700px, 100vw"
+                                    alt={day.title}
+                                    className="absolute inset-0 w-full h-full object-cover z-0"
+                                  />
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/10 z-0" />
                                   
                                   <div className="relative z-10 flex justify-end">
