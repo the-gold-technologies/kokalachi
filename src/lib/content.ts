@@ -200,6 +200,8 @@ interface CmsBlogPost {
   ctaSecondaryBtnUrl: string | null;
   shareBtnText: string | null;
   relatedCategory: string | null;
+  relatedTripsKicker: string | null;
+  relatedTripsTitle: string | null;
   sidebarBadge: string | null;
   shareTitle: string | null;
   shareNote: string | null;
@@ -240,6 +242,8 @@ function toBlogPost(p: CmsBlogPost): BlogPost {
     share: { title: p.shareTitle ?? "", note: p.shareNote ?? "", buttonText: p.shareBtnText ?? "" },
     sidebarBadge: orUndefined(p.sidebarBadge),
     relatedCategory: orUndefined(p.relatedCategory),
+    relatedTripsKicker: orUndefined(p.relatedTripsKicker),
+    relatedTripsTitle: orUndefined(p.relatedTripsTitle),
     seo: {
       title: p.metaTitle,
       metaTitle: p.metaTitle,

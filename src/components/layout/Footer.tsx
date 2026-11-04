@@ -74,9 +74,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
               </Link>
             </div>
             <p className="text-white/80 text-xs sm:text-sm leading-relaxed max-w-sm font-sans">
-              Kokalachi designs immersive, slow-paced journeys for conscious
-              travelers, dreamers, and storytellers. We replace tourist traps
-              with authentic human connection.
+              {site.siteDescription}
             </p>
 
             <div className="space-y-2.5 pt-1 text-xs sm:text-sm text-white/80 font-sans">
@@ -213,18 +211,17 @@ export function Footer({ site, tripsMenu }: FooterProps) {
           {/* Column 4: Newsletter Dispatch (4 cols on lg) */}
           <div className="lg:col-span-4 space-y-4">
             <h3 className="text-[#F3B748] font-montserrat font-extrabold text-xs uppercase tracking-[0.2em]">
-              The Secret Dispatch
+              {site.socialLinks?.newsletterTitle}
             </h3>
             <p className="text-white/80 text-xs sm:text-sm leading-relaxed font-sans">
-              Get early access to secret trip launches, rare visual travelogues,
-              and slow travel advice. Zero spam, ever.
+              {site.socialLinks?.newsletterDescription}
             </p>
 
             {subscribed ? (
               <div className="p-4 rounded-2xl bg-white/10 border border-[#D96C2C]/50 text-white flex items-center gap-3 text-xs sm:text-sm animate-fade-in font-sans shadow-2xs">
                 <CheckCircle2 className="w-5 h-5 text-[#F3B748] shrink-0" />
                 <span>
-                  You&apos;re on the list! Welcome to the Kokalachi circle.
+                  {site.socialLinks?.newsletterSuccessMessage}
                 </span>
               </div>
             ) : (
@@ -242,7 +239,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
                     type="submit"
                     className="group absolute right-1.5 top-1.5 bottom-1.5 pl-4 pr-1.5 rounded-full bg-[#D96C2C] hover:bg-[#b8571e] text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
                   >
-                    <span>Join</span>
+                    <span>{site.socialLinks?.newsletterButtonText}</span>
                     <span className="grid place-items-center h-6 w-6 rounded-full bg-white/20">
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </span>
@@ -251,7 +248,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
                 <p className="text-[11px] text-white/60 flex items-center gap-1 font-sans">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#F3B748]" />
                   <span>
-                    We respect your privacy. Unsubscribe anytime in one click.
+                    {site.socialLinks?.newsletterPrivacyNote}
                   </span>
                 </p>
               </form>
@@ -262,7 +259,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
         {/* Bottom Bar: copyright on the left; legal links on the right with the credit in small below */}
         <div className="pt-8 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 text-xs text-white/60 font-sans">
           <p className="text-center sm:text-left">
-            © {new Date().getFullYear()} Kokalachi. All rights reserved.
+            {site.socialLinks?.copyrightText?.replace("{year}", String(new Date().getFullYear()))}
           </p>
 
           <div className="flex flex-col items-center sm:items-end gap-2">

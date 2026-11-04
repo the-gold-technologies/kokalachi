@@ -46,6 +46,8 @@ export interface BlogPost {
   share: { title: string; note: string; buttonText: string }; // sidebar "send this to a friend" card
   sidebarBadge?: string;    // e.g. "First-timer pick"
   relatedCategory?: string; // trip category to suggest at the end, e.g. "FirstTimers"
+  relatedTripsKicker?: string;
+  relatedTripsTitle?: string;
   seo: PageSeo;
 }
 

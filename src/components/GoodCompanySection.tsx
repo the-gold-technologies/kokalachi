@@ -97,17 +97,17 @@ export function GoodCompanySection({ content }: { content: GoodCompanyContent })
             <span className="w-14 h-14 rounded-full bg-[#FDF0EC] text-[#EF4444] flex items-center justify-center shrink-0">
               <Heart size={26} className="fill-[#EF4444]" />
             </span>
-            <h4 className="text-xl sm:text-2xl font-serif text-[#0E5A60] font-bold leading-tight">
-              Our <br className="hidden md:block" /> Promise
+            <h4 className="text-xl sm:text-2xl font-serif text-[#0E5A60] font-bold leading-tight whitespace-pre-line">
+              {content.promiseTitle}
             </h4>
           </div>
 
           <div className="flex-1 space-y-1.5">
             <p className="text-lg sm:text-xl lg:text-[22px] font-serif font-bold text-[#0E5A60] leading-snug">
-              We&apos;ll never compromise your safety, comfort or experience just to fill a trip.
+              {content.promiseHeadline}
             </p>
             <p className="font-script text-[#D96C2C] text-xl sm:text-2xl leading-relaxed">
-              That&apos;s a promise we keep on every journey.
+              {content.promiseAccent}
             </p>
           </div>
         </div>

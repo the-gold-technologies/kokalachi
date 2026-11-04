@@ -393,32 +393,32 @@ export function WhyWeExistSection({ content }: { content: WhyWeExistContent }) {
                   {/* Pillar 1 */}
                   <div className="flex items-center gap-2.5">
                     <Users className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
-                      Handpicked <br /> Travel Companions
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans whitespace-pre-line">
+                      {content.pillar1Title}
                     </span>
                   </div>
 
                   {/* Pillar 2 */}
                   <div className="flex items-center gap-2.5">
                     <ShieldCheck className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
-                      Trusted <br /> &amp; Safe
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans whitespace-pre-line">
+                      {content.pillar2Title}
                     </span>
                   </div>
 
                   {/* Pillar 3 */}
                   <div className="flex items-center gap-2.5">
                     <BookOpen className="w-5 h-5 text-[#C85A24] shrink-0 stroke-[1.8]" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
-                      Thoughtfully <br /> Planned
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans whitespace-pre-line">
+                      {content.pillar3Title}
                     </span>
                   </div>
 
                   {/* Pillar 4 */}
                   <div className="flex items-center gap-2.5">
                     <Heart className="w-5 h-5 text-[#EF4444] fill-[#EF4444] shrink-0 stroke-none" />
-                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans">
-                      Connections <br /> That Last
+                    <span className="text-[11px] sm:text-xs font-semibold leading-tight text-[#2C221E] font-sans whitespace-pre-line">
+                      {content.pillar4Title}
                     </span>
                   </div>
                 </div>

@@ -364,15 +364,10 @@ export default async function BlogPostPage({
           <div className="site-container">
             <div className="text-center mb-10">
               <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
-                Made for first-timers
+                {post.relatedTripsKicker}
               </span>
               <h2 className="heading-section font-serif text-[#0E5A60]">
-                Trips to say{" "}
-                <span className="relative inline-block font-script text-[1.15em]">
-                  yes
-                  <TitleUnderline />
-                </span>{" "}
-                to
+                {post.relatedTripsTitle}
               </h2>
             </div>
             {/* Centered, so two trips don't leave a gap on the right */}

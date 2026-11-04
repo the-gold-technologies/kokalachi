@@ -73,6 +73,10 @@ export interface WhyWeExistContent extends Heading {
     isSilent?: boolean;
     reactions?: string;
   }[];
+  pillar1Title?: string;
+  pillar2Title?: string;
+  pillar3Title?: string;
+  pillar4Title?: string;
 }
 
 export interface HowItWorksContent extends Heading {
@@ -107,6 +111,9 @@ export interface GoodCompanyContent extends Heading {
   cards: { title: string; description: string; image: string; hashtag: string }[];
   ctaText: string;
   ctaLink: string;
+  promiseTitle?: string;
+  promiseHeadline?: string;
+  promiseAccent?: string;
 }
 
 export interface MomentsThatStayedContent extends Heading {
@@ -282,6 +289,9 @@ export interface ContactSections {
     trust2Desc: string;
     trust3Title: string;
     trust3Desc: string;
+    officeTitle?: string;
+    officeCompanyName?: string;
+    officeAddress?: string;
   };
 }
 
@@ -407,6 +417,11 @@ export interface SiteConfig {
     footerLogo?: string;
     whatsapp?: string;
     copyrightText?: string;
+    newsletterTitle?: string;
+    newsletterDescription?: string;
+    newsletterButtonText?: string;
+    newsletterSuccessMessage?: string;
+    newsletterPrivacyNote?: string;
   } | null;
   headingOptions: unknown; // hero headline tag for the home page
   schema: string | null; // site-wide JSON-LD (e.g. TravelAgency)
