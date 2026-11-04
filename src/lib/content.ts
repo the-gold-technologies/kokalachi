@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { cmsGet, CmsTag } from "@/lib/cms";
 import { sortTripCards, type Departure, type TourPackage, type TripCardData } from "@/data/trips";
 import { getNextDeparture } from "@/lib/departures";
+import { tripRegion } from "@/lib/regions";
 import type { BlogPost, BlogSection } from "@/data/blogs";
 import type { CommunityTrip, StoryEntry } from "@/data/community";
 import type {
@@ -66,6 +67,8 @@ interface CmsTrip {
   highlights: { icon: string; title: string; description: string }[] | null;
   gallery: string[] | null;
   vibeTags: string[] | null;
+  destinationSlug: string | null;
+  region?: string | null; // "domestic" | "international"; to be added in the CMS (see lib/regions)
   isFeatured: boolean;
   order: number;
   metaTitle: string | null;
@@ -119,6 +122,7 @@ function toTripCard(t: CmsTrip): TripCardData {
     vibeTags: t.vibeTags ?? [],
     categories: t.categories ?? [],
     featured: t.isFeatured,
+    region: tripRegion(t.region, [t.slug, t.destinationSlug]),
     // The CMS gallery doubles as the card slideshow; the first three keep cards light
     images: gallery.length > 0 ? gallery.slice(0, 3) : [t.image],
     tourPackage: {

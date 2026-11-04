@@ -49,6 +49,8 @@ export interface TourPackage {
   gallery?: string[];
 }
 
+export type TripRegion = "domestic" | "international";
+
 export interface TripCardData {
   id: string;
   slug: string;
@@ -62,6 +64,7 @@ export interface TripCardData {
   categories: string[];
   images: string[];
   featured?: boolean;      // pins the trip to the front of every list, e.g. the newest launch
+  region: TripRegion;      // for the Domestic / International filter on /journeys (see lib/regions)
   tourPackage: TourPackage;
   seo: {
     metaTitle: string | null;

@@ -7,15 +7,30 @@ import type { JourneysSections } from "@/types/cms";
 import type { HeadingTag } from "@/lib/content";
 import { CompactTripCardItem } from "@/components/CompactTripCardItem";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
-import { Heart } from "lucide-react";
+import { Heart, MapPin, Plane } from "lucide-react";
 import { filterTripsByVibe, isHeartVibe, vibeIcon } from "@/lib/vibes";
+import { filterTripsByRegion, isRegionFilter, REGION_FILTERS, type RegionFilter } from "@/lib/regions";
+
+const REGION_ICONS = { domestic: MapPin, international: Plane } as const;
 
 // Opens the page pre-filtered when linked as /journeys?category=Adventure (e.g. from the navbar)
-function CategoryFromUrl({ onCategory }: { onCategory: (id: string) => void }) {
-  const category = useSearchParams().get("category");
+// or /journeys?region=international
+function FiltersFromUrl({
+  onCategory,
+  onRegion,
+}: {
+  onCategory: (id: string) => void;
+  onRegion: (region: RegionFilter) => void;
+}) {
+  const params = useSearchParams();
+  const category = params.get("category");
+  const region = params.get("region");
   useEffect(() => {
     if (category) onCategory(category);
   }, [category, onCategory]);
+  useEffect(() => {
+    if (isRegionFilter(region)) onRegion(region);
+  }, [region, onRegion]);
   return null;
 }
 
@@ -27,17 +42,20 @@ interface JourneysBrowserProps {
 
 export function JourneysBrowser({ trips, sections, headingTag: Heading = "h1" }: JourneysBrowserProps) {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [activeRegion, setActiveRegion] = useState<RegionFilter>("all");
   const hero = sections.JourneysHeroSection;
   const filter = sections.JourneysFilterSection;
 
   const categories = filter.categories.map((v) => ({ ...v, icon: vibeIcon(v.id), isHeart: isHeartVibe(v.id) }));
 
-  const filteredCards = filterTripsByVibe(trips, activeCategory);
+  // Region first, then the vibe (so "Trending" is the top trips of that region)
+  const visibleFor = (region: RegionFilter) => filterTripsByVibe(filterTripsByRegion(trips, region), activeCategory);
+  const filteredCards = visibleFor(activeRegion);
 
   return (
     <div className="min-h-screen font-sans text-slate-800  pb-20">
       <Suspense fallback={null}>
-        <CategoryFromUrl onCategory={setActiveCategory} />
+        <FiltersFromUrl onCategory={setActiveCategory} onRegion={setActiveRegion} />
       </Suspense>
       
       {/* Hero Section (Matching Detailed Page) */}
@@ -125,6 +143,40 @@ export function JourneysBrowser({ trips, sections, headingTag: Heading = "h1" }:
 
           {/* Right Area (3-Column Grid) */}
           <div className="w-full flex-grow">
+            {/* Domestic / International, with how many trips each would show alongside the chosen vibe */}
+            <div
+              role="radiogroup"
+              aria-label="Domestic or international"
+              className="mb-6 flex items-center gap-1.5 overflow-x-auto scrollbar-hide p-1.5 rounded-full bg-white border border-slate-100 shadow-sm w-fit max-w-full"
+            >
+              {REGION_FILTERS.map((r) => {
+                const active = activeRegion === r.id;
+                const Icon = r.id === "all" ? null : REGION_ICONS[r.id];
+                return (
+                  <button
+                    key={r.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setActiveRegion(r.id)}
+                    className={`shrink-0 inline-flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold font-sans whitespace-nowrap transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E5A60]/40 ${
+                      active ? "bg-[#0E5A60] text-white shadow-md" : "text-slate-600 hover:bg-slate-50 hover:text-[#0E5A60]"
+                    }`}
+                  >
+                    {Icon && <Icon size={15} className={active ? "text-[#FFD9BF]" : "text-[#D96C2C]"} />}
+                    {r.label}
+                    <span
+                      className={`min-w-5 rounded-full px-1.5 py-px text-[11px] font-bold ${
+                        active ? "bg-white/15 text-white" : "bg-slate-100 text-slate-500"
+                      }`}
+                    >
+                      {visibleFor(r.id).length}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredCards.map((card) => (
                 <div key={card.id} className="h-full">
