@@ -256,7 +256,12 @@ export function DestinationRow({ dest, onNavigate }: { dest: DestinationLink; on
         <span className="block font-semibold text-[14px] leading-snug text-[#0B2A3D] group-hover:text-[#0E5A60] transition-colors">
           {dest.title}
         </span>
-        <span className={`block text-[11.5px] truncate ${dated ? "text-[#0E5A60] font-medium" : "text-slate-400"}`}>
+        {/* Faded so the place name leads; the date comes forward on hover */}
+        <span
+          className={`block text-[11.5px] truncate transition-colors ${
+            dated ? "text-[#0E5A60]/50 group-hover:text-[#0E5A60]/80" : "text-slate-400/70 group-hover:text-slate-400"
+          }`}
+        >
           {dest.meta}
         </span>
       </span>

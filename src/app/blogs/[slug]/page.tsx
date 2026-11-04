@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, CalendarDays, Clock, Feather, MapPin } from "luc
 import { FaWhatsapp } from "react-icons/fa6";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { FlyingBirds } from "@/components/ui/FlyingBirds";
-import { TripCardItem } from "@/components/TripCardItem";
 import { UpcomingJourneysStrip } from "@/components/UpcomingJourneysStrip";
 import { BlogBlocks } from "@/components/blog/BlogBlocks";
 import { BlogToc } from "@/components/blog/BlogToc";
@@ -66,12 +65,10 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const readingTime = getReadingTime(post);
-  const relatedTrips = post.relatedCategory
-    ? trips
-        .filter((card) => card.categories.includes(post.relatedCategory!) && hasFullDetails(card.tourPackage))
-        .slice(0, 3)
-    : [];
-  const nextTrip = relatedTrips[0];
+  // The sidebar suggests one trip from the post's related category
+  const nextTrip = post.relatedCategory
+    ? trips.find((card) => card.categories.includes(post.relatedCategory!) && hasFullDetails(card.tourPackage))
+    : undefined;
   const shareText =encodeURIComponent(`${post.title} https://kokalachi.com/blogs/${post.slug}`);
 
   // BlogPosting structured data for search engines (the CMS can supply its own)
@@ -321,6 +318,8 @@ export default async function BlogPostPage({
         </div>
       </div>
 
+      <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="blog-post" inline />
+
       {/* CTA */}
       <section className="pb-16 lg:pb-20">
         <div className="site-container">
@@ -357,32 +356,6 @@ export default async function BlogPostPage({
           </div>
         </div>
       </section>
-
-      {/* Trips to try it on */}
-      {relatedTrips.length > 0 && (
-        <section className="pb-20 lg:pb-24">
-          <div className="site-container">
-            <div className="text-center mb-10">
-              <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-[#C85A24] font-montserrat block mb-3">
-                {post.relatedTripsKicker}
-              </span>
-              <h2 className="heading-section font-serif text-[#0E5A60]">
-                {post.relatedTripsTitle}
-              </h2>
-            </div>
-            {/* Centered, so two trips don't leave a gap on the right */}
-            <div className="flex flex-wrap justify-center gap-6">
-              {relatedTrips.map((card) => (
-                <div key={card.slug} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
-                  <TripCardItem card={card} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <UpcomingJourneysStrip trips={trips} content={await getUpcomingJourneysStrip()} page="blog-post" />
     </div>
   );
 }

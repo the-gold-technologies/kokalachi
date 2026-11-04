@@ -187,13 +187,23 @@ export function isCurrent(item: NavItem, pathname: string): boolean {
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
-// The CMS WhatsApp field may hold a full link or just a number
-export function whatsappHref(value: string | null | undefined): string | null {
+// The CMS WhatsApp field may hold a full link or just a number. `message` pre-fills the chat
+// (a full link keeps its own text unless a message is given).
+export function whatsappHref(value: string | null | undefined, message?: string): string | null {
   if (!value) return null;
-  if (/^https?:\/\//i.test(value)) return value;
+  if (/^https?:\/\//i.test(value)) {
+    if (!message) return value;
+    try {
+      const url = new URL(value);
+      url.searchParams.set("text", message);
+      return url.toString();
+    } catch {
+      return value;
+    }
+  }
   const digits = value.replace(/\D/g, "");
   if (!digits) return null;
-  const text = encodeURIComponent("Hi Kokalachi! Can you help me find a trip?");
+  const text = encodeURIComponent(message ?? "Hi Kokalachi! Can you help me find a trip?");
   return `https://wa.me/${digits}?text=${text}`;
 }
 

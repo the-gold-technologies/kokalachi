@@ -11,6 +11,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Check,
+  User,
+  UserLock,
+  ArrowRight,
 } from "lucide-react";
 import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import { TaglineRoute } from "@/components/ui/TaglineRoute";
@@ -18,6 +21,17 @@ import type { HeroContent } from "@/types/cms";
 import type { TripCardData } from "@/data/trips";
 import { datesFromSelection, destinationSuggestions, searchTarget } from "@/lib/tripSearch";
 import type { HeadingTag } from "@/lib/content";
+import { tripsPath } from "@/data/tripPages";
+
+// How they're travelling. Solo and Group search the trips (every trip takes both); Custom is
+// planned rather than searched, so the button goes to the Custom Group Trip page instead.
+// Same icons as the trip booking form.
+const TRAVEL_STYLES = [
+  { key: "solo", label: "Solo", desc: "Join a group trip on your own", icon: User },
+  { key: "group", label: "Group", desc: "With friends, a partner or family", icon: Users },
+  { key: "custom", label: "Custom", desc: "A private trip on your own dates", icon: UserLock },
+] as const;
+type TravelStyle = (typeof TRAVEL_STYLES)[number]["key"];
 
 // Today in India as "YYYY-MM-DD" (trip dates are Indian dates)
 const todayIST = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date());
@@ -36,7 +50,8 @@ export function HeroSection({
   // Search filter states
   const [destination, setDestination] = useState("");
   const [selectedDates, setSelectedDates] = useState("Select dates");
-  const [selectedTravellers, setSelectedTravellers] = useState("1 Traveller");
+  const [travelStyle, setTravelStyle] = useState<TravelStyle>("solo");
+  const style = TRAVEL_STYLES.find((t) => t.key === travelStyle)!;
 
   // Dropdown toggles
   const [isDestOpen, setIsDestOpen] = useState(false);
@@ -66,6 +81,21 @@ export function HeroSection({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (!isDestOpen && !isDatesOpen && !isTravellersOpen) return;
+    // Wait for the panel to render (and finish its short slide-in) before measuring
+    const timer = window.setTimeout(() => {
+      const card = searchContainerRef.current;
+      const panel = card?.querySelector<HTMLElement>("[data-hero-dropdown]");
+      if (!card || !panel) return;
+      const overflow = panel.getBoundingClientRect().bottom - window.innerHeight + 16;
+      const room = card.getBoundingClientRect().top - 110; // keep the card clear of the navbar
+      const by = Math.min(overflow, room);
+      if (by > 0) window.scrollBy({ top: by, behavior: "smooth" });
+    }, 170);
+    return () => window.clearTimeout(timer);
+  }, [isDestOpen, isDatesOpen, isTravellersOpen]);
+
   const { popularDestinations, quickDatePresets } = content;
   // "Find your circle. Find your next" → one line per sentence
   const headlineLines = content.headline.split(".").map((line) => line.trim());
@@ -87,7 +117,6 @@ export function HeroSection({
     "December",
   ];
 
-  const travellerOptions = content.travellerOptions;
 
   // Calendar helpers
   const getDaysInMonth = (year: number, month: number) =>
@@ -132,6 +161,10 @@ export function HeroSection({
   // One matching trip opens that trip; otherwise /trips/upcoming opens with the filters applied
   // (see lib/tripSearch). Travellers doesn't narrow anything: every trip takes solo travellers and groups.
   const handleSearch = (query = destination) => {
+    if (travelStyle === "custom") {
+      router.push(tripsPath("custom-group-trip"));
+      return;
+    }
     const dates = datesFromSelection(selectedDates === "Select dates" ? "" : selectedDates, pickedDate ?? undefined);
     router.push(searchTarget(trips, query, dates));
   };
@@ -242,7 +275,7 @@ export function HeroSection({
 
               {/* Destination Dropdown — Clean, Fully Visible, No Ugly Scrollbar */}
               {isDestOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div data-hero-dropdown className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
                     {content.popularDestinationsTitle}
                   </div>
@@ -312,7 +345,7 @@ export function HeroSection({
 
               {/* Interactive Calendar Popover — Beautiful, Full View, No Scrollbar */}
               {isDatesOpen && (
-                <div className="absolute top-full left-0 md:-left-10 mt-2 w-[310px] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-3.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div data-hero-dropdown className="absolute top-full left-0 md:-left-10 mt-2 w-[310px] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-3.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   {/* Quick Preset Buttons */}
                   <div className="flex flex-wrap gap-1 mb-3 pb-2.5 border-b border-slate-100">
                     {quickDatePresets.map((preset) => (
@@ -420,14 +453,14 @@ export function HeroSection({
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
-                    <Users className="w-4 h-4 text-slate-700" />
+                    <style.icon className="w-4 h-4 text-slate-700" />
                   </div>
                   <div className="flex flex-col min-w-0 pr-1">
                     <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                      {content.travellersLabel}
+                      Travelling
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
-                      {selectedTravellers}
+                      {style.label}
                     </span>
                   </div>
                 </div>
@@ -436,38 +469,34 @@ export function HeroSection({
 
               {/* Travellers Dropdown — Clean, Fully Visible */}
               {isTravellersOpen && (
-                <div className="absolute top-full left-0 md:-left-8 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div data-hero-dropdown className="absolute top-full left-0 md:-left-8 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
-                    {content.groupSizeTitle}
+                    How are you travelling?
                   </div>
                   <div className="space-y-1">
-                    {travellerOptions.map((opt) => (
-                      <button
-                        key={opt.label}
-                        type="button"
-                        onClick={() => {
-                          setSelectedTravellers(opt.label);
-                          setIsTravellersOpen(false);
-                        }}
-                        className={`w-full flex flex-col px-3 py-2 rounded-xl transition-colors text-left ${
-                          selectedTravellers === opt.label
-                            ? "bg-[#0E5A60]/10 text-[#0E5A60]"
-                            : "text-slate-700 hover:bg-slate-100"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between w-full">
-                          <span className="text-xs font-semibold">
-                            {opt.label}
+                    {TRAVEL_STYLES.map((opt) => {
+                      const selected = travelStyle === opt.key;
+                      return (
+                        <button
+                          key={opt.key}
+                          type="button"
+                          onClick={() => {
+                            setTravelStyle(opt.key);
+                            setIsTravellersOpen(false);
+                          }}
+                          className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition-colors text-left cursor-pointer ${
+                            selected ? "bg-[#0E5A60]/10 text-[#0E5A60]" : "text-slate-700 hover:bg-slate-100"
+                          }`}
+                        >
+                          <opt.icon className={`w-4 h-4 shrink-0 ${selected ? "text-[#0E5A60]" : "text-[#D96C2C]"}`} />
+                          <span className="flex-1 min-w-0">
+                            <span className="block text-xs font-semibold">{opt.label}</span>
+                            <span className="block text-[10px] text-slate-500">{opt.desc}</span>
                           </span>
-                          {selectedTravellers === opt.label && (
-                            <Check className="w-3.5 h-3.5 text-[#0E5A60]" />
-                          )}
-                        </div>
-                        <span className="text-[10px] text-slate-500">
-                          {opt.desc}
-                        </span>
-                      </button>
-                    ))}
+                          {selected && <Check className="w-3.5 h-3.5 text-[#0E5A60] shrink-0" />}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -479,8 +508,17 @@ export function HeroSection({
               onClick={() => handleSearch()}
               className="bg-[#0E5A60] hover:bg-[#0B2A3D] text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl md:rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer shrink-0 font-sans mt-2 md:mt-0"
             >
-              <Search className="w-4 h-4 text-white" />
-              <span>{content.searchButtonText}</span>
+              {travelStyle === "custom" ? (
+                <>
+                  <span>Plan My Trip</span>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </>
+              ) : (
+                <>
+                  <Search className="w-4 h-4 text-white" />
+                  <span>{content.searchButtonText}</span>
+                </>
+              )}
             </button>
           </div>
 

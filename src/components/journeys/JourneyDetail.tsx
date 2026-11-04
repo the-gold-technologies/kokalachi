@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { createBooking } from "@/actions/booking";
+import { submitContactEnquiry } from "@/actions/contact";
 import { 
   Calendar,
   Users,
@@ -19,11 +20,19 @@ import {
   Clock,
   Compass,
   Heart,
-  ShieldCheck
+  ShieldCheck,
+  BookOpen,
+  Route,
+  PackageCheck,
+  Backpack,
+  MessagesSquare,
+  UserLock
 } from "lucide-react";
 import type { TourPackage, Departure, TripCardData } from "@/data/trips";
 import {
   formatDeparture,
+  formatStartingOriginalPrice,
+  formatStartingPrice,
   getDeparturePrice,
   getNextDeparture,
   getNextDepartureLabel,
@@ -33,6 +42,8 @@ import {
   isSoldOut,
 } from "@/lib/departures";
 import { DeparturePicker } from "@/components/DeparturePicker";
+import { JourneySectionNav, type SectionNavItem } from "@/components/journeys/JourneySectionNav";
+import { TripQuickActions } from "@/components/journeys/TripQuickActions";
 import { MetaPixel } from "@/components/analytics/MetaPixel";
 import { META_PIXEL_ID } from "@/lib/tracking";
 
@@ -41,11 +52,15 @@ function BookingWidget({
   departures,
   selectedDeparture,
   onSelectDeparture,
+  tripSlug,
+  whatsapp,
 }: {
   tour: TourPackage;
   departures: Departure[];
   selectedDeparture?: Departure;
   onSelectDeparture: (id: string) => void;
+  tripSlug: string;
+  whatsapp?: string | null;
 }) {
   const [guestInput, setGuests] = useState(1);
   const [travelDate, setTravelDate] = useState("");
@@ -53,6 +68,9 @@ function BookingWidget({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // "group" joins a fixed batch; "private" asks for a custom trip on their own dates
+  const [tripType, setTripType] = useState<"group" | "private">("group");
+  const [privateDate, setPrivateDate] = useState("");
 
   useEffect(() => {
     setMounted(true);
@@ -60,7 +78,9 @@ function BookingWidget({
 
   // Trips with departures must have one picked; older trips keep the free date input
   const hasDepartures = !!tour.departures;
-  const maxGuests = Math.min(10, selectedDeparture?.spotsLeft ?? 10);
+  const isPrivate = tripType === "private";
+  // A private trip isn't limited by a batch's seats
+  const maxGuests = isPrivate ? 30 : Math.min(10, selectedDeparture?.spotsLeft ?? 10);
   // Keep the guest count within the seats left on the chosen date
   const guests = Math.max(1, Math.min(guestInput, maxGuests));
 
@@ -69,6 +89,14 @@ function BookingWidget({
   const priceKnown = departurePrice != null;
   const basePrice = departurePrice ?? 0;
   const bookableDepartures = departures.filter((d) => !isSoldOut(d));
+  const startingPrice = priceKnown ? formatStartingPrice(tour) : undefined;
+  const startingOriginalPrice = priceKnown ? formatStartingOriginalPrice(tour) : undefined;
+  // Every batch full: a private trip is still possible
+  const soldOut = hasDepartures && bookableDepartures.length === 0;
+  const openBooking = (type: "group" | "private") => {
+    setTripType(soldOut ? "private" : type);
+    setIsModalOpen(true);
+  };
   
   // Calculations — for GST-inclusive prices, split the GST back out of the costing
   const gstPerGuest = tour.gstAmount || 0;
@@ -82,6 +110,31 @@ function BookingWidget({
     setIsSubmitting(true);
     
     const formData = new FormData(e.currentTarget);
+
+    if (isPrivate) {
+      const requests = String(formData.get("specialRequests") ?? "").trim();
+      const result = await submitContactEnquiry({
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        phone: formData.get("phone") as string,
+        journey: `Custom group trip: ${tour.title}`,
+        travelDate: privateDate || undefined,
+        groupSize: guests === 1 ? "Solo" : `${guests} people`,
+        message: requests || "Private trip request from the trip page.",
+      });
+      if (result.success) {
+        setSubmitSuccess(true);
+        setTimeout(() => {
+          setIsModalOpen(false);
+          setSubmitSuccess(false);
+        }, 3000);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+      setIsSubmitting(false);
+      return;
+    }
+
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
@@ -110,117 +163,95 @@ function BookingWidget({
 
   return (
     <>
-      <div className="flex flex-col flex-1 min-h-0 h-full justify-between gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        {/* Departure Picker */}
-        {hasDepartures && (
-          <div className="py-2 flex-shrink-0">
-            <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5 mb-2.5">
-              <Calendar size={15} className="text-[#0E5A60]" /> Select Your Batch
-            </h4>
-            <DeparturePicker
-              tour={tour}
-              departures={departures}
-              selectedId={selectedDeparture?.id}
-              onSelect={onSelectDeparture}
-            />
+      {/* Kept simple: dates, duration and group live in the snapshot; picking a batch, travellers
+          and the price breakdown happen in the booking form */}
+      <div className="flex flex-col gap-4">
+        {startingPrice ? (
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#C85A24] mb-1">
+              {tour.offerLabel || "Starting from"}
+            </p>
+            <p className="flex items-baseline flex-wrap gap-x-2">
+              <span className="font-black text-[28px] leading-none text-[#0E5A60]">{startingPrice}</span>
+              {startingOriginalPrice && (
+                <span className="text-sm font-semibold text-slate-400 line-through">{startingOriginalPrice}</span>
+              )}
+              <span className="text-[13px] text-slate-500">/ person</span>
+            </p>
+          </div>
+        ) : (
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#C85A24] mb-1">Price announced soon</p>
+            <p className="text-[13px] text-slate-600 leading-relaxed">
+              Reserve your spot now, no payment needed. You&apos;ll be the first to get the full itinerary and price.
+            </p>
           </div>
         )}
 
-        {/* Group Size Counter */}
-        <div className="flex items-center justify-between py-2 flex-shrink-0">
-          <h4 className="text-sm font-bold text-[#0E5A60] flex items-center gap-1.5">
-            <Users size={15} className="text-[#0E5A60]" /> Group Size
-          </h4>
-          <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-full px-2 py-1">
-            <button
-              type="button"
-              onClick={() => setGuests(Math.max(1, guests - 1))}
-              className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
-            >
-              <Minus size={12} />
-            </button>
-            <span className="font-bold text-sm text-[#0E5A60] w-3 text-center">{guests}</span>
-            <button
-              type="button"
-              onClick={() => setGuests(Math.min(maxGuests, guests + 1))}
-              className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors"
-            >
-              <Plus size={12} />
-            </button>
-          </div>
-        </div>
-
-        {/* Calculation Breakdown Box */}
-        {priceKnown ? (
-        <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col flex-1 justify-between min-h-[220px]">
-          <div>
-            <div className="mb-4 pb-4 border-b border-slate-200">
-              <div className="flex items-center justify-between">
-                <span className="text-[13px] font-medium text-slate-600">Costing</span>
-                <span className="font-bold text-[13px] text-[#0E5A60]">₹{roomTotal.toLocaleString()}</span>
-              </div>
-            </div>
-
-            {/* Taxes & Fees */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-500 font-medium">GST</span>
-                <span className="font-medium text-slate-700">₹{gst.toLocaleString()}</span>
-              </div>
-              {tour.tcsPercent ? (
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-slate-500 font-medium">TCS {tour.tcsPercent}%</span>
-                  <span className="font-medium text-slate-700">₹{tcs.toLocaleString()}</span>
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          {/* Total Price & CTA */}
-          <div className="pt-4 border-t border-slate-200 mt-4 flex-shrink-0">
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-bold text-base text-[#0E5A60]">Total</span>
-              <span className="font-black text-xl text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
-            </div>
-
-            <button
-              onClick={() => setIsModalOpen(true)}
-              disabled={hasDepartures && !selectedDeparture}
-              className="w-full py-3.5 cursor-pointer disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:translate-y-0 bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
-            >
-              <span>Book Now</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={() => openBooking("group")}
+          className="w-full py-3.5 cursor-pointer bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg hover:shadow-[#D96C2C]/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group"
+        >
+          <span>{soldOut ? "Plan a Private Trip" : priceKnown ? "Book Now" : "Reserve My Spot"}</span>
+          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+        </button>
+        {soldOut ? (
+          <p className="-mt-2 text-center text-[12px] text-slate-500">All batches are full. Travel on your own dates instead.</p>
         ) : (
-        <div className="bg-[#FAF4EC] rounded-2xl p-4 border border-[#F0E8D9] flex flex-col gap-3">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-[#C85A24] mb-1">Price announced soon</p>
-            <p className="text-[13px] text-slate-600 leading-relaxed">
-              Reserve your spot now — no payment needed. You&apos;ll be the first to get the full itinerary and price.
-            </p>
-          </div>
           <button
-            onClick={() => setIsModalOpen(true)}
-            disabled={hasDepartures && !selectedDeparture}
-            className="w-full py-3.5 cursor-pointer disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed bg-[#D96C2C] hover:bg-[#C85A24] text-white font-bold text-[14px] rounded-full shadow-md shadow-[#D96C2C]/20 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group"
+            type="button"
+            onClick={() => openBooking("private")}
+            className="-mt-2 mx-auto inline-flex items-center gap-1 text-[12.5px] font-semibold text-[#0E5A60] hover:text-[#D96C2C] transition-colors cursor-pointer"
           >
-            <span>Reserve My Spot</span>
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform stroke-[2.5]" />
+            Or plan a custom trip, on your dates
           </button>
-        </div>
+        )}
+
+        {/* Call-back / WhatsApp for people with questions before booking */}
+        <TripQuickActions
+          tripId={tour.id.toString()}
+          tripTitle={tour.title}
+          destination={tour.location}
+          tripSlug={tripSlug}
+          whatsapp={whatsapp}
+        />
+
+        {/* What happens after "Book Now", so a first booking isn't a leap into the unknown.
+            (Trips without a price show their own steps in the "Coming Soon" section.) */}
+        {priceKnown && (
+          <div className="rounded-2xl bg-[#FAF5EE] border border-[#ECE4D6] px-4 py-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#C85A24] mb-3">How booking works</p>
+            <ol className="relative space-y-3">
+              {/* Dashed route joining the steps */}
+              <span aria-hidden className="absolute left-[11px] top-3 bottom-3 border-l-[1.5px] border-dashed border-[#D9CDB8]" />
+              {[
+                { title: "Send a booking request", note: "Pick your batch and travellers." },
+                { title: "We confirm with you", note: "Our team reaches out to go over the details." },
+                { title: "Pay to lock your spot", note: "Your seat is held once the payment is done." },
+              ].map((step, i) => (
+                <li key={step.title} className="relative flex gap-3">
+                  <span className="relative z-10 w-6 h-6 shrink-0 rounded-full bg-white border border-[#D96C2C]/40 text-[11px] font-bold text-[#D96C2C] flex items-center justify-center">
+                    {i + 1}
+                  </span>
+                  <div className="pt-0.5">
+                    <p className="text-[13px] font-semibold text-[#0E5A60] leading-tight">{step.title}</p>
+                    <p className="text-[12px] text-slate-500 leading-snug mt-0.5">{step.note}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         )}
       </div>
 
       {/* Booking Form Modal */}
       {isModalOpen && mounted && createPortal(
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" style={{ zIndex: 99999 }}>
-          <div className="bg-white rounded-3xl w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto shadow-2xl animate-in fade-in zoom-in-95 duration-300">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-              <div>
-                <h3 className="text-xl font-bold text-[#0E5A60]">{priceKnown ? "Book Your Journey" : "Reserve Your Spot"}</h3>
-                <p className="text-sm text-slate-500 mt-0.5">{tour.title}</p>
+          <div className="bg-white rounded-3xl w-full max-w-lg md:max-w-4xl max-h-[calc(100dvh-2rem)] overflow-y-auto shadow-2xl animate-in fade-in zoom-in-95 duration-300">
+            <div className="flex items-center justify-between gap-4 px-7 py-5 border-b border-slate-100">
+              <div className="min-w-0">
+                <h3 className="text-xl font-bold text-[#0E5A60]">{isPrivate ? "Plan a Custom Trip" : priceKnown ? "Book Your Journey" : "Reserve Your Spot"}</h3>
+                <p className="text-sm text-slate-500 mt-0.5 truncate" title={tour.title}>{tour.title}</p>
               </div>
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -235,55 +266,159 @@ function BookingWidget({
                 <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle2 size={32} />
                 </div>
-                <h4 className="text-xl font-bold text-slate-800 mb-2">{priceKnown ? "Booking Request Sent!" : "Spot Reserved!"}</h4>
+                <h4 className="text-xl font-bold text-slate-800 mb-2">{isPrivate ? "Request Sent!" : priceKnown ? "Booking Request Sent!" : "Spot Reserved!"}</h4>
                 <p className="text-slate-600">
-                  {priceKnown
+                  {isPrivate
+                    ? "We'll get back to you with a plan and a quote for your dates and group."
+                    : priceKnown
                     ? "Our team will reach out to you shortly to confirm your booking and process the payment."
                     : "We'll share the full itinerary and price with you on WhatsApp and email as soon as they're ready."}
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleBookingSubmit} className="px-6 py-4 space-y-3">
-                <div className="bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 mb-4 space-y-2.5">
-                  {selectedDeparture && (
-                    <div>
-                      <label htmlFor="departure" className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Your Batch</label>
-                      {bookableDepartures.length > 1 ? (
-                        <select
-                          id="departure"
-                          value={selectedDeparture.id}
-                          onChange={(e) => onSelectDeparture(e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm font-bold text-[#0E5A60] focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60]"
-                        >
-                          {bookableDepartures.map((d) => (
-                            <option key={d.id} value={d.id}>
-                              {formatDeparture(d)}{d.label ? ` · ${d.label}` : ""}
-                            </option>
-                          ))}
-                        </select>
-                      ) : (
-                        <p className="flex items-center gap-1.5 text-sm font-bold text-[#0E5A60]">
-                          <Calendar size={14} /> {formatDeparture(selectedDeparture)}
-                        </p>
-                      )}
-                      {selectedDeparture.note && <p className="text-[11px] text-slate-500 mt-1">{selectedDeparture.note}</p>}
-                    </div>
-                  )}
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-slate-600">{priceKnown ? "Total for " : ""}{guests} Guest{guests > 1 ? 's' : ''}</span>
-                    <span className="text-lg font-bold text-[#0E5A60]">{priceKnown ? `₹${finalTotal.toLocaleString()}` : "Price TBA"}</span>
+              <form onSubmit={handleBookingSubmit} className="grid md:grid-cols-2">
+                {/* Left: batch, travellers and what it comes to */}
+                <div className="px-7 py-6 space-y-5 md:bg-[#FCFAF6] md:border-r border-slate-100">
+                <div role="radiogroup" aria-label="How do you want to travel?" className="grid grid-cols-2 gap-1.5 p-1.5 rounded-2xl bg-white border border-[#ECE4D6]">
+                  {([
+                    { type: "group", icon: Users, title: "Group batch", note: soldOut ? "All batches full" : "Set dates, with others" },
+                    { type: "private", icon: UserLock, title: "Custom trip", note: "Your dates, your people" },
+                  ] as const).map((opt) => {
+                    const active = tripType === opt.type;
+                    const Icon = opt.icon;
+                    return (
+                      <button
+                        key={opt.type}
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
+                        disabled={opt.type === "group" && soldOut}
+                        onClick={() => setTripType(opt.type)}
+                        className={`flex items-start gap-2 rounded-xl px-3 py-2.5 text-left transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E5A60]/40 disabled:cursor-not-allowed disabled:opacity-50 ${
+                          active ? "bg-[#0E5A60] text-white shadow-sm" : "text-slate-600 hover:bg-[#FAF5EE]"
+                        }`}
+                      >
+                        <Icon size={16} className={`mt-0.5 shrink-0 ${active ? "text-[#FFD9BF]" : "text-[#D96C2C]"}`} />
+                        <span>
+                          <span className="block text-[13px] font-bold leading-tight">{opt.title}</span>
+                          <span className={`block text-[11px] mt-0.5 ${active ? "text-white/75" : "text-slate-400"}`}>{opt.note}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {isPrivate ? (
+                  <div>
+                    <label htmlFor="privateDate" className="text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                      <Calendar size={14} className="text-[#0E5A60]" /> Preferred start date
+                    </label>
+                    <input
+                      type="date"
+                      id="privateDate"
+                      min={new Date().toISOString().split('T')[0]}
+                      value={privateDate}
+                      onChange={(e) => setPrivateDate(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors"
+                    />
+                    <p className="text-[12px] text-slate-500 mt-1.5">Not sure yet? Leave it blank and we&apos;ll work it out together.</p>
+                  </div>
+                ) : hasDepartures ? (
+                  <div>
+                    <p className="text-sm font-bold text-slate-700 mb-2 flex items-center gap-1.5">
+                      <Calendar size={14} className="text-[#0E5A60]" /> Pick your batch
+                    </p>
+                    <DeparturePicker
+                      tour={tour}
+                      departures={departures}
+                      selectedId={selectedDeparture?.id}
+                      onSelect={onSelectDeparture}
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <label htmlFor="travelDate" className="text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1.5"><Calendar size={14} /> Preferred Travel Date</label>
+                    <input
+                      type="date"
+                      id="travelDate"
+                      min={new Date().toISOString().split('T')[0]}
+                      value={travelDate}
+                      onChange={(e) => setTravelDate(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors"
+                    />
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                    <Users size={14} className="text-[#0E5A60]" /> Travellers
+                  </p>
+                  <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-full px-2 py-1">
+                    <button
+                      type="button"
+                      aria-label="One less traveller"
+                      onClick={() => setGuests(Math.max(1, guests - 1))}
+                      className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer"
+                    >
+                      <Minus size={12} />
+                    </button>
+                    <span className="font-bold text-sm text-[#0E5A60] min-w-[2.25rem] text-center">{guests === 1 ? "Solo" : guests}</span>
+                    <button
+                      type="button"
+                      aria-label="One more traveller"
+                      onClick={() => setGuests(Math.min(maxGuests, guests + 1))}
+                      className="w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100 hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer"
+                    >
+                      <Plus size={12} />
+                    </button>
                   </div>
                 </div>
 
+                {isPrivate ? (
+                  <p className="bg-[#FAF5EE] rounded-2xl border border-[#ECE4D6] px-4 py-3 text-[13px] text-slate-600">
+                    Custom trips are priced for your group and dates. We&apos;ll send you a quote, and there&apos;s nothing to pay now.
+                  </p>
+                ) : priceKnown ? (
+                  <div className="bg-[#FAF5EE] rounded-2xl border border-[#ECE4D6] px-4 py-3 space-y-1.5 text-[13px]">
+                    <div className="flex justify-between text-slate-600">
+                      <span>Costing ({guests === 1 ? "solo" : `${guests} × ₹${(roomTotal / guests).toLocaleString()}`})</span>
+                      <span className="font-semibold text-slate-700">₹{roomTotal.toLocaleString()}</span>
+                    </div>
+                    {/* Always shown, as on the old sidebar, even when it's ₹0 */}
+                    <div className="flex justify-between text-slate-600">
+                      <span>GST</span>
+                      <span className="font-semibold text-slate-700">₹{gst.toLocaleString()}</span>
+                    </div>
+                    {tour.tcsPercent ? (
+                      <div className="flex justify-between text-slate-600">
+                        <span>TCS {tour.tcsPercent}%</span>
+                        <span className="font-semibold text-slate-700">₹{tcs.toLocaleString()}</span>
+                      </div>
+                    ) : null}
+                    <div className="flex justify-between items-baseline pt-2 mt-1 border-t border-[#E4DACA]">
+                      <span className="font-bold text-[#0E5A60]">Total</span>
+                      <span className="font-black text-lg text-[#0E5A60]">₹{finalTotal.toLocaleString()}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="bg-[#FAF5EE] rounded-2xl border border-[#ECE4D6] px-4 py-3 text-[13px] text-slate-600">
+                    Price to be announced. Reserving is free and there&apos;s nothing to pay now.
+                  </p>
+                )}
+
+                </div>
+
+                {/* Right: their details */}
+                <div className="px-7 py-6 space-y-4 flex flex-col border-t md:border-t-0 border-slate-100">
                 <div>
                   <label htmlFor="name" className="block text-sm font-bold text-slate-700 mb-1.5">Full Name</label>
                   <input type="text" id="name" name="name" required className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="John Doe" />
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-4">{/* One per row, so a long email fits */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-1.5">Email Address</label>
-                    <input type="email" id="email" name="email" required className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="john@example.com" />
+                    <input type="email" id="email" name="email" required className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="you@email.com" />
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-1.5">WhatsApp Number</label>
@@ -296,28 +431,15 @@ function BookingWidget({
                   <textarea id="specialRequests" name="specialRequests" rows={2} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors" placeholder="Any dietary requirements, medical conditions, or other requests..."></textarea>
                 </div>
 
-                {!hasDepartures && (
-                <div>
-                  <label htmlFor="travelDate" className="block text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-1.5"><Calendar size={14} /> Preferred Travel Date</label>
-                  <input
-                    type="date"
-                    id="travelDate"
-                    min={new Date().toISOString().split('T')[0]}
-                    value={travelDate}
-                    onChange={(e) => setTravelDate(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#0E5A60] focus:ring-1 focus:ring-[#0E5A60] transition-colors"
-                  />
-                </div>
-                )}
-
-                <div className="pt-2">
+                <div className="pt-1 mt-auto">
                   <button 
                     type="submit" 
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || (!isPrivate && hasDepartures && !selectedDeparture)}
                     className="w-full py-3 bg-[#0E5A60] hover:bg-[#0A4348] disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold text-[15px] rounded-full shadow-md transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    {isSubmitting ? "Submitting..." : priceKnown ? "Confirm Booking Request" : "Reserve My Spot"}
+                    {isSubmitting ? "Submitting..." : isPrivate ? "Request My Custom Trip" : priceKnown ? "Confirm Booking Request" : "Reserve My Spot"}
                   </button>
+                </div>
                 </div>
               </form>
             )}
@@ -331,9 +453,10 @@ function BookingWidget({
 
 interface JourneyDetailProps {
   trip: TripCardData;
+  whatsapp?: string | null; // CMS → SEO → Global → social links (number or wa.me link)
 }
 
-export function JourneyDetail({ trip }: JourneyDetailProps) {
+export function JourneyDetail({ trip, whatsapp }: JourneyDetailProps) {
   const [guests, setGuests] = useState(1);
   const [enquirySent, setEnquirySent] = useState(false);
   const [activeDetailTab, setActiveDetailTab] = useState<"inclusions" | "essentials" | "faq">("inclusions");
@@ -381,6 +504,23 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
   const nextDepartureLabel = getNextDepartureLabel(tour);
   const batchCount = departures.filter((d) => !isSoldOut(d)).length;
   const fullDetails = hasFullDetails(tour);
+
+  // Quick-jump links: one per section; the "Need to Know" ones also switch that panel's tab
+  const detailTab = (key: "inclusions" | "essentials" | "faq", label: string, icon: React.ElementType): SectionNavItem => ({
+    key,
+    label,
+    icon,
+    targetId: "trip-details",
+    onSelect: () => setActiveDetailTab(key),
+  });
+  // (Only for trips with full details; a dates-only trip has a single section, nothing to jump between)
+  const sectionNavItems: SectionNavItem[] = [
+    { key: "overview", label: "Overview", icon: BookOpen, targetId: "trip-overview" },
+    { key: "itinerary", label: "Day-by-Day Journey", icon: Route, targetId: "trip-itinerary" },
+    detailTab("inclusions", "Inclusions & Exclusions", PackageCheck),
+    ...(tour.whatToPack || tour.weather ? [detailTab("essentials", "Trip Essentials", Backpack)] : []),
+    ...(tour.faqs ? [detailTab("faq", "FAQs", MessagesSquare)] : []),
+  ];
 
   const handleEnquiry = (e: React.FormEvent) => {
     e.preventDefault();
@@ -523,8 +663,10 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
 
             {fullDetails ? (
             <>
+            <JourneySectionNav items={sectionNavItems} />
+
             {/* Overview Section */}
-            <section className="space-y-4">
+            <section id="trip-overview" className="space-y-4">
               <h3 className="text-2xl sm:text-3xl font-serif text-[#0E5A60] leading-tight">
                 Overview
               </h3>
@@ -602,7 +744,7 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
             </section>
 
             {/* Itinerary Section (Visual Timeline) */}
-            <section className="space-y-6 relative">
+            <section id="trip-itinerary" className="space-y-6 relative">
               <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C85A24] mb-1">The Arc</h2>
               <h3 className="text-2xl sm:text-3xl font-serif text-[#0E5A60] leading-tight">
                 Day-by-Day Journey
@@ -719,7 +861,7 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
             </section>
 
             {/* The Logistics (Tabs) - CRO Focused: Hiding dense info until requested */}
-            <section className="space-y-6 pt-6 border-t border-slate-100">
+            <section id="trip-details" className="space-y-6 pt-6 border-t border-slate-100">
               <div>
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C85A24] mb-1">The Details</h2>
                 <h3 className="text-2xl sm:text-3xl font-serif text-[#0E5A60] leading-tight">
@@ -861,32 +1003,7 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
 
           {/* Right Column: Sticky Booking Widget */}
           <div id="book" className="lg:col-span-4 scroll-mt-24">
-            <div className="sticky top-24 bg-white p-4 rounded-[32px] border border-slate-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex flex-col max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-
-              {/* Top Summary Info */}
-              <div className="bg-slate-50 px-3 py-3 rounded-2xl mb-4 flex items-center justify-between border border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100">
-                    <Calendar size={14} className="text-[#0E5A60]" />
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Dates</p>
-                    <p className="text-sm font-bold text-[#0E5A60]">{selectedDeparture ? formatDeparture(selectedDeparture) : nextDepartureLabel}</p>
-                  </div>
-                </div>
-
-                <div className="h-8 w-[1px] bg-slate-200"></div>
-
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-100">
-                    <Clock size={14} className="text-[#0E5A60]" />
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Duration</p>
-                    <p className="text-sm font-bold text-[#0E5A60]">{tour.duration}</p>
-                  </div>
-                </div>
-              </div>
+            <div className="sticky top-24 bg-white p-5 rounded-[32px] border border-slate-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] flex flex-col max-h-[calc(100vh-100px)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
               {/* Booking Form State & Logic */}
               <BookingWidget
@@ -894,6 +1011,8 @@ export function JourneyDetail({ trip }: JourneyDetailProps) {
                 departures={departures}
                 selectedDeparture={selectedDeparture}
                 onSelectDeparture={setSelectedDepartureId}
+                tripSlug={trip.slug}
+                whatsapp={whatsapp}
               />
 
             </div>
