@@ -25,7 +25,8 @@ import { tripsPath } from "@/data/tripPages";
 
 // How they're travelling. Solo and Group search the trips (every trip takes both); Custom is
 // planned rather than searched, so the button goes to the Custom Group Trip page instead.
-// Same icons as the trip booking form.
+// Same icons as the trip booking form. The wording comes from the CMS (travellerOptions, by key);
+// these are the fallbacks.
 const TRAVEL_STYLES = [
   { key: "solo", label: "Solo", desc: "Join a group trip on your own", icon: User },
   { key: "group", label: "Group", desc: "With friends, a partner or family", icon: Users },
@@ -51,7 +52,11 @@ export function HeroSection({
   const [destination, setDestination] = useState("");
   const [selectedDates, setSelectedDates] = useState("Select dates");
   const [travelStyle, setTravelStyle] = useState<TravelStyle>("solo");
-  const style = TRAVEL_STYLES.find((t) => t.key === travelStyle)!;
+  const travelStyles = TRAVEL_STYLES.map((t) => {
+    const cms = content.travellerOptions?.find((o) => o.key === t.key);
+    return { ...t, label: cms?.label || t.label, desc: cms?.desc || t.desc };
+  });
+  const style = travelStyles.find((t) => t.key === travelStyle)!;
 
   // Dropdown toggles
   const [isDestOpen, setIsDestOpen] = useState(false);
@@ -457,7 +462,7 @@ export function HeroSection({
                   </div>
                   <div className="flex flex-col min-w-0 pr-1">
                     <span className="text-[10.5px] font-bold text-slate-500 uppercase tracking-wider">
-                      Travelling
+                      {content.travellersLabel || "Travelling"}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
                       {style.label}
@@ -471,10 +476,10 @@ export function HeroSection({
               {isTravellersOpen && (
                 <div data-hero-dropdown className="absolute top-full left-0 md:-left-8 mt-2 w-72 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] border border-slate-100 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-2.5 py-1 mb-1">
-                    How are you travelling?
+                    {content.groupSizeTitle || "How are you travelling?"}
                   </div>
                   <div className="space-y-1">
-                    {TRAVEL_STYLES.map((opt) => {
+                    {travelStyles.map((opt) => {
                       const selected = travelStyle === opt.key;
                       return (
                         <button
@@ -510,7 +515,7 @@ export function HeroSection({
             >
               {travelStyle === "custom" ? (
                 <>
-                  <span>Plan My Trip</span>
+                  <span>{content.customButtonText || "Plan My Trip"}</span>
                   <ArrowRight className="w-4 h-4 text-white" />
                 </>
               ) : (

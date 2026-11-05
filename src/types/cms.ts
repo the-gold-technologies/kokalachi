@@ -43,8 +43,10 @@ export interface HeroContent extends Heading {
   travellersLabel: string;
   groupSizeTitle: string;
   searchButtonText: string;
+  customButtonText?: string; // replaces the search button when "Custom" is picked
   popularSearchesLabel: string;
-  travellerOptions: { label: string; desc: string }[];
+  // The "How are you travelling?" choices, matched to Solo / Group / Custom by key
+  travellerOptions: { key?: string; label: string; desc: string }[];
 }
 
 export interface WhyWeExistContent extends Heading {
