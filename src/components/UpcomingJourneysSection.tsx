@@ -18,7 +18,7 @@ import {
 import type { TripCardData } from "@/data/trips";
 import type { UpcomingJourneysContent, VibeCategory } from "@/types/cms";
 import { filterTripsByVibe, isHeartVibe, vibeIcon } from "@/lib/vibes";
-import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft, isTourSoldOut } from "@/lib/departures";
 import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
@@ -59,11 +59,15 @@ function TripCardItem({ card }: { card: TripCardData }) {
         <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-[#0E5A60] flex items-center gap-1.5 shadow-sm">
           <MapPin size={14} className="text-[#C85A24]" /> {card.destination}
         </div>
-        {!!getSpotsLeft(card.tourPackage) && (
+        {getSpotsLeft(card.tourPackage) ? (
           <div className="absolute top-4 right-4 z-20 bg-[#D96C2C] px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-sm flex items-center gap-1">
             <Flame size={12} className="fill-white" /> {getSpotsLeft(card.tourPackage)} Spots
           </div>
-        )}
+        ) : isTourSoldOut(card.tourPackage) ? (
+          <div className="absolute top-4 right-4 z-20 bg-slate-800/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-sm">
+            Sold Out
+          </div>
+        ) : null}
       </div>
 
       {/* Content Section */}

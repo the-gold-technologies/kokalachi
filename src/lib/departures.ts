@@ -58,6 +58,15 @@ export function isSoldOut(departure: Departure): boolean {
   return departure.status === "soldout" || departure.spotsLeft === 0;
 }
 
+export function isTourSoldOut(tour: TourPackage): boolean {
+  const upcoming = getUpcomingDepartures(tour);
+  if (upcoming.length > 0) {
+    return upcoming.every(isSoldOut);
+  }
+  const all = tour.departures ?? [];
+  return all.length > 0 && all.some((d) => isSoldOut(d));
+}
+
 // The first upcoming departure that can still be booked.
 export function getNextDeparture(tour: TourPackage): Departure | undefined {
   return getUpcomingDepartures(tour).find((d) => !isSoldOut(d));

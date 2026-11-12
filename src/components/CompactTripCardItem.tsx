@@ -10,7 +10,7 @@ import {
   Flame,
 } from "lucide-react";
 import { TripCardData } from "@/data/trips";
-import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft } from "@/lib/departures";
+import { formatStartingOriginalPrice, formatStartingPrice, getSpotsLeft, isTourSoldOut } from "@/lib/departures";
 import { DepartureChips } from "@/components/DepartureChips";
 import { useImageSlideshow } from "@/hooks/useImageSlideshow";
 
@@ -54,11 +54,15 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
         <div className="absolute top-3 left-3 z-20 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-semibold text-slate-700 shadow-sm flex items-center gap-1">
           <MapPin size={12} className="text-[#C85A24]" /> {card.destination}
         </div>
-        {!!getSpotsLeft(card.tourPackage) && (
+        {getSpotsLeft(card.tourPackage) ? (
           <div className="absolute top-3 right-3 z-20 bg-[#0E5A60]/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-semibold text-white shadow-sm flex items-center gap-1">
             <Flame size={10} className="fill-[#D96C2C] text-[#D96C2C]" /> {getSpotsLeft(card.tourPackage)} Spots
           </div>
-        )}
+        ) : isTourSoldOut(card.tourPackage) ? (
+          <div className="absolute top-3 right-3 z-20 bg-slate-800/80 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-semibold text-white shadow-sm">
+            Sold Out
+          </div>
+        ) : null}
       </div>
 
       {/* Content Section */}
