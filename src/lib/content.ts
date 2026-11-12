@@ -139,7 +139,8 @@ function toTripCard(t: CmsTrip): TripCardData {
       tag: t.tag,
       tagColor: t.tagColor,
       departures,
-      spotsLeft: upcoming?.spotsLeft ?? undefined,
+      // 0 marks the undated batch as sold out
+      spotsLeft: upcoming?.status === "soldout" ? 0 : (upcoming?.spotsLeft ?? undefined),
       nextDeparture: upcoming ? upcoming.label || "Upcoming" : undefined,
       hook: orUndefined(t.hook),
       overview: t.overview ?? [],

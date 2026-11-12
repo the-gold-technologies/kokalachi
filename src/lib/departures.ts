@@ -59,12 +59,12 @@ export function isSoldOut(departure: Departure): boolean {
 }
 
 export function isTourSoldOut(tour: TourPackage): boolean {
+  // Future dates decide when there are any; otherwise the undated "Upcoming" batch
+  // (spotsLeft 0 = sold out), and failing that, any past date marked sold out
   const upcoming = getUpcomingDepartures(tour);
-  if (upcoming.length > 0) {
-    return upcoming.every(isSoldOut);
-  }
-  const all = tour.departures ?? [];
-  return all.length > 0 && all.some((d) => isSoldOut(d));
+  if (upcoming.length > 0) return upcoming.every(isSoldOut);
+  if (tour.nextDeparture) return tour.spotsLeft === 0;
+  return (tour.departures ?? []).some(isSoldOut);
 }
 
 // The first upcoming departure that can still be booked.
@@ -108,12 +108,11 @@ export function formatStartingOriginalPrice(tour: TourPackage): string | undefin
     : undefined;
 }
 
-// Spots left on the next departure; trips without departures fall back to tour.spotsLeft.
+// Spots left on the next bookable future date. Undated "Upcoming" batches and
+// past dates show no spots; trips without departures fall back to tour.spotsLeft.
 export function getSpotsLeft(tour: TourPackage): number | undefined {
   if (!tour.departures) return tour.spotsLeft;
-  // No dated batch to book yet: show the spots of the "Upcoming" batch, if any
-  const next = getNextDeparture(tour);
-  return next ? next.spotsLeft : tour.spotsLeft;
+  return getNextDeparture(tour)?.spotsLeft;
 }
 
 // "17 Oct"
