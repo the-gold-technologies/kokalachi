@@ -36,13 +36,24 @@ function PullQuote({ text }: { text: string }) {
 function Polaroid({ src, alt, caption }: { src: string; alt: string; caption: string }) {
   return (
     <figure className="my-12 flex justify-center">
-      <div className="relative bg-white p-3 pb-14 sm:p-4 sm:pb-16 shadow-[0_20px_50px_rgba(14,90,96,0.18)] rotate-[1.5deg] hover:rotate-0 transition-transform duration-500 max-w-[640px] w-full">
-        <div className="absolute -top-3 left-8 w-20 h-6 bg-[#FFF4E5]/90 border-y border-amber-900/15 rotate-[-6deg]" />
-        <div className="absolute -top-3 right-8 w-20 h-6 bg-[#FFF4E5]/90 border-y border-amber-900/15 rotate-[5deg]" />
-        <img src={src} alt={alt} className="w-full aspect-[4/3] object-cover" />
-        <figcaption className="absolute bottom-3 sm:bottom-4 left-0 right-0 text-center font-script text-xl sm:text-2xl text-[#0E5A60]">
-          {caption}
-        </figcaption>
+      <div className="relative bg-white p-3 sm:p-4 pb-4 sm:pb-5 shadow-[0_20px_50px_rgba(14,90,96,0.18)] rotate-[1.5deg] hover:rotate-0 transition-transform duration-500 max-w-[640px] w-full flex flex-col">
+        {/* Washi tape on top corners */}
+        <div className="absolute -top-3 left-8 w-20 h-6 bg-[#FFF4E5]/90 border-y border-amber-900/15 rotate-[-6deg] pointer-events-none z-10" />
+        <div className="absolute -top-3 right-8 w-20 h-6 bg-[#FFF4E5]/90 border-y border-amber-900/15 rotate-[5deg] pointer-events-none z-10" />
+
+        {/* Photo with clean aspect ratio */}
+        <div className="w-full aspect-[4/3] overflow-hidden bg-slate-100">
+          <img src={src} alt={alt} className="w-full h-full object-cover" />
+        </div>
+
+        {/* Caption placed in natural document flow below the photo so it NEVER overlaps the image */}
+        {caption ? (
+          <figcaption className="pt-3 sm:pt-4 px-2 sm:px-4 text-center font-script text-xl sm:text-2xl text-[#0E5A60] leading-snug">
+            {caption}
+          </figcaption>
+        ) : (
+          <div className="h-6 sm:h-8" />
+        )}
       </div>
     </figure>
   );

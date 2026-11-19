@@ -4,10 +4,15 @@
 import { cache } from "react";
 import type { Metadata } from "next";
 import { cmsGet, CmsTag } from "@/lib/cms";
-import { sortTripCards, type Departure, type TourPackage, type TripCardData } from "@/data/trips";
+import {
+  sortTripCards,
+  type Departure,
+  type TourPackage,
+  type TripCardData,
+} from "@/data/trips";
 import { getNextDeparture } from "@/lib/departures";
 import { tripRegion } from "@/lib/regions";
-import type { BlogPost, BlogSection } from "@/data/blogs";
+import type { BlogPost, BlogSection, BlogBlock } from "@/data/blogs";
 import type { CommunityTrip, StoryEntry } from "@/data/community";
 import type {
   BlogsSections,
@@ -79,11 +84,12 @@ interface CmsTrip {
   departures: CmsDeparture[];
 }
 
-const orUndefined = <T,>(value: T | null): T | undefined => value ?? undefined;
+const orUndefined = <T>(value: T | null): T | undefined => value ?? undefined;
 
 type DatedCmsDeparture = CmsDeparture & { startDate: string; endDate: string };
 
-const isDated = (d: CmsDeparture): d is DatedCmsDeparture => !!d.startDate && !!d.endDate;
+const isDated = (d: CmsDeparture): d is DatedCmsDeparture =>
+  !!d.startDate && !!d.endDate;
 
 function toDeparture(d: DatedCmsDeparture): Departure {
   return {
@@ -104,11 +110,17 @@ function toTripCard(t: CmsTrip): TripCardData {
   const departures = t.departures.filter(isDated).map(toDeparture);
   // A batch without dates stands in until dates are announced: its label ("Upcoming" by default)
   // and spots show on the site, and its price is used while there is no dated batch to book
-  const upcoming = t.departures.find((d) => !isDated(d) && d.status !== "closed");
-  const useUpcomingPrice = !!upcoming && getNextDeparture({ departures } as TourPackage) == null;
-  const basePrice = useUpcomingPrice && upcoming.price != null ? upcoming.price : t.price;
+  const upcoming = t.departures.find(
+    (d) => !isDated(d) && d.status !== "closed",
+  );
+  const useUpcomingPrice =
+    !!upcoming && getNextDeparture({ departures } as TourPackage) == null;
+  const basePrice =
+    useUpcomingPrice && upcoming.price != null ? upcoming.price : t.price;
   const originalPrice =
-    useUpcomingPrice && upcoming.originalPrice != null ? upcoming.originalPrice : t.originalPrice;
+    useUpcomingPrice && upcoming.originalPrice != null
+      ? upcoming.originalPrice
+      : t.originalPrice;
   // A price of 0 in the CMS means "not announced yet": the site shows "Price TBA" and takes reservations
   const price = basePrice > 0 ? basePrice : "TBA";
   return {
@@ -140,7 +152,8 @@ function toTripCard(t: CmsTrip): TripCardData {
       tagColor: t.tagColor,
       departures,
       // 0 marks the undated batch as sold out
-      spotsLeft: upcoming?.status === "soldout" ? 0 : (upcoming?.spotsLeft ?? undefined),
+      spotsLeft:
+        upcoming?.status === "soldout" ? 0 : (upcoming?.spotsLeft ?? undefined),
       nextDeparture: upcoming ? upcoming.label || "Upcoming" : undefined,
       hook: orUndefined(t.hook),
       overview: t.overview ?? [],
@@ -171,13 +184,17 @@ function toTripCard(t: CmsTrip): TripCardData {
 // Featured first, then soonest bookable departure (see sortTripCards)
 export const getTrips = cache(async (): Promise<TripCardData[]> => {
   const { data } = await cmsGet<CmsTrip[]>("/trips", [CmsTag.trips]);
-  return sortTripCards([...data].sort((a, b) => a.order - b.order).map(toTripCard));
+  return sortTripCards(
+    [...data].sort((a, b) => a.order - b.order).map(toTripCard),
+  );
 });
 
-export const getTrip = cache(async (slug: string): Promise<TripCardData | undefined> => {
-  const trips = await getTrips();
-  return trips.find((trip) => trip.slug === slug);
-});
+export const getTrip = cache(
+  async (slug: string): Promise<TripCardData | undefined> => {
+    const trips = await getTrips();
+    return trips.find((trip) => trip.slug === slug);
+  },
+);
 
 // ---------- Blogs ----------
 
@@ -220,6 +237,25 @@ interface CmsBlogPost {
 }
 
 function toBlogPost(p: CmsBlogPost): BlogPost {
+  const sections: BlogSection[] = (p.sections ?? []).map((sec: any) => {
+    const blocks: BlogBlock[] = Array.isArray(sec.blocks)
+      ? [...sec.blocks]
+      : [];
+    const secImg = typeof sec.image === "string" ? sec.image.trim() : "";
+    if (secImg && !blocks.some((b: any) => b.type === "image")) {
+      blocks.push({
+        type: "image",
+        src: secImg,
+        alt: sec.imageAlt || sec.title || "",
+        caption: sec.imageAlt || sec.title || "",
+      });
+    }
+    return {
+      ...sec,
+      blocks,
+    };
+  });
+
   return {
     slug: p.slug,
     title: p.title,
@@ -234,7 +270,7 @@ function toBlogPost(p: CmsBlogPost): BlogPost {
     ogImage: orUndefined(p.ogImage),
     marginNote: orUndefined(p.marginNote),
     intro: p.intro ?? [],
-    sections: p.sections ?? [],
+    sections,
     cta: {
       eyebrow: p.ctaEyebrow ?? "",
       title: p.ctaTitle ?? "",
@@ -244,7 +280,11 @@ function toBlogPost(p: CmsBlogPost): BlogPost {
       secondaryText: p.ctaSecondaryBtnText ?? "",
       secondaryUrl: p.ctaSecondaryBtnUrl ?? "",
     },
-    share: { title: p.shareTitle ?? "", note: p.shareNote ?? "", buttonText: p.shareBtnText ?? "" },
+    share: {
+      title: p.shareTitle ?? "",
+      note: p.shareNote ?? "",
+      buttonText: p.shareBtnText ?? "",
+    },
     sidebarBadge: orUndefined(p.sidebarBadge),
     relatedCategory: orUndefined(p.relatedCategory),
     relatedTripsKicker: orUndefined(p.relatedTripsKicker),
@@ -262,10 +302,10 @@ function toBlogPost(p: CmsBlogPost): BlogPost {
 }
 
 const getBlogsListing = cache(() =>
-  cmsGet<{ sections: BlogsSections; blogs: { slug: string }[] }, PageSeo>("/blogs?isPublished=true", [
-    CmsTag.blogs,
-    CmsTag.page("blogs"),
-  ]),
+  cmsGet<{ sections: BlogsSections; blogs: { slug: string }[] }, PageSeo>(
+    "/blogs?isPublished=true",
+    [CmsTag.blogs, CmsTag.page("blogs")],
+  ),
 );
 
 // The listing only carries card fields, so each post is fetched in full (reading time needs the body).
@@ -273,7 +313,9 @@ const getBlogsListing = cache(() =>
 export const getBlogPosts = cache(async (): Promise<BlogPost[]> => {
   const { data } = await getBlogsListing();
   const posts = await Promise.all(
-    data.blogs.map(({ slug }) => cmsGet<CmsBlogPost>(`/blogs/${encodeURIComponent(slug)}`, [CmsTag.blogs])),
+    data.blogs.map(({ slug }) =>
+      cmsGet<CmsBlogPost>(`/blogs/${encodeURIComponent(slug)}`, [CmsTag.blogs]),
+    ),
   );
   return posts
     .map(({ data: post }) => post)
@@ -282,13 +324,18 @@ export const getBlogPosts = cache(async (): Promise<BlogPost[]> => {
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)); // newest first
 });
 
-export const getBlogPost = cache(async (slug: string): Promise<BlogPost | undefined> => {
-  const posts = await getBlogPosts();
-  return posts.find((post) => post.slug === slug);
-});
+export const getBlogPost = cache(
+  async (slug: string): Promise<BlogPost | undefined> => {
+    const posts = await getBlogPosts();
+    return posts.find((post) => post.slug === slug);
+  },
+);
 
 export const getBlogsPage = cache(async () => {
-  const [{ data }, seo] = await Promise.all([getBlogsListing(), getPageSeo("blogs")]);
+  const [{ data }, seo] = await Promise.all([
+    getBlogsListing(),
+    getPageSeo("blogs"),
+  ]);
   return { sections: data.sections, seo };
 });
 
@@ -297,30 +344,58 @@ export const getBlogsPage = cache(async () => {
 // Full SEO rows for every page (CMS → SEO → Pages): adds the Open Graph fields and heading tag
 // that the page endpoints leave out. Cached under every page's tag, so any page SEO save refreshes it.
 // "trips" also covers its sub-pages: the CMS pings it for any trips page SEO save
-const PAGE_SLUGS = ["home", "about", "contact", "journeys", "faqs", "community", "blogs", "terms", "privacy-policy", "trips"];
+const PAGE_SLUGS = [
+  "home",
+  "about",
+  "contact",
+  "journeys",
+  "faqs",
+  "community",
+  "blogs",
+  "terms",
+  "privacy-policy",
+  "trips",
+];
 
 export const getPageSeoRows = cache(async () => {
-  const { data } = await cmsGet<(PageSeo & { slug: string })[]>("/seo?type=pages", PAGE_SLUGS.map(CmsTag.page));
+  const { data } = await cmsGet<(PageSeo & { slug: string })[]>(
+    "/seo?type=pages",
+    PAGE_SLUGS.map(CmsTag.page),
+  );
   return data;
 });
 
-export const getPageSeo = cache(async (slug: string): Promise<PageSeo | null> => {
-  const rows = await getPageSeoRows();
-  return rows.find((row) => row.slug === slug) ?? null;
-});
+export const getPageSeo = cache(
+  async (slug: string): Promise<PageSeo | null> => {
+    const rows = await getPageSeoRows();
+    return rows.find((row) => row.slug === slug) ?? null;
+  },
+);
 
 // Endpoints that wrap their sections as { sections: {...} } instead of returning them directly
-const NESTED_SECTION_PAGES = new Set<keyof PageSections>(["contact", "journeys", "faqs"]);
+const NESTED_SECTION_PAGES = new Set<keyof PageSections>([
+  "contact",
+  "journeys",
+  "faqs",
+]);
 
 export const getPage = cache(
-  async <K extends keyof PageSections>(slug: K): Promise<{ sections: PageSections[K]; seo: PageSeo | null }> => {
+  async <K extends keyof PageSections>(
+    slug: K,
+  ): Promise<{ sections: PageSections[K]; seo: PageSeo | null }> => {
     const [{ data }, seo] = await Promise.all([
-      cmsGet<Record<string, unknown>, PageSeo | null>(`/${slug}`, [CmsTag.page(slug)]),
+      cmsGet<Record<string, unknown>, PageSeo | null>(`/${slug}`, [
+        CmsTag.page(slug),
+      ]),
       getPageSeo(slug),
     ]);
-    const sections = (NESTED_SECTION_PAGES.has(slug) ? data.sections : data) as PageSections[K];
+    const sections = (
+      NESTED_SECTION_PAGES.has(slug) ? data.sections : data
+    ) as PageSections[K];
     if (!sections || Object.keys(sections).length === 0) {
-      throw new Error(`[cms] Page "${slug}" has no sections yet. Save it once in the CMS.`);
+      throw new Error(
+        `[cms] Page "${slug}" has no sections yet. Save it once in the CMS.`,
+      );
     }
     return { sections, seo };
   },
@@ -335,15 +410,23 @@ export const getCommunityTrips = cache(async (): Promise<CommunityTrip[]> => {
 
 export const getAllStories = cache(async (): Promise<StoryEntry[]> => {
   const trips = await getCommunityTrips();
-  return trips.flatMap((trip) => trip.stories.map((story) => ({ trip, story })));
+  return trips.flatMap((trip) =>
+    trip.stories.map((story) => ({ trip, story })),
+  );
 });
 
 // Live numbers for the homepage and /community, so nothing is typed in by hand
 export async function getCommunityStats() {
-  const [trips, stories] = await Promise.all([getCommunityTrips(), getAllStories()]);
+  const [trips, stories] = await Promise.all([
+    getCommunityTrips(),
+    getAllStories(),
+  ]);
   return {
     storyCount: stories.length,
-    travellerCount: stories.reduce((n, { story }) => n + story.authors.length, 0),
+    travellerCount: stories.reduce(
+      (n, { story }) => n + story.authors.length,
+      0,
+    ),
     momentCount: trips.reduce((n, trip) => n + trip.media.length, 0),
     countryCount: new Set(trips.map((trip) => trip.country)).size,
   };
@@ -361,8 +444,13 @@ export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
 // so a CMS outage just shows the defaults.
 export const getNavLabels = cache(async (): Promise<Record<string, string>> => {
   try {
-    const { data } = await cmsGet<{ id: string; label: string }[]>("/nav-links", [CmsTag.site]);
-    return Object.fromEntries(data.filter((l) => l.label?.trim()).map((l) => [l.id, l.label.trim()]));
+    const { data } = await cmsGet<{ id: string; label: string }[]>(
+      "/nav-links",
+      [CmsTag.site],
+    );
+    return Object.fromEntries(
+      data.filter((l) => l.label?.trim()).map((l) => [l.id, l.label.trim()]),
+    );
   } catch (error) {
     console.error("[cms] menu link names unavailable, using defaults:", error);
     return {};
@@ -375,9 +463,15 @@ export const getNavLabels = cache(async (): Promise<Record<string, string>> => {
 // and SEO → Page Settings). Tagged "page:trips" (the CMS pings it for any trips page or trips SEO
 // save) and "site" (menu link names and reordering).
 export const getTripsPages = cache(async (): Promise<TripsSection> => {
-  const { data } = await cmsGet<CmsTripsPages>("/trips-pages", [CmsTag.page("trips"), CmsTag.site]);
+  const { data } = await cmsGet<CmsTripsPages>("/trips-pages", [
+    CmsTag.page("trips"),
+    CmsTag.site,
+  ]);
   const main = data.sections.AllTripsSection;
-  if (!main) throw new Error('[cms] The All Trips page has no content yet. Save it once in the CMS.');
+  if (!main)
+    throw new Error(
+      "[cms] The All Trips page has no content yet. Save it once in the CMS.",
+    );
 
   const allTrips: TripsPage = {
     slug: "",
@@ -403,58 +497,77 @@ export const getTripsPages = cache(async (): Promise<TripsSection> => {
 
   const subPages = [...data.pages]
     .sort((a, b) => a.order - b.order)
-    .map(({ slug, content: c, seo }): TripsPage => ({
-      slug,
-      path: tripsPath(slug),
-      tabLabel: c.tabLabel,
-      tagline: c.tagline,
-      headline: c.headline,
-      scriptAccent: c.scriptAccent,
-      description: c.description,
-      // A page without its own photo uses the All Trips one
-      heroImage: c.heroImage || main.heroImage,
-      layout: c.layout,
-      list: c.list,
-      listTitle: c.listTitle,
-      listSubtitle: c.listSubtitle,
-      notes: c.notes ?? [],
-      howItWorksLabel: c.howItWorksLabel,
-      howItWorksTitle: c.howItWorksTitle,
-      steps: c.steps ?? [],
-      enquiryTag: c.enquiryTag,
-      menu: { tag: c.menuTag, desc: c.menuDesc, image: c.menuImage },
-      seo,
-    }));
+    .map(
+      ({ slug, content: c, seo }): TripsPage => ({
+        slug,
+        path: tripsPath(slug),
+        tabLabel: c.tabLabel,
+        tagline: c.tagline,
+        headline: c.headline,
+        scriptAccent: c.scriptAccent,
+        description: c.description,
+        // A page without its own photo uses the All Trips one
+        heroImage: c.heroImage || main.heroImage,
+        layout: c.layout,
+        list: c.list,
+        listTitle: c.listTitle,
+        listSubtitle: c.listSubtitle,
+        notes: c.notes ?? [],
+        howItWorksLabel: c.howItWorksLabel,
+        howItWorksTitle: c.howItWorksTitle,
+        steps: c.steps ?? [],
+        enquiryTag: c.enquiryTag,
+        menu: { tag: c.menuTag, desc: c.menuDesc, image: c.menuImage },
+        seo,
+      }),
+    );
 
-  return { pages: [allTrips, ...subPages], menuFooterText: main.menuFooterText };
+  return {
+    pages: [allTrips, ...subPages],
+    menuFooterText: main.menuFooterText,
+  };
 });
 
 // One trips page by its slug ("" for /trips), or undefined if the CMS doesn't have it
-export const getTripsPage = cache(async (slug: string): Promise<TripsPage | undefined> => {
-  const { pages } = await getTripsPages();
-  return pages.find((page) => page.slug === slug);
-});
+export const getTripsPage = cache(
+  async (slug: string): Promise<TripsPage | undefined> => {
+    const { pages } = await getTripsPages();
+    return pages.find((page) => page.slug === slug);
+  },
+);
 
 // ---------- Shared sections ----------
 
 // Sections shown on many pages (CMS → Static Pages → Shared Sections).
 // A CMS outage hides the strip rather than breaking the page it sits on.
-export const getUpcomingJourneysStrip = cache(async (): Promise<UpcomingJourneysStripContent | null> => {
-  try {
-    const { data } = await cmsGet<SharedSections>("/shared-sections", [CmsTag.page("shared"), CmsTag.site]);
-    return data.UpcomingJourneysStripSection ?? null;
-  } catch (error) {
-    console.error("[cms] Upcoming Journeys strip unavailable, hiding it:", error);
-    return null;
-  }
-});
+export const getUpcomingJourneysStrip = cache(
+  async (): Promise<UpcomingJourneysStripContent | null> => {
+    try {
+      const { data } = await cmsGet<SharedSections>("/shared-sections", [
+        CmsTag.page("shared"),
+        CmsTag.site,
+      ]);
+      return data.UpcomingJourneysStripSection ?? null;
+    } catch (error) {
+      console.error(
+        "[cms] Upcoming Journeys strip unavailable, hiding it:",
+        error,
+      );
+      return null;
+    }
+  },
+);
 
 // ---------- SEO ----------
 
 // Metadata from a CMS SEO block. CMS titles are complete ("All Journeys | Kokalachi"),
 // so they bypass the root layout's "%s | Kokalachi" template.
 // contentImage: a photo from the page's own CMS content, used when SEO sets no share image.
-export function seoMetadata(seo: PageSeo | null | undefined, path: string, contentImage?: string): Metadata {
+export function seoMetadata(
+  seo: PageSeo | null | undefined,
+  path: string,
+  contentImage?: string,
+): Metadata {
   if (!seo) return {};
   const title = seo.metaTitle || seo.title;
   const description = seo.metaDescription || undefined;
@@ -491,7 +604,9 @@ export function headingTag(options: unknown): HeadingTag {
     typeof options === "string"
       ? options
       : (options as { heroHeadingTag?: unknown } | null)?.heroHeadingTag;
-  return typeof value === "string" && /^h[1-6]$/.test(value) ? (value as HeadingTag) : "h1";
+  return typeof value === "string" && /^h[1-6]$/.test(value)
+    ? (value as HeadingTag)
+    : "h1";
 }
 
 // JSON-LD from a CMS "schema" field, or null when it is empty or not valid JSON
