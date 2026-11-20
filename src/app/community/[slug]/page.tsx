@@ -103,7 +103,7 @@ export default async function CommunityTripPage({ params }: Props) {
                 </span>
                 {trip.journeySlug && (
                   <Link
-                    href={`/journeys/${trip.journeySlug}`}
+                    href={`/tour-details/${trip.journeySlug}`}
                     className="bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/30 text-white text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full transition-colors"
                   >
                     See the {trip.destination} journey →

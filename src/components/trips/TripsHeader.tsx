@@ -5,10 +5,10 @@ import { TitleUnderline } from "@/components/ui/TitleUnderline";
 import type { HeadingTag } from "@/lib/content";
 import type { TripsPage, TripsTab } from "@/data/tripPages";
 
-// Hero for the /trips pages, same look as /journeys. Text and photo from CMS → Trips Pages.
+// Hero for the /trips pages, same look as /tour-details. Text and photo from CMS → Trips Pages.
 export function TripsHero({ page, headingTag: Heading = "h1" }: { page: TripsPage; headingTag?: HeadingTag }) {
   return (
-    // Same height as the other page heroes (/journeys, /blogs, /faqs)
+    // Same height as the other page heroes (/tour-details, /blogs, /faqs)
     <div className="relative h-[60vh] min-h-[420px] w-full">
       {/* Photo subjects sit on the right, leaving the left side clear for the text */}
       <img

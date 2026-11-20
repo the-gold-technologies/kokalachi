@@ -7,7 +7,7 @@ import { Cookie, X } from "lucide-react";
 import { onOpenCookieSettings, setAdConsent, useAdConsent } from "@/lib/consent";
 
 // Trip pages are the only ones that use advertising cookies, so the banner asks there
-const TRIP_PAGE = /^\/journeys\/[^/]+\/?$/;
+const TRIP_PAGE = /^\/tour-details\/[^/]+\/?$/;
 
 export function CookieConsent() {
   const consent = useAdConsent();

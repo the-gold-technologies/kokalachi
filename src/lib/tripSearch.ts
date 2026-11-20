@@ -72,7 +72,7 @@ export function searchTarget(trips: TripCardData[], query: string, dates: Partia
     : matches;
 
   // Exactly one trip fits what was searched: open it
-  if (q && bookable.length === 1) return `/journeys/${bookable[0].slug}`;
+  if (q && bookable.length === 1) return `/tour-details/${bookable[0].slug}`;
 
   const params = new URLSearchParams();
   if (q) {

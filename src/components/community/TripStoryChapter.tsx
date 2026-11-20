@@ -96,7 +96,7 @@ export function TripStoryChapter({ trip, number, labels, showHeader = true }: Tr
             <p className="font-script text-2xl sm:text-3xl text-[#0E5A60] -rotate-2">{trip.tagline}</p>
             {trip.journeySlug && (
               <Link
-                href={`/journeys/${trip.journeySlug}`}
+                href={`/tour-details/${trip.journeySlug}`}
                 className="group inline-flex items-center gap-2 rounded-full border border-[#0E5A60]/20 bg-white hover:bg-[#0E5A60] hover:text-white text-[#0E5A60] px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
               >
                 See the {trip.destination} journey

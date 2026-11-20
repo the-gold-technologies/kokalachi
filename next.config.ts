@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
+  // Trip pages moved from /journeys to /tour-details: keep old links and search results working
+  async redirects() {
+    return [
+      { source: "/journeys", destination: "/tour-details", permanent: true },
+      { source: "/journeys/:slug", destination: "/tour-details/:slug", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

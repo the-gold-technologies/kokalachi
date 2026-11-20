@@ -19,7 +19,7 @@ export function TripCardItem({ card }: { card: TripCardData }) {
 
   return (
     <Link
-      href={`/journeys/${card.slug}`}
+      href={`/tour-details/${card.slug}`}
       className="bg-white rounded-[2rem] px-2 pt-2 pb-4 shadow-sm hover:shadow-2xl transition-all duration-500 group flex flex-col border border-slate-100 relative cursor-pointer font-sans transform hover:-translate-y-2 h-full"
     >
       {/* Image Section */}

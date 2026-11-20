@@ -33,7 +33,7 @@ export async function GET() {
         path: page.slug === "home" ? "" : `/${page.slug}`,
         priority: page.slug === "home" ? "1.0" : page.slug.startsWith("trips/") ? "0.7" : "0.8",
       })),
-    ...trips.filter((trip) => !trip.seo.noIndex).map((trip) => ({ path: `/journeys/${trip.slug}`, priority: "0.7" })),
+    ...trips.filter((trip) => !trip.seo.noIndex).map((trip) => ({ path: `/tour-details/${trip.slug}`, priority: "0.7" })),
     // Each trip's community story page
     ...communityTrips.map((trip) => ({ path: tripStoriesHref(trip), priority: "0.6" })),
     ...posts

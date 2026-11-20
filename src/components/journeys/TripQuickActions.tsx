@@ -29,7 +29,7 @@ export function TripQuickActions({
 
   // Plain text: the trip and its link. Batch and travellers are picked in the booking form,
   // so they aren't known here.
-  const message = `Hi Kokalachi! I'm looking at ${tripTitle} and have a few questions.\nhttps://kokalachi.com/journeys/${tripSlug}`;
+  const message = `Hi Kokalachi! I'm looking at ${tripTitle} and have a few questions.\nhttps://kokalachi.com/tour-details/${tripSlug}`;
   const wa = whatsappHref(whatsapp, message);
 
   return (
@@ -115,7 +115,7 @@ function CallBackModal({
       bestTime: time,
       tripId,
       tripName: tripTitle,
-      tripUrl: `https://kokalachi.com/journeys/${tripSlug}`,
+      tripUrl: `https://kokalachi.com/tour-details/${tripSlug}`,
     });
     setStatus(result.success ? "sent" : "failed");
   };

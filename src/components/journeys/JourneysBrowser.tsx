@@ -13,8 +13,8 @@ import { filterTripsByRegion, isRegionFilter, REGION_FILTERS, type RegionFilter 
 
 const REGION_ICONS = { domestic: MapPin, international: Plane } as const;
 
-// Opens the page pre-filtered when linked as /journeys?category=Adventure (e.g. from the navbar)
-// or /journeys?region=international
+// Opens the page pre-filtered when linked as /tour-details?category=Adventure (e.g. from the navbar)
+// or /tour-details?region=international
 function FiltersFromUrl({
   onCategory,
   onRegion,

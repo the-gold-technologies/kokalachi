@@ -24,9 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: { absolute: `${title} | Kokalachi` },
     description,
     keywords: trip.seo.targetKeywords ?? undefined,
-    alternates: { canonical: `/journeys/${trip.slug}` },
+    alternates: { canonical: `/tour-details/${trip.slug}` },
     ...(trip.seo.noIndex ? { robots: { index: false, follow: false } } : {}),
-    openGraph: { title, description, url: `/journeys/${trip.slug}`, images: [{ url: tour.image }] },
+    openGraph: { title, description, url: `/tour-details/${trip.slug}`, images: [{ url: tour.image }] },
   };
 }
 
@@ -36,7 +36,7 @@ export default async function JourneyPage({ params }: Props) {
   if (!trip) {
     // An old URL for a trip whose slug was renamed: send it on permanently (see tripSlugRedirects)
     const moved = movedTripSlug(id, trips.map((t) => t.slug));
-    if (moved) permanentRedirect(`/journeys/${moved}`);
+    if (moved) permanentRedirect(`/tour-details/${moved}`);
     notFound();
   }
 

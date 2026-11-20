@@ -1,4 +1,4 @@
-// Trip URLs that have moved: old slug → new slug, for /journeys/<slug>.
+// Trip URLs that have moved: old slug → new slug, for /tour-details/<slug>.
 //
 // Trip slugs come from the CMS. When a slug is renamed there, add the old one here so links
 // already indexed by Google or shared on WhatsApp/Instagram keep working: the trip page sends

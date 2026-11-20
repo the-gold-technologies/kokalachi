@@ -27,7 +27,7 @@ export interface CommunityTrip {
   tripType: string;          // "Group Journey", "Family Holiday", ...
   travelledOn: string;       // "October 2026"
   tagline: string;           // handwritten line beside the gallery
-  journeySlug?: string;      // links to /journeys/<slug> when we run this trip
+  journeySlug?: string;      // links to /tour-details/<slug> when we run this trip
   coverImage: string;
   media: CommunityMedia[];
   stories: TravellerStory[];

@@ -6,7 +6,7 @@ import { getPage, getTrips, headingTag, seoMetadata, getUpcomingJourneysStrip } 
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo } = await getPage("journeys");
-  return seoMetadata(seo, "/journeys");
+  return seoMetadata(seo, "/tour-details");
 }
 
 export default async function AllJourneysPage() {

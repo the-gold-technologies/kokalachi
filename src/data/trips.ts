@@ -64,7 +64,7 @@ export interface TripCardData {
   categories: string[];
   images: string[];
   featured?: boolean;      // pins the trip to the front of every list, e.g. the newest launch
-  region: TripRegion;      // for the Domestic / International filter on /journeys (see lib/regions)
+  region: TripRegion;      // for the Domestic / International filter on /tour-details (see lib/regions)
   tourPackage: TourPackage;
   seo: {
     metaTitle: string | null;

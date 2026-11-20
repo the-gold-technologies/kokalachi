@@ -288,7 +288,7 @@ export function Navbar({ trips, latestPost, navLabels, tripsMenu, logos, whatsap
                 const { key } = item;
                 const isOpen = openMenu === key;
                 return (
-                  // A link to the section's main page (/journeys, /trips, /blogs): a mouse opens the menu
+                  // A link to the section's main page (/tour-details, /trips, /blogs): a mouse opens the menu
                   // on hover and goes to the page on click; on touch the first tap opens the menu and
                   // the second goes to the page; on a keyboard Enter goes to the page, ↓ or Space opens it.
                   <Link

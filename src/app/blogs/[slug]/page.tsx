@@ -271,7 +271,7 @@ export default async function BlogPostPage({
               <div className="sticky top-32 space-y-8">
                 {nextTrip && (
                   <Link
-                    href={`/journeys/${nextTrip.slug}`}
+                    href={`/tour-details/${nextTrip.slug}`}
                     className="group block rounded-[28px] bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden"
                   >
                     <div className="relative h-40 overflow-hidden">

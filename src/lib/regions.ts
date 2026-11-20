@@ -1,6 +1,6 @@
 import type { TripCardData, TripRegion } from "@/data/trips";
 
-// Domestic (India) or international, for the /journeys filter.
+// Domestic (India) or international, for the /tour-details filter.
 //
 // Each CMS trip should carry `region: "domestic" | "international"`. Until it does, trips are
 // sorted by this list of today's trips outside India (matched on the trip or destination slug);

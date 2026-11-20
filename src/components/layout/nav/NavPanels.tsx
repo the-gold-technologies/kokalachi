@@ -43,7 +43,7 @@ export function TicketCard({
 
   return (
     <Link
-      href={`/journeys/${card.slug}`}
+      href={`/tour-details/${card.slug}`}
       onClick={onNavigate}
       className="group relative flex items-stretch rounded-2xl bg-white border border-[#ECE4D6] shadow-[0_4px_14px_rgba(11,42,61,0.05)] hover:shadow-[0_14px_30px_rgba(11,42,61,0.13)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
     >
@@ -304,7 +304,7 @@ function JourneysPanel({ data, close }: { data: NavData; close: () => void }) {
       </div>
       <PanelFooter
         close={close}
-        href="/journeys"
+        href="/tour-details"
         cta="Explore all journeys"
         note={
           <>

@@ -19,7 +19,7 @@ export function CompactTripCardItem({ card }: { card: TripCardData }) {
 
   return (
     <Link
-      href={`/journeys/${card.slug}`}
+      href={`/tour-details/${card.slug}`}
       className="bg-white rounded-3xl p-2 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col border border-slate-100 relative cursor-pointer font-sans h-full"
     >
       {/* Image Section */}

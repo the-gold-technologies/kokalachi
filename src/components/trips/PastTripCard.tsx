@@ -12,7 +12,7 @@ export function PastTripCard({ card, departures }: { card: TripCardData; departu
 
   return (
     <Link
-      href={`/journeys/${card.slug}`}
+      href={`/tour-details/${card.slug}`}
       className="bg-white rounded-3xl p-2 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col border border-slate-100 font-sans h-full"
     >
       <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl mb-3 bg-slate-100">

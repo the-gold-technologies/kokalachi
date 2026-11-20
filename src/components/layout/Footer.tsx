@@ -28,7 +28,7 @@ export function Footer({ site, tripsMenu }: FooterProps) {
   // Listing pages rather than single trips, so every destination (including new ones) is covered.
   // The /trips sub-pages use their tab labels and order from CMS → Trips Pages.
   const journeyLinks = [
-    { label: "All Journeys", href: "/journeys" },
+    { label: "All Journeys", href: "/tour-details" },
     ...(tripsMenu?.pages ?? [])
       .filter((page) => page.slug)
       .map((page) => ({ label: page.tabLabel, href: page.path })),

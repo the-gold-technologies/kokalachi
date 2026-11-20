@@ -27,7 +27,7 @@ export type NavLabels = Record<string, string>;
 // Top-level order of the navbar: finding a trip first, then stories and people, then who we are.
 // The labels here are the defaults; the CMS names replace them.
 export const NAV_ITEMS: NavItem[] = [
-  { kind: "menu", key: "journeys", navId: "nav-journeys", label: "Journeys", href: "/journeys" },
+  { kind: "menu", key: "journeys", navId: "nav-journeys", label: "Tour Details", href: "/tour-details" },
   { kind: "menu", key: "trips", navId: "nav-trips", label: "Trips", href: "/trips" },
   { kind: "menu", key: "blogs", navId: "nav-blogs", label: "Blogs", href: "/blogs" },
   { kind: "link", navId: "nav-community", label: "Community", href: "/community" },
@@ -116,7 +116,7 @@ export function buildNavData(
         id: name,
         title: name,
         desc: cards.length === 1 ? cards[0].duration : plural(cards.length, "trip"),
-        href: cards.length === 1 ? `/journeys/${cards[0].slug}` : `/trips?destination=${encodeURIComponent(name)}`,
+        href: cards.length === 1 ? `/tour-details/${cards[0].slug}` : `/trips?destination=${encodeURIComponent(name)}`,
         meta: next ? `Next: ${shortDate(next)}` : "New dates soon",
       };
       return { link, next };
@@ -236,7 +236,7 @@ function buildTopBar(
     id: card.slug,
     label: d.label || "Next departure",
     text: `${card.destination} · ${shortDate(d.startDate)}`,
-    href: `/journeys/${card.slug}`,
+    href: `/tour-details/${card.slug}`,
   });
 
   const [first, ...rest] = upcoming;
@@ -247,7 +247,7 @@ function buildTopBar(
     const tour = t.card.tourPackage;
     const price = getDeparturePrice(tour, t.d);
     const original = getDepartureOriginalPrice(tour, t.d);
-    const href = `/journeys/${t.card.slug}`;
+    const href = `/tour-details/${t.card.slug}`;
     if (price != null && original != null && original > price) {
       offers.push({
         id: t.card.slug,

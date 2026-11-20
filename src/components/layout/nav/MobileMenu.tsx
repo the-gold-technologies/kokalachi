@@ -94,7 +94,7 @@ export function MobileMenu({ open, onClose, data, logo, pathname, whatsapp, phon
             <DestinationRow key={d.id} dest={d} onNavigate={onClose} />
           ))}
         </div>
-        <SeeAll href="/journeys" onClose={onClose}>Explore all journeys</SeeAll>
+        <SeeAll href="/tour-details" onClose={onClose}>Explore all journeys</SeeAll>
       </>
     ),
     trips: (
