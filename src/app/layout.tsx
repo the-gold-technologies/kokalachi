@@ -1,42 +1,23 @@
 import type { Metadata } from "next";
-import { Poppins, Playball, Montserrat, Playfair_Display, Caveat, Satisfy } from "next/font/google";
+import { preload } from "react-dom";
+// Self-hosted fonts (public/fonts): the build never downloads from Google, which fails on the
+// hosting build server. Same faces and settings next/font/google produced before.
+import "./fonts.css";
 import "./globals.css";
 
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
-  subsets: ["latin"],
-});
-
-const playball = Playball({
-  weight: "400",
-  variable: "--font-playball",
-  subsets: ["latin"],
-});
-
-const montserrat = Montserrat({
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  weight: ["400", "600", "700", "800"],
-  variable: "--font-playfair",
-  subsets: ["latin"],
-});
-
-const caveat = Caveat({
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-caveat",
-  subsets: ["latin"],
-});
-
-const satisfy = Satisfy({
-  weight: "400",
-  variable: "--font-satisfy",
-  subsets: ["latin"],
-});
+// The Latin files every page needs first, preloaded as next/font/google did
+const PRELOADED_FONTS = [
+  "0484562807a97172-s.p.woff2",
+  "46bdd75a3ff56824-s.p.woff2",
+  "7db6c35d839a711c-s.p.woff2",
+  "8888a3826f4a3af4-s.p.woff2",
+  "904be59b21bd51cb-s.p.woff2",
+  "93ed22edef6e70f7-s.p.woff2",
+  "b957ea75a84b6ea7-s.p.woff2",
+  "d121c670c7edb705-s.p.woff2",
+  "eaead17c7dbfcd5d-s.p.woff2",
+  "eafabf029ad39a43-s.p.woff2",
+];
 
 // Site-wide metadata, all from CMS → SEO → Global; pages add their own from CMS → SEO → Pages
 const SITE_URL = "https://kokalachi.com";
@@ -91,10 +72,14 @@ export default async function RootLayout({
     }),
   ]);
 
+  for (const file of PRELOADED_FONTS) {
+    preload(`/fonts/${file}`, { as: "font", type: "font/woff2", crossOrigin: "" });
+  }
+
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${playball.variable} ${montserrat.variable} ${playfair.variable} ${caveat.variable} ${satisfy.variable} h-full antialiased scroll-smooth`}
+      className="site-fonts h-full antialiased scroll-smooth"
     >
       <body className="min-h-full flex flex-col">
         <Navbar
